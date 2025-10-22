@@ -11,6 +11,22 @@
   maleFirstNames: NamesFeroxiFirstMale
   femaleFirstNames: NamesFeroxiFirstFemale
   lastNames: NamesFeroxiLast
+  # Orion-Start
+  category: Unusual
+  description: "/ServerInfo/_Orion/SpeciesDescriptions/Feroxi.xml"
+  pros:
+  - Наносят 7 колющего урона своими укусами.
+  - Получают на 10% меньше урона от ушибов.
+  - Устойчивее к холоду на 10%.
+  special:
+  - Могут дышать водяным паром.
+  - Когда состояние жажды доходит до критического состояния, начинают задыхаться.
+  - Употребление соли высасывает влагу.
+  - Лёгкие невозможно отделить от туловища.
+  cons:
+  - Получают на 10% больше режущего урона.
+  - Испытывают жажду на 100% быстрее.
+  # Orion-End
 
 - type: speciesBaseSprites
   id: MobFeroxiSprites
