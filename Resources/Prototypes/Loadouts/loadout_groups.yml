@@ -1356,7 +1356,7 @@
   loadouts:
   - SecurityBelt
   - SecurityWebbing
-  - SecurityJudoBelt # Goobstation - Martial Arts
+#  - SecurityJudoBelt # Goobstation - Martial Arts | Orion-Remove
 
 - type: loadoutGroup
   id: SecurityOuterClothing
