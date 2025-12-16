@@ -744,17 +744,17 @@ namespace Content.Server.Ghost
             // However, that should rarely happen.
 /* // Orion-Edit: Removed
             if (!string.IsNullOrWhiteSpace(mind.Comp.CharacterName))
-                _metaData.SetEntityName(ghost, mind.Comp.CharacterName);
+                _metaData.SetEntityName(ghost, FormattedMessage.EscapeText(mind.Comp.CharacterName)); // Goob Sanitize Text
             else if (mind.Comp.UserId is { } userId && _player.TryGetSessionById(userId, out var session))
-                _metaData.SetEntityName(ghost, session.Name);
+                _metaData.SetEntityName(ghost, FormattedMessage.EscapeText(session.Name)); // Goob Sanitize Text
 */
             // Orion-Start
             if (mind.Comp.UserId is NetUserId userUid && _player.TryGetSessionById(userUid, out var session))
             {
                 if (!string.IsNullOrWhiteSpace(mind.Comp.CharacterName))
-                    _metaData.SetEntityName(ghost, mind.Comp.CharacterName);
+                    _metaData.SetEntityName(ghost, FormattedMessage.EscapeText(mind.Comp.CharacterName)); // Goob Sanitize Text
                 else
-                    _metaData.SetEntityName(ghost, session.Name);
+                    _metaData.SetEntityName(ghost, FormattedMessage.EscapeText(session.Name)); // Goob Sanitize Text
             }
             // Orion-End
 
@@ -876,7 +876,7 @@ namespace Content.Server.Ghost
                             _damageable.TryChangeDamage(playerEntity,
                                 damage,
                                 true,
-                                targetPart: _bodySystem.GetTargetBodyPart(root));
+                                targetPart: TargetBodyPart.All);
                         else
                             _damageable.TryChangeDamage(playerEntity, damage, true);
                         // Shitmed Change End
