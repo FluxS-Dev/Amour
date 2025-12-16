@@ -50,9 +50,7 @@
       - Monkey
       - Kobold
       # Orion-Start
-      - OldFastCodes
       - CorporateCodespeak
-      - Codespeak
       # Orion-End
 
     understood:
@@ -92,9 +90,7 @@
       - Monkey
       - Kobold
       # Orion-Start
-      - OldFastCodes
       - CorporateCodespeak
-      - Codespeak
       # Orion-End
 
 
