@@ -11,8 +11,8 @@
 # Quarterzip
 - type: loadout
   id: QuarterzipJumpsuit
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: SophisticatedTider
+#  effects: # Orion-Edit: Removed
+#  - !type:GroupLoadoutEffect
+#    proto: SophisticatedTider
   equipment:
     jumpsuit: ClothingUniformJumpsuitPassengerQuarterzip
