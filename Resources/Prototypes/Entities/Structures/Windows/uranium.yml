@@ -31,9 +31,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/uranium_window.rsi
+    sprite: _Amour/Structures/Windows/uranium_window.rsi # Amour
   - type: Icon
-    sprite: _Amour/Structures/Windows/uranium_window.rsi
+    sprite: _Amour/Structures/Windows/uranium_window.rsi # Amour
     state: full
   - type: Damageable
     damageContainer: StructuralInorganic
@@ -71,7 +71,7 @@
     damageDivisor: 3
     trackAllDamage: true
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks.rsi
+      sprite: _Amour/Structures/Windows/cracks.rsi # Amour
   - type: StaticPrice
     price: 200
   - type: RadiationBlocker
@@ -93,10 +93,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: _Amour/Structures/Windows/directional.rsi # Amour
     state: uranium_window
   - type: Icon
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: _Amour/Structures/Windows/directional.rsi # Amour
     state: uranium_window
   - type: Construction
     graph: WindowDirectional
@@ -107,7 +107,7 @@
     damageDivisor: 1.5
     trackAllDamage: true
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks_directional.rsi
+      sprite: _Amour/Structures/Windows/cracks_directional.rsi # Amour
   - type: Destructible
     thresholds:
     - trigger:
@@ -149,7 +149,7 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/uranium_window_diagonal.rsi
+    sprite: _Amour/Structures/Windows/uranium_window_diagonal.rsi # Amour
     state: state0
   - type: Tag
     tags:
@@ -159,7 +159,7 @@
     key: windows
     base: state
   - type: Icon
-    sprite: _Amour/Structures/Windows/uranium_window_diagonal.rsi
+    sprite: _Amour/Structures/Windows/uranium_window_diagonal.rsi # Amour
     state: state0
   - type: Fixtures
     fixtures:
@@ -181,7 +181,7 @@
     - East
   - type: DamageVisuals
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi
+      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi # Amour
   - type: Construction
     graph: WindowDiagonal
     node: uraniumWindowDiagonal

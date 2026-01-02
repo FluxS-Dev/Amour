@@ -18,9 +18,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/mining.rsi
+    sprite: _Amour/Structures/Windows/mining.rsi # Amour
   - type: Icon
-    sprite: _Amour/Structures/Windows/mining.rsi
+    sprite: _Amour/Structures/Windows/mining.rsi # Amour
   - type: Repairable
     fuelCost: 15
     doAfterDelay: 3
@@ -60,7 +60,7 @@
     damageDivisor: 4
     trackAllDamage: true
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks.rsi
+      sprite: _Amour/Structures/Windows/cracks.rsi # Amour
   - type: StaticPrice
     price: 100
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
@@ -77,7 +77,7 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/mining_diagonal.rsi
+    sprite: _Amour/Structures/Windows/mining_diagonal.rsi # Amour
     state: state0
   - type: Tag
     tags:
@@ -87,7 +87,7 @@
     key: windows
     base: state
   - type: Icon
-    sprite: _Amour/Structures/Windows/mining_diagonal.rsi
+    sprite: _Amour/Structures/Windows/mining_diagonal.rsi # Amour
     state: state0
   - type: Fixtures
     fixtures:
@@ -109,5 +109,5 @@
     - East
   - type: DamageVisuals
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi
+      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi # Amour
 

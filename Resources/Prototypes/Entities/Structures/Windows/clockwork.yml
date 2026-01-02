@@ -34,9 +34,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/clockwork_window.rsi
+    sprite: _Amour/Structures/Windows/clockwork_window.rsi # Amour
   - type: Icon
-    sprite: _Amour/Structures/Windows/clockwork_window.rsi
+    sprite: _Amour/Structures/Windows/clockwork_window.rsi # Amour
   - type: Repairable
     fuelCost: 10
     doAfterDelay: 2
@@ -79,7 +79,7 @@
     damageDivisor: 3
     trackAllDamage: true
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks.rsi
+      sprite: _Amour/Structures/Windows/cracks.rsi # Amour
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: WindowCosmicCult
 
@@ -94,10 +94,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: _Amour/Structures/Windows/directional.rsi # Amour
     state: clock_window
   - type: Icon
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: _Amour/Structures/Windows/directional.rsi # Amour
     state: clock_window
   - type: Construction
     graph: WindowDirectional
@@ -108,7 +108,7 @@
     damageDivisor: 1.5
     trackAllDamage: true
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks_directional.rsi
+      sprite: _Amour/Structures/Windows/cracks_directional.rsi # Amour
   - type: Damageable
     damageModifierSet: RGlass
   - type: Destructible
@@ -150,7 +150,7 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/clockwork_diagonal.rsi
+    sprite: _Amour/Structures/Windows/clockwork_diagonal.rsi # Amour
     state: state0
   - type: Tag
     tags:
@@ -160,7 +160,7 @@
     key: windows
     base: state
   - type: Icon
-    sprite: _Amour/Structures/Windows/clockwork_diagonal.rsi
+    sprite: _Amour/Structures/Windows/clockwork_diagonal.rsi # Amour
     state: state0
   - type: Fixtures
     fixtures:
@@ -182,7 +182,7 @@
     - East
   - type: DamageVisuals
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi
+      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi # Amour
   - type: Construction
     graph: WindowDiagonal
     node: clockworkWindowDiagonal
