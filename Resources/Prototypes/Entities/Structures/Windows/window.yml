@@ -69,9 +69,9 @@
       - Window
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/window.rsi
+    sprite: _Amour/Structures/Windows/window.rsi # Amour
   - type: Icon
-    sprite: _Amour/Structures/Windows/window.rsi
+    sprite: _Amour/Structures/Windows/window.rsi # Amour
     state: full
   - type: Physics
     bodyType: Static
@@ -137,7 +137,7 @@
     damageDivisor: 2
     trackAllDamage: true
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks.rsi
+      sprite: _Amour/Structures/Windows/cracks.rsi # Amour
   - type: StaticPrice
     price: 100
   - type: BlockWeather
@@ -146,12 +146,13 @@
   parent: Window
   id: TintedWindow
   name: tinted window
+  description: Smart tinted window with state switching option.
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/tinted_window.rsi
+    sprite: _Amour/Structures/Windows/tinted_window.rsi # Amour
   - type: Icon
-    sprite: _Amour/Structures/Windows/tinted_window.rsi
+    sprite: _Amour/Structures/Windows/tinted_window.rsi # Amour
   - type: IconSmooth
     base: twindow
   - type: Construction
@@ -162,6 +163,20 @@
     price: 70
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: WindowCosmicCult
+  - type: ToggleableOccluder # Goob
+  - type: DeviceLinkSink # Goob
+    ports:
+    - On
+    - Off
+    - Toggle
+
+- type: entity # Goob
+  parent: TintedWindow
+  id: TintedWindowTransparent
+  suffix: Transparent
+  components:
+  - type: Occluder
+    enabled: false
 
 - type: entity
   id: WindowRCDResistant
@@ -192,10 +207,10 @@
         collection: GlassSmack
   - type: Sprite
     drawdepth: Mobs
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: _Amour/Structures/Windows/directional.rsi # Amour
     state: window
   - type: Icon
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: _Amour/Structures/Windows/directional.rsi # Amour
     state: window
   - type: InteractionPopup
     interactSuccessString: comp-window-knock
@@ -261,9 +276,9 @@
     thresholds: [5, 10, 20]
     trackAllDamage: true
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks_directional.rsi
+      sprite: _Amour/Structures/Windows/cracks_directional.rsi # Amour
   - type: StaticPrice
-    price: 15
+    price: 10
 
 - type: entity
   id: WindowDirectionalRCDResistant
@@ -284,10 +299,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: _Amour/Structures/Windows/directional.rsi # Amour
     state: frosted_window
   - type: Icon
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: _Amour/Structures/Windows/directional.rsi # Amour
     state: frosted_window
   - type: StaticPrice
     price: 35
@@ -303,17 +318,18 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/window_diagonal.rsi
+    sprite: _Amour/Structures/Windows/window_diagonal.rsi # Amour
     state: state0
   - type: Tag
     tags:
     - Diagonal
+    - Window
   - type: IconSmooth
     mode: Diagonal
-    key: windows
+    key: walls # Orion-Edit
     base: state
   - type: Icon
-    sprite: _Amour/Structures/Windows/window_diagonal.rsi
+    sprite: _Amour/Structures/Windows/window_diagonal.rsi # Amour
     state: state0
   - type: Fixtures
     fixtures:
@@ -335,7 +351,7 @@
     - East
   - type: DamageVisuals
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi
+      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi # Amour
   - type: Construction
     graph: WindowDiagonal
     node: windowDiagonal

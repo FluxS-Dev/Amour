@@ -118,9 +118,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/plastitanium_window.rsi
+    sprite: _Amour/Structures/Windows/plastitanium_window.rsi # Amour
   - type: Icon
-    sprite: _Amour/Structures/Windows/plastitanium_window.rsi
+    sprite: _Amour/Structures/Windows/plastitanium_window.rsi # Amour
     state: full
   - type: IconSmooth
     key: windows
@@ -177,7 +177,7 @@
     damageDivisor: 20
     trackAllDamage: true
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks.rsi
+      sprite: _Amour/Structures/Windows/cracks.rsi # Amour
   - type: Repairable
     fuelCost: 15
     doAfterDelay: 3
@@ -194,13 +194,13 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/plastitanium_window_diagonal.rsi
+    sprite: _Amour/Structures/Windows/plastitanium_window_diagonal.rsi # Amour
     state: state0
   - type: Tag
     tags:
     - Diagonal
   - type: Icon
-    sprite: _Amour/Structures/Windows/plastitanium_window_diagonal.rsi
+    sprite: _Amour/Structures/Windows/plastitanium_window_diagonal.rsi # Amour
     state: state0
   - type: IconSmooth
     mode: Diagonal
@@ -268,7 +268,7 @@
     damageDivisor: 20
     trackAllDamage: true
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi
+      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi # Amour
   - type: Repairable
     fuelCost: 15
     doAfterDelay: 3

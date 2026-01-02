@@ -243,7 +243,15 @@
 - type: tile
   id: FloorSteelOffset
   name: tiles-steel-floor-offset
-  sprite: /Textures/_Amour/Tiles/steel_offset.png
+  sprite: /Textures/_Amour/Tiles/steel_offset.png # Amour
+  # Orion-Start
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  # Orion-End
   baseTurf: Plating
   isSubfloor: false
   deconstructTools: [ Prying ]
