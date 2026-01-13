@@ -1655,7 +1655,7 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-  - sprite: _Amour\Mobs\Customization\human_hair.rsi
+  - sprite: _Amour/Mobs/Customization/human_hair.rsi
     state: morning_hairstyle
 
 - type: marking
@@ -1663,5 +1663,5 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-  - sprite: _Amour\Mobs\Customization\human_hair.rsi
+  - sprite: _Amour/Mobs/Customization/human_hair.rsi
     state: morning_hairstyle_2
