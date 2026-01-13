@@ -220,3 +220,6 @@ marking-HumanHairClassicLongest2 = Очень длинная (Через гла�
 marking-HumanHairClassicVeryshortovereyealternate = Очень короткая (Через глаз альт., Классик)
 marking-HumanHairClassicVlongfringe = Очень короткая (Чёлка, Классик)
 marking-HumanHairClassicVolaju = Воладзю (Классик)
+
+marking-HairMorningHairstyle = Доброе утро
+marking-HairMorningHairstyle2 = Доброе утро (пучок)

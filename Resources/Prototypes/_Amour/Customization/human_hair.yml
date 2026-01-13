@@ -1649,3 +1649,19 @@
   sprites:
     - sprite: _Amour/Mobs/Customization/old_human_hair.rsi
       state: tailed
+
+- type: marking
+  id: HairMorningHairstyle
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+  - sprite: _Amour\Mobs\Customization\human_hair.rsi
+    state: morning_hairstyle
+
+- type: marking
+  id: HairMorningHairstyle2
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+  - sprite: _Amour\Mobs\Customization\human_hair.rsi
+    state: morning_hairstyle_2
