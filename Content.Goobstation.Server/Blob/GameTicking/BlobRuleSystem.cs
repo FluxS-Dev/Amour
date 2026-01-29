@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
+// SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
 // SPDX-FileCopyrightText: 2024 Fishbait <Fishbait@git.ml>
 // SPDX-FileCopyrightText: 2024 fishbait <gnesse@gmail.com>
 // SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
@@ -51,6 +51,7 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     {
         base.Initialize();
 
+        SubscribeLocalEvent<NukeExplodedEvent>(OnNukeExploded); // Amour fix
         SubscribeLocalEvent<BlobRuleComponent, AfterAntagEntitySelectedEvent>(AfterAntagSelected);
     }
 
@@ -59,7 +60,7 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
         var activeRules = QueryActiveRules();
         while (activeRules.MoveNext(out var entityUid, out _, out _, out _))
         {
-            if(uid == entityUid)
+            if (uid == entityUid)
                 continue;
 
             GameTicker.EndGameRule(uid, gameRule);
@@ -72,7 +73,7 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     {
         component.Accumulator += frameTime;
 
-        if(component.Accumulator < 10)
+        if (component.Accumulator < 10)
             return;
 
         component.Accumulator = 0;
@@ -139,7 +140,7 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                 Color.Red);
         }
         else if (blobTilesCount >= (stationUid.Comp?.StageBegin ?? StationBlobConfigComponent.DefaultStageBegin)
-                 && _roundEndSystem.ExpectedCountdownEnd != null && _emergency.EmergencyShuttleArrived) 
+                 && _roundEndSystem.ExpectedCountdownEnd != null && _emergency.EmergencyShuttleArrived)
         {
             _chatSystem.DispatchStationAnnouncement(stationUid,
                 Loc.GetString("blob-alert-shuttle-arrived"),
@@ -148,7 +149,7 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                 null,
                 Color.OrangeRed);
         }
-        
+
         switch (blobRuleComp.Stage)
         {
             case BlobStage.Default when blobTilesCount >= (stationUid.Comp?.StageBegin ?? StationBlobConfigComponent.DefaultStageBegin):
@@ -165,63 +166,84 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
 
                 RaiseLocalEvent(stationUid,
                     new BlobChangeLevelEvent
-                {
-                    Station = stationUid,
-                    Level = blobRuleComp.Stage
-                },
+                    {
+                        Station = stationUid,
+                        Level = blobRuleComp.Stage
+                    },
                     broadcast: true);
                 return;
             case BlobStage.Begin when blobTilesCount >= (stationUid.Comp?.StageCritical ?? StationBlobConfigComponent.DefaultStageCritical):
-            {
-                if (_nukeCode.SendNukeCodes(stationUid))//send the nuke code?
                 {
-                    blobRuleComp.Stage = BlobStage.Critical;
-                    _chatSystem.DispatchGlobalAnnouncement(
-                    Loc.GetString("blob-alert-critical"),
-                    stationName,
-                    true,
-                    blobRuleComp.CriticalAudio,
-                    Color.Red);
-                }
-                else
-                {
-                    blobRuleComp.Stage = BlobStage.Critical;
-                    _chatSystem.DispatchGlobalAnnouncement(
-                    Loc.GetString("blob-alert-critical-NoNukeCode"),
-                    stationName,
-                    true,
-                    blobRuleComp.CriticalAudio,
-                    Color.Red);
-                }
+                    if (_nukeCode.SendNukeCodes(stationUid))//send the nuke code?
+                    {
+                        blobRuleComp.Stage = BlobStage.Critical;
+                        _chatSystem.DispatchGlobalAnnouncement(
+                        Loc.GetString("blob-alert-critical"),
+                        stationName,
+                        true,
+                        blobRuleComp.CriticalAudio,
+                        Color.Red);
+                    }
+                    else
+                    {
+                        blobRuleComp.Stage = BlobStage.Critical;
+                        _chatSystem.DispatchGlobalAnnouncement(
+                        Loc.GetString("blob-alert-critical-NoNukeCode"),
+                        stationName,
+                        true,
+                        blobRuleComp.CriticalAudio,
+                        Color.Red);
+                    }
 
-                _alertLevelSystem.SetLevel(stationUid, StationAlertCritical, true, true, true, true);
+                    _alertLevelSystem.SetLevel(stationUid, StationAlertCritical, true, true, true, true);
 
-                RaiseLocalEvent(stationUid,
-                    new BlobChangeLevelEvent
-                {
-                    Station = stationUid,
-                    Level = blobRuleComp.Stage
-                },
+                    RaiseLocalEvent(stationUid,
+                        new BlobChangeLevelEvent
+                        {
+                            Station = stationUid,
+                            Level = blobRuleComp.Stage
+                        },
                     broadcast: true);
-                return;
-            }
+                    return;
+                }
             case BlobStage.Critical when blobTilesCount >= (stationUid.Comp?.StageTheEnd ?? StationBlobConfigComponent.DefaultStageEnd):
-            {
-                blobRuleComp.Stage = BlobStage.TheEnd;
-                _roundEndSystem.EndRound();
-
-                RaiseLocalEvent(stationUid,
-                    new BlobChangeLevelEvent
                 {
-                    Station = stationUid,
-                    Level = blobRuleComp.Stage
-                },
+                    blobRuleComp.Stage = BlobStage.TheEnd;
+                    _roundEndSystem.EndRound();
+
+                    RaiseLocalEvent(stationUid,
+                        new BlobChangeLevelEvent
+                        {
+                            Station = stationUid,
+                            Level = blobRuleComp.Stage
+                        },
                     broadcast: true);
-                return;
-            }
+                    return;
+                }
         }
     }
 
+    // Amour fix start
+    private void OnNukeExploded(NukeExplodedEvent ev)
+    {
+        var query = QueryActiveRules();
+        while (query.MoveNext(out _, out var blobRule, out _))
+        {
+            if (ev.OwningStation != null)
+            {
+                foreach (var (_, _, coreId) in blobRule.Blobs)
+                {
+                    var xform = Transform(coreId);
+
+                    if (ev.OwningStation == xform.GridUid)
+                    {
+                        _roundEndSystem.EndRound();
+                    }
+                }
+            }
+        }
+    }
+    // Amour fix end
     protected override void AppendRoundEndText(
         EntityUid uid,
         BlobRuleComponent blob,
@@ -234,7 +256,7 @@ public sealed class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
         var result = Loc.GetString("blob-round-end-result", ("blobCount", blob.Blobs.Count));
 
         // yeah this is duplicated from traitor rules lol, there needs to be a generic rewrite where it just goes through all minds with objectives
-        foreach (var (mindId, mind) in blob.Blobs)
+        foreach (var (mindId, mind, _) in blob.Blobs) // Amour fix
         {
             var name = mind.CharacterName;
             _player.TryGetSessionByEntity(mindId, out var session);
