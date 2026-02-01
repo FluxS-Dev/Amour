@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 02/01/2026 08:25:04
+  time: 02/01/2026 08:54:51
   entityCount: 27357
 maps:
 - 1
@@ -15948,7 +15948,7 @@ entities:
       pos: 7.5,-4.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -87031.734
+      secondsUntilStateChange: -88792.09
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -18532,12 +18532,6 @@ entities:
       parent: 2
 - proto: AlwaysPoweredlightBlack
   entities:
-  - uid: 641
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 59.5,-17.5
-      parent: 2
   - uid: 642
     components:
     - type: Transform
@@ -18548,30 +18542,8 @@ entities:
     - type: Transform
       pos: 79.5,-7.5
       parent: 2
-- proto: AlwaysPoweredLightExterior
-  entities:
-  - uid: 644
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -7.5,36.5
-      parent: 2
-- proto: AlwaysPoweredlightRed
-  entities:
-  - uid: 645
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 15.5,-50.5
-      parent: 2
 - proto: AlwaysPoweredLightSodium
   entities:
-  - uid: 646
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 8.5,40.5
-      parent: 2
   - uid: 647
     components:
     - type: Transform
@@ -129546,6 +129518,12 @@ entities:
       parent: 2
 - proto: PoweredlightBlack
   entities:
+  - uid: 641
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 59.5,-17.5
+      parent: 2
   - uid: 19065
     components:
     - type: Transform
@@ -129825,6 +129803,12 @@ entities:
       parent: 2
 - proto: PoweredlightExterior
   entities:
+  - uid: 644
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,36.5
+      parent: 2
   - uid: 19112
     components:
     - type: Transform
@@ -131062,6 +131046,12 @@ entities:
       parent: 2
 - proto: PoweredlightRed
   entities:
+  - uid: 645
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 15.5,-50.5
+      parent: 2
   - uid: 19327
     components:
     - type: Transform
@@ -131259,6 +131249,12 @@ entities:
       bodyType: Dynamic
 - proto: PoweredlightSodium
   entities:
+  - uid: 646
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,40.5
+      parent: 2
   - uid: 649
     components:
     - type: Transform
