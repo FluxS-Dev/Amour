@@ -239,8 +239,10 @@
   - type: LanguageKnowledge # Einstein Engines - Language
     speaks:
     - DroneTalk
+    - RobotTalk
     understands:
     - DroneTalk
+    - RobotTalk
     - TauCetiBasic
   - type: TypingIndicator
     proto: robot
@@ -278,8 +280,9 @@
     - VimPilot
     - Bot # Goobstation
   - type: CollectiveMind # Goobstation
-    defaultChannel: Dronemind
+    defaultChannel: Binary
     channels:
+    - Binary
     - Dronemind
   - type: Access
     tags:
