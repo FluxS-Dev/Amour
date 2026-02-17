@@ -189,8 +189,6 @@
       blacklist:
         tags:
         - Book
-  - type: StaticPrice
-    price: 450
   - type: DragDropTargetable
   # Goobstation Change End
 
@@ -228,6 +226,8 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.25
     baseSprintSpeed: 2.25 #Goobedit
+  - type: StaticPrice
+    price: 7500
 
 - type: entity
   id: MechRipleyBattery
@@ -269,6 +269,8 @@
     pilotWhitelist:
       components:
       - HumanoidAppearance
+  - type: StaticPrice
+    price: 8000
 
 - type: entity
   parent: MechHonker

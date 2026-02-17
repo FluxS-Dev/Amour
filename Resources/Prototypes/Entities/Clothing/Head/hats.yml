@@ -186,7 +186,7 @@
     materialComposition:
       Cloth: 25
   - type: Armor # Orion
-    priceMultiplier: 0.6
+    priceMultiplier: 0.2 #Amour - Cargo rebalance
 
 - type: entity
   parent: ClothingHeadHatBeret

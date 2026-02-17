@@ -99,8 +99,8 @@
     materialComposition:
       Steel: 62
       Glass: 250
-  - type: StaticPrice #Goobstation - Recycle update
-    price: 50
+  - type: StaticPrice #Amour - Cargo rebalance
+    price: 400
 
 # Assmos - Extinguisher Nozzle
 - type: entity
