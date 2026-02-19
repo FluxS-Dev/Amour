@@ -268,8 +268,8 @@
     - type: FloorCleaner # Goobstation
       radius: 3
       cleanDelay: 6
-  - type: StaticPrice #Amour - Cargo rebalance
-    price: 200
+    - type: StaticPrice # Amour - Cargo rebalance
+      price: 200
 
 - type: entity
   name: wet floor sign
