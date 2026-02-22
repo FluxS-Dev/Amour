@@ -187,6 +187,32 @@
     - !type:TileNotBlocked
 
 - type: construction
+  id: WallReinforcedDiagonal
+  graph: Girder
+  startNode: start
+  targetNode: reinforceddiagonal
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: WallSolidDiagonal
+  graph: Girder
+  startNode: start
+  targetNode: walldiagonal
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
   id: WallClock
   graph: ClockworkGirder
   startNode: start

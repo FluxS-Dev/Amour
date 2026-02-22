@@ -35,10 +35,10 @@
         collection: MetalThud
   - type: Sprite
     drawdepth: Mobs
-    sprite: _Goobstation/Structures/Walls/directional.rsi
+    sprite: _Amour/Structures/Walls/directional.rsi
     state: directionalwall
   - type: Icon
-    sprite: _Goobstation/Structures/Walls/directional.rsi
+    sprite: _Amour/Structures/Walls/directional.rsi
     state: directionalwall
   - type: Physics
   - type: Fixtures

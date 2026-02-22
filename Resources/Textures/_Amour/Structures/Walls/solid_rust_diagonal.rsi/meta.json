@@ -5,13 +5,15 @@
         "y": 32
     },
     "license": "CC-BY-SA-3.0",
-    "copyright": "by Archestratigus aka zastupnic",
+    "copyright": "Sprited by SS14L1NZ",
     "states": [
         {
-            "name": "state0"
+            "name": "state0",
+            "directions": 4
         },
         {
-            "name": "state1"
+            "name": "state1",
+            "directions": 4
         }
     ]
 }
