@@ -11,7 +11,7 @@
 # SPDX-FileCopyrightText: 2022 Delete69 <95458399+Delete69@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2022 Jacob Tong <10494922+ShadowCommander@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2022 J+¦lio C+ésar Ueti <52474532+Mirino97@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2022 J+ï¿½lio C+ï¿½sar Ueti <52474532+Mirino97@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2022 Peptide90 <78795277+Peptide90@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
@@ -121,7 +121,7 @@
         acts: [ "Destruction" ]
   - type: Airtight
   - type: IconSmooth
-    key: walls
+    key: windows
     base: window
   - type: InteractionPopup
     interactSuccessString: comp-window-knock
@@ -153,6 +153,7 @@
   - type: Icon
     sprite: _Amour/Structures/Windows/tinted_window.rsi
   - type: IconSmooth
+    key: windows
     base: twindow
   - type: Construction
     graph: Window
@@ -340,3 +341,47 @@
     graph: WindowDiagonal
     node: windowDiagonal
 
+- type: entity
+  parent: Window
+  id: TintedWindowDiagonal
+  suffix: diagonal
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: Sprite
+    drawdepth: WallTops
+    sprite: _Amour/Structures/Windows/tinted_diagonal.rsi
+    state: state0
+  - type: Tag
+    tags:
+    - Diagonal
+  - type: IconSmooth
+    mode: Diagonal
+    key: windows
+    base: state
+  - type: Icon
+    sprite: _Amour/Structures/Windows/tinted_diagonal.rsi
+    state: state0
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PolygonShape
+            vertices:
+            - "-0.5,-0.5"
+            - "0.5,0.5"
+            - "0.5,-0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+    airBlockedDirection:
+    - South
+    - East
+  - type: DamageVisuals
+    damageOverlay:
+      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi
