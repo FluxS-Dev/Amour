@@ -517,22 +517,22 @@
 
 # Santa
 
-- type: entity
-  id: SantaClausSpawn
-  parent: BaseGameRule
-  components:
-  - type: StationEvent
-    weight: 1
-    earliestStart: 3
-    minimumPlayers: 10
-    maxOccurrences: 1
-    eventType: Neutral
-  - type: GameRule
-    chaosScore: 100
-  - type: VentCrittersRule # like a chimney
-    max: 1
-    table:
-      id: SantaClaus
+#- type: entity # Amour - out of season
+#  id: SantaClausSpawn
+#  parent: BaseGameRule
+#  components:
+#  - type: StationEvent
+#    weight: 1
+#    earliestStart: 3
+#    minimumPlayers: 10
+#    maxOccurrences: 1
+#    eventType: Neutral
+#  - type: GameRule
+#    chaosScore: 100
+#  - type: VentCrittersRule # like a chimney
+#    max: 1
+#    table:
+#      id: SantaClaus
 
 #Contractor
 - type: entity
