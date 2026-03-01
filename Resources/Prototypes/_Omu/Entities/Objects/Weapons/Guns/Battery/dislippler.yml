@@ -1,6 +1,6 @@
 - type: entity
   name: dislippler
-  parent: [WeaponDisablerPractice, BaseSyndicateContraband]
+  parent: [WeaponDisablerPractice] # BaseSyndicateContraband
   id: WeaponDislippler
   description: Standard-issue security disabler on Honk! Co. stations. Ultimate proof that God has abandoned us.
   components:

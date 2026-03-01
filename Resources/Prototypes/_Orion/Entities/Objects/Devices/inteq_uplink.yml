@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem, BaseMajorContraband]
+  parent: [BaseItem] # BaseMajorContraband
   id: BaseInteQUplinkRadio
   name: InteQ uplink
   description: Suspiciously looking radio...

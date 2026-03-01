@@ -22,7 +22,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseCartridge, BaseMajorContraband ]
+  parent: [ BaseCartridge] # BaseMajorContraband
   id: CartridgeAntiMateriel
   name: cartridge (.60 anti-materiel)
   components:

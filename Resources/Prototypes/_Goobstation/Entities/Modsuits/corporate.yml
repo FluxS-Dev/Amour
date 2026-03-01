@@ -14,7 +14,7 @@
 
 # The Modsuit Itself, This is just a Deathsquad modsuit, but reskined for CC Officials
 - type: entity
-  parent: [ ClothingModsuitStandard, BaseCentcommContraband ]
+  parent: [ ClothingModsuitStandard] # BaseCentcommContraband
   id: ClothingModsuitCorporate
   name: Corporate modsuit control unit
   description: The main controller for a Corporate modsuit.
@@ -49,7 +49,7 @@
           shader: unshaded      
 
 - type: entity
-  parent: [ClothingModsuitGauntletsStandard, BaseCentcommContraband]
+  parent: [ClothingModsuitGauntletsStandard] # BaseCentcommContraband
   id: ClothingModsuitGauntletsCorporate
   name: Corporate modsuit gauntlets
   description: A pair of gauntlets made for the Corporate modsuit.
@@ -78,7 +78,7 @@
         startingGrabStage: Hard
 
 - type: entity
-  parent: [ClothingModsuitHelmetStandard, ShowSecurityIcons, BaseCentcommContraband]
+  parent: [ClothingModsuitHelmetStandard, ShowSecurityIcons] # BaseCentcommContraband
   id: ClothingModsuitHelmetCorporate
   name: Corporate modsuit helmet
   description: A state-of-the-art helmet designed by NanoTrasen for the Corporate modsuit. It includes a built-in HUD.
@@ -166,7 +166,7 @@
         blockSmokeIngestion: True
 
 - type: entity
-  parent: [ClothingModsuitChestplateStandard, BaseCentcommContraband]
+  parent: [ClothingModsuitChestplateStandard] # BaseCentcommContraband
   id: ClothingModsuitChestplateCorporate
   name: Corporate modsuit chestplate
   description: A state of the art chestplate designed by NanoTrasen for the Corporate modsuit. It incorporates powered servos to reduce the equipment load.
@@ -231,7 +231,7 @@
         heatingCoefficient: 0.01
 
 - type: entity
-  parent: [ClothingModsuitBootsStandard, BaseCentcommContraband]
+  parent: [ClothingModsuitBootsStandard] # BaseCentcommContraband
   id: ClothingModsuitBootsCorporate
   name: Corporate modsuit boots
   description: A state-of-the-art pair of magboots for the Corporate modsuit. So long as the suit is powered, these will not slow the wearer down.
@@ -301,7 +301,7 @@
           
 #NCT
 - type: entity
-  parent: [ClothingModsuitCorporate, ClothingModsuitStandard, BaseCentcommContraband]
+  parent: [ClothingModsuitCorporate, ClothingModsuitStandard] # BaseCentcommContraband
   id: ClothingModsuitTrainer
   name: Career Trainer modsuit control unit
   description: The main controller for a Career Trainer modsuit.
@@ -316,7 +316,7 @@
         shoes: ClothingModsuitBootsTrainer
 
 - type: entity
-  parent: [ClothingModsuitGauntletsCorporate, ClothingModsuitGauntletsStandard, BaseCentcommContraband]
+  parent: [ClothingModsuitGauntletsCorporate, ClothingModsuitGauntletsStandard] # BaseCentcommContraband
   id: ClothingModsuitGauntletsTrainer
   name: Corporate modsuit gauntlets
   description: A pair of gauntlets made for the Career Trainer modsuit.
@@ -326,7 +326,7 @@
       sprite: _Goobstation/Clothing/OuterClothing/Modsuits/nct.rsi
 
 - type: entity
-  parent: [ClothingModsuitHelmetCorporate, ClothingModsuitHelmetStandard, ShowSecurityIcons, BaseCentcommContraband]
+  parent: [ClothingModsuitHelmetCorporate, ClothingModsuitHelmetStandard, ShowSecurityIcons] # BaseCentcommContraband
   id: ClothingModsuitHelmetTrainer
   name: Corporate modsuit helmet
   description: A state-of-the-art helmet designed by NanoTrasen for the Career Trainer modsuit. It includes a built-in HUD.
@@ -359,7 +359,7 @@
       reduction: 0.2
 
 - type: entity
-  parent: [ClothingModsuitChestplateCorporate, ClothingModsuitChestplateStandard, BaseCentcommContraband]
+  parent: [ClothingModsuitChestplateCorporate, ClothingModsuitChestplateStandard] # BaseCentcommContraband
   id: ClothingModsuitChestplateTrainer
   name: Career Trainer modsuit chestplate
   description: A state of the art chestplate designed by NanoTrasen for the Career Trainer modsuit. It incorporates powered servos to reduce the equipment load.
@@ -390,7 +390,7 @@
       reduction: 0.8
 
 - type: entity
-  parent: [ClothingModsuitBootsCorporate, ClothingModsuitBootsStandard, BaseCentcommContraband]
+  parent: [ClothingModsuitBootsCorporate, ClothingModsuitBootsStandard] # BaseCentcommContraband
   id: ClothingModsuitBootsTrainer
   name: Career Trainer modsuit boots
   description: A state-of-the-art pair of magboots for the Career Trainer modsuit. So long as the suit is powered, these will not slow the wearer down.

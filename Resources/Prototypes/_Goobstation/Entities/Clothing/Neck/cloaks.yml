@@ -65,7 +65,7 @@
     sprite: _Goobstation/Clothing/Neck/Cloaks/sanabi.rsi
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase] # BaseCommandContraband
   id: ClothingNeckCloakVetCap
   name: Veteran Captain's cloak
   description: Captains Aura Cloak
@@ -98,7 +98,7 @@
 
 # outer command cloak
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase] # BaseCommandContraband
   id: ClothingNeckCloakOuterCommand
   name: outer command cloak
   description: A stylish purple cloak with Terra-Gov insignia.

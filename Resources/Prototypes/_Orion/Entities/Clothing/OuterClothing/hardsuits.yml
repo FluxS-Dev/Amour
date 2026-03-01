@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseMajorContraband, ClothingOuterHardsuitSyndieElite ]
+  parent: [ ClothingOuterHardsuitSyndieElite ] # BaseMajorContraband
   id: ClothingOuterHardsuitInteQElite
   name: elite InteQ hardsuit
   description: An upgraded version of the syndicate hardsuit that features enhanced fireproofing, pressure resist, and superior armor.
@@ -13,7 +13,7 @@
       head: ClothingHeadHelmetHardsuitInteQElite
 
 - type: entity
-  parent: [ BaseMajorContraband, ClothingOuterHardsuitSyndie ]
+  parent: [ ClothingOuterHardsuitSyndie ] # BaseMajorContraband
   id: ClothingOuterHardsuitInteQ
   name: InteQ hardsuit
   description: An upgraded version of the syndicate hardsuit that features enhanced fireproofing, pressure resist, and superior armor.
@@ -27,7 +27,7 @@
       head: ClothingHeadHelmetHardsuitInteQ
 
 - type: entity
-  parent: [ BaseMajorContraband, ClothingOuterHardsuitSyndie ]
+  parent: [ ClothingOuterHardsuitSyndie ] # BaseMajorContraband
   id: ClothingOuterHardsuitSyndicateInteQ
   name: InteQ hardsuit
   description: An upgraded version of the syndicate hardsuit that features enhanced fireproofing, pressure resist, and superior armor.

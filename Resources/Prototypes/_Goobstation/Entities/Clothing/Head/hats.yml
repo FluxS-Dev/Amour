@@ -22,7 +22,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ClothingHeadBase, BaseCentcommContraband]
+  parent: [ClothingHeadBase] # BaseCentcommContraband
   id: ClothingHeadHatBeretEliteNavyOfficer
   name: elite navy officer's beret
   description: A navy blue beret with the silver shield of the Nanotrasen security forces.
@@ -37,7 +37,7 @@
     - WhitelistChameleon # We do a little bit of trolling.
 
 - type: entity
-  parent: [ClothingHeadBase, BaseCentcommContraband]
+  parent: [ClothingHeadBase] # BaseCentcommContraband
   id: ClothingHeadHatBeretNavyOfficer
   name: navy officer's beret
   description: A black beret with the silver shield of the Nanotrasen security forces.
@@ -52,7 +52,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadBase, BaseCentcommContraband]
+  parent: [ClothingHeadBase] # BaseCentcommContraband
   id: ClothingHeadHatBeretNavyCaptain
   name: navy captain's beret
   description: A starch white beret.
@@ -67,7 +67,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadBase, BaseCentcommContraband]
+  parent: [ClothingHeadBase] # BaseCentcommContraband
   id: ClothingHeadHatBeretBlueshield
   name: blueshield's armored beret
   description: A durable beret woven out of durathread. Provides protection, too.
@@ -82,7 +82,7 @@
     - WhitelistChameleon # We do a little bit of trolling.
 
 - type: entity
-  parent: [ClothingHeadBase, BaseCentcommContraband]
+  parent: [ClothingHeadBase] # BaseCentcommContraband
   id: ClothingHeadHatCowboyBlueshield
   name: blueshield's armored cowboy hat
   description: Sheriff's back in town, kids.
@@ -97,7 +97,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingHeadBase, BaseFoldable, BaseCentcommContraband]
+  parent: [ClothingHeadBase, BaseFoldable] # BaseCentcommContraband
   id: ClothingHeadHatUshankaBlueshield
   name: blueshield's armored ushanka
   description: Perfect for saving heads in Siberia, da?
@@ -246,7 +246,7 @@
     sprite: _Goobstation/Clothing/Head/Hats/lehmin.rsi
 
 - type: entity
-  parent: [ ClothingHeadBase, BaseJanitorContraband ]
+  parent: [ ClothingHeadBase] # BaseJanitorContraband
   id: ClothingHeadHatJanitorCap
   name: janitorial cap
   description: An extravagant purple cap for only the BEST of janitorial workers.

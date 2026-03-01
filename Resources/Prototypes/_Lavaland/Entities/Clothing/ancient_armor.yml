@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseCargoContraband ]
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing] # BaseCargoContraband
   id: LavalandEquipmentAncientArmor
   name: predecessor armor
   description: Ancient armor that is fully made out of strong goliath plates. 

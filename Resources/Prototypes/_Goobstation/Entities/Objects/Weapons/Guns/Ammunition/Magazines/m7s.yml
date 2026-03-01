@@ -6,7 +6,7 @@
 - type: entity
   id: MagazineLowCaliberM7S
   name: M7S magazine (5x23mm)
-  parent: [ BaseItem, BaseSyndicateContraband ]
+  parent: [ BaseItem] # BaseSyndicateContraband
   components:
   - type: Tag
     tags:

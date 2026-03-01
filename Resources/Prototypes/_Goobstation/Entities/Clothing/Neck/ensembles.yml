@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase] # BaseCommandContraband
   id: ClothingNeckEnsembleCaptain
   name: captain's ensemble
   description: You're a hardened veteran, and you rule this station with an iron fist. That chess match? Never happened.
@@ -43,7 +43,7 @@
           state: cloak-icon
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase] # BaseCommandContraband
   id: ClothingNeckEnsembleChiefEngineer
   name: chief engineer's ensemble
   description: In the event of a delamination, this won't protect you from the radiation. With how long you've been doing this, that wouldn't happen. Right?
@@ -87,7 +87,7 @@
           state: cloak-icon
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase] # BaseCommandContraband
   id: ClothingNeckEnsembleChiefMedicalOfficer
   name: chief medical officer's ensemble
   description: With how many medbays you've seen, you're a real poly math-- unpacking people like packages, and mulching bodies like it's nothing. You WILL set up cloning, right?
@@ -150,7 +150,7 @@
           sprite: _Goobstation/Clothing/Neck/Ensembles/cmo.rsi
           state: mantlewings-icon
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase] # BaseCommandContraband
   id: ClothingNeckEnsembleHeadOfSecurity
   name: head of security's ensemble
   description: Stained with the blood of tiders, and the tears of cadets. The word "shitsec" brings you joy, a tear to your eye.
@@ -194,7 +194,7 @@
           state: cloak-icon
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase] # BaseCommandContraband
   id: ClothingNeckEnsembleResearchDirector
   name: research director's ensemble
   description: The endpoint of all research leads here. You truly are the pinnacle of science, a monument to Nanotrasens accomplishments and ability to glue you back together, must you explode so often?
@@ -258,7 +258,7 @@
           state: cloakwings-icon
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase] # BaseCommandContraband
   id: ClothingNeckEnsembleQuarterMaster
   name: quartermaster's ensemble
   description: Delicately crafted with the most premium materials purchaseable with spesos; a cloak that truly represents the Spirit of Cargonia... and your bank account.
@@ -302,7 +302,7 @@
           state: cloak-icon
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCommandContraband]
+  parent: [ClothingNeckBase] # BaseCommandContraband
   id: ClothingNeckEnsembleHeadOfPersonnel
   name: head of personnel's ensemble
   description: There's nothing sweeter in this world than the tears of someone who was made to fill out five paragraphs of paperwork. You denied them after, of course.
@@ -346,7 +346,7 @@
           state: cloak-icon
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCentcommCommandContraband]
+  parent: [ClothingNeckBase] # BaseCentcommCommandContraband
   id: ClothingNeckEnsembleBlueshield
   name: blueshield officer's ensemble
   description: After fending off countless tiders in defense of command, Nanotrasen has finally granted you the ability to die in style. Now get out there and protect the NTR soldier!
@@ -398,7 +398,7 @@
           state: mantle-icon
 
 - type: entity
-  parent: [ClothingNeckBase, BaseCentcommCommandContraband]
+  parent: [ClothingNeckBase] # BaseCentcommCommandContraband
   id: ClothingNeckEnsembleNanotrasenRepresentative
   name: nanotrasen representative's ensemble
   description: After years of doing practically nothing, Central Command has gifted you this cloak. Now you can do nothing, while looking pretty!

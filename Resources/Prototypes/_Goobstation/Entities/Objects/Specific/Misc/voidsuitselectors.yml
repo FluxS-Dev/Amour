@@ -9,7 +9,7 @@
   id: UndeterminedVoidsuitParamedic
   name: paramedic hardsuit selector
   description: A small remote utilizing bluespace technology to drop in a hardsuit or modsuit of your choosing.
-  parent: [ BaseItem, BaseSetSelector, BaseMedicalContraband ]
+  parent: [ BaseItem, BaseSetSelector] # BaseMedicalContraband
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Devices/unique_teleporters.rsi
@@ -24,7 +24,7 @@
   id: UndeterminedVoidsuitSecurity
   name: security hardsuit selector
   description: A small remote utilizing bluespace technology to drop in a hardsuit or modsuit of your choosing.
-  parent: [ BaseItem, BaseSetSelector, BaseSecurityContraband ]
+  parent: [ BaseItem, BaseSetSelector] # BaseSecurityContraband
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Devices/unique_teleporters.rsi
@@ -39,7 +39,7 @@
   id: UndeterminedVoidsuitHeadOfSecurity
   name: head of security hardsuit selector
   description: A small remote utilizing bluespace technology to drop in a hardsuit or modsuit of your choosing.
-  parent: [ BaseItem, BaseSetSelector, BaseSecurityContraband ]
+  parent: [ BaseItem, BaseSetSelector] # BaseSecurityContraband
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Devices/unique_teleporters.rsi
@@ -54,7 +54,7 @@
   id: UndeterminedVoidsuitEngineer
   name: engineer hardsuit selector
   description: A small remote utilizing bluespace technology to drop in a hardsuit or modsuit of your choosing.
-  parent: [ BaseItem, BaseSetSelector, BaseEngineeringContraband ]
+  parent: [ BaseItem, BaseSetSelector ] # BaseEngineeringContraband
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Devices/unique_teleporters.rsi
@@ -69,7 +69,7 @@
   id: UndeterminedVoidsuitCaptain
   name: captain hardsuit selector
   description: A small remote utilizing bluespace technology to drop in a hardsuit or modsuit of your choosing.
-  parent: [ BaseItem, BaseSetSelector, BaseCommandContraband ]
+  parent: [ BaseItem, BaseSetSelector] # BaseCommandContraband
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Devices/unique_teleporters.rsi
@@ -84,7 +84,7 @@
   id: UndeterminedVoidsuitRD
   name: research director hardsuit selector
   description: A small remote utilizing bluespace technology to drop in a hardsuit or modsuit of your choosing.
-  parent: [ BaseItem, BaseSetSelector, BaseCommandContraband ]
+  parent: [ BaseItem, BaseSetSelector] # BaseCommandContraband
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Devices/unique_teleporters.rsi

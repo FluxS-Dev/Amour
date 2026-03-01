@@ -56,7 +56,7 @@
   - type: AutoSurgeonMultiple
 
 - type: entity
-  parent: [BaseAutosurgeonSingle, BaseSyndicateContraband]
+  parent: [BaseAutosurgeonSingle] # BaseSyndicateContraband
   id: BaseAutosurgeonSyndicateSingle
   abstract: true
   components:
@@ -64,7 +64,7 @@
     state: icon-syndie
 
 - type: entity
-  parent: [BaseAutosurgeonMultiple, BaseSyndicateContraband]
+  parent: [BaseAutosurgeonMultiple] # BaseSyndicateContraband
   id: BaseAutosurgeonSyndicateMultiple
   abstract: true
   components:

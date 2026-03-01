@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseMinorContraband, ClothingBeltStorageBase ]
+  parent: [ ClothingBeltStorageBase ] # BaseMinorContraband
   id: ClothingBeltInteQWebbing
   name: combat webbing
   description: Unique and versatile chest mount in which you can store weapons and ammunition.
@@ -10,7 +10,7 @@
     sprite: _Orion/Clothing/Belt/inteq_webbing.rsi
 
 - type: entity
-  parent: [ BaseMinorContraband, ClothingBeltStorageBase ]
+  parent: [ ClothingBeltStorageBase ] # BaseMinorContraband
   id: ClothingBeltInteQDropPouch
   name: combat drop pouch
   description: Improved unloading for storing various items
@@ -21,7 +21,7 @@
     sprite: _Orion/Clothing/Belt/inteq_droppouch.rsi
 
 - type: entity
-  parent: [ BaseMajorContraband, ClothingBeltBase ]
+  parent: [ ClothingBeltBase ] # BaseMajorContraband
   id: ClothingBeltInteQShieldBelt
   name: InteQ shield belt
   description: Brilliant ideas came before the bullet, and the mercenaries came up with the idea of using shields not only in hardsuits.

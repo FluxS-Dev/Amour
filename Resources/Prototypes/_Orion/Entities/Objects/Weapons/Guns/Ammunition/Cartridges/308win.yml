@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseCartridge, BaseSecurityContraband ]
+  parent: [ BaseCartridge] # BaseSecurityContraband
   id: Cartridge308win
   name: cartridge (.308 winchester)
   components:

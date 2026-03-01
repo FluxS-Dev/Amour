@@ -7,7 +7,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ClothingBackpackDuffel, BaseMajorContraband ]
+  parent: [ ClothingBackpackDuffel] # BaseMajorContraband
   id: ClothingBackpackDuffelAbductor
   name: alien duffel bag
   description: An ordinary duffel bag woven from a durable fiber.

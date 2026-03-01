@@ -317,7 +317,7 @@
 
 - type: entity
   name: Svalinn # Goobstation
-  parent: [BaseWeaponCustomCellSmall, BaseSecurityContraband] # goob edit - svalinn buff fix
+  parent: [BaseWeaponCustomCellSmall] # BaseSecurityContraband # goob edit - svalinn buff fix
   id: WeaponLaserSvalinn
   description: A cheap and modular laser pistol often carried by civilians. Takes standard power cells, with higher capacity ones amplifying the capacity and power of the resulting beam. # Goobstation
   components:
@@ -361,7 +361,7 @@
 
 - type: entity
   name: retro laser blaster
-  parent: [BaseWeaponBatterySmall, BaseMajorContraband]
+  parent: [BaseWeaponBatterySmall] # BaseMajorContraband
   id: WeaponLaserGun
   description: A laser pistol from another time. Its design is pretty rare in the current era, but it's compatible with modern rechargers. # Goobstation
   components:
@@ -391,7 +391,7 @@
 
 - type: entity
   name: makeshift laser pistol
-  parent: [BaseWeaponBatterySmall, BaseMinorContraband]
+  parent: [BaseWeaponBatterySmall] # BaseMinorContraband
   id: WeaponMakeshiftLaser
   description: Better pray it won't burn your hands off.
   components:
@@ -426,7 +426,7 @@
 
 - type: entity
   name: tesla gun
-  parent: [BaseWeaponBattery, BaseMajorContraband]
+  parent: [BaseWeaponBattery] # BaseMajorContraband
   id: WeaponTeslaGun
   description: The power of the primordial element of lightning in your hands.
   components:
@@ -491,7 +491,7 @@
 
 - type: entity
   name: laser carbine # Goobstation
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponBattery, BaseGunWieldable] # BaseSecurityContraband
   id: WeaponLaserCarbine
   description: An ergonomic and light laser weapon favored by NanoTrasen security teams because of its low capacity for structural damage. # Goobstation
   components:
@@ -526,7 +526,7 @@
 
 - type: entity
   name: pulse pistol
-  parent: [BaseWeaponBatterySmall, BaseCentcommContraband]
+  parent: [BaseWeaponBatterySmall] # BaseCentcommContraband
   id: WeaponPulsePistol
   description: A state-of-the-art laser pistol that fires a rapidly pulsing beam. It's favored as a sidearm for the Emergency Response corps due to its self-recharging design. # Goobstation
   components:
@@ -563,7 +563,7 @@
 
 - type: entity
   name: pulse carbine
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseCentcommContraband]
+  parent: [BaseWeaponBattery, BaseGunWieldable] # BaseCentcommContraband
   id: WeaponPulseCarbine
   description: A state-of-the-art laser carbine that fires a rapidly pulsing beam. Cheaper than its advanced counterpart, though lacks the ability to self-recharge. # Goobstation
   components:
@@ -620,7 +620,7 @@
 
 - type: entity
   name: pulse rifle
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseCentcommContraband]
+  parent: [BaseWeaponBattery, BaseGunWieldable] # BaseCentcommContraband
   id: WeaponPulseRifle
   description: A weapon almost as infamous as its users. # Goobstation - Sometimes less is more.
   components:
@@ -674,7 +674,7 @@
 
 - type: entity
   name: laser cannon
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponBattery, BaseGunWieldable] # BaseSecurityContraband
   id: WeaponLaserCannon
   description: A heavy and advanced laser weapon that trades out the capacity of a carbine for greatly increased power. Known to inflict third-degree burns straight through bulletproof armor.
   components:
@@ -711,7 +711,7 @@
 
 - type: entity
   name: portable particle decelerator
-  parent: [BaseWeaponBattery, BaseEngineeringContraband]
+  parent: [BaseWeaponBattery] # BaseEngineeringContraband
   id: WeaponParticleDecelerator
   description: A portable particle decelerator capable of decomposing a tesla or singularity.
   components:
@@ -750,7 +750,7 @@
 
 - type: entity
   name: x-ray cannon
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponBattery, BaseGunWieldable] # BaseSecurityContraband
   id: WeaponXrayCannon
   description: An experimental laser weapon that fires a dense x-ray beam. Leaves intense radiation burns.
   components:
@@ -835,7 +835,7 @@
 
 - type: entity
   name: disabler
-  parent: [WeaponDisablerPractice, BaseSecurityCommandContraband]
+  parent: [WeaponDisablerPractice] # BaseSecurityCommandContraband
   id: WeaponDisabler
   description: A self-defense weapon that exhausts organic targets, weakening them until they collapse.
   components:
@@ -871,7 +871,7 @@
 
 - type: entity
   name: disabler SMG
-  parent: [BaseWeaponBattery, BaseSecurityContraband]
+  parent: [BaseWeaponBattery] # BaseSecurityContraband
   id: WeaponDisablerSMG
   description: An iteration of the disabler, reducing the power of each shot for a massive increase in firerate. Though a lot bulkier, the lightweight frame and lack of recoil make it fully usable one-handed. # Goobstation
   components:
@@ -912,7 +912,7 @@
 
 - type: entity
   name: Taser # Goobstation
-  parent: [BaseWeaponBatterySmall, BaseSecurityContraband]
+  parent: [BaseWeaponBatterySmall] # BaseSecurityContraband
   id: WeaponTaser
   description: A handheld stun weapon that fires two electrified darts at the target. Formerly used by NanoTrasen security, though it's mostly been phased out. # Goobstation
   components:
@@ -951,7 +951,7 @@
 
 - type: entity
   name: elite taser
-  parent: [ BaseCentcommContraband, WeaponTaser ]
+  parent: [ WeaponTaser ] # BaseCentcommContraband
   id: WeaponTaserSuper
   suffix: ADMEME
   description: A low-capacity, energy-based stun gun used by elite security teams to disable even the toughest of targets.
@@ -968,7 +968,7 @@
 
 - type: entity
   name: antique laser pistol
-  parent: [BaseWeaponBatterySmall, BaseGrandTheftContraband]
+  parent: [BaseWeaponBatterySmall] # BaseGrandTheftContraband
   id: WeaponAntiqueLaser
   description: A premium laser pistol from another age, customised with a mahogany grip and sleek chrome filigree. The chamber glows with menacing spikes of energy. There are clown and captain stick figures scratched into the side plate. The clown is dead. The captain is striking a heroic pose. # Goobstation
   components:
@@ -1012,7 +1012,7 @@
 
 - type: entity
   name: advanced laser pistol # Goobstation
-  parent: [BaseWeaponBatterySmall, BaseSecurityContraband]
+  parent: [BaseWeaponBatterySmall] # BaseSecurityContraband
   id: WeaponAdvancedLaser
   description: An experimental laser pistol fitted with a self-charging nuclear battery. # Goobstation
   components:
@@ -1054,7 +1054,7 @@
 
 - type: entity
   name: C.H.I.M.P. handcannon
-  parent: [BaseWeaponBatterySmall, BaseScienceContraband]
+  parent: [BaseWeaponBatterySmall] # BaseScienceContraband
   id: WeaponPistolCHIMP
   description: Just because it's a little C.H.I.M.P. doesn't mean it can't punch like an A.P.E.
   components:
@@ -1106,7 +1106,7 @@
 
 - type: entity
   name: experimental C.H.I.M.P. handcannon
-  parent: [WeaponPistolCHIMP, BaseSyndicateContraband]
+  parent: [WeaponPistolCHIMP] # BaseSyndicateContraband
   id: WeaponPistolCHIMPUpgraded
   description: This C.H.I.M.P. seems to have a greater punch than usual...
   components:
@@ -1149,7 +1149,7 @@
 
 - type: entity
   name: Energy Shotgun # Goobstation
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseGrandTheftContraband]
+  parent: [BaseWeaponBattery, BaseGunWieldable] # BaseGrandTheftContraband
   id: WeaponEnergyShotgun
   description: A one-of-a-kind energy weapon that fires a barrage of red-hot plasma rather than a laser beam. Comes with a fire selector between narrow, wide, and disabling, making it a diverse weapon in the right hands. # Goobstation
   components:
@@ -1223,7 +1223,7 @@
 
 - type: entity
   name: temperature gun # Goobstation
-  parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponBattery, BaseGunWieldable] # BaseSecurityContraband
   id: WeaponTemperatureGun
   description: A versatile energy gun that fires projectiles that modify internal body temperature, originally designed for use against opponents in armored hardsuits. Probably constitutes some kind of war crime in corporate space. # Goobstation
   components:
@@ -1276,12 +1276,12 @@
 
 - type: entity
   name: xenoborg laser gun
-  parent: [WeaponAdvancedLaser, BaseXenoborgContraband]
+  parent: [WeaponAdvancedLaser] # BaseXenoborgContraband
   id: XenoborgLaserGun
 
 - type: entity
   name: xenoborg heavy laser gun
-  parent: [WeaponAdvancedLaser, BaseXenoborgContraband]
+  parent: [WeaponAdvancedLaser] # BaseXenoborgContraband
   id: XenoborgHeavyLaserGun
   components:
   - type: HitscanBatteryAmmoProvider

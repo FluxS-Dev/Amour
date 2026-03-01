@@ -6,7 +6,7 @@
 
 - type: entity
   id: ExperimentalSyndicateTeleporter
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem] # BaseSyndicateContraband
   name: experimental Syndicate teleporter
   description: A self-recharging device that teleports the user forward. In case of teleportation into a wall, uses emergency teleportation. Or gibs the user if it's out of charges.
   components:

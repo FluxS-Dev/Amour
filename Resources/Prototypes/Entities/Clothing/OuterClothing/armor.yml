@@ -157,7 +157,7 @@
 #Basic armor vest for inheritance
 - type: entity
   abstract: true
-  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseSecurityContraband]
+  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing] # BaseSecurityContraband
   id: ClothingOuterArmorBase
   name: armor vest
   description: A standard Type I armored vest that provides decent protection against most types of damage.
@@ -194,7 +194,7 @@
 
 #Standard armor vest, allowed for security and bartenders
 - type: entity
-  parent: [ BaseSecurityBartenderContraband, ClothingOuterArmorBase]
+  parent: [ClothingOuterArmorBase] # BaseSecurityBartenderContraband
   id: ClothingOuterArmorBasic
   components:
   - type: Tag
@@ -216,7 +216,7 @@
     sprite: Clothing/OuterClothing/Armor/security_slim.rsi
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSecurityContraband]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing] # BaseSecurityContraband
   id: ClothingOuterArmorRiot
   name: riot suit
   description: A suit of semi-flexible polycarbonate body armor with heavy padding to protect against melee attacks. Perfect for fighting delinquents around the station.
@@ -311,7 +311,7 @@
     reflectingInHands: false
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseSyndicateContraband ]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing] # BaseSyndicateContraband
   id: ClothingOuterArmorRaid
   name: syndicate raid suit
   description: A somewhat flexible and well-armored suit with a powerful shoulder mounted flashlight manufactured in the Gorlex Marauder's iconic blood-red color scheme, it does not protect its wearer from space.
@@ -411,7 +411,7 @@
     size: Normal
 
 - type: entity
-  parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]
+  parent: [ ClothingOuterBaseLarge, AllowSuitStorageClothing ] # BaseMajorContraband
   id: ClothingOuterArmorCult
   name: acolyte armor
   description: An evil-looking piece of cult armor, made of bones.
@@ -510,7 +510,7 @@
     sprite: Clothing/OuterClothing/Armor/heavyred.rsi
 
 - type: entity
-  parent: [ClothingOuterArmorHeavy, ClothingOuterWizardBaseArmor, BaseMagicalContraband] # Goob edit
+  parent: [ClothingOuterArmorHeavy, ClothingOuterWizardBaseArmor] # BaseMagicalContraband # Goob edit
   id: ClothingOuterArmorMagusblue
   name: blue magus armor
   description: An blue armored suit that provides good protection. Doesn't count as wizard robes. # Goob edit
@@ -548,7 +548,7 @@
     sprite: Clothing/OuterClothing/Armor/magusred.rsi
 
 - type: entity
-  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing, BaseCommandContraband]
+  parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing] # BaseCommandContraband
   id: ClothingOuterArmorCaptainCarapace
   name: "captain's carapace"
   description: "An armored chestpiece that provides protection whilst still offering maximum mobility and flexibility. Issued only to the station's finest."
@@ -594,7 +594,7 @@
     - WhitelistChameleon
 
 - type: entity # This is from upstream, so it goes in wizden code.
-  parent: [ClothingOuterArmorCaptainCarapace, BaseCentcommContraband]
+  parent: [ClothingOuterArmorCaptainCarapace] # BaseCentcommContraband
   id: ClothingOuterArmorCentcommCarapace
   name: centcomm carapace
   description: 'An armored chestpiece that provides protection whilst still offering maximum mobility and flexibility. Issued only to centcomm officials and agents.'
@@ -605,7 +605,7 @@
     sprite: Clothing/OuterClothing/Armor/centcomm_carapace.rsi
 
 - type: entity
-  parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]
+  parent: [ ClothingOuterBaseLarge, AllowSuitStorageClothing ] # BaseMajorContraband
   id: ClothingOuterArmorChangeling
   name: chitinous armor
   description: Inflates the changeling's body into an all-consuming chitinous mass of armor.
@@ -655,7 +655,7 @@
     - jumpsuit
 
 - type: entity
-  parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]
+  parent: [ ClothingOuterBaseLarge, AllowSuitStorageClothing ] # BaseMajorContraband
   id: ClothingOuterArmorBone
   name: bone armor
   description: Sits on you like a second skin.
@@ -704,7 +704,7 @@
     - jumpsuit
 
 - type: entity
-  parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]
+  parent: [ ClothingOuterBaseLarge, AllowSuitStorageClothing ] # BaseMajorContraband
   id: ClothingOuterArmorPodWars
   name: ironclad II armor
   description: A repurposed suit of ironclad II armor, a relic of the pod wars.

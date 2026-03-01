@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem] # BaseSecurityContraband
   id: BaseMagazinePulseRifle
   name: pulse rifle magazine
   description: Standard EarthGov type of impulse magazines

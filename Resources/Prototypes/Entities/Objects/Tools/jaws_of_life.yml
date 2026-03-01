@@ -139,7 +139,7 @@
 
 - type: entity
   name: syndicate jaws of life
-  parent: [JawsOfLifeBase, BaseSyndicateContraband]
+  parent: [JawsOfLifeBase] # BaseSyndicateContraband
   id: SyndicateJawsOfLife
   description: Useful for entering the station or its departments.
   components:

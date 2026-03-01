@@ -62,7 +62,7 @@
 
 # ===== Random =====
 - type: entity # Pistol
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure] # BaseSecurityContraband
   id: GunSafeRandomPistolAlertUnlocked
   name: pistol safe
   suffix: Random, pistol
@@ -73,7 +73,7 @@
         tableId: FillGunSafeRandomPistol
 
 - type: entity # SMG
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure] # BaseSecurityContraband
   id: GunSafeRandomSubMachineGunAlertUnlocked
   name: SMG safe
   suffix: Random, SMG
@@ -89,7 +89,7 @@
   suffix: Random, SMG, Alert Level Lock
 
 - type: entity # basic rifles
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure] # BaseSecurityContraband
   id: GunSafeRandomLightRifleAlertUnlocked
   name: light rifle safe
   suffix: Random, light rifle
@@ -105,7 +105,7 @@
   suffix: Random, light rifle, Alert Level Lock
 
 - type: entity # Special rifles
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure] # BaseSecurityContraband
   id: GunSafeRandomHeavyRifleAlertUnlocked
   name: heavy rifle safe
   suffix: Random, heavy rifle
@@ -121,7 +121,7 @@
   suffix: Random, heavy rifle, Alert Level Lock
 
 - type: entity # Basic pump shotguns
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure] # BaseSecurityContraband
   id: GunSafeRandomPumpShotgunAlertUnlocked
   name: pump shotgun safe
   suffix: Random, pump shotgun
@@ -137,7 +137,7 @@
   suffix: Random, pump shotgun, Alert Level Lock
 
 - type: entity # Auto shotguns
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure] # BaseSecurityContraband
   id: GunSafeRandomAutoShotgunAlertUnlocked
   name: auto shotgun safe
   suffix: Random, auto shotgun
@@ -153,7 +153,7 @@
   suffix: Random, auto shotgun, Alert Level Lock
 
 - type: entity # Laser guns
-  parent: [GunSafeBaseSecure, BaseSecurityContraband]
+  parent: [GunSafeBaseSecure] # BaseSecurityContraband
   id: GunSafeRandomLaserCarbineAlertUnlocked
   name: laser carbine safe
   suffix: Random, laser carbine

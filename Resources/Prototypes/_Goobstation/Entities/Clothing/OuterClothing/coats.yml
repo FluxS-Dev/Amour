@@ -8,7 +8,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ClothingOuterArmorHoS, ClothingOuterStorageBase, BaseSecurityCommandContraband]
+  parent: [ClothingOuterArmorHoS, ClothingOuterStorageBase] # BaseSecurityCommandContraband
   id: ClothingOuterArmorHoSExperimental
   name: head of security's experimental armored trenchcoat
   description: A greatcoat enhanced with an experimental bluespace assisted alloy for some extra protection and style for those with a commanding presence.
@@ -46,7 +46,7 @@
     accent: StreetpunkAccent
 
 - type: entity
-  parent: [ClothingOuterDavidsJacket, BaseMajorContraband]
+  parent: [ClothingOuterDavidsJacket] # BaseMajorContraband
   id: ClothingOuterDavidsJacketValid
   name: edgerunner jacket
   description: You're right on the edge. Show 'em you got this.
@@ -84,7 +84,7 @@
 
 #blue ward coat
 - type: entity
-  parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase, BaseWardenContraband]
+  parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase] # BaseWardenContraband
   id: ClothingOuterCoatWardenBlue
   name: warden's blue jacket
   description: A sturdy, utilitarian jacket for those familiar with the brig.
@@ -125,7 +125,7 @@
 
 #hop longcoat
 - type: entity
-  parent: [ClothingOuterStorageBase, BaseCommandContraband]
+  parent: [ClothingOuterStorageBase] # BaseCommandContraband
   id: ClothingOuterCoatHoPLong
   name: hop's longcoat
   description: A smart longcoat for the Head of Personnel.
@@ -138,7 +138,7 @@
 
 #outer command jacket
 - type: entity
-  parent: [ ClothingOuterArmorCaptainCarapace, ClothingOuterStorageBase, BaseCentcommContraband ]
+  parent: [ ClothingOuterArmorCaptainCarapace, ClothingOuterStorageBase] # BaseCentcommContraband
   id: ClothingOuterArmoredJacketOuterCommand
   name: outer command jacket
   description: A purple jacket with very fancy elements. There is a Terra-Gov insignia on the back.

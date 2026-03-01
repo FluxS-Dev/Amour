@@ -11,7 +11,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseItem, BaseMagicalContraband ]
+  parent: [ BaseItem] # BaseMagicalContraband
   id: CodexCicatrix
   suffix: MagicItem
   name: codex cicatrix
@@ -52,7 +52,7 @@
     - HereticItem
 
 - type: entity
-  parent: [ DrinkBase, BaseMagicalContraband ]
+  parent: [ DrinkBase] # BaseMagicalContraband
   id: HereticEldritchFlask
   name: eldritch flask
   description: A flask filled with an unknown substance. Who knows what will happen when you take a sip from it.

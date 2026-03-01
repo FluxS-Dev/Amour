@@ -81,7 +81,7 @@
 # Blueshield Hardsuit
 
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseCentcommContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseCentcommContraband
   id: ClothingOuterHardsuitBlueshieldLight
   name: "'praetorian' escort hardsuit"
   description: A hardsuit designed for an elite bodyguard. This particular one is made of a lighter metal, allowing for more maneuverability.
@@ -126,7 +126,7 @@
 # Cybersun Stealth
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContraband ]
+  parent: [ ClothingOuterHardsuitBase] # BaseSyndicateContraband
   id: ClothingOuterHardsuitCybersunStealth
   suffix: stealth
   name: cybersun stealth hardsuit
@@ -183,7 +183,7 @@
 # cybersun dreadnought suit
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseSyndicateAnchoredContraband ]
+  parent: [ ClothingOuterHardsuitBase] # BaseSyndicateAnchoredContraband
   id: ClothingOuterHardsuitCybersunDreadnought
   name: Cybersun dreadnought suit
   description: The Syndicate places its glory on your shoulders, do not disappoint.
@@ -244,7 +244,7 @@
 
 # Security voidsuit - used this instead of security hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseSecurityContraband
   id: ClothingOuterVoidsuitSecurity
   name: security hardsuit
   description: A light hardsuit with an in-built plate carrier to provide moderate protection while remaining mobile.
@@ -311,7 +311,7 @@
 # Nanorep catalog Hardsuit
 
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseCentcommContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseCentcommContraband
   id: ClothingOuterHardsuitExperimentalNanorep
   name: "NTX5-Mirrorduss"
   description: A crude dark exosuit of reinforced plating, etched with faintly glowing Bluespace circuits. You can tell someone attempted to scratch out part of the text — Prototype No. 2
@@ -353,7 +353,7 @@
 # Singuloth hardsuit
 
 - type: entity
-  parent: [BaseMagicalContraband, ClothingOuterHardsuitEngineeringWhite]
+  parent: [ClothingOuterHardsuitEngineeringWhite] # BaseMagicalContraband
   id: ClothingSingulothArmor
   name: singuloth knight's armor
   description: A ceremonial armor from the chapter of the Singuloth Knights, It's made of pure forged adamantium.
@@ -385,7 +385,7 @@
 # Detective's Hardsuit
 
 - type: entity
-  parent: [ClothingOuterVoidsuitSecurity, BaseSecurityContraband]
+  parent: [ClothingOuterVoidsuitSecurity] # BaseSecurityContraband
   id: ClothingOuterHardsuitDetective
   name: detective hardsuit
   description: A hardsuit custom-made for the Detective. It has a strong smell of alcohol and cigarettes.
@@ -399,7 +399,7 @@
       head: ClothingHeadHelmetHardsuitDetective
 
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseSyndicateContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseSyndicateContraband
   id: ClothingOuterHardsuitContractor
   name: contractor hardsuit
   description: A light hardsuit with an in-built plate carrier to provide moderate protection while remaining mobile.

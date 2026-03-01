@@ -175,7 +175,7 @@
 
 #Basic Helmet (Security Helmet)
 - type: entity
-  parent: [ClothingHeadHelmetArmoredBase, BaseSecurityContraband, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable
+  parent: [ClothingHeadHelmetArmoredBase, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable # BaseSecurityContraband
   id: ClothingHeadHelmetBasic
   name: helmet
   description: Standard security gear. Protects the head from impacts.
@@ -194,7 +194,7 @@
 
 #Mercenary Helmet
 - type: entity
-  parent: [ ClothingHeadHelmetArmoredBase, BaseMajorContraband ]
+  parent: [ ClothingHeadHelmetArmoredBase] # BaseMajorContraband
   id: ClothingHeadHelmetMerc
   name: mercenary helmet
   description: The combat helmet is commonly used by mercenaries, is strong, light and smells like gunpowder and the jungle.
@@ -209,7 +209,7 @@
 
 #SWAT Helmet
 - type: entity
-  parent: [ClothingHeadHelmetBase, BaseSecurityContraband, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable
+  parent: [ClothingHeadHelmetBase, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable # BaseSecurityContraband
   id: ClothingHeadHelmetSwat
   name: SWAT helmet
   description: An extremely robust helmet, commonly used by paramilitary forces. This one has the Nanotrasen logo emblazoned on the top.
@@ -245,7 +245,7 @@
 
 #Syndicate SWAT Helmet
 - type: entity
-  parent: [BaseSyndicateContraband, ClothingHeadHelmetSwat] # Goob edit
+  parent: [ClothingHeadHelmetSwat] # Goob edit # BaseSyndicateContraband
   id: ClothingHeadHelmetSwatSyndicate
   name: SWAT helmet
   suffix: Syndicate
@@ -261,7 +261,7 @@
 
 #Light Riot Helmet
 - type: entity
-  parent: [ClothingHeadHelmetBase, BaseSecurityContraband, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable
+  parent: [ClothingHeadHelmetBase, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable # BaseSecurityContraband
   id: ClothingHeadHelmetRiot
   name: light riot helmet
   description: It's a helmet specifically designed to protect against close range attacks.
@@ -330,7 +330,7 @@
 
 #Cult Helmet
 - type: entity
-  parent: [ClothingHeadHelmetBase, BaseMajorContraband, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable
+  parent: [ClothingHeadHelmetBase, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable # BaseMajorContraband
   id: ClothingHeadHelmetCult
   name: cult helmet
   description: A robust, evil-looking cult helmet.
@@ -356,7 +356,7 @@
 
 #Space Ninja Helmet
 - type: entity
-  parent: [ClothingHeadEVAHelmetBase, BaseMajorContraband] # Goob - ClothingHeadHelmetBaseFoldable
+  parent: [ClothingHeadEVAHelmetBase] # BaseMajorContraband # Goob - ClothingHeadHelmetBaseFoldable
   id: ClothingHeadHelmetSpaceNinja
   name: space ninja helmet
   description: What may appear to be a simple black garment is in fact a highly sophisticated nano-weave helmet. Standard issue ninja gear.
@@ -423,7 +423,7 @@
 
 #Wizard Helmet
 - type: entity
-  parent: [ClothingHeadHelmetBase, ClothingHeadHatWizardBaseArmor, BaseMagicalContraband, ClothingHeadHelmetBaseFoldable] # Goob edit
+  parent: [ClothingHeadHelmetBase, ClothingHeadHatWizardBaseArmor, ClothingHeadHelmetBaseFoldable] # Goob edit # BaseMagicalContraband
   id: ClothingHeadHelmetWizardHelm
   name: wizard helm
   description: Strange-looking helmet that most certainly belongs to a real magic user. Doesn't count as wizard hat. # Goob edit
@@ -492,7 +492,7 @@
 
 #Atmos Fire Helmet
 - type: entity
-  parent: [ClothingHeadLightBase, BaseEngineeringContraband]
+  parent: [ClothingHeadLightBase] # BaseEngineeringContraband
   id: ClothingHeadHelmetAtmosFire
   name: atmos fire helmet
   description: An atmos fire helmet, able to keep the user cool in any situation.
@@ -540,7 +540,7 @@
 
 #Chitinous Helmet
 - type: entity
-  parent: [ ClothingHeadHelmetBase, BaseMajorContraband, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable
+  parent: [ ClothingHeadHelmetBase, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable # BaseMajorContraband
   id: ClothingHeadHelmetLing
   name: chitinous helmet
   description: An all-consuming chitinous mass of armor.
@@ -573,7 +573,7 @@
 #ERT HELMETS
 #ERT Leader Helmet
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetArmoredBase, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable
+  parent: [ ClothingHeadHelmetArmoredBase, ClothingHeadHelmetBaseFoldable] # Goob - ClothingHeadHelmetBaseFoldable # BaseCentcommContraband
   id: ClothingHeadHelmetERTLeader
   name: ERT leader helmet
   description: An in-atmosphere helmet worn by the leader of a Nanotrasen Emergency Response Team. Has blue highlights.
@@ -649,7 +649,7 @@
   #    Hair: HEAD
 
 - type: entity
-  parent: [ BaseSyndicateContraband, ClothingHeadHelmetBase, ClothingHeadHelmetBaseFoldable ] # Goob - ClothingHeadHelmetBaseFoldable
+  parent: [ ClothingHeadHelmetBase, ClothingHeadHelmetBaseFoldable ] # Goob - ClothingHeadHelmetBaseFoldable # BaseSyndicateContraband
   id: ClothingHeadHelmetRaid
   name: syndicate raid helmet
   description: An armored helmet for use with the syndicate raid suit. Very stylish.
@@ -681,7 +681,7 @@
 #Bone Helmet
 #No need to hide the hair on this one
 - type: entity
-  parent: [ ClothingHeadHelmetArmoredBase, BaseMinorContraband ]
+  parent: [ ClothingHeadHelmetArmoredBase] # BaseMinorContraband
   id: ClothingHeadHelmetBone
   name: bone helmet
   description: Cool-looking helmet made of skull of your enemies.
@@ -696,7 +696,7 @@
 
 #Ironclad II Helmet
 - type: entity
-  parent: [ ClothingHeadHelmetArmoredBase, BaseMinorContraband, ClothingHeadHelmetBaseFoldable ] # Goob - ClothingHeadHelmetBaseFoldable
+  parent: [ ClothingHeadHelmetArmoredBase, ClothingHeadHelmetBaseFoldable ] # Goob - ClothingHeadHelmetBaseFoldable # BaseMinorContraband
   id: ClothingHeadHelmetPodWars
   name: ironclad II helmet
   description: An ironclad II helmet, a relic of the pod wars.
@@ -711,7 +711,7 @@
 
 #Justice Helmet
 - type: entity
-  parent: [ClothingHeadHelmetArmoredBase, BaseSecurityContraband] # Goob edit
+  parent: [ClothingHeadHelmetArmoredBase] # BaseSecurityContraband # Goob edit
   id: ClothingHeadHelmetJustice
   name: justice helm
   description: Advanced security gear. Protects the station from ne'er-do-wells.

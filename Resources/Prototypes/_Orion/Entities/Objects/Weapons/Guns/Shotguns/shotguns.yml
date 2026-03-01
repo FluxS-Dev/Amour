@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseMajorContraband, WeaponShotgunBulldog]
+  parent: [WeaponShotgunBulldog] # BaseMajorContraband
   id: WeaponShotgunInteQBulldog
   name: Bulldog
   description: Magazine-fed shotgun designed for close quarters combat. Uses .12 shotgun shells. It is painted in the InteQ brand color.
@@ -25,7 +25,7 @@
     sprite: _Orion/Objects/Weapons/Guns/Shotguns/zauer/tiny.rsi
 
 - type: entity
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponShotgun, BaseGunWieldable] # BaseSecurityContraband
   id: WeaponShotgunXM1014
   name: XM1014
   suffix: Shotgun
@@ -55,7 +55,7 @@
     proto: ShellShotgunBeanbag
 
 - type: entity
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponShotgun, BaseGunWieldable] # BaseSecurityContraband
   id: WeaponShotgunPaladin
   name: Paladin pump shotgun
   description: A nine-round pump action shotgun. A shotgun used for hunting, home defence and police work, many versions of it exist and are used by just about anyone.
@@ -90,7 +90,7 @@
     - WeaponShotgunKammerer
 
 - type: entity
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponShotgun, BaseGunWieldable] # BaseSecurityContraband
   id: WeaponShotgunSpas
   name: Spas-12
   description: The Earth Armories Spas-12 is the shotgun used by the EarthGov Marine Corps. It's used as a close quarters tool when someone wants something more suited for close range than most people, or as an odd sidearm on your back for emergencies. Uses 50 gauge shells.

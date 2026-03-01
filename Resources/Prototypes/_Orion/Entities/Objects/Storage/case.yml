@@ -44,7 +44,7 @@
 # CASES
 
 - type: entity
-  parent: [BaseCase, BaseMinorContraband]
+  parent: [BaseCase] # BaseMinorContraband
   id: CaseInteQ
   name: brown case
   suffix: InteQ, Empty
@@ -55,7 +55,7 @@
     state: icon
 
 - type: entity
-  parent: [BaseCase, BaseSecurityContraband]
+  parent: [BaseCase] # BaseSecurityContraband
   id: CaseSecurity
   name: security case
   suffix: Security, Empty
@@ -66,7 +66,7 @@
     state: icon
 
 - type: entity
-  parent: [BaseCaseMini, BaseSecurityContraband]
+  parent: [BaseCaseMini] # BaseSecurityContraband
   id: CaseSecurityMini
   name: security mini case
   suffix: Security, Empty
@@ -77,7 +77,7 @@
     state: icon
 
 - type: entity
-  parent: [BaseCase, BaseSecurityContraband]
+  parent: [BaseCase] # BaseSecurityContraband
   id: CaseBrigmedic
   name: brigmedic case
   suffix: Brigmedic, Empty

@@ -84,7 +84,7 @@
 
 - type: entity
   name: forensic scanner
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseItem] # BaseSecurityContraband
   id: ForensicScanner
   description: A handheld device that can scan objects for fingerprints and fibers.
   components:

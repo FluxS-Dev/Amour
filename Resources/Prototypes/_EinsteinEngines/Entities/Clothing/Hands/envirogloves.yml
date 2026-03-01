@@ -138,7 +138,7 @@
   suffix: Loadouts, Colorable
 
 - type: entity
-  parent: [ClothingHandsGlovesEnviroglovesBase, BaseSecurityContraband]
+  parent: [ClothingHandsGlovesEnviroglovesBase] # BaseSecurityContraband
   id: ClothingHandsGlovesEnviroglovesDetective
   name: forensic envirogloves
   description: Covers up those scandalous boney fingerprints.

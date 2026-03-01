@@ -66,7 +66,7 @@
 - type: entity
   name: pinpointer
   id: PinpointerNuclear
-  parent: [ PinpointerBase, BaseCommandContraband ]
+  parent: [ PinpointerBase] # BaseCommandContraband
   components:
   - type: Pinpointer
     whitelist: # Goob edit: pinpointer whitelist
@@ -78,7 +78,7 @@
   name: syndicate pinpointer
   description: Produced specifically for nuclear operative missions, get that disk!
   id: PinpointerSyndicateNuclear
-  parent: [ PinpointerBase, BaseSyndicateContraband ]
+  parent: [ PinpointerBase] # BaseSyndicateContraband
   components:
   - type: Sprite
     layers:
@@ -140,7 +140,7 @@
     targetName: research servers # Goob edit
 
 - type: entity
-  parent: [ PinpointerBase, BaseXenoborgContraband ]
+  parent: [ PinpointerBase] # BaseXenoborgContraband
   id: PinpointerMothership
   name: core pinpointer
   suffix: Mothership

@@ -7,7 +7,7 @@
 
 - type: entity
   categories: [ DoNotMap ]
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem] # BaseSyndicateContraband
   id: MantisBlade
   name: mantis blade
   description: They won’t see the steel until it’s too late.

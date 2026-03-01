@@ -1,7 +1,7 @@
 - type: entity
   name: vial of tickles
   id: BottleOfTickles
-  parent: [BaseItem, BaseMagicalContraband]
+  parent: [BaseItem] # BaseMagicalContraband
   description: A magically infused bottle of clown love, distilled from countless hugging attacks. Used in funny rituals to attract adorable creatures.
   components:
   - type: Sprite

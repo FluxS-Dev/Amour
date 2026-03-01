@@ -142,7 +142,7 @@
     sprite: Clothing/Back/Satchels/science.rsi
 
 - type: entity
-  parent: [ClothingBackpackSatchel, BaseSecurityContraband]
+  parent: [ClothingBackpackSatchel] # BaseSecurityContraband
   id: ClothingBackpackSatchelSecurity
   name: security satchel
   description: A robust satchel for security related needs.
@@ -151,7 +151,7 @@
     sprite: Clothing/Back/Satchels/security.rsi
 
 - type: entity
-  parent: [ClothingBackpackSatchel, BaseSecurityContraband]
+  parent: [ClothingBackpackSatchel] # BaseSecurityContraband
   id: ClothingBackpackSatchelBrigmedic
   name: brigmedic satchel
   description: A sterile satchel for medical related needs.
@@ -160,7 +160,7 @@
     sprite: Clothing/Back/Satchels/brigmedic.rsi
 
 - type: entity
-  parent: [ClothingBackpackSatchel, BaseCommandContraband]
+  parent: [ClothingBackpackSatchel] # BaseCommandContraband
   id: ClothingBackpackSatchelCaptain
   name: captain's satchel
   description: An exclusive satchel for Nanotrasen officers.

@@ -1,4 +1,4 @@
-using Content.Shared.Inventory;
+/*using Content.Shared.Inventory;
 
 namespace Content.Shared.Contraband;
 
@@ -24,4 +24,4 @@ public sealed partial class ShowContrabandSystem : EntitySystem
 public record struct GetContrabandDetailsEvent(bool CanShowContraband = false) : IInventoryRelayEvent
 {
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.EYES;
-}
+}*/

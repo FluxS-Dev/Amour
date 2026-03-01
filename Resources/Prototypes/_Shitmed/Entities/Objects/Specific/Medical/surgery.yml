@@ -314,7 +314,7 @@
   - type: Stitches
 
 - type: entity
-  parent: [ OmnimedTool, BaseSyndicateContraband ]
+  parent: [ OmnimedTool] # BaseSyndicateContraband
   id: OmnimedToolSyndie
   name: gorlex surgical omnitool
   description: A compact surgical omnitool conveniently packed like a Swiss Army knife, except that its user has probably violated a couple of Swiss conventions. Can perform surgery through clothing.

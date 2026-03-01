@@ -11,7 +11,7 @@
 
 - type: entity
   name: DT-8 "Terminus"
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem] # BaseSecurityContraband
   id: Terminus
   description: An advanced melee weapon crafted specifically for an oni. It is also capable of firing a spread of disabler shots from its tip.
   components:

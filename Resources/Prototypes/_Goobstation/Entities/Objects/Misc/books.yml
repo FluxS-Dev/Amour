@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseGuidebook, BaseMagicalContraband]
+  parent: [BaseGuidebook] # BaseMagicalContraband
   id: GuidebookCodexUmbra
   suffix: guidebook
   name: Codex Umbra
@@ -23,7 +23,7 @@
 
 - type: entity
   id: AdvMimeryVol1
-  parent: [BaseSyndicateContraband, BaseSpellbook]
+  parent: [BaseSpellbook] # BaseSyndicateContraband
   name: Guide to Advanced Mimery Vol 1
   description: The pages don't make any sound when turned.
   components:
@@ -38,7 +38,7 @@
 
 - type: entity
   id: AdvMimeryVol2
-  parent: [BaseSyndicateContraband, BaseSpellbook]
+  parent: [BaseSpellbook] # BaseSyndicateContraband
   name: Guide to Advanced Mimery Vol 2
   description: There aren't any words written...
   components:
@@ -53,7 +53,7 @@
 
 - type: entity
   id: BoxAdvMimery
-  parent: [BaseSyndicateContraband, BoxCardboard]
+  parent: [BoxCardboard] # BaseSyndicateContraband
   name: Guide to Advanced Mimery series box
   components:
   - type: StorageFill

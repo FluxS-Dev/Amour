@@ -107,7 +107,7 @@
       prob: 0.01
 
 - type: entity
-  parent: [ BaseStructureDynamic, BaseSetSelector, BaseSyndicateContraband ]
+  parent: [ BaseStructureDynamic, BaseSetSelector] # BaseSyndicateContraband
   id: CrateSyndicateUndetermined # Not actually a crate, just looks like one
   name: undetermined Syndicate bundle crate
   description: Contains a Syndicate bundle. Which one is yet to be determined.

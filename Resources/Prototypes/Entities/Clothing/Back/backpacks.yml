@@ -139,7 +139,7 @@
       collection: IanBark
 
 - type: entity
-  parent: [ClothingBackpack, BaseSecurityContraband]
+  parent: [ClothingBackpack] # BaseSecurityContraband
   id: ClothingBackpackSecurity
   name: security backpack
   description: It's a very robust backpack.
@@ -148,7 +148,7 @@
     sprite: Clothing/Back/Backpacks/security.rsi
 
 - type: entity
-  parent: [ClothingBackpack, BaseSecurityContraband]
+  parent: [ClothingBackpack] # BaseSecurityContraband
   id: ClothingBackpackBrigmedic
   name: brigmedic backpack
   description: It's a very sterile backpack.
@@ -184,7 +184,7 @@
     sprite: Clothing/Back/Backpacks/medical.rsi
 
 - type: entity
-  parent: [ClothingBackpack, BaseCommandContraband]
+  parent: [ClothingBackpack] # BaseCommandContraband
   id: ClothingBackpackCaptain
   name: captain's backpack
   description: It's a special backpack made exclusively for Nanotrasen officers.
@@ -275,7 +275,7 @@
 
 #ERT
 - type: entity
-  parent: [ ClothingBackpack, ContentsExplosionResistanceBase, BaseCentcommContraband ] # Goobstation
+  parent: [ ClothingBackpack, ContentsExplosionResistanceBase] # BaseCentcommContraband # Goobstation
   id: ClothingBackpackERTLeader
   name: ERT leader backpack
   description: A spacious backpack with lots of pockets, worn by the Commander of an Emergency Response Team.
@@ -358,7 +358,7 @@
 
 #Syndicate
 - type: entity
-  parent: [ClothingBackpack, BaseSyndicateContraband]
+  parent: [ClothingBackpack] # BaseSyndicateContraband
   id: ClothingBackpackSyndicate
   name: syndicate backpack
   description:

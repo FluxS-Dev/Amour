@@ -246,7 +246,7 @@
   - type: IgnoreUIRange
   - type: IgnoreInventoryBlock # Orion
   - type: ShowAntagIcons
-  - type: ShowContrabandDetails
+#  - type: ShowContrabandDetails # Amour - LockCut
   - type: Inventory
     templateId: aghost
   - type: Loadout

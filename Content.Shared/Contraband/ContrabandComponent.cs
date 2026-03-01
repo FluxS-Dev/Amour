@@ -8,7 +8,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Roles;
+/*using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -43,4 +43,4 @@ public sealed partial class ContrabandComponent : Component
     [DataField]
     [AutoNetworkedField]
     public HashSet<ProtoId<JobPrototype>> AllowedJobs = new();
-}
+}*/

@@ -7,7 +7,7 @@
 
 - type: entity # I will just say this gun fucking sucks. holy shit.
   name: X-01 Multiphase
-  parent: [BaseWeaponBatterySmall, BaseGrandTheftContraband]
+  parent: [BaseWeaponBatterySmall] # BaseGrandTheftContraband
   id: WeaponEnergyGunMultiphase
   description: This is an expensive, modern recreation of the antique laser gun. This gun has several unique firemodes, but lacks the ability to recharge over time.
   components:

@@ -24,7 +24,7 @@
 - type: entity
   id: BaseMagazineCaselessRifle
   name: "magazine (9.5mm HP)" # Goob edit
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseItem] # BaseSecurityContraband
   abstract: true
   components:
   - type: Tag

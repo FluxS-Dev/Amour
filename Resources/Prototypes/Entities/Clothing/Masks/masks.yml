@@ -199,7 +199,7 @@
         Aerial: 0.5
 
 - type: entity
-  parent: [ClothingMaskGas, BaseSecurityContraband]
+  parent: [ClothingMaskGas] # BaseSecurityContraband
   id: ClothingMaskGasSecurity
   name: security gas mask
   description: A standard issue Security gas mask.
@@ -229,7 +229,7 @@
     blockSmokeIngestion: true
 
 - type: entity
-  parent: [ClothingMaskGas, BaseSyndicateContraband]
+  parent: [ClothingMaskGas] # BaseSyndicateContraband
   id: ClothingMaskGasSyndicate
   name: syndicate gas mask
   description: A close-fitting tactical mask that can be connected to an air supply.
@@ -281,7 +281,7 @@
     - Mask
 
 - type: entity
-  parent: [ClothingMaskGasAtmos, BaseCommandContraband]
+  parent: [ClothingMaskGasAtmos] # BaseCommandContraband
   id: ClothingMaskGasCaptain
   name: captain's gas mask
   description: Nanotrasen cut corners and repainted a spare atmospheric gas mask, but don't tell anyone.
@@ -296,7 +296,7 @@
 
 
 - type: entity
-  parent: [ ClothingMaskGasAtmos, BaseCentcommContraband ]
+  parent: [ ClothingMaskGasAtmos] # BaseCentcommContraband
   id: ClothingMaskGasCentcom
   name: CentComm gas mask
   description: Oooh, gold and green. Fancy! This should help as you sit in your office.
@@ -310,7 +310,7 @@
     blockSmokeIngestion: true # Goobstation
 
 - type: entity
-  parent: [ClothingMaskGas, BaseCargoContraband]
+  parent: [ClothingMaskGas] # BaseCargoContraband
   id: ClothingMaskGasExplorer
   name: explorer gas mask
   description: A military-grade gas mask that can be connected to an air supply.
@@ -485,7 +485,7 @@
     node: mask
 
 - type: entity
-  parent: [ClothingMaskClown, BaseSecurityContraband]
+  parent: [ClothingMaskClown] # BaseSecurityContraband
   id: ClothingMaskClownSecurity
   name: security clown wig and mask
   description: A debatably oxymoronic but protective mask and wig.
@@ -655,7 +655,7 @@
     accent: StutteringAccent
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseSecurityContraband ]
+  parent: [ ClothingMaskGas] # BaseSecurityContraband
   id: ClothingMaskGasSwat
   name: swat gas mask
   description: A elite issue Security gas mask.
@@ -687,7 +687,7 @@
     blockSmokeIngestion: true
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseSecurityCargoContraband ]
+  parent: [ ClothingMaskGas] # BaseSecurityCargoContraband
   id: ClothingMaskGasMerc
   name: mercenary gas mask
   description: Slightly outdated, but reliable military-style gas mask.
@@ -715,7 +715,7 @@
     - Mask
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseCentcommContraband ]
+  parent: [ ClothingMaskGas] # BaseCentcommContraband
   id: ClothingMaskGasERT
   name: ert gas mask
   description: The gas mask of the elite squad of the ERT.
@@ -1014,7 +1014,7 @@
     sprite: Clothing/Mask/scaredmime.rsi
 
 - type: entity
-  parent: [ClothingMaskMime, BaseSecurityContraband]
+  parent: [ClothingMaskMime] # BaseSecurityContraband
   id: ClothingMaskMimeSecurity
   name: security mime mask
   description: You have the right to remain silent.

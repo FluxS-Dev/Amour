@@ -41,7 +41,7 @@
 - type: entity
   id: BaseMagazinePistol
   name: pistol magazine (9mm auto) # Orion-Edit: .35 > 9mm
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseItem] # BaseSecurityContraband
   abstract: true
   components:
   - type: Tag
@@ -107,7 +107,7 @@
 - type: entity
   id: BaseMagazinePistolSubMachineGun  # Yeah it's weird but it's pistol caliber
   name: SMG magazine (9mm auto) # Orion-Edit: .35 > 9mm
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseItem] # BaseSecurityContraband
   abstract: true
   components:
   - type: Tag
@@ -140,7 +140,7 @@
 - type: entity
   id: MagazinePistolSubMachineGunTopMounted
   name: WT550 magazine (9mm auto top-mounted) # Orion-Edit: .35 > 9mm
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseItem] # BaseSecurityContraband
   description: Unconventional 30-round top feeding magazine for the WT550 SMG. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: Tag

@@ -180,7 +180,7 @@
             - PowerCell
 
 - type: entity
-  parent: [ClothingModsuitStandard, BaseSecurityContraband]
+  parent: [ClothingModsuitStandard] # BaseSecurityContraband
   id: ClothingModsuitSecurity
   name: security soldat modsuit control unit
   description: A robust modular hardsuit control module unit for thrashing commies in spess.
@@ -218,7 +218,7 @@
             - PowerCell
 
 - type: entity
-  parent: [ClothingModsuitStandard, BaseCommandContraband]
+  parent: [ClothingModsuitStandard] # BaseCommandContraband
   id: ClothingModsuitHeadOfSecurity
   name: head of security's bulwark modsuit control unit
   description: A robust modular HARDERsuit control module unit for the head of security.
@@ -264,7 +264,7 @@
             - PowerCell
 
 - type: entity
-  parent: [ClothingModsuitStandard, BaseMedicalContraband]
+  parent: [ClothingModsuitStandard] # BaseMedicalContraband
   id: ClothingModsuitParamedic
   name: sanitater modsuit control unit
   description: A modular hardsuit control module unit for paramedics.
@@ -307,7 +307,7 @@
             - PowerCell
 
 - type: entity
-  parent: [ClothingModsuitStandard, BaseEngineeringContraband]
+  parent: [ClothingModsuitStandard] # BaseEngineeringContraband
   id: ClothingModsuitEngineer
   name: engineer sapper modsuit control unit
   description: A modular hardsuit control module unit for withstanding the greatest hazards on the job.
@@ -347,7 +347,7 @@
             - PowerCell
 
 - type: entity
-  parent: [ClothingModsuitStandard, BaseEngineeringContraband]
+  parent: [ClothingModsuitStandard] # BaseEngineeringContraband
   id: ClothingModsuitAtmostech
   name: atmospheric technician aeolus modsuit control unit
   description: A modular hardsuit control module unit for withstanding the greatest hazards on the job.
@@ -387,7 +387,7 @@
             - PowerCell
 
 - type: entity
-  parent: [ClothingModsuitStandard, BaseCommandContraband, BaseGrandTheftContraband]
+  parent: [ClothingModsuitStandard] # BaseGrandTheftContraband # BaseCommandContraband
   id: ClothingModsuitResearchDirector
   name: RD's minerva modsuit control unit
   description: A modular hardsuit control module unit for withstanding another shuttlebomb.
@@ -430,7 +430,7 @@
             - PowerCell
 
 - type: entity
-  parent: [ClothingModsuitStandard, BaseCommandContraband]
+  parent: [ClothingModsuitStandard] # BaseCommandContraband
   id: ClothingModsuitCaptain
   name: captain's magnate modsuit control unit
   description: A gem-encrusted, mirror-shined and absolutely MAGNATE armored modsuit. The cooling fluid is dragons' blood watered down with Dr. Gibb. This shit is nothing to you, man. # goob edit - grammar

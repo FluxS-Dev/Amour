@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingEyesBase, BaseMinorContraband]
+  parent: [ClothingEyesBase] # BaseMinorContraband
   id: ClothingEyesGogglessInteQ
   name: yellow goggles
   description: Used to help provide rudimentary eye cover. Enhanced shielding blocks many flashes.

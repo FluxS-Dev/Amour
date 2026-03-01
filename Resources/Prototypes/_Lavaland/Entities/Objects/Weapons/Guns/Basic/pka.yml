@@ -25,7 +25,7 @@
 - type: entity
   name: proto-kinetic shotgun
   id: WeaponProtoKineticShotgun
-  parent: [ BaseGunWieldable, WeaponProtoKineticAcceleratorBase, BaseCargoContraband ]
+  parent: [ BaseGunWieldable, WeaponProtoKineticAcceleratorBase] # BaseCargoContraband
   description: Fires a spread of low-damage kinetic bolts that are half as effective for mining.
   components:
   - type: Sprite
@@ -93,7 +93,7 @@
 - type: entity
   name: proto-kinetic repeater
   id: WeaponProtoKineticRepeater
-  parent: [ WeaponProtoKineticAcceleratorBase, BaseCargoContraband ]
+  parent: [ WeaponProtoKineticAcceleratorBase] # BaseCargoContraband
   description: Fires a barrage of medium-damage kinetic bolts at a short range.
   components:
   - type: Sprite
@@ -122,7 +122,7 @@
 - type: entity
   name: proto-kinetic pistol
   id: WeaponProtoKineticPistol
-  parent: [ WeaponProtoKineticAcceleratorBase, BaseCargoContraband ]
+  parent: [ WeaponProtoKineticAcceleratorBase] # BaseCargoContraband
   description: Fires low-damage kinetic bolts, has a higher mod capacity.
   components:
   - type: Sprite

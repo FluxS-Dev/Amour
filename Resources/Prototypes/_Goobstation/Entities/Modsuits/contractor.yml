@@ -14,7 +14,7 @@
 
 # The Modsuit Itself, This is just a Deathsquad modsuit, but reskined for CC Officials
 - type: entity
-  parent: [ ClothingModsuitStandardNoStorage, BaseSyndicateContraband ]
+  parent: [ ClothingModsuitStandardNoStorage] # BaseSyndicateContraband
   id: ClothingModsuitContractor
   name: Contractor modsuit control unit
   description: The main controller for a Contractor modsuit.
@@ -48,7 +48,7 @@
       damageCoefficient: 0.1
 
 - type: entity
-  parent: [ClothingModsuitGauntletsStandard, BaseSyndicateContraband]
+  parent: [ClothingModsuitGauntletsStandard] # BaseSyndicateContraband
   id: ClothingModsuitGauntletsContractor
   name: Contractor modsuit gauntlets
   description: A pair of gauntlets made for the Contractor modsuit.
@@ -77,7 +77,7 @@
         startingGrabStage: Hard
 
 - type: entity
-  parent: [ClothingModsuitHelmetStandard, ShowSecurityIcons, BaseSyndicateContraband]
+  parent: [ClothingModsuitHelmetStandard, ShowSecurityIcons] # BaseSyndicateContraband
   id: ClothingModsuitHelmetContractor
   name: Contractor modsuit helmet
   description: A state-of-the-art helmet designed by the Syndicate for the Contractor modsuit. It includes a built-in HUD.
@@ -176,7 +176,7 @@
         blockSmokeIngestion: True
 
 - type: entity
-  parent: [ClothingModsuitChestplateStandard, BaseSyndicateContraband]
+  parent: [ClothingModsuitChestplateStandard] # BaseSyndicateContraband
   id: ClothingModsuitChestplateContractor
   name: Contractor modsuit chestplate
   description: A state of the art chestplate designed by the Syndicate for the Contractor modsuit. It incorporates powered servos to reduce the equipment load.
@@ -231,7 +231,7 @@
         heatingCoefficient: 0.01
 
 - type: entity
-  parent: [ClothingModsuitBootsStandard, BaseSyndicateContraband]
+  parent: [ClothingModsuitBootsStandard] # BaseSyndicateContraband
   id: ClothingModsuitBootsContractor
   name: Contractor modsuit boots
   description: A state-of-the-art pair of magboots for the Contractor modsuit. So long as the suit is powered, these will not slow the wearer down.

@@ -47,7 +47,7 @@
 - type: entity
   name: cryo katana
   description: Okay maybe things took a weird route when a snow golem was making this engraved sword.
-  parent: [ LavalandBaseKatana, BaseSalvageContraband ]
+  parent: [ LavalandBaseKatana] # BaseSalvageContraband
   id: CryoKatana
   categories: [ DoNotMap ]
   components:
@@ -85,7 +85,7 @@
 - type: entity
   name: lava katana
   description: One thousand degree knife, that somehow always keeps intact.
-  parent: [ LavalandBaseKatana, BaseSalvageContraband ]
+  parent: [ LavalandBaseKatana] # BaseSalvageContraband
   id: LavaKatana
   categories: [ DoNotMap ]
   components:

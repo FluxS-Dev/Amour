@@ -15,7 +15,7 @@
 - type: entity
   id: BaseMagazineShotgunLeverRifle
   name: "magazine (8 Gauge)"
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseItem] # BaseSecurityContraband
   abstract: true
   components:
   - type: Tag

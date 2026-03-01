@@ -2,7 +2,7 @@
 # marlen
 
 - type: entity
-  parent: [BaseItem, BaseCentcommContraband]
+  parent: [BaseItem] # BaseCentcommContraband
   id: Marlen
   name: marlen
   description: A stylish intricate souvenir made from tough hyper-woven durathread by "NanoFashion". Looks expensive.

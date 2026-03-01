@@ -4,7 +4,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Contraband;
+//using Content.Shared.Contraband; // Amour - LockCut
 using Content.Shared.Power;
 using Robust.Shared.Timing;
 using Content.Shared.Inventory;
@@ -22,7 +22,7 @@ public abstract class SharedContrabandDetectorSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
-    [Dependency] private readonly ContrabandSystem _contrabandSystem = default!;
+    //[Dependency] private readonly ContrabandSystem _contrabandSystem = default!; // Amour - LockCut
     [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiverSystem = default!;
@@ -69,8 +69,8 @@ public abstract class SharedContrabandDetectorSystem : EntitySystem
     }
     public bool IsContraband(EntityUid uid)
     {
-        if (HasComp<ContrabandComponent>(uid) && !HasComp<UndetectableContrabandComponent>(uid))
-            return true;
+        //if (HasComp<ContrabandComponent>(uid) && !HasComp<UndetectableContrabandComponent>(uid))
+        //    return true;
 
         return false;
     }
@@ -194,8 +194,8 @@ public abstract class SharedContrabandDetectorSystem : EntitySystem
     /// <param name="contraband"></param>
     /// <param name="user"></param>
     /// <returns></returns>
-    public bool CheckContrabandPermission(EntityUid contraband, EntityUid user, ContrabandComponent? component = null)
-    {
+    public bool CheckContrabandPermission(EntityUid contraband, EntityUid user/*, ContrabandComponent? component = null*/)
+    {   /*
         // No contraband = have permission 
         if (!Resolve(contraband, ref component))
             return true;
@@ -217,5 +217,8 @@ public abstract class SharedContrabandDetectorSystem : EntitySystem
             return true;
 
         return false;
+        */
+
+        return true; // Amour - LockCut. Delet all of this line later
     }
 }

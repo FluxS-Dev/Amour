@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseKnife, BaseSalvageContraband ]
+  parent: [ BaseKnife] # BaseSalvageContraband
   id: WeaponCrusherDagger
   name: kinetic dagger
   description: A scaled down version of a proto-kinetic crusher. Uses kinetic energy to vibrate the blade at high speeds.
@@ -50,7 +50,7 @@
     doAfterDuration: 4.0
 
 - type: entity
-  parent: [ BaseItem, ClothingHandsBase, BaseSalvageContraband ]
+  parent: [ BaseItem, ClothingHandsBase] # BaseSalvageContraband
   id: LavalandWeaponKineticClaws
   name: kinetic claws
   description: Unleash your inner edgelord with this one-handed claw small enough to fit in your backpack.
@@ -98,7 +98,7 @@
     speed: 0.3 # awful
 
 - type: entity
-  parent: [ BaseItem, BaseSalvageContraband ]
+  parent: [ BaseItem] # BaseSalvageContraband
   id: LavalandWeaponKineticMachete
   name: kinetic machete
   description: A smaller, one-handed variant of the crusher which allows you to attack from afar and block incoming attacks.

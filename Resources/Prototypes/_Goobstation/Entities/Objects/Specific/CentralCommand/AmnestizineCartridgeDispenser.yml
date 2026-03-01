@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseAmmoProvider, BaseCentcommContraband]
+  parent: [BaseAmmoProvider] # BaseCentcommContraband
   id: BoxAmnestizineCartridge
   name: amnestic cartridge dispenser
   description: Dispenses amnestic cartridges to be loaded into cartridge dispensers. Almost like a forbidden pez-dispenser!

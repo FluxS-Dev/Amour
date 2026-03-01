@@ -1,5 +1,5 @@
 - type: entity
-  parent: [EncryptionKey, BaseMinorContraband]
+  parent: [EncryptionKey] # BaseMinorContraband
   id: EncryptionKeyInteQ
   name: InteQ encryption key
   description: An encryption key used by InteQ.

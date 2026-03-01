@@ -22,7 +22,7 @@
 - type: entity
   id: MagazineSmart
   name: "magazine (.160 smart)"
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseItem] # BaseSecurityContraband
   components:
   - type: Tag
     tags:

@@ -17,7 +17,7 @@
 
 - type: entity
   name: bow
-  parent: [BaseItem, BaseMinorContraband]
+  parent: [BaseItem] # BaseMinorContraband
   id: BaseBow
   description: The original rooty tooty point and shooty.
   abstract: true

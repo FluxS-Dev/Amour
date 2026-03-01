@@ -1,6 +1,6 @@
 # InteQ
 - type: entity
-  parent: [ BaseMajorContraband, EnergyShield ]
+  parent: [ EnergyShield ] # BaseMajorContraband
   id: EnergyShieldInteQ
   name: InteQ energy shield
   description: Exotic energy shield, when folded, can even fit in your pocket.

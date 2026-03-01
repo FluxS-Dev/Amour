@@ -87,7 +87,7 @@
     autoRechargePauseTime: 60
 
 - type: entity
-  parent: [ MedicalBeamGun, BaseSyndicateContraband ]
+  parent: [ MedicalBeamGun] # BaseSyndicateContraband
   id: MedicalBeamGunSyndicate
   name: syndicate medical beam gun
   suffix: Syndicate, Unlimited

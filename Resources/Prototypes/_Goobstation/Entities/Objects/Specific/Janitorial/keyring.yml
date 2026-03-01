@@ -6,7 +6,7 @@
 - type: entity
   name: janitor's key ring
   id: KeyRingJanitor
-  parent: [BaseItem, BaseJanitorContraband]
+  parent: [BaseItem] # BaseJanitorContraband
   description: A janitor's best friend; their trusty old key ring. You can never quite remember which key goes where.
   components:
   - type: Sprite

@@ -1032,7 +1032,7 @@
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndieCommander ]
+  parent: [ ClothingHeadHelmetHardsuitSyndieCommander ] # BaseCentcommContraband
   id: ClothingHeadHelmetHardsuitERTLeader
   name: ERT leader hardsuit helmet # Goob edit
   description: A special hardsuit helmet worn by members of an emergency response team. # Goob edit
@@ -1046,7 +1046,7 @@
 
 #ERT Chaplain Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie ]
+  parent: [ ClothingHeadHelmetHardsuitSyndie ] # BaseCentcommContraband
   id: ClothingHeadHelmetHardsuitERTChaplain
   name: ERT chaplain hardsuit helmet # Goob edit
   description: A special hardsuit helmet worn by members of an emergency response team. # Goob edit
@@ -1060,7 +1060,7 @@
 
 #ERT Engineer Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie ]
+  parent: [ ClothingHeadHelmetHardsuitSyndie ] # BaseCentcommContraband
   id: ClothingHeadHelmetHardsuitERTEngineer
   name: ERT engineer hardsuit helmet # Goob edit
   description: A special hardsuit helmet worn by members of an emergency response team. # Goob edit
@@ -1075,7 +1075,7 @@
 
 #ERT Medical Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndieElite ]
+  parent: [ ClothingHeadHelmetHardsuitSyndieElite ] # BaseCentcommContraband
   id: ClothingHeadHelmetHardsuitERTMedical
   name: ERT medic hardsuit helmet # Goob edit
   description: A special hardsuit helmet worn by members of an emergency response team. # Goob edit
@@ -1089,7 +1089,7 @@
 
 #ERT Security Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie ]
+  parent: [ ClothingHeadHelmetHardsuitSyndie ] # BaseCentcommContraband
   id: ClothingHeadHelmetHardsuitERTSecurity
   name: ERT security hardsuit helmet # Goob edit
   description: A special hardsuit helmet worn by members of an emergency response team. # Goob edit
@@ -1103,7 +1103,7 @@
 
 #ERT Janitor Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHelmetHardsuitSyndie ]
+  parent: [ ClothingHeadHelmetHardsuitSyndie ] # BaseCentcommContraband
   id: ClothingHeadHelmetHardsuitERTJanitor
   name: ERT janitor hardsuit helmet # Goob edit
   description: A special hardsuit helmet worn by members of an emergency response team. # Goob edit
@@ -1117,7 +1117,7 @@
 
 #CBURN Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHardsuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitWithLightBase ] # BaseCentcommContraband
   id: ClothingHeadHelmetCBURN
   name: CBURN exosuit helmet
   description: A pressure resistant and fireproof hood worn by special cleanup units.
@@ -1168,7 +1168,7 @@
 
 #Deathsquad Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingHeadHardsuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitWithLightBase ] # BaseCentcommContraband
   id: ClothingHeadHelmetHardsuitDeathsquad
   name: deathsquad hardsuit helmet # Goob edit
   description: A robust helmet for special operations.

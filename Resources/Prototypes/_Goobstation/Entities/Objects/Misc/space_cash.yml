@@ -6,7 +6,7 @@
 
 
 - type: entity
-  parent: [SpaceCash, BaseMajorContraband]
+  parent: [SpaceCash] # BaseMajorContraband
   id: SpaceCashCounterfeit
   name: suspicious spesos
   description: This looks like painted-on paper.

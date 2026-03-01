@@ -27,7 +27,7 @@
 - type: entity
   name: handheld crew monitor
 #  categories: [ DoNotMap ] # Goobstation
-  parent: [ BaseHandheldComputer, BaseMedicalContraband ] # Goobstation
+  parent: [ BaseHandheldComputer] # BaseMedicalContraband # Goobstation
   # CMO-only bud, don't add more. # Goobstation - no lmao
   id: HandheldCrewMonitor
   description: A hand-held crew monitor displaying the status of suit sensors.

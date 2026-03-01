@@ -6,7 +6,7 @@
 
 - type: entity
   name: HE1S-G8
-  parent: [ BaseItem, BaseGunWieldable, BaseSyndicateContraband ]
+  parent: [ BaseItem, BaseGunWieldable] # BaseSyndicateContraband
   id: WeaponSniperHE1SG8
   description: High Energy One-Shell rifle. On its side, "leading us on and on" is written using a cheap black marker. Takes Gauss-8 cartridges.
   components:

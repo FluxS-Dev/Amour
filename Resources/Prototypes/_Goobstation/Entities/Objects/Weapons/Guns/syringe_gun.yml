@@ -46,7 +46,7 @@
 
 - type: entity
   name: syringe gun
-  parent: [ BaseSyringeGun, BaseMedicalContraband ]
+  parent: [ BaseSyringeGun] # BaseMedicalContraband
   id: SyringeGun
   description: A gun that allows you to fire syringes to slowly inject their contents on a target.
   components:
@@ -59,7 +59,7 @@
 
 - type: entity
   name: rapid syringe gun
-  parent: [ BaseSyringeGun, BaseGrandTheftContraband ]
+  parent: [ BaseSyringeGun] # BaseGrandTheftContraband
   id: RapidSyringeGun
   description: A finely-tuned syringe gun featuring a faster fire rate and more room for ammo, made for the most experienced medical officers.
   components:
@@ -91,7 +91,7 @@
 
 - type: entity
   name: syringe pistol
-  parent: [ BaseSyringeGun, BaseSyndicateContraband ]
+  parent: [ BaseSyringeGun] # BaseSyndicateContraband
   id: SyringePistol
   description: An illegally modified syringe gun that pierces the skin better and can fit in pockets.
   components:

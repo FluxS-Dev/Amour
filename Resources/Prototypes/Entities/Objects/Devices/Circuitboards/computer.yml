@@ -414,7 +414,7 @@
     prototype: ComputerCrewMonitoring
 
 - type: entity
-  parent: [BaseComputerCircuitboard, BaseCommandContraband]
+  parent: [BaseComputerCircuitboard] # BaseCommandContraband
   id: IDComputerCircuitboard
   name: ID card computer board
   description: A computer printed circuit board for an ID card console.
@@ -442,7 +442,7 @@
       prototype: computerBodyScanner
 
 - type: entity
-  parent: [ BaseComputerCircuitboard, BaseCommandContraband ]
+  parent: [ BaseComputerCircuitboard] # BaseCommandContraband
   id: CommsComputerCircuitboard
   name: communications computer board
   description: A computer printed circuit board for a communications console.
@@ -453,7 +453,7 @@
       prototype: ComputerComms
 
 - type: entity
-  parent: [ BaseComputerCircuitboard, BaseSyndicateContraband ]
+  parent: [ BaseComputerCircuitboard] # BaseSyndicateContraband
   id: SyndicateCommsComputerCircuitboard
   name: syndicate communications computer board
   description: A computer printed circuit board for a syndicate communications console.
@@ -464,7 +464,7 @@
     prototype: SyndicateComputerComms
 
 - type: entity
-  parent: [ BaseComputerCircuitboard, BaseCentcommContraband ]
+  parent: [ BaseComputerCircuitboard] # BaseCentcommContraband
   id: CentcommCommsComputerCircuitboard
   name: central command communications computer board
   description: A computer printed circuit board for a central command communications console.
@@ -536,7 +536,7 @@
     prototype: ComputerShuttle
 
 - type: entity
-  parent: [ BaseComputerCircuitboard, BaseSyndicateContraband ]
+  parent: [ BaseComputerCircuitboard] # BaseSyndicateContraband
   id: SyndicateShuttleConsoleCircuitboard
   name: syndicate shuttle console board
   description: A computer printed circuit board for a syndicate shuttle console.
@@ -569,7 +569,7 @@
       prototype: ComputerIFF
 
 - type: entity
-  parent: [ BaseComputerCircuitboard, BaseSyndicateContraband ]
+  parent: [ BaseComputerCircuitboard] # BaseSyndicateContraband
   id: ComputerIFFSyndicateCircuitboard
   name: syndicate IFF console board
   description: Allows you to control the IFF and stealth characteristics of this vessel.

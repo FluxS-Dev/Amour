@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem] # BaseSecurityContraband
   id: BaseMagazineBox308win
   name: ammunition box (.308 winchester)
   abstract: true

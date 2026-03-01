@@ -5,7 +5,7 @@
 # Main Upgrades
 - type: entity
   id: BaseCrusherUpgradeMain
-  parent: [BaseItem, BaseSecurityCargoContraband]
+  parent: [BaseItem] # BaseSecurityCargoContraband
   name: crusher upgrade capsule
   description: A modkit for crusher weapons.
   abstract: true
@@ -105,7 +105,7 @@
 # Blade upgrades
 - type: entity
   id: BaseCrusherUpgradeBlade
-  parent: [BaseItem, BaseSecurityCargoContraband]
+  parent: [BaseItem] # BaseSecurityCargoContraband
   name: crusher blade upgrade
   description: A modkit for crusher weapons.
   abstract: true
@@ -202,7 +202,7 @@
 # Handle upgrades
 - type: entity
   id: BaseCrusherUpgradeHandle
-  parent: [BaseItem, BaseSecurityCargoContraband]
+  parent: [BaseItem] # BaseSecurityCargoContraband
   name: crusher handle upgrade
   description: A modkit for crusher weapons.
   abstract: true

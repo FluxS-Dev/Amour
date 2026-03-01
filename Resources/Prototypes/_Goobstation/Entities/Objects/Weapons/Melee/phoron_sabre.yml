@@ -7,7 +7,7 @@
 
 - type: entity # To-do - Replace all sounds with Nanotrasen energy sounds once blueshield shield PR is merged.
   name: phoron sabre
-  parent: [BaseMeleeWeaponEnergy, BaseCentcommContraband]
+  parent: [BaseMeleeWeaponEnergy] # BaseCentcommContraband
   id: PhoronSabre
   suffix: DO NOT MAP
   description: The signature weapon of the dreaded deathsquads. It's mostly for show.

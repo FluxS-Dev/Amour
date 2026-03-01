@@ -15,7 +15,7 @@
 
 - type: entity
   id: CrateSyndicateSurplusBundle
-  parent: [ CrateSyndicate, StorePresetUplink, BaseSyndicateContraband ]
+  parent: [ CrateSyndicate, StorePresetUplink] # BaseSyndicateContraband
   name: Syndicate surplus crate
   # Goobstation - Telecrystal rework
   description: Contains 250 telecrystals worth of completely random Syndicate items. It can be useless junk or really good.
@@ -41,7 +41,7 @@
 
 - type: entity
   id: CrateSyndicateSuperSurplusBundle
-  parent: [ CrateSyndicate, StorePresetUplink, BaseSyndicateContraband ]
+  parent: [ CrateSyndicate, StorePresetUplink] # BaseSyndicateContraband
   name: Syndicate super surplus crate
   # Goobstation - Telecrystal rework
   description: Contains 625 telecrystals worth of completely random Syndicate items.

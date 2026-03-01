@@ -36,7 +36,7 @@
 - type: entity
   id: BaseCartridgePistol
   name: cartridge (9mm auto) # Orion-Edit: .35 > 9mm
-  parent: [ BaseCartridge, BaseSecurityContraband ]
+  parent: [ BaseCartridge] # BaseSecurityContraband
   abstract: true
   components:
   - type: Tag

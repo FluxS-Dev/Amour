@@ -7,7 +7,7 @@
 
 - type: entity
   id: CigPackBlueshield
-  parent: [BaseCentcommContraband, CigPackSyndicate] # Don't tell them
+  parent: [CigPackSyndicate] # Don't tell them # BaseCentcommContraband
   name: blueshield cigarette packet
   description: High-grade cigarettes for a high-grade bodyguard. Infused with a slow-affecting medication to help soothe you.
   components:

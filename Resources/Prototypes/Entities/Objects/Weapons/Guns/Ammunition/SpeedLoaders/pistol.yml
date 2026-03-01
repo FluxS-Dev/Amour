@@ -20,7 +20,7 @@
 - type: entity
   id: BaseSpeedLoaderPistol
   name: "speed loader (9mm auto)" # Orion-Edit: .35 > 9mm
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseItem] # BaseSecurityContraband
   abstract: true
   components:
   - type: Tag

@@ -25,7 +25,7 @@
 - type: entity
   id: BaseMagazineRifle
   name: "magazine (5.56mm rifle)"  # Orion-Edit: .20 > 5.56mm
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseItem] # BaseSecurityContraband
   abstract: true
   components:
   - type: Tag

@@ -39,7 +39,7 @@
       - id: EmergencyMedipen
 
 - type: entity
-  parent: [ ClothingBeltDeathsquadWebbing, BaseCentcommContraband ]
+  parent: [ ClothingBeltDeathsquadWebbing] # BaseCentcommContraband
   suffix: Filled, DO NOT MAP
   id: ClothingBeltDeathsquadWebbingFilled
   name: deathsquad operative chestrig
@@ -77,7 +77,7 @@
 
 - type: entity
   id: ClothingBeltSecurityWebbingFilledMedical
-  parent: [ClothingBeltSecurityWebbingMedical, BaseCentcommContraband]
+  parent: [ClothingBeltSecurityWebbingMedical] # BaseCentcommContraband
   suffix: Filled
   components:
   - type: StorageFill

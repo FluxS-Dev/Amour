@@ -11,7 +11,7 @@
 - type: entity
   id: BaseMagazineHighCaliber
   name: "magazine (.50 caliber)"
-  parent: [ BaseItem, BaseSyndicateContraband ]
+  parent: [ BaseItem] # BaseSyndicateContraband
   abstract: true
   components:
   - type: Tag
@@ -76,7 +76,7 @@
 - type: entity
   id: BaseMagazineAntiMateriel
   name: "magazine (.60 caliber)"
-  parent: [ BaseItem, BaseSyndicateContraband ]
+  parent: [ BaseItem] # BaseSyndicateContraband
   abstract: true
   components:
   - type: Tag

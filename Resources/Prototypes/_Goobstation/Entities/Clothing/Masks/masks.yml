@@ -51,7 +51,7 @@
   - type: EyeProtection
 
 - type: entity
-  parent: [ClothingMaskBase, BaseMinorContraband]
+  parent: [ClothingMaskBase] # BaseMinorContraband
   id: ClothingMaskGasVoiceCraftable
   suffix: Voice Mask, Craftable
   name: Voice Modulator Mask
@@ -147,7 +147,7 @@
   - type: Unremoveable
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseCentcommContraband ]
+  parent: [ ClothingMaskGas] # BaseCentcommContraband
   id: ClothingBSOMaskGasSwat
   name: Blueshield SWAT gas mask
   description: A standard issue gas mask for BlueShield Officers

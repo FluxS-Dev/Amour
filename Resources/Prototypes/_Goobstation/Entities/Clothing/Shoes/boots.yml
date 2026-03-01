@@ -61,7 +61,7 @@
     sprite: _Goobstation/Clothing/Shoes/Boots/breverb.rsi
 
 - type: entity
-  parent: [ClothingShoesBootsMagAdv, BaseJetpack, BaseCentcommContraband]
+  parent: [ClothingShoesBootsMagAdv, BaseJetpack] # BaseCentcommContraband
   id: ClothingShoesBootsMagEmergencyResponseTeam
   name: tactical response magboots
   description: Look! An emergency responder, we're saved!
@@ -124,7 +124,7 @@
     tags: [] # ignore "WhitelistChameleon" tag
 
 - type: entity
-  parent: [ClothingShoesBootsMagBase, BaseMajorContraband]
+  parent: [ClothingShoesBootsMagBase] # BaseMajorContraband
   id: ClothingShoesRealJordans
   suffix: Magboots
   name: air jordans
@@ -165,7 +165,7 @@
     points: 1 # i want ntr to harmbaton tiders with jordans cuz i am evil.
 
 - type: entity
-  parent: [ClothingShoesBaseButcherable, BaseMinorContraband]
+  parent: [ClothingShoesBaseButcherable] # BaseMinorContraband
   id: ClothingShoesFakeJordans
   name: air jordans
   suffix: fake
@@ -195,7 +195,7 @@
 
 
 - type: entity
-  parent: [BaseCommandContraband, ClothingShoesBootsJack]
+  parent: [ClothingShoesBootsJack] # BaseCommandContraband
   id: ClothingShoesBootsJackAdvanced
   name: advanced jackboots
   description: This pair of jackboots was designed for the Head of Security. No one knows why are they called advanced, but they are for sure advanced in drip.
@@ -209,7 +209,7 @@
       collection: StepHeavyBoots
 
 - type: entity
-  parent: [ClothingShoesBootsMagBase, BaseMajorContraband]
+  parent: [ClothingShoesBootsMagBase] # BaseMajorContraband
   id: ClothingShoesRealJordansAutographed
   suffix: Devil
   name: air jordans
@@ -248,7 +248,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingShoesMilitaryBase, ClothingShoesBaseWinterBoots, BaseCentcommContraband]
+  parent: [ClothingShoesMilitaryBase, ClothingShoesBaseWinterBoots] # BaseCentcommContraband
   id: ClothingShoesBootsWinterSnowjackBso
   name: blueshield's snowjacks
   description: For when you need to save a head from a changeling on a research station in Antarctica.
@@ -270,7 +270,7 @@
 
 
 - type: entity
-  parent: [ClothingShoesMilitaryBase, ClothingShoesBaseWinterBoots, BaseSecurityContraband]
+  parent: [ClothingShoesMilitaryBase, ClothingShoesBaseWinterBoots] # BaseSecurityContraband
   id: ClothingShoesWinterCombatBoots
   name: snowjacks boots
   description: Nanotrasen-issue Security combat boots for combat scenarios or combat situations. Now in winter edition.
@@ -299,7 +299,7 @@
 
 # Western Undetermined Set
 - type: entity
-  parent: [ClothingShoesMilitaryBase, BaseMajorContraband]
+  parent: [ClothingShoesMilitaryBase] # BaseMajorContraband
   id: ClothingShoesBootsCowboyBrownRobust
   name: authentic brown cowboy boots
   description: For a real cowboy.
@@ -312,7 +312,7 @@
     modifier: 0.5
 
 - type: entity
-  parent: [BaseCommandContraband, ClothingShoesGaloshes]
+  parent: [ClothingShoesGaloshes] # BaseCommandContraband
   id: ClothingShoesBootsJackGaloshes
   name: Jack Galoshes
   description: This pair of jackboots was designed for the elite maids of our station. Perhaps the most coveted item on station.

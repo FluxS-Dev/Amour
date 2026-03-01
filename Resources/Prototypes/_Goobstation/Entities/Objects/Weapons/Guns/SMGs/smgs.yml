@@ -7,7 +7,7 @@
 
 - type: entity
   name: M7S Ventilator
-  parent: [BaseWeaponSubMachineGun, BaseGunWieldable, BaseSyndicateContraband]
+  parent: [BaseWeaponSubMachineGun, BaseGunWieldable] # BaseSyndicateContraband
   id: WeaponSubMachineGunM7S
   description: For when you need to air out an entire hallway, forcibly. Feeds from side-loading 5x23mm magazines.
   components:

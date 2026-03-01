@@ -5,7 +5,7 @@
 
 using System.Linq;
 using Content.Client.UserInterface.Controls;
-using Content.Shared.Contraband;
+//using Content.Shared.Contraband;
 using Content.Shared.Light;
 using Content.Shared.Light.Components;
 using Content.Shared.Toggleable;
@@ -89,7 +89,7 @@ namespace Content.Goobstation.Client.Weapons.Melee.EnergySword
 
         public void SetLogoAndFlavor(EntityUid entity)
         {
-            if (_entManager.TryGetComponent<ContrabandComponent>(entity, out var contraband) &&
+            /*if (_entManager.TryGetComponent<ContrabandComponent>(entity, out var contraband) &&
                 contraband.AllowedDepartments.ToHashSet().Contains("CentralCommand"))
             {
                 Logo.SetOnlyStyleClass("NTLogoDark");
@@ -100,6 +100,11 @@ namespace Content.Goobstation.Client.Weapons.Melee.EnergySword
                 Logo.SetOnlyStyleClass("SyndicateLogo");
                 CollaborationText.Text = Loc.GetString("escolorpicker-menu-flavor-left-syndicate");
             }
+            */
+            // Amour - LockCut
+
+            Logo.SetOnlyStyleClass("SyndicateLogo");
+            CollaborationText.Text = Loc.GetString("escolorpicker-menu-flavor-left-syndicate");
 
         }
     }

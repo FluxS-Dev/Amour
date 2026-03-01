@@ -296,7 +296,7 @@
 # singuloth head
 
 - type: entity
-  parent: [ClothingHeadHelmetHardsuitBlueshield, BaseMagicalContraband]
+  parent: [ClothingHeadHelmetHardsuitBlueshield] # BaseMagicalContraband
   id: ClothingHeadSinguloth
   name: singuloth knight's helm
   description: An adamantium helmet from the chapter of the Singuloth Knights. It shines with a holy aura

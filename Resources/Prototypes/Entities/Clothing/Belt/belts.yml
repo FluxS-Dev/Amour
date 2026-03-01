@@ -765,7 +765,7 @@
   - type: Appearance
 
 - type: entity
-  parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseSecurityContraband]
+  parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase] # BaseSecurityContraband
   id: ClothingBeltSecurity
   name: security belt
   description: Can hold security gear like handcuffs and flashes.
@@ -823,7 +823,7 @@
   - type: Appearance
 
 - type: entity
-  parent: [ClothingBeltBase, ClothingSlotBase, BaseCommandContraband]
+  parent: [ClothingBeltBase, ClothingSlotBase] # BaseCommandContraband
   id: ClothingBeltSheath
   name: sabre sheath
   description: An ornate sheath designed to hold an officer's blade.
@@ -888,7 +888,7 @@
           - Sidearm
 
 - type: entity
-  parent: [ClothingBeltHolster, BaseSyndicateContraband] # Goobstation
+  parent: [ClothingBeltHolster] # BaseSyndicateContraband # Goobstation
   id: ClothingBeltSyndieHolster
   name: syndicate shoulder holster
   description: A deep shoulder holster capable of holding many types of ballistics.
@@ -920,7 +920,7 @@
 # Belts without visualizers
 
 - type: entity
-  parent: [ClothingBeltAmmoProviderBase, BaseSecurityBartenderContraband]
+  parent: [ClothingBeltAmmoProviderBase] # BaseSecurityBartenderContraband
   id: ClothingBeltBandolier
   name: bandolier
   description: A bandolier for holding shotgun ammunition.
@@ -964,7 +964,7 @@
     sprite: Clothing/Belt/securitywebbing.rsi
 
 - type: entity
-  parent: [ ClothingBeltStorageBase, BaseSecurityCargoContraband ]
+  parent: [ ClothingBeltStorageBase] # BaseSecurityCargoContraband
   id: ClothingBeltMercWebbing
   name: mercenary webbing
   description: Ideal for storing everything from ammo to weapons and combat essentials.
@@ -986,7 +986,7 @@
     sprite: Clothing/Belt/salvagewebbing.rsi
 
 - type: entity
-  parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseSyndicateContraband]
+  parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase] # BaseSyndicateContraband
   id: ClothingBeltMilitaryWebbing
   name: chest rig
   description: A set of tactical webbing worn by Syndicate boarding parties.

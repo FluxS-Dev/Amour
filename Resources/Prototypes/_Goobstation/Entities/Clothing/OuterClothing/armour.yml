@@ -111,7 +111,7 @@
 
 # HoS web vest
 - type: entity
-  parent: [ClothingOuterArmorHoS, ClothingOuterStorageBase, BaseSecurityCommandContraband]
+  parent: [ClothingOuterArmorHoS, ClothingOuterStorageBase] # BaseSecurityCommandContraband
   id: ClothingOuterArmorHoSVestWeb
   name: head of security's web vest
   description: A high-quality armored vest made from a hard synthetic material. It is surprisingly flexible and light, despite formidable armor plating.
@@ -169,7 +169,7 @@
 
 # Blueshield Armour Vest
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingOuterArmorCaptainCarapace ]
+  parent: [ ClothingOuterArmorCaptainCarapace ] # BaseCentcommContraband
   id: ClothingBlueshieldArmourVest
   name: blueshield's security armour
   description: An armoured vest with the badge of the blueshield. Utilizes bluespace technology to be more compact.
@@ -204,7 +204,7 @@
     sprite: _Goobstation/Clothing/OuterClothing/Armor/blueshield_cowboy_jacket.rsi
 
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingOuterWinterCapArmored ]
+  parent: [ ClothingOuterWinterCapArmored ] # BaseCentcommContraband
   id: ClothingOuterWinterBlueshield
   name: blueshield's armored winter coat
   description: A blue winter coat reinforced with kevlar in the chest area.
@@ -220,7 +220,7 @@
 # CentralCommand
 
 - type: entity
-  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseCentcommContraband]
+  parent: [ClothingOuterBaseMedium, AllowSuitStorageClothing] # BaseCentcommContraband
   id: ClothingOuterArmourInvisible # I'll be real, this is just invisible armor so it doesn't ruin how fucking AWESOME navy officers look. Bite me.
   name: bluespace assisted armor
   description: An armored vest that utilizes bluespace technology, bending light and becoming invisible to the naked eye when worn.
@@ -265,7 +265,7 @@
         type: ChameleonBoundUserInterface
 
 - type: entity
-  parent: [ ClothingOuterBaseMedium, ClothingOuterStorageToggleableBase, AllowSuitStorageClothing, BaseSyndicateContraband ]
+  parent: [ ClothingOuterBaseMedium, ClothingOuterStorageToggleableBase, AllowSuitStorageClothing] # BaseSyndicateContraband
   id: ClothingOuterArmorCloakSith
   name: dark lord cloak
   description: What began as a simple cosplay cloak was illegally reinforced with armored plates, transforming it into a functional piece of armor. Looks like it's even capable of protecting the user from the lack of pressure in space.
@@ -308,7 +308,7 @@
   # Intentionally no temperature or high pressure protection
 
 - type: entity
-  parent: [BaseSyndicateContraband, ClothingOuterArmourInvisible]
+  parent: [ClothingOuterArmourInvisible] # BaseSyndicateContraband
   id: ClothingOuterArmourInvisibleSyndie
   name: redspace assisted armor
   description: An armored vest that utilizes redspace technology to appear invisible and not mess with your business style.
@@ -367,7 +367,7 @@
 
 # Western Undetermined Set
 - type: entity
-  parent: [ClothingOuterPonchoClassic, BaseMajorContraband]
+  parent: [ClothingOuterPonchoClassic] # BaseMajorContraband
   id: ClothingOuterPonchoClassicRobust
   name: authentic cowboys poncho
   description: A poncho made for real cowboy's.

@@ -11,7 +11,7 @@
 
 - type: entity
   name: hypercharged flash
-  parent: [BaseItem, BaseCentcommContraband]
+  parent: [BaseItem] # BaseCentcommContraband
   id: HyperFlash
   suffix: DO NOT MAP
   description: An ultrabright flashbulb with a trigger. This one seems to be much more potent than an ordinary one.
@@ -129,7 +129,7 @@
 - type: entity
   name: pepperspray
   id: PepperSpray
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem] # BaseSecurityContraband
   suffix: Filled
   description: A small 50u canister of Oleoresin Capsaicin. Capable of blinding and stunning targets who aren't wearing protective gear.
   components:

@@ -84,7 +84,7 @@
 - type: entity
   name: holoparasite injector
   id: HoloparasiteInjector
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem] # BaseSyndicateContraband
   description: A complex artwork of handheld machinery allowing the user to host a holoparasite guardian.
   components:
   - type: Sprite
@@ -105,7 +105,7 @@
 - type: entity
   name: magical lamp
   id: MagicalLamp
-  parent: [ArabianLamp, BaseMagicalContraband] # Goob edit
+  parent: [ArabianLamp] # BaseMagicalContraband # Goob edit
   description: The wizard federation had to cut costs after the jinn merchandise scandal somehow.
   components:
   - type: GuardianCreator
@@ -115,7 +115,7 @@
 
 - type: entity
   name: holoparasite box
-  parent: [BoxCardboard, BaseSyndicateContraband]
+  parent: [BoxCardboard] # BaseSyndicateContraband
   id: BoxHoloparasite
   description: A box containing a holoparasite injector.
   components:
@@ -131,7 +131,7 @@
 
 - type: entity
   name: holoclown box
-  parent: [BoxCardboard, BaseSyndicateContraband]
+  parent: [BoxCardboard] # BaseSyndicateContraband
   id: BoxHoloclown
   description: A box containing a holoclown injector.
   components:

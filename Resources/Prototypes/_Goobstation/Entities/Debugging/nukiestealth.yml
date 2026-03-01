@@ -11,7 +11,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContraband ]
+  parent: [ ClothingOuterHardsuitBase] # BaseSyndicateContraband
   id: ClothingOuterHardsuitSyndieStealthDebug
   suffix: DEBUG, DO NOT MAP, stealth
   categories: [ DoNotMap ]

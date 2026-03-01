@@ -128,7 +128,7 @@
 - type: entity
   id: ShellShotgunBeanbag
   name: shell (12 Gauge beanbag) # Goobstation
-  parent: [ BaseShellShotgun, BaseSecurityBartenderContraband ]
+  parent: [ BaseShellShotgun] # BaseSecurityBartenderContraband
   components:
   - type: Tag
     tags:
@@ -147,7 +147,7 @@
 - type: entity
   id: ShellShotgunSlug
   name: shell (12 Gauge slug) # Goobstation
-  parent: [ BaseShellShotgun, BaseSecurityContraband]
+  parent: [ BaseShellShotgun] # BaseSecurityContraband
   components:
   - type: Sprite
     layers:
@@ -180,7 +180,7 @@
 - type: entity
   id: ShellShotgun
   name: shell (12 Gauge) # Goobstation
-  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  parent: [ BaseShellShotgun] # BaseSecurityContraband
   components:
   - type: Sprite
     layers:
@@ -192,7 +192,7 @@
 - type: entity
   id: ShellShotgunIncendiary
   name: shell (12 Gauge incendiary) # Goobstation
-  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  parent: [ BaseShellShotgun] # BaseSecurityContraband
   components:
   - type: Sprite
     layers:
@@ -206,7 +206,7 @@
 - type: entity
   id: ShellShotgunPractice
   name: shell (12 Gauge practice) # Goobstation
-  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  parent: [ BaseShellShotgun] # BaseSecurityContraband
   components:
   - type: Sprite
     layers:
@@ -220,7 +220,7 @@
 - type: entity
   id: ShellTranquilizer
   name: shell (12 Gauge tranquilizer) # Goobstation
-  parent: [ BaseShellShotgun, BaseSecurityZookeeperContraband ] # Goobstation
+  parent: [ BaseShellShotgun ] # Goobstation # BaseSecurityZookeeperContraband
   components:
   - type: Tag
     tags:
@@ -249,7 +249,7 @@
   id: ShellShotgunImprovised
   name: improvised shotgun shell
   description: A homemade shotgun shell that shoots painful glass shrapnel. The spread is so wide that it couldn't hit the broad side of a barn.
-  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  parent: [ BaseShellShotgun] # BaseSecurityContraband
   components:
   - type: Tag
     tags:
@@ -271,7 +271,7 @@
 - type: entity
   id: ShellShotgunUranium
   name: uranium shotgun shell
-  parent: [ BaseShellShotgun, BaseSecurityContraband ]
+  parent: [ BaseShellShotgun] # BaseSecurityContraband
   components:
     - type: Sprite
       layers:

@@ -1,6 +1,6 @@
 - type: entity
   name: Executive briefcase
-  parent: [BaseItem, StorePresetNTR, BaseGrandTheftContraband]
+  parent: [BaseItem, StorePresetNTR] # BaseGrandTheftContraband
   suffix: Empty
   id: ExecutiveBriefcaseEmpty
   description: A standard-issue executive briefcase for secure NanoNeT access.

@@ -19,7 +19,7 @@
 
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Contraband;
+//using Content.Shared.Contraband; // Amour - LockCut
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
@@ -36,7 +36,7 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly ClothingSystem _clothingSystem = default!;
-    [Dependency] private readonly ContrabandSystem _contraband = default!;
+    // [Dependency] private readonly ContrabandSystem _contraband = default!; // Amour - LockCut
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedItemSystem _itemSystem = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -127,8 +127,9 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
             Dirty(uid, appearance);
         }
 
-        // properly mark contraband
-        if (proto.TryGetComponent("Contraband", out ContrabandComponent? contra))
+        // Amour - LockCut
+        // properly mark contraband 
+        /*if (proto.TryGetComponent("Contraband", out ContrabandComponent? contra))
         {
             EnsureComp<ContrabandComponent>(uid, out var current);
             _contraband.CopyDetails(uid, contra, current);
@@ -136,7 +137,7 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
         else
         {
             RemComp<ContrabandComponent>(uid);
-        }
+        }*/
     }
 
     private void OnVerb(Entity<ChameleonClothingComponent> ent, ref GetVerbsEvent<InteractionVerb> args)

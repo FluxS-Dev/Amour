@@ -181,7 +181,7 @@
 - type: entity
   name: explosive grenade
   description: Grenade that creates a small but devastating explosion.
-  parent: [GrenadeBase, BaseSyndicateContraband]
+  parent: [GrenadeBase] # BaseSyndicateContraband
   id: ExGrenade
   components:
   - type: ExplodeOnTrigger
@@ -204,7 +204,7 @@
 - type: entity
   name: flashbang
   description: Eeeeeeeeeeeeeeeeeeeeee.
-  parent: [ GrenadeBase, BaseSecurityContraband ]
+  parent: [ GrenadeBase] # BaseSecurityContraband
   id: GrenadeFlashBang
   components:
   - type: Sprite
@@ -259,7 +259,7 @@
 - type: entity
   name: syndicate minibomb
   description: A syndicate-manufactured explosive used to stow destruction and cause chaos.
-  parent: [GrenadeBase, BaseSyndicateContraband]
+  parent: [GrenadeBase] # BaseSyndicateContraband
   id: SyndieMiniBomb
   components:
   - type: Sprite
@@ -329,7 +329,7 @@
 - type: entity
   name: supermatter grenade
   description: Grenade that simulates delamination of the supermatter engine, pulling things in a heap and exploding after some time.
-  parent: [GrenadeBase, BaseSyndicateContraband]
+  parent: [GrenadeBase] # BaseSyndicateContraband
   id: SupermatterGrenade
   components:
   - type: Sprite
@@ -540,7 +540,7 @@
 - type: entity
   name: EMP grenade
   description: A grenade designed to wreak havoc on electronic systems.
-  parent: [GrenadeBase, BaseSyndicateContraband]
+  parent: [GrenadeBase] # BaseSyndicateContraband
   id: EmpGrenade
   components:
   - type: Sprite
@@ -563,7 +563,7 @@
 - type: entity
   name: holy hand grenade
   description: O Lord, bless this thy hand grenade, that with it thou mayst blow thine enemies to tiny bits, in thy mercy.
-  parent: [GrenadeBase, BaseSyndicateContraband]
+  parent: [GrenadeBase] # BaseSyndicateContraband
   id: HolyHandGrenade
   components:
   - type: Sprite
@@ -590,7 +590,7 @@
     price: 10000
 
 - type: entity
-  parent: [ GrenadeBase, BaseSecurityContraband ]
+  parent: [ GrenadeBase] # BaseSecurityContraband
   id: SmokeGrenade
   name: smoke grenade
   description: A tactical grenade that releases a large, long-lasting cloud of smoke when used.
@@ -614,7 +614,7 @@
       path: /Audio/Items/smoke_grenade_prime.ogg
 
 - type: entity
-  parent: [ BaseCivilianContraband, SmokeGrenade ]
+  parent: [ SmokeGrenade ] # BaseCivilianContraband
   id: CleanerGrenade
   name: cleanade
   description: Special grenade for janitors, releasing large cloud of space cleaner foam.
@@ -652,7 +652,7 @@
         Quantity: 20
 
 - type: entity
-  parent: [ BaseEngineeringContraband, SmokeGrenade ]
+  parent: [ SmokeGrenade ] # BaseEngineeringContraband
   id: MetalFoamGrenade
   name: metal foam grenade
   description: An emergency tool used for patching hull breaches with special quick-set metal foam. Almost as good as real floors!
@@ -671,7 +671,7 @@
     price: 350
 
 - type: entity
-  parent: [ BaseEngineeringContraband, GrenadeBase ] # Prevent inheriting DeleteOnTrigger from SmokeGrenade
+  parent: [ GrenadeBase ] # Prevent inheriting DeleteOnTrigger from SmokeGrenade # BaseEngineeringContraband
   id: AirGrenade
   name: air grenade
   description: A special solid state chemical grenade used for quickly releasing standard air into a spaced area. Fills up to 30 tiles!
@@ -737,7 +737,7 @@
 - type: entity
   name: syndicate trickybomb
   description: A syndicate-manufactured explosive used to make an excellent distraction.
-  parent: [GrenadeDummy, BaseSyndicateContraband]
+  parent: [GrenadeDummy] # BaseSyndicateContraband
   id: SyndieTrickyBomb
   components:
   - type: Sprite

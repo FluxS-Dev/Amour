@@ -85,7 +85,7 @@
 
 - type: entity
   name: nail (armor-piercing)
-  parent: [ Nail, BaseSyndicateContraband ]
+  parent: [ Nail] # BaseSyndicateContraband
   description: A heavy nail designed to pierce through hard surfaces. Looks just like a regular nail, until it suddenly kills you.
   id: NailArmorPiercing
   components:
@@ -126,7 +126,7 @@
     state: icon
 
 - type: entity
-  parent: [ MagazineBoxNail, BaseSyndicateContraband ]
+  parent: [ MagazineBoxNail] # BaseSyndicateContraband
   id: MagazineBoxNailArmorPiercing
   name: nail box (armor-piercing)
   components:

@@ -14,7 +14,7 @@
 
 - type: entity
   name: tracker box
-  parent: [BoxCardboard, BaseSecurityContraband]
+  parent: [BoxCardboard] # BaseSecurityContraband
   id: BoxTracker
   description: A box containing a couple trackers.
   components:
@@ -28,7 +28,7 @@
 
 - type: entity
   name: lethal injections box
-  parent: [BoxCardboard, BaseSecurityContraband]
+  parent: [BoxCardboard] # BaseSecurityContraband
   id: BoxLethalInjection
   description: A box containing several lethal injection syringes.
   components:
@@ -42,7 +42,7 @@
 
 - type: entity
   name: 40mm baton grenade box
-  parent: [BoxCardboard, BaseSecurityContraband]
+  parent: [BoxCardboard] # BaseSecurityContraband
   id: BoxGrenadesBaton
   description: A box containing eight 40mm baton grenades for single target stunning.
   components:
@@ -59,7 +59,7 @@
 
 - type: entity
   name: 40mm flash grenade box
-  parent: [BoxCardboard, BaseSecurityContraband]
+  parent: [BoxCardboard] # BaseSecurityContraband
   id: BoxGrenadesFlash
   description: A box containing eight 40mm flashbang grenades for mass target stunning.
   components:
@@ -76,7 +76,7 @@
 
 - type: entity
   name: 40mm tear gas grenade box
-  parent: [BoxCardboard, BaseSecurityContraband]
+  parent: [BoxCardboard] # BaseSecurityContraband
   id: BoxGrenadesTeargas
   description: A box containing eight 40mm tear gas grenades for efficient riot dispersion.
   components:

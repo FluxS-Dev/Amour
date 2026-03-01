@@ -31,7 +31,7 @@
 
 - type: entity
   id: EnergySpeedloaderLethal
-  parent: [ BaseEnergySpeedloader, BaseCentcommContraband ]
+  parent: [ BaseEnergySpeedloader] # BaseCentcommContraband
   name: energy speedloader (lethal)
   description: A rather volatile powercell utilizing phoron to charge lethal bolts over time. Phoron will make us all rich.
   components:
@@ -45,7 +45,7 @@
 
 - type: entity
   id: EnergySpeedloaderDisabler
-  parent: [ BaseEnergySpeedloader, BaseCentcommContraband ]
+  parent: [ BaseEnergySpeedloader] # BaseCentcommContraband
   name: energy speedloader (disabler)
   description: A rather volatile powercell utilizing phoron to charge disabling bolts over time. Phoron will make us all rich.
   components:
@@ -61,7 +61,7 @@
 
 - type: entity
   id: EnergySpeedloaderPulse
-  parent: [ BaseEnergySpeedloader, BaseCentcommContraband ]
+  parent: [ BaseEnergySpeedloader] # BaseCentcommContraband
   name: energy speedloader (pulse)
   description: A rather volatile powercell utilizing phoron to charge destructive energy pulses over time. Phoron will make us all rich.
   components:

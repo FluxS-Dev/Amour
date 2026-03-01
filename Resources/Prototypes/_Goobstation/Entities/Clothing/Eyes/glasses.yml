@@ -21,7 +21,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons, BaseSecurityContraband, ClothingEyesGlassesSunglasses]
+  parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons, ClothingEyesGlassesSunglasses] # BaseSecurityContraband
   id: ClothingEyesGlassesMedSec
   name: medical security glasses
   description: Sunglasses with a medical and security hud
@@ -127,7 +127,7 @@
     node: glassesMed
 
 - type: entity
-  parent: [ClothingEyesHudOmni, BaseCentcommContraband]
+  parent: [ClothingEyesHudOmni] # BaseCentcommContraband
   id: ClothingEyesGlassesDeathsquad
   suffix: DO NOT MAP
   name: central commander shades
@@ -160,7 +160,7 @@
     tags: [] # ignore "WhitelistChameleon" tag
 
 - type: entity
-  parent: [ClothingEyesHudOmni, BaseCentcommContraband]
+  parent: [ClothingEyesHudOmni] # BaseCentcommContraband
   id: ClothingEyesGlassesCentComm
   suffix: DO NOT MAP
   name: central command shades
@@ -184,7 +184,7 @@
     lightRadius: 15
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons, BaseCentcommContraband]
+  parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons] # BaseCentcommContraband
   id: ClothingEyesGlassesCentCommNoThermal
   suffix: No thermals, DO NOT MAP
   name: central command shades
@@ -210,7 +210,7 @@
   - type: ShowThirstIcons
 
 - type: entity
-  parent: [ClothingEyesBase, ShowHealthRelatedIcons, BaseCentcommContraband, ClothingEyesGlassesSunglasses]
+  parent: [ClothingEyesBase, ShowHealthRelatedIcons, ClothingEyesGlassesSunglasses] # BaseCentcommContraband
   id: ClothingEyesGlassesBSO
   name: blueshield officer glasses
   description: Sunglasses with a medical, job and diagnostic hud.
@@ -238,7 +238,7 @@
     node: glassesMedDiag
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityCommandContraband]
+  parent: [ClothingEyesBase, ShowSecurityIcons] # BaseSecurityCommandContraband
   id: ClothingEyesGlassesSecurityAdvanced
   name: advanced security goggles
   description: A set of goggles that provide flash protection, a security HUD, and basic thermal vision.
@@ -266,7 +266,7 @@
     coverage: EYES
 
 - type: entity
-  parent: [ClothingEyesGlassesSecurity, BaseSecurityContraband]
+  parent: [ClothingEyesGlassesSecurity] # BaseSecurityContraband
   id: ClothingEyesGlassesSecurityContraDetect
   name: contraband detector security glasses
   description: A set of glasses that provide flash protection, a security HUD, and a built in contraband detector.

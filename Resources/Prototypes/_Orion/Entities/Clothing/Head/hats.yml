@@ -10,7 +10,7 @@
     sprite: _Orion/Clothing/Head/Hats/inteq_beret.rsi
 
 - type: entity
-  parent: [ClothingHeadBase, BaseMinorContraband]
+  parent: [ClothingHeadBase] # BaseMinorContraband
   id: ClothingHeadInteQHonorableBeret
   name: InteQ honorable beret
   description: White beret with a emblem on it.
@@ -21,7 +21,7 @@
     sprite: _Orion/Clothing/Head/Hats/inteq_honorable_beret.rsi
 
 - type: entity
-  parent: [ClothingHeadBase, BaseMinorContraband]
+  parent: [ClothingHeadBase] # BaseMinorContraband
   id: ClothingHeadHatInteQMAA
   name: InteQ master at arms hat
   description: Master at arms hat, looks intimidating, I doubt that you will like to communicate with its owner...

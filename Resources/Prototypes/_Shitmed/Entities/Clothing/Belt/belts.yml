@@ -7,7 +7,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ClothingBeltUtility, BaseMajorContraband ]
+  parent: [ ClothingBeltUtility] # BaseMajorContraband
   id: ClothingAbductorBelt
   name:  alien belt
   description: Can hold various OUR things. # I was going to change this, but it's funny so it stays.

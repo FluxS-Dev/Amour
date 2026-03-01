@@ -8,7 +8,7 @@
 
 - type: entity
   name: dart gun
-  parent: [ BaseItem, BaseSyndicateContraband ]
+  parent: [ BaseItem] # BaseSyndicateContraband
   id: DartGun
   description: 'The label reads: "Interdyne Pharmaceutics is not responsible for any geneva convention violations caused by improper use."'
   components:

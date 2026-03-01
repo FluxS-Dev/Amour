@@ -101,7 +101,7 @@
     sprite: Clothing/OuterClothing/Bio/scientist.rsi
 
 - type: entity
-  parent: [ClothingOuterBioGeneral, BaseSecurityContraband]
+  parent: [ClothingOuterBioGeneral] # BaseSecurityContraband
   id: ClothingOuterBioSecurity
   name: bio suit
   suffix: Security

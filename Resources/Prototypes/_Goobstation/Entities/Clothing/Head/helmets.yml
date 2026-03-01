@@ -15,7 +15,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [BaseSyndicateContraband, ClothingHeadHelmetBase]
+  parent: [ClothingHeadHelmetBase] # BaseSyndicateContraband
   id: ClothingHeadHelmetHelldiver
   name: salvage NT-01 tactical helmet
   description: This armor is the NanoTrasen standard issue, made from the same titanium alloy as the Goliath hull.
@@ -86,7 +86,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ ClothingHeadBase, BaseMajorContraband ]
+  parent: [ ClothingHeadBase] # BaseMajorContraband
   id: ReverseBearTrap
   name: reverse bear trap
   description: A horrifying set of shut metal jaws, rigged to a kitchen timer and secured by padlock to a head-mounted clamp. To apply, hit someone with it
@@ -109,7 +109,7 @@
         Blunt: 5
 
 - type: entity
-  parent: [ ClothingHeadBase, BaseSyndicateContraband ]
+  parent: [ ClothingHeadBase] # BaseSyndicateContraband
   id: ClothingHeadHatHoodCloakSith
   name: dark lord hood
   description: What began as a simple cosplay hood was illegally reinforced with armored plates, transforming it into a functional piece of armor. Looks like it's even capable of protecting the user from the lack of pressure in space.
@@ -152,7 +152,7 @@
 
 # Western Undetermined Set
 - type: entity
-  parent: [ClothingHeadHatCowboyBrown, BaseMajorContraband]
+  parent: [ClothingHeadHatCowboyBrown] # BaseMajorContraband
   id: ClothingHeadHatCowboyBrownRobust
   name: authentic brown cowboy hat
   description: "\"This station ain't big enough for the two of us.\""

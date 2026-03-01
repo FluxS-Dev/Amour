@@ -192,7 +192,7 @@
 
 - type: entity
   name: Kardashev-Mosin
-  parent: [BaseWeaponSniper, BaseGunWieldable, BaseSecurityContraband] # Orion-Edit: MajorContraband > SecurityContraband
+  parent: [BaseWeaponSniper, BaseGunWieldable] # BaseSecurityContraband # Orion-Edit: MajorContraband > SecurityContraband
   id: WeaponSniperMosin
   description: A true relic, the Kardashev-Mosin has served in nearly every armed conflict since its creation 670 years ago. The bolt-action design of the rifle remains virtually identical to its original design, whether used for hunting, sniping, or endless trench warfare. Loads 10 rounds of 7.62mm rifle. # Orion-Edit: .30 rifle > 7.62mm
   components:
@@ -256,7 +256,7 @@
 
 - type: entity
   name: Hristov
-  parent: [BaseWeaponSniperMagazine, BaseGunWieldable, BaseSyndicateContraband]
+  parent: [BaseWeaponSniperMagazine, BaseGunWieldable] # BaseSyndicateContraband
   id: WeaponSniperHristov
   description: A portable anti-materiel rifle for when you need to make someone regret their life choices from a safe distance. Comes with an integrated long-range scope. Feeds from .60 Anti-Materiel magazines.
   components:
@@ -291,7 +291,7 @@
 
 - type: entity
   name: musket
-  parent: [ BaseWeaponSniper, BaseGunWieldable, BaseMajorContraband ]
+  parent: [ BaseWeaponSniper, BaseGunWieldable] # BaseMajorContraband
   id: Musket
   description: This should've been in a museum long before you were born. Loads one round of .60 Anti-Materiel.
   components:
@@ -330,7 +330,7 @@
 
 - type: entity
   name: flintlock pistol
-  parent: [BaseWeaponSniper, BaseMajorContraband]
+  parent: [BaseWeaponSniper] # BaseMajorContraband
   id: WeaponPistolFlintlock
   description: A pirate's companion. Yarrr! Loads one round of .45 Magnum.
   components:

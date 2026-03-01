@@ -7,7 +7,7 @@
 
 - type: entity
   name: blue flippo
-  parent: [BaseItem, BaseCentcommContraband]
+  parent: [BaseItem] # BaseCentcommContraband
   id: FlippoLighterBlueshield
   description: "A specialized blue lighter given only to specific officers. Great for a smoke after a long day."
   components:

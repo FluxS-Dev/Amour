@@ -1,6 +1,6 @@
 # Base
 - type: entity
-  parent: [ BaseItem, BaseCentcommContraband ]
+  parent: [ BaseItem] # BaseCentcommContraband
   id: BasePowerpackRifle
   name: powerpack (.10 rifle)
   abstract: true
@@ -52,7 +52,7 @@
   - type: UseDelayBlockShoot
 
 - type: entity
-  parent: [ BaseItem, BaseCentcommContraband ]
+  parent: [ BaseItem] # BaseCentcommContraband
   id: BasePowerpackEnergy
   name: powerpack (pulse)
   abstract: true

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ ClothingBackpack, BaseMajorContraband ]
+  parent: [ ClothingBackpack] # BaseMajorContraband
   id: ClothingBackpackAbductor
   name: alien backpack
   description: An ordinary backpack woven from a durable fiber.

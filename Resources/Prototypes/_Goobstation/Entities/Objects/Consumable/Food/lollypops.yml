@@ -87,7 +87,7 @@
 # Syndicate
 
 - type: entity
-  parent: [FoodSnackLollypopWrappedBase, BaseSyndicateContraband]
+  parent: [FoodSnackLollypopWrappedBase] # BaseSyndicateContraband
   id: FoodSnackLollypopWrappedBaseSyndicate
   abstract: true
   name: wrapped syndicate lollypop
@@ -141,7 +141,7 @@
 # Command
 
 - type: entity
-  parent: [FoodSnackLollypopWrappedBase, BaseCommandContraband]
+  parent: [FoodSnackLollypopWrappedBase] # BaseCommandContraband
   id: FoodSnackLollypopWrappedBaseNanotrasen
   abstract: true
   name: wrapped nanotrasen lollypop
@@ -194,7 +194,7 @@
 # Centcomm
 
 - type: entity
-  parent: [FoodSnackLollypopWrappedBase, BaseCentcommContraband]
+  parent: [FoodSnackLollypopWrappedBase] # BaseCentcommContraband
   id: FoodSnackLollypopWrappedBaseCentcomm
   name: wrapped centcomm lollypop
   description: A highly expensive lollypop. It's still in it's gold wrapper.
@@ -1199,7 +1199,7 @@
 # EVIL pops, syndicates and rare loot.
 
 - type: entity
-  parent: [FoodSnackLollypopWrappedBase, BaseSyndicateContraband]
+  parent: [FoodSnackLollypopWrappedBase] # BaseSyndicateContraband
   id: FoodSnackLollypopWrappedMysteryEvil
   name: wrapped mystery lollypop
   suffix: evil
@@ -2122,7 +2122,7 @@
 
 - type: entity
   categories: [ HideSpawnMenu ]
-  parent: [FoodPacketTrash, BaseSyndicateContraband]
+  parent: [FoodPacketTrash] # BaseSyndicateContraband
   id: FoodSnackLollypopTrashSyndicate
   name: syndicate lollypop wrapper
   description: Someone's been naughty...

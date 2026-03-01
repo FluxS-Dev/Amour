@@ -23,7 +23,7 @@
 
 - type: entity
   id: BasePKAUpgrade
-  parent: [BaseItem, BaseSecurityCargoContraband]
+  parent: [BaseItem] # BaseSecurityCargoContraband
   name: PKA modkit
   description: A modkit for a proto-kinetic accelerator.
   abstract: true
@@ -101,7 +101,7 @@
 
 - type: entity
   id: PKAUpgradePressure
-  parent: [BaseSyndicateContraband, BasePKAUpgrade]
+  parent: [ BasePKAUpgrade] # BaseSyndicateContraband
   name: PKA modkit (pressure)
   components:
   - type: Sprite

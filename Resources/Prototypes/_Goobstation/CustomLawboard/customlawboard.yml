@@ -18,7 +18,7 @@
 
 - type: entity
   id: SyndicateCustomLawboard
-  parent: [BaseCustomLawboard, BaseSyndicateAnchoredContraband]
+  parent: [BaseCustomLawboard] # BaseSyndicateAnchoredContraband
   name: experimental syndicate law board
   description: A strange looking experimental lawboard. Judging by the Syndicate display on it, it's probaly used for nefarious purposes.
   components:
@@ -42,7 +42,7 @@
 
 - type: entity
   id: NTCustomLawboard
-  parent: [BaseCustomLawboard, BaseCommandContraband]
+  parent: [BaseCustomLawboard] # BaseCommandContraband
   name: freeform law board
   description: A freeform lawboard, accepts any custom laws.
   components:

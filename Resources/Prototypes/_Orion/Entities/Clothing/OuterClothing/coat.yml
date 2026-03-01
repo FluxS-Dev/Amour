@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseMinorContraband, ClothingOuterArmorBasic ]
+  parent: [ ClothingOuterArmorBasic ] # BaseMinorContraband
   id: ClothingOuterCoatInteQBattle
   name: InteQ battle coat
   description: InteQ armored coat is made of durable fabric, with gilded patterns.
@@ -10,7 +10,7 @@
     sprite: _Orion/Clothing/OuterClothing/Coats/inteq_battle_coat.rsi
 
 - type: entity
-  parent: [ BaseMinorContraband, ClothingOuterCoatHoSTrench ]
+  parent: [ ClothingOuterCoatHoSTrench ] # BaseMinorContraband
   id: ClothingOuterCoatInteQHonorableBattle
   name: InteQ honorable battle coat
   description: InteQ honorable armored coat is made of durable fabric, with gilded patterns.
@@ -23,7 +23,7 @@
     points: 1
 
 - type: entity
-  parent: [ BaseMinorContraband, ClothingOuterCoatAMG ]
+  parent: [ ClothingOuterCoatAMG ] # BaseMinorContraband
   id: ClothingOuterCoatInteQMedical
   name: InteQ medical coat
   description: The version of the medical coat, with elements of a bulletproof vest, but your heart is protected.

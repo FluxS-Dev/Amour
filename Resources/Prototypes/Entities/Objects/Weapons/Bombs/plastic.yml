@@ -70,7 +70,7 @@
 - type: entity
   name: composition C-4
   description: Used to put holes in specific areas without too much extra hole. A saboteur's favorite.
-  parent: [BasePlasticExplosive, BaseMajorContraband]
+  parent: [BasePlasticExplosive] # BaseMajorContraband
   id: C4
   components:
   - type: Sprite
@@ -155,7 +155,7 @@
 - type: entity
   name: seismic charge
   description: Concussion based explosive designed to destroy large amounts of rock.
-  parent: [ BasePlasticExplosive, BaseSecurityCargoContraband ]
+  parent: [ BasePlasticExplosive] # BaseSecurityCargoContraband
   id: SeismicCharge
   components:
   - type: Sprite

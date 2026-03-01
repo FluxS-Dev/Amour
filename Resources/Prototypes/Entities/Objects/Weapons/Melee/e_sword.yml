@@ -241,7 +241,7 @@
 
 - type: entity
   name: energy sword
-  parent: [BaseMeleeWeaponEnergy, BaseSyndicateContraband]
+  parent: [BaseMeleeWeaponEnergy] # BaseSyndicateContraband
   id: EnergySword
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Cuts through unarmored targets like butter.
   components:
@@ -274,7 +274,7 @@
 
 - type: entity
   name: energy dagger
-  parent: [BaseMeleeWeaponEnergy, BaseSyndicateContraband]
+  parent: [BaseMeleeWeaponEnergy] # BaseSyndicateContraband
   id: EnergyDaggerLoud
   description: A not as loud and dangerous dagger with a beam made of pure, concentrated plasma. This one is completely undisguised.
   components:
@@ -382,8 +382,8 @@
       malus: 0.4
     - type: Execution
       doAfterDuration: 4.0
-    - type: Contraband
-      severity: Syndicate
+#    - type: Contraband # Amour - LockCut
+#      severity: Syndicate
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_dagger.rsi
     layers:
@@ -420,7 +420,7 @@
     spread: 30
 
 - type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem] # BaseSyndicateContraband
   id: EnergyDaggerBox
   name: e-dagger box
   suffix: E-Dagger
@@ -439,7 +439,7 @@
 
 - type: entity
   name: energy cutlass
-  parent: [BaseMeleeWeaponEnergy, BaseMajorContraband]
+  parent: [BaseMeleeWeaponEnergy] # BaseMajorContraband
   id: EnergyCutlass
   description: An exotic energy weapon.
   components:
@@ -469,7 +469,7 @@
 
 - type: entity
   name: double-bladed energy sword
-  parent: [BaseMeleeWeaponEnergy, BaseSyndicateContraband]
+  parent: [BaseMeleeWeaponEnergy] # BaseSyndicateContraband
   id: EnergySwordDoubleBase # Goob edit
   abstract: true # Goob edit
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
@@ -618,7 +618,7 @@
     freeHandsRequired: 0 # because borg has no off-hand to wield with.  Without this, it will be unable to activate the esword
 
 - type: entity
-  parent: [ EnergyDaggerLoud, BaseXenoborgContraband ]
+  parent: [ EnergyDaggerLoud] # BaseXenoborgContraband
   id: EnergyDaggerLoudBlue
   suffix: blue
   components:

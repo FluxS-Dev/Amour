@@ -14,7 +14,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [BaseItem, BaseMinorContraband]
+  parent: [BaseItem] # BaseMinorContraband
   id: ThrowingStar
   name: throwing star
   description: An ancient weapon still used to this day, due to its ease of lodging itself into its victim's body parts.

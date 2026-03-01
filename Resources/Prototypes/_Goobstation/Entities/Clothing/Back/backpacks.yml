@@ -9,7 +9,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseCentcommContraband , ClothingBackpack ]
+  parent: [ ClothingBackpack ] # BaseCentcommContraband
   id: ClothingBackpackCentcomm
   name: centcomm backpack
   description: A luxurious backpack, smells like money.
@@ -18,7 +18,7 @@
     sprite: _Goobstation/Clothing/Back/Backpacks/centcom.rsi
 
 - type: entity
-  parent: [ClothingBackpack, BaseCentcommContraband]
+  parent: [ClothingBackpack] # BaseCentcommContraband
   id: ClothingBackpackBlueshield
   name: blueshield backpack
   description: A very protective backpack, smells like energy gun.

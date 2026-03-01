@@ -157,7 +157,7 @@
     sprite: Clothing/Shoes/Specific/cult.rsi
 
 - type: entity
-  parent: [ ClothingShoesBase, BaseJanitorContraband ]
+  parent: [ ClothingShoesBase] # BaseJanitorContraband
   id: ClothingShoesGaloshes
   name: galoshes
   description: Rubber boots.
@@ -178,7 +178,7 @@
 
 
 - type: entity
-  parent: [ClothingShoesBaseButcherable, BaseMajorContraband]
+  parent: [ClothingShoesBaseButcherable] # BaseMajorContraband
   id: ClothingShoesSpaceNinja
   name: space ninja shoes
   description: A pair of nano-enhanced boots with built-in magnetic suction cups.

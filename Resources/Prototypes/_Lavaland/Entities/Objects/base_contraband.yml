@@ -1,7 +1,7 @@
-- type: entity
-  id: BaseSalvageContraband
-  parent: BaseRestrictedContraband
-  abstract: true
-  components:
-  - type: Contraband
-    allowedJobs: [ SalvageSpecialist ]
+#- type: entity
+#  id: BaseSalvageContraband
+#  parent: BaseRestrictedContraband
+#  abstract: true
+#  components:
+#  - type: Contraband # Amour - LockCut
+#    allowedJobs: [ SalvageSpecialist ]

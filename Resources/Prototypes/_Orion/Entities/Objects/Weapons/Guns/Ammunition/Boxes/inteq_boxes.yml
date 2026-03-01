@@ -1,7 +1,7 @@
 # BASE
 
 - type: entity
-  parent: [ BaseItem, BaseMajorContraband ]
+  parent: [ BaseItem] # BaseMajorContraband
   id: BaseMagazineBoxInteQ
   name: ammunition box
   abstract: true

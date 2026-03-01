@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseWeaponLauncher, BaseMajorContraband]
+  parent: [BaseWeaponLauncher] # BaseMajorContraband
   id: WeaponLauncherGL70
   name: GL-70
   description: The GL-70 is the standard grenade launcher used by the Earth Army for area denial and big explosions.
@@ -42,7 +42,7 @@
   - type: GunRequiresWield
 
 - type: entity
-  parent: [WeaponFlareGun, BaseGunWieldable, BaseSecurityContraband]
+  parent: [WeaponFlareGun, BaseGunWieldable] # BaseSecurityContraband
   id: WeaponLauncherM81
   name: M-81
   description: A lightweight single-shot grenade launcher used by the UEG for area blockades and large explosions or riot police units.
@@ -75,7 +75,7 @@
             - Grenade
 
 - type: entity
-  parent: [BaseMajorContraband, BaseWeaponLauncher]
+  parent: [BaseWeaponLauncher] # BaseMajorContraband
   id: WeaponLauncherRL5
   name: RL-5
   description: The RL-5 is the primary anti-armor used around the galaxy. Used to take out light-tanks and enemy structures, the RL-5 rocket launcher is a dangerous weapon with a variety of combat uses.

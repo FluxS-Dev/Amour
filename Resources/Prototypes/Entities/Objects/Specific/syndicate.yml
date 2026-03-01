@@ -35,7 +35,7 @@
 
 - type: entity
   name: telecrystal
-  parent: [BaseItem, BaseSyndicateContraband]
+  parent: [BaseItem] # BaseSyndicateContraband
   id: Telecrystal
   # Goobstation - Telecrystal rework
   suffix: 100 TC
@@ -100,7 +100,7 @@
 
 # Uplinks
 - type: entity
-  parent: [BaseItem, StorePresetUplink, BaseSyndicateContraband]
+  parent: [BaseItem, StorePresetUplink] # BaseSyndicateContraband
   id: BaseUplinkRadio
   name: syndicate uplink
   description: Suspiciously looking old radio...
@@ -201,7 +201,7 @@
       Telecrystal: 999999
 
 - type: entity
-  parent: [BaseItem, StorePresetContractor, BaseSyndicateContraband]
+  parent: [BaseItem, StorePresetContractor] # BaseSyndicateContraband
   id: BaseUplinkContractor
   name: contractor uplink
   description: A handheld terminal providing access to the guild store and bounty board.

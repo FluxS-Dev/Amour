@@ -1,6 +1,6 @@
 - type: entity
   name: explosive payload
-  parent: [ BasePayload, BaseSyndicateContraband ]
+  parent: [ BasePayload] # BaseSyndicateContraband
   id: ExplosivePayload
   components:
   - type: Sprite

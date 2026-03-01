@@ -14,7 +14,7 @@
 
 - type: entity
   name: Dualetta
-  parent: [BaseWeaponPistol, BaseSyndicateContraband]
+  parent: [BaseWeaponPistol] # BaseSyndicateContraband
   id: WeaponPistolDualetta
   description: The coolest pistol in the sector. It is said that nobody is strong enough of will to tarnish this weapon's reputation by daring to fire it without its paired pistol. Feeds from .35 Auto pistol magazines.
   components:
@@ -71,7 +71,7 @@
       - WeaponPistolDualetta
 
 - type: entity
-  parent: [ BaseItem, BaseSyndicateContraband ]
+  parent: [ BaseItem] # BaseSyndicateContraband
   id: WeaponPistolAnaconda
   name: Anaconda
   description: A bulky hand cannon with a built in fabricator in its grip. Slowly prints ammo for itself, though don't count on it being fast enough for sustained firefights.
@@ -123,7 +123,7 @@
 
 - type: entity
   name: Contract Terminator
-  parent: [BaseWeaponPistol, BaseCentcommContraband]
+  parent: [BaseWeaponPistol] # BaseCentcommContraband
   id: WeaponPistolCentcommAgent
   description: Necessity is the mother of deception.
   components:

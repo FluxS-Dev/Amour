@@ -107,7 +107,7 @@
   name: handcuffs
   description: Used to detain criminals and other assholes.
   id: Handcuffs
-  parent: [BaseItem, BaseSecurityCommandContraband]
+  parent: [BaseItem] # BaseSecurityCommandContraband
   components:
   # Goobstation edit start
   - type: EmitSoundOnPickup

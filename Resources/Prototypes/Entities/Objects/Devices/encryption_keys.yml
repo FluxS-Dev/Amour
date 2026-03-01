@@ -121,7 +121,7 @@
     - EncryptionCommon
 
 - type: entity
-  parent: [ EncryptionKey, BaseCargoContraband ]
+  parent: [ EncryptionKey] # BaseCargoContraband
   id: EncryptionKeyCargo
   name: cargo encryption key
   description: An encryption key used by supply employees.
@@ -139,7 +139,7 @@
     - EncryptionCargo
 
 - type: entity
-  parent: [ EncryptionKey, BaseCentcommContraband ]
+  parent: [ EncryptionKey] # BaseCentcommContraband
   id: EncryptionKeyCentCom
   name: central command encryption key
   description: An encryption key used by captain's bosses.
@@ -154,7 +154,7 @@
     - state: nano_label
 
 - type: entity
-  parent: [ EncryptionKey, BaseCentcommCommandContraband ]
+  parent: [ EncryptionKey] # BaseCentcommCommandContraband
   id: EncryptionKeyStationMaster
   name: station master encryption key
   description: An encryption key used by station's bosses.
@@ -176,7 +176,7 @@
     - state: cap_label
 
 - type: entity
-  parent: [ EncryptionKey, BaseCommandContraband ]
+  parent: [ EncryptionKey] # BaseCommandContraband
   id: EncryptionKeyCommand
   name: command encryption key
   description: An encryption key used by crew's bosses.
@@ -194,7 +194,7 @@
     - EncryptionCommand
 
 - type: entity
-  parent: [ EncryptionKey, BaseEngineeringContraband ]
+  parent: [ EncryptionKey ] # BaseEngineeringContraband
   id: EncryptionKeyEngineering
   name: engineering encryption key
   description: An encryption key used by the engineers.
@@ -212,7 +212,7 @@
     - EncryptionEngineering
 
 - type: entity
-  parent: [ EncryptionKey, BaseMedicalContraband ]
+  parent: [ EncryptionKey] # BaseMedicalContraband
   id: EncryptionKeyMedical
   name: medical encryption key
   description: An encryption key used by those who save lives.
@@ -230,7 +230,7 @@
     - EncryptionMedical
 
 - type: entity
-  parent: [ EncryptionKey, BaseMedicalScienceContraband ]
+  parent: [ EncryptionKey] # BaseMedicalScienceContraband
   id: EncryptionKeyMedicalScience
   name: med-sci encryption key
   description: An encryption key used by someone who hasn't decided which side to take.
@@ -246,7 +246,7 @@
     - state: medsci_label
 
 - type: entity
-  parent: [ EncryptionKey, BaseScienceContraband ]
+  parent: [ EncryptionKey] # BaseScienceContraband
   id: EncryptionKeyScience
   name: science encryption key
   description: An encryption key used by scientists. Maybe it is plasmaproof?
@@ -264,7 +264,7 @@
     - EncryptionScience
 
 - type: entity
-  parent: [ EncryptionKey, BaseScienceContraband ]
+  parent: [ EncryptionKey] # BaseScienceContraband
   id: EncryptionKeyRobo
   name: robotech encryption key
   description: An encryption key used by robototech engineers. Maybe it has a LAH-6000 on it?
@@ -279,7 +279,7 @@
     - state: robotics_label
 
 - type: entity
-  parent: [ EncryptionKey, BaseSecurityLawyerContraband ]
+  parent: [ EncryptionKey] # BaseSecurityLawyerContraband
   id: EncryptionKeySecurity
   name: security encryption key
   description: An encryption key used by security.
@@ -297,7 +297,7 @@
     - EncryptionSecurity
 
 - type: entity
-  parent: [ EncryptionKey, BaseCivilianContraband ]
+  parent: [ EncryptionKey] # BaseCivilianContraband
   id: EncryptionKeyService
   name: service encryption key
   description: An encryption key used by the service staff, tasked with keeping the station full, happy and clean.
@@ -315,7 +315,7 @@
     - EncryptionService
 
 - type: entity
-  parent: [ EncryptionKey, BaseSyndicateContraband ]
+  parent: [ EncryptionKey] # BaseSyndicateContraband
   id: EncryptionKeySyndie
   name: blood-red encryption key
   description: An encryption key used by... wait... Who is the owner of this chip?
@@ -332,7 +332,7 @@
     price: 500 # 1000 for 2
 
 - type: entity
-  parent: [ EncryptionKey, BaseSiliconScienceContraband ]
+  parent: [ EncryptionKey] # BaseSiliconScienceContraband
   id: EncryptionKeyBinary
   name: binary translator key
   description: An encryption key that translates binary signals used by silicons.
@@ -348,7 +348,7 @@
     - state: ai_label
 
 - type: entity
-  parent: [ EncryptionKey, BaseSyndicateContraband ]
+  parent: [ EncryptionKey] # BaseSyndicateContraband
   id: EncryptionKeyBinarySyndicate
   name: binary translator key
   description: A syndicate encryption key that translates binary signals used by silicons.

@@ -169,7 +169,7 @@
 #Shortswords
 - type: entity
   name: cutlass
-  parent: [ BaseSword, BaseMajorContraband ]
+  parent: [ BaseSword] # BaseMajorContraband
   id: Cutlass
   description: A wickedly curved blade, often seen in the hands of space pirates.
   components:
@@ -196,7 +196,7 @@
 
 - type: entity
   name: machete
-  parent: [ BaseSword, BaseMajorContraband ]
+  parent: [ BaseSword] # BaseMajorContraband
   id: Machete
   description: A large, vicious looking blade.
   components:
@@ -224,7 +224,7 @@
 #Longswords
 - type: entity
   name: captain's sabre
-  parent: [ BaseSword, BaseCommandContraband ]
+  parent: [ BaseSword] # BaseCommandContraband
   id: CaptainSabre
   description: A ceremonial weapon belonging to the captain of the station.
   components:
@@ -266,7 +266,7 @@
 
 - type: entity
   name: katana
-  parent: [ BaseSword, BaseMajorContraband ]
+  parent: [ BaseSword] # BaseMajorContraband
   id: Katana
   description: Ancient craftwork made with not so ancient plasteel.
   components:
@@ -335,7 +335,7 @@
 #Greatswords
 - type: entity
   name: claymore
-  parent: [ BaseSword, BaseMajorContraband ]
+  parent: [ BaseSword] # BaseMajorContraband
   id: Claymore
   description: An ancient war blade.
   components:
@@ -366,7 +366,7 @@
 #Other/Weird
 - type: entity
   name: throngler
-  parent: [ BaseSword, BaseMajorContraband ]
+  parent: [ BaseSword] # BaseMajorContraband
   id: Throngler
   description: If Security dares take it from you, just remind them that they are indeed mortal.
   components:

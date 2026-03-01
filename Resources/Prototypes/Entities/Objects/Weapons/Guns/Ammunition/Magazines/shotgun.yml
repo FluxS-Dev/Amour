@@ -34,7 +34,7 @@
 - type: entity
   id: BaseMagazineShotgun
   name: ammo drum (12 Gauge shells) # Goobstation
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseItem] # BaseSecurityContraband
   abstract: true
   components:
   - type: Tag

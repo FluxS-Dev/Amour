@@ -23,7 +23,7 @@
     coverage: EYES
 
 - type: entity
-  parent: [ClothingEyesNightVisionGoggles, ShowMedicalIcons, BaseSyndicateContraband]
+  parent: [ClothingEyesNightVisionGoggles, ShowMedicalIcons] # BaseSyndicateContraband
   id: ClothingEyesNightVisionGogglesSyndie
   name: syndicate night vision goggles
   description: A high-tech pair of night vision goggles. Has medical analysis technology.
@@ -61,7 +61,7 @@
     coverage: EYES
 
 - type: entity
-  parent: [ClothingEyesBase, BaseSyndicateContraband]
+  parent: [ClothingEyesBase] # BaseSyndicateContraband
   id: ClothingEyesThermalVisionGogglesSyndie
   name: thermal vision goggles
   description: A high-tech pair of thermal goggles.

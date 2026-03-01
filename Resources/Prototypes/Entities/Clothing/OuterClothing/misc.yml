@@ -236,7 +236,7 @@
 
 - type: entity
   abstract: true
-  parent: [ClothingOuterBase, BaseMagicalContraband, AllowSuitStorageClothing] # Goob edit
+  parent: [ClothingOuterBase, AllowSuitStorageClothing] # Goob edit # BaseMagicalContraband
   id: ClothingOuterWizardBase
   suffix: Wizard Clothes # Goobstation
   components:

@@ -52,7 +52,7 @@
   - type: Unremoveable
 
 - type: entity
-  parent: [ClothingHeadsetAlt, BaseSecurityContraband]
+  parent: [ClothingHeadsetAlt] # BaseSecurityContraband
   id: ClothingHeadsetAltWarden
   name: warden's over-ear headset
   description: An updated, modular intercom, allowing for rapid communication with command personnel.
@@ -69,7 +69,7 @@
     sprite: _Goobstation/Clothing/Ears/Headsets/warden.rsi
 
 - type: entity
-  parent: [ClothingHeadsetAlt, BaseCentcommContraband]
+  parent: [ClothingHeadsetAlt] # BaseCentcommContraband
   id: ClothingHeadsetDeathsquad
   name: deathsquad over-ear headset
   components:
@@ -86,7 +86,7 @@
     tags: [] # ignore "WhitelistChameleon" tag
 
 - type: entity
-  parent: [ClothingHeadsetAlt, BaseSecurityContraband]
+  parent: [ClothingHeadsetAlt] # BaseSecurityContraband
   id: ClothingHeadsetAltSecurityRegular
   name: security over-ear headset
   components:
@@ -101,7 +101,7 @@
     sprite: Clothing/Ears/Headsets/security.rsi
 
 - type: entity
-  parent: [ClothingHeadsetAlt, BaseCentcommContraband]
+  parent: [ClothingHeadsetAlt] # BaseCentcommContraband
   id: ClothingHeadsetAltBlueshield
   name: blueshield officers over-ear headset
   components:

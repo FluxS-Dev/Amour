@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseMajorContraband, BaseMeleeWeaponEnergy ]
+  parent: [ BaseMeleeWeaponEnergy ] # BaseMajorContraband
   id: BaseMeleeWeaponPlasma
   abstract: true
   components:

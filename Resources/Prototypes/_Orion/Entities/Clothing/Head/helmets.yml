@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadHelmetSwat, BaseMinorContraband]
+  parent: [ClothingHeadHelmetSwat] # BaseMinorContraband
   id: ClothingHeadHelmetSwatInteQ
   name: SWAT helmet
   suffix: InteQ
@@ -11,7 +11,7 @@
     sprite: _Orion/Clothing/Head/Helmets/inteq_swat.rsi
 
 - type: entity
-  parent: [ClothingHeadHelmetBasic, BaseMajorContraband]
+  parent: [ClothingHeadHelmetBasic] # BaseMajorContraband
   id: ClothingHeadHelmetInteQDarkTemplar
   name: brown crusader helmet
   description: Anti-eretic.
@@ -32,7 +32,7 @@
     sprite: _Orion/Clothing/Head/Helmets/inteq_alt_dark_templar.rsi
 
 - type: entity
-  parent: [ClothingHeadHelmetSwat, BaseMajorContraband]
+  parent: [ClothingHeadHelmetSwat] # BaseMajorContraband
   id: ClothingHeadHelmetInteQInfiltrator
   name: infiltrator helmet
   description: Lightweight helmet with panoramic visor. It is covered with a protective film that protects the wearer from bright flashes, and the reinforced visor can withstand more than one bullet during your stealth mission.
@@ -44,7 +44,7 @@
   - type: FlashImmunity
 
 - type: entity
-  parent: [ClothingHeadHelmetSwat, BaseMajorContraband]
+  parent: [ClothingHeadHelmetSwat] # BaseMajorContraband
   id: ClothingHeadHelmetInteQIronTombstone
   name: Iron Tombstone helmet
   description: Heavy...

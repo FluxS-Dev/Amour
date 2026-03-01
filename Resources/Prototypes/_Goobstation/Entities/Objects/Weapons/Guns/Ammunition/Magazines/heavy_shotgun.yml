@@ -9,7 +9,7 @@
 - type: entity
   id: BaseMagazineShotgunHeavy
   name: ammo drum (2 gauge shells)
-  parent: [ BaseItem, BaseSyndicateContraband ]
+  parent: [ BaseItem] # BaseSyndicateContraband
   abstract: true
   components:
   - type: Tag

@@ -117,7 +117,7 @@
 
 - type: entity
   name: Miniature Energy Crossbow
-  parent: [ BaseWeaponBatterySmall, BaseSyndicateContraband ]
+  parent: [ BaseWeaponBatterySmall] # BaseSyndicateContraband
   id: MiniatureEnergyCrossbow
   description: A signature design from Donk Co., this crossbow fires a thin dart loaded with sedatives and depressants designed to pierce even the heaviest of armor.
   components:
@@ -205,7 +205,7 @@
 
 - type: entity
   name: EG-4 Equalizer
-  parent: [ BaseWeaponCustomCellSmall, BaseCentcommContraband ]
+  parent: [ BaseWeaponCustomCellSmall] # BaseCentcommContraband
   id: WeaponEnergyRevolver
   description: In the face of death, everyone is equal. The right arm of the Blueshield corps, the Equalizer is a modular energy revolver platform designed for lethal and non-lethal target neutralization. Takes energy speedloaders.
   components:
@@ -257,7 +257,7 @@
 
 - type: entity
   name: advanced disabler
-  parent: [ WeaponDisablerPractice, BaseCentcommContraband ]
+  parent: [ WeaponDisablerPractice] # BaseCentcommContraband
   id: WeaponDisablerAdvanced
   description: A self-defense weapon for corporate execs with money to burn. Slim, sturdy, and self-recharging for your convenience.
   components:
@@ -285,7 +285,7 @@
 
 - type: entity
   name: syndicate disabler
-  parent: [ WeaponDisablerPractice, BaseSyndicateContraband ]
+  parent: [ WeaponDisablerPractice] # BaseSyndicateContraband
   id: WeaponDisablerSyndicate
   description: A sleek disabler designed from a reverse-engineered NanoTrasen prototype. While it lacks stopping power, it makes up for it with a self-recharging cell.
   components:
@@ -337,7 +337,7 @@
 
 - type: entity
   name: CR-2 Hera
-  parent: [ BaseWeaponCustomCell, BaseGunWieldable, BaseSecurityContraband ]
+  parent: [ BaseWeaponCustomCell, BaseGunWieldable] # BaseSecurityContraband
   id: WeaponEnergyRifle
   description: A versatile plasma assault rifle, iterated off of the now defunct energy gun. Loads from energy rifle magazines.
   components:
@@ -387,7 +387,7 @@
 
 - type: entity
   name: DT-12 Lawbringer
-  parent: [BaseWeaponBatterySmall, BaseGrandTheftContraband]
+  parent: [BaseWeaponBatterySmall] # BaseGrandTheftContraband
   id: WeaponEnergyGunLawbringer
   description: Sometimes rank is a function of firepower. A versatile energy gun with a myriad of firing modes designed for the Head of Security. Self-recharges after a 40 second delay.
   components:
@@ -485,7 +485,7 @@
   name: Ion Rifle
   id: WeaponEnergyIonRifle
   description: A rifle that fires ion bolts designed to degrade mechanical targets. Ideal against combat mechs and silicons, though useless against pretty much everything else.
-  parent: [BaseWeaponBattery, BaseSecurityContraband]
+  parent: [BaseWeaponBattery] # BaseSecurityContraband
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/Battery/ion_rifle.rsi

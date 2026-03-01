@@ -257,7 +257,7 @@
 # Secure Crates
 
 - type: entity
-  parent: [ CrateBaseSecure, BaseSecurityContraband ]
+  parent: [ CrateBaseSecure] # BaseSecurityContraband
   id: CrateSecgear
   name: secgear crate
   components:
@@ -387,7 +387,7 @@
     damageModifierSet: StrongCrates
 
 - type: entity
-  parent: [ CrateBaseSecure, BaseSecurityContraband ]
+  parent: [ CrateBaseSecure] # BaseSecurityContraband
   suffix: Armory, Secure
   id: CrateContrabandStorageSecure
   name: contraband storage crate

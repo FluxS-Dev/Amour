@@ -29,7 +29,7 @@
 - type: entity
   name: proto-kinetic accelerator
   id: WeaponProtoKineticAccelerator
-  parent: [WeaponProtoKineticAcceleratorBase, BaseCargoContraband]
+  parent: [WeaponProtoKineticAcceleratorBase] # BaseCargoContraband
   description: Fires high-damage kinetic bolts at a short range.
   components:
   - type: Sprite

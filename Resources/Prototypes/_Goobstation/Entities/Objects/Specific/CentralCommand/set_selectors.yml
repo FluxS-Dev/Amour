@@ -19,7 +19,7 @@
   id: BlueshieldUndeterminedWeapon
   name: blueshield sets pack
   description: A small box utilizing bluespace technology to drop in a loadout directly to you. Choose wisely.
-  parent: [ BaseItem, BaseSetSelector, BaseCentcommContraband ]
+  parent: [ BaseItem, BaseSetSelector] # BaseCentcommContraband
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Security/blueshieldundetermined.rsi
@@ -38,7 +38,7 @@
   id: BlueshieldUndeterminedHardsuit
   name: blueshield hardsuit pack
   description: A small box utilizing bluespace technology to drop in a loadout directly to you. Choose wisely.
-  parent: [ BaseItem, BaseSetSelector, BaseCentcommContraband ]
+  parent: [ BaseItem, BaseSetSelector] # BaseCentcommContraband
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Security/blueshieldundetermined.rsi
@@ -55,7 +55,7 @@
   id: ERTSecurityUndeterminedWeapon
   name: emergency response weaponry pack
   description: A small remote utilizing bluespace technology to drop in a loadout directly to you. Choose wisely.
-  parent: [ BaseItem, BaseSetSelector, BaseCentcommContraband ]
+  parent: [ BaseItem, BaseSetSelector] # BaseCentcommContraband
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Security/ertundetermined.rsi

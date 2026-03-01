@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseMagazineRifle, BaseSecurityContraband ]
+  parent: [ BaseMagazineRifle] # BaseSecurityContraband
   id: MagazineRifle762
   name: magazine (7.62mm rifle)
   components:
@@ -60,7 +60,7 @@
 
 
 - type: entity
-  parent: [ BaseItem, BaseSecurityContraband ]
+  parent: [ BaseItem] # BaseSecurityContraband
   id: MagazineHeavyRifleBR64
   name: magazine (.45 magnum)
   components:

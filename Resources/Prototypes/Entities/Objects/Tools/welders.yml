@@ -341,7 +341,7 @@
     color: orange
 
 - type: entity
-  parent: [ Welder, BaseXenoborgContraband ]
+  parent: [ Welder] # BaseXenoborgContraband
   id: RefuelingWelder
   name: refuling welding tool
   description: "An slow welder that can refuel itself over time."

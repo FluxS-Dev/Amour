@@ -26,7 +26,7 @@
 
 - type: entity
   name: DT-3 "Atrocity"
-  parent: [BaseItem, BaseCentcommContraband]
+  parent: [BaseItem] # BaseCentcommContraband
   id: BlueshieldMace
   description: Crush all those who oppose your leaders. Functions as a stun baton in its powered state.
   components:
@@ -102,7 +102,7 @@
 
 - type: entity
   name: combat injector
-  parent: [BaseItem, BaseCentcommContraband]
+  parent: [BaseItem] # BaseCentcommContraband
   id: CombatInjector
   description: Injects stored chemicals on hit, has a low capacity due to its sturdy design.
   components:

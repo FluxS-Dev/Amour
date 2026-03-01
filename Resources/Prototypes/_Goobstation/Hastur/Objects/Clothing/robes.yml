@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ ClothingNeckBase, BaseMagicalContraband ]
+  parent: [ ClothingNeckBase] # BaseMagicalContraband
   id: ClothingOuterHasturRobes
   name: yellow robes
   description: It's calling to you...

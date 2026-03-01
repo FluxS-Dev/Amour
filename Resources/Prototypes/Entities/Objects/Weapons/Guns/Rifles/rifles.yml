@@ -186,7 +186,7 @@
 
 - type: entity
   name: AKM
-  parent: [BaseWeaponRifle, BaseSecurityContraband]
+  parent: [BaseWeaponRifle] # BaseSecurityContraband
   id: WeaponRifleAk
   description: A somewhat battered combat rifle of a design originating from old Earth. Favored by criminals, militias, and terrorists due to its famed reliability and easy-to-manufacture design. Feeds from 5.45mm rifle magazines. # Orion-Edit: .30 > 5.45mm
   components:
@@ -240,7 +240,7 @@
 
 - type: entity
   name: M-90GL # Goobstation
-  parent: [BaseWeaponRifle, BaseSyndicateContraband]
+  parent: [BaseWeaponRifle] # BaseSyndicateContraband
   id: WeaponRifleM90GrenadeLauncher
   description: A bullpup Waffle Corporation assault rifle with an integrated grenade launcher. Feeds from 5.56mm rifle magazines. # Goobstation | Orion-Edit: .20 > 5.56mm
   components:
@@ -286,7 +286,7 @@
 
 - type: entity
   name: Lecter
-  parent: [BaseWeaponRifle, BaseSecurityContraband]
+  parent: [BaseWeaponRifle] # BaseSecurityContraband
   id: WeaponRifleLecter
   description: A military-grade assault rifle that's seen more wars than you can remember. The full-size package and steady recoil of the Lecter help it excel at one thing—pinpoint accuracy. Feeds from 5.56mm rifle magazines. # Goobstation | Orion-Edit: .20 > 5.56mm
   components:
@@ -337,7 +337,7 @@
 
 - type: entity
   name: Estoc # Goob
-  parent: [BaseWeaponRifle, BaseSyndicateContraband]
+  parent: [BaseWeaponRifle] # BaseSyndicateContraband
   id: WeaponRifleEstoc
   description: A now defunct military burst-fire DMR, the Estoc quickly found its way into paramilitary and boarding party hands. Boasts an expensive tritium sight for faster target acquisition. Feeds from 5.56mm rifle magazines. # Goobstation | Orion-Edit: .20 > 5.56mm
   components:

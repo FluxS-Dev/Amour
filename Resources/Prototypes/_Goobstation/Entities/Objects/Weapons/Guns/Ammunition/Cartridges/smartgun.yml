@@ -7,7 +7,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseCartridge, BaseSecurityContraband ]
+  parent: [ BaseCartridge] # BaseSecurityContraband
   id: CartridgeSmart
   name: cartridge (.160 smart)
   description: A .160 smart bullet with a small charge of booster propellant at the bottom.

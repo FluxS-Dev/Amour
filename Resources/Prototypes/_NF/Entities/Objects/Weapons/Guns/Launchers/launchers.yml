@@ -5,7 +5,7 @@
 
 - type: entity
   name: mail RPDS
-  parent: [BaseCargoContraband, WeaponImprovisedPneumaticCannon] #Goob Edit - Modified so we do not need gastanks to operate it.
+  parent: [WeaponImprovisedPneumaticCannon] #Goob Edit - Modified so we do not need gastanks to operate it. # BaseCargoContraband
   id: WeaponMailLake
   description: Rap(b?)id Parcel Delivery System. Last-In-First-Out Logic.
   components:

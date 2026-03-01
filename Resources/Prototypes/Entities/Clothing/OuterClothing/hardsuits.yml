@@ -232,7 +232,7 @@
 #CREW HARDSUITS
 #Atmospherics Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseEngineeringContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseEngineeringContraband
   id: ClothingOuterHardsuitAtmos
   name: atmospherics hardsuit # Goob edit
   description: A special suit that protects against hazardous, low pressure environments. Has thermal shielding.
@@ -274,7 +274,7 @@
 
 # Engineering hardsuit, heavily edited by goobstation
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseEngineeringContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseEngineeringContraband
   id: ClothingOuterHardsuitEngineering
   name: engineering hardsuit
   description: A special hardsuit that protects against hazardous, low pressure environments. Has radiation shielding.
@@ -313,7 +313,7 @@
 
 #Spationaut Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseCargoContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseCargoContraband
   id: ClothingOuterHardsuitSpatio
   name: spationaut hardsuit # Goob edit
   description: A lightweight hardsuit designed for industrial EVA in zero gravity. # Goob edit
@@ -354,7 +354,7 @@
 
 #Salvage Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseCargoContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseCargoContraband
   id: ClothingOuterHardsuitSalvage
   name: mining hardsuit # Goob edit
   description: A special suit that protects against hazardous, low pressure environments. Has reinforced plating for wildlife encounters.
@@ -397,7 +397,7 @@
 
 #Goliath Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseCargoContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseCargoContraband
   id: ClothingOuterHardsuitGoliath
   name: goliath hardsuit # Goob edit
   description: A lightweight hardsuit, adorned with a patchwork of thick, chitinous goliath hide. # Goob edit
@@ -443,7 +443,7 @@
 
 #Maxim Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseCargoContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseCargoContraband
   id: ClothingOuterHardsuitMaxim
   name: salvager maxim hardsuit # Goob edit
   description: Fire. Heat. These things forge great weapons, they also forge great salvagers.
@@ -488,7 +488,7 @@
 
 #Security Hardsuit (goob - not used)
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseSecurityContraband
   id: ClothingOuterHardsuitSecurity
   name: security hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
@@ -535,7 +535,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseSecurityContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseSecurityContraband
   id: ClothingOuterHardsuitBrigmedic
   name: brigmedic hardsuit # Goob edit
   description: Special hardsuit of the guardian angel of the brig. It is the medical version of the security hardsuit. # Goob edit
@@ -573,7 +573,7 @@
 
 #Warden's Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseWardenContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseWardenContraband
   id: ClothingOuterHardsuitWarden
   name: warden's hardsuit # Goob edit
   description: A specialized riot suit geared to combat low pressure environments.
@@ -616,7 +616,7 @@
 
 #Captain's Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseCommandContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseCommandContraband
   id: ClothingOuterHardsuitCap
   name: captain's parade hardsuit # Goob edit
   description: A formal and slightly armored hardsuit, made for the station's captain. # Goob edit
@@ -664,7 +664,7 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseCommandContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseCommandContraband
   id: ClothingOuterHardsuitEngineeringWhite
   name: chief engineer's hardsuit # Goob edit
   description: A special hardsuit that protects against hazardous, low pressure environments, made for the chief engineer of the station. # Goob edit
@@ -714,7 +714,7 @@
 
 #Chief Medical Officer's Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseCommandContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseCommandContraband
   id: ClothingOuterHardsuitMedical
   name: chief medical officer's hardsuit # Goob edit
   description: A special suit that protects against hazardous, low pressure environments. Built with lightweight materials for easier movement. # Goob edit
@@ -751,7 +751,7 @@
 
 #Research Director's Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseGrandTheftContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseGrandTheftContraband
   id: ClothingOuterHardsuitRd
   name: experimental research hardsuit # Goob edit
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
@@ -804,7 +804,7 @@
 
 #Head of Security's Hardsuit, heavily edited by goob
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseCommandContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseCommandContraband
   id: ClothingOuterHardsuitSecurityRed
   name: head of security's hardsuit
   description: Lighter and more protective than the standard security hardsuit, but not by much.
@@ -887,7 +887,7 @@
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContraband ]
+  parent: [ ClothingOuterHardsuitBase] # BaseSyndicateContraband
   id: ClothingOuterHardsuitSyndie
   name: blood-red hardsuit # Goob edit
   description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
@@ -942,7 +942,7 @@
 
 # Syndicate Medic Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitSyndie, BaseSyndicateContraband]
+  parent: [ClothingOuterHardsuitSyndie] # BaseSyndicateContraband
   id: ClothingOuterHardsuitSyndieMedic
   name: blood-red medic hardsuit # Goob edit
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
@@ -966,7 +966,7 @@
 
 #Syndicate Elite Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseSyndicateContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseSyndicateContraband
   id: ClothingOuterHardsuitSyndieElite
   name: syndicate elite hardsuit # Goob edit
   description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. Property of Gorlex Marauders. # Goob edit
@@ -1018,7 +1018,7 @@
       head: ClothingHeadHelmetHardsuitSyndieElite
 
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseSyndicateContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseSyndicateContraband
   id: ClothingOuterHardsuitSyndieCommander
   name: syndicate commander hardsuit # Goob edit
   description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights. # Goob edit
@@ -1067,7 +1067,7 @@
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, BaseSyndicateContraband]
+  parent: [ClothingOuterHardsuitBase] # BaseSyndicateContraband
   id: ClothingOuterHardsuitJuggernaut
   name: cybersun juggernaut suit
   description: A suit made by the cutting edge R&D department at Cybersun to be hyper resilient.
@@ -1117,7 +1117,7 @@
 
 #Wizard Hardsuit
 - type: entity
-  parent: [ClothingOuterHardsuitBase, ClothingOuterWizardBaseArmor, BaseMagicalContraband] # Goob edit
+  parent: [ClothingOuterHardsuitBase, ClothingOuterWizardBaseArmor] # BaseMagicalContraband # Goob edit
   id: ClothingOuterHardsuitWizard
   name: wizard hardsuit # Goob edit
   description: A bizarre gem-encrusted suit that radiates magical energies.
@@ -1201,7 +1201,7 @@
 #Pirate EVA Suit (Deep Space EVA Suit)
 #Despite visually appearing like a softsuit, it functions exactly like a hardsuit would (parents off of base hardsuit, has resistances and toggleable clothing, etc.) so it goes here.
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseMajorContraband ]
+  parent: [ ClothingOuterHardsuitBase] # BaseMajorContraband
   id:  ClothingOuterHardsuitPirateEVA
   name: deep space EVA suit
   suffix: Pirate
@@ -1240,7 +1240,7 @@
 
 #Pirate Captain Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseMajorContraband ]
+  parent: [ ClothingOuterHardsuitBase] # BaseMajorContraband
   id: ClothingOuterHardsuitPirateCap
   name: pirate captain's hardsuit # Goob edit
   description: An ancient armored hardsuit, perfect for defending against space scurvy and toolbox-wielding scallywags. # Goob edit
@@ -1282,7 +1282,7 @@
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndieCommander ]
+  parent: [ ClothingOuterHardsuitSyndieCommander ] # BaseCentcommContraband
   id: ClothingOuterHardsuitERTLeader
   name: ERT leader's hardsuit # Goob edit
   description: A protective hardsuit worn by the leader of an emergency response team. # Goob edit
@@ -1297,7 +1297,7 @@
 
 #ERT Chaplain Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingOuterHardsuitJuggernaut ]
+  parent: [ ClothingOuterHardsuitJuggernaut ] # BaseCentcommContraband
   id: ClothingOuterHardsuitERTChaplain
   name: ERT chaplain's hardsuit # Goob edit
   description: A protective hardsuit worn by the chaplains of an Emergency Response Team. # Goob edit
@@ -1329,7 +1329,7 @@
 
 #ERT Medic Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndieMedic ]
+  parent: [ ClothingOuterHardsuitSyndieMedic ] # BaseCentcommContraband
   id: ClothingOuterHardsuitERTMedical
   name: ERT medic's hardsuit # Goob edit
   description: A protective hardsuit worn by the medics of an emergency response team. # Goob edit
@@ -1344,7 +1344,7 @@
 
 #ERT Security Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndie ]
+  parent: [ ClothingOuterHardsuitSyndie ] # BaseCentcommContraband
   id: ClothingOuterHardsuitERTSecurity
   name: ERT security's hardsuit # Goob edit
   description: A protective hardsuit worn by the security officers of an emergency response team. # Goob edit
@@ -1378,7 +1378,7 @@
 
 #Deathsquad
 - type: entity # Goobstation - Start
-  parent: [ BaseCentcommContraband, ClothingOuterHardsuitBase ]
+  parent: [ ClothingOuterHardsuitBase ] # BaseCentcommContraband
   id: ClothingOuterHardsuitDeathsquad # Todo - This should be a modsuit when those are done.
   name: PI-52 "Lucifer" hardsuit # Goob edit
   description: A famous hardsuit used by Central Command's death-squadrons, often shown in movies by Nanotrasen intended to increase recruitment. # Goob edit
@@ -1436,7 +1436,7 @@
 
 #CBURN Hardsuit
 - type: entity
-  parent: [ BaseCentcommContraband, ClothingOuterHardsuitBase ]
+  parent: [ ClothingOuterHardsuitBase ] # BaseCentcommContraband
   id: ClothingOuterHardsuitCBURN
   name: CBURN exosuit
   description: A lightweight yet strong exosuit used for special cleanup operations.

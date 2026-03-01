@@ -22,7 +22,7 @@
 - type: entity
   id: BaseCartridgeRifle
   name: cartridge (5.56mm rifle) # Orion-Edit: .20 > 5.56mm
-  parent: [ BaseCartridge, BaseSecurityContraband ]
+  parent: [ BaseCartridge] # BaseSecurityContraband
   abstract: true
   components:
   - type: Tag
