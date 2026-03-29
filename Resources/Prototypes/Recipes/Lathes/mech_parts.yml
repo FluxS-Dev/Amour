@@ -57,10 +57,10 @@
   result: RipleyHarness
   categories:
   - Ripley # Goobstation
-  completetime: 10
+  completetime: 10 # Amour - RipleyHarnessCostFix start
   materials:
     Steel: 1500
-    Glass: 1200
+    Glass: 1200 # Amour - RipleyHarnessCostFix end
 
 - type: latheRecipe
   parent: BaseRipleyLimbRecipe
