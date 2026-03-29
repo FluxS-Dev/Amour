@@ -57,6 +57,10 @@
   result: RipleyHarness
   categories:
   - Ripley # Goobstation
+  completetime: 10
+  materials:
+    Steel: 1500
+    Glass: 1200
 
 - type: latheRecipe
   parent: BaseRipleyLimbRecipe
