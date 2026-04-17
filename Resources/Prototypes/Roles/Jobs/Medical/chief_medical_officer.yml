@@ -136,15 +136,15 @@
   description: job-description-cmo
   playTimeTracker: JobChiefMedicalOfficer
   requirements:
+    # Amour-Edit-Start
     - !type:RoleTimeRequirement
       role: JobChemist
-      time: 9000 #2.50 hrs # Amour
+      time: 9000 #2.50 hrs # Amour edit
     - !type:RoleTimeRequirement
       role: JobMedicalDoctor
-      time: 14000 #3.89 hrs # Amour
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 18000 #5 hrs # Amour
+      time: 3600 #1 h # Amour edit
+    # Amour-Edit-End
+    - !type:DiscordLinkRequirement # Amour
     - !type:AgeRequirement # Amour
       requiredAge: 23
   startingGear: CMOGear
@@ -153,8 +153,8 @@
   canBeAntag: false
   guides: # goobstation
 #  - Medical # Orion-Edit: Removed because dont have this SOP
-#  - ChiefMedicalOfficer SOP # Orion-Edit: Removed because dont have this SOP
-#  - Medical SOP # Orion-Edit: Removed because dont have this SOP
+#  - ChiefMedicalOfficerSOP # Orion-Edit: Removed because dont have this SOP
+#  - MedicalSOP # Orion-Edit: Removed because dont have this SOP
 #  - Command # Orion-Edit: Removed because dont have this SOP
   - Chemicals
   - Virology
@@ -186,7 +186,7 @@
   equipment:
     id: CMOPDA
     ears: ClothingHeadsetAltMedical # Goobstation
-    eyes: ClothingEyesGlassesMed # Goobstation
+#    eyes: ClothingEyesGlassesMedChemFlash #Omu | Orion-Edit: OP
     belt: ClothingBeltMedicalFilled
   storage:
     back:
@@ -199,7 +199,7 @@
   hasMindShield: true
   equipment:
     head: ClothingHeadHatBeretCmo
-    eyes: ClothingEyesHudMedical
+    eyes: ClothingEyesGlassesMedChemFlash # Omu
     mask: ClothingMaskSterile
     neck: ClothingCloakCmo
     outerClothing: ClothingOuterCoatLabCmo

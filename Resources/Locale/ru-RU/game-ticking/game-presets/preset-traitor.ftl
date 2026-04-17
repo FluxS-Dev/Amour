@@ -15,8 +15,8 @@ traitor-no-one-ready = Нет готовых игроков! Нельзя зап
 traitor-death-match-title = Бой насмерть предателей
 traitor-death-match-description = Все — предатели. Все хотят смерти друг друга.
 traitor-death-match-station-is-too-unsafe-announcement = На станции слишком опасно, чтобы продолжать. У вас есть одна минута.
-traitor-death-match-end-round-description-first-line = ПДА были восстановлены...
-traitor-death-match-end-round-description-entry = ПДА { $originalName }, с { $tcBalance } ТК
+traitor-death-match-end-round-description-first-line = КПК были восстановлены...
+traitor-death-match-end-round-description-entry = КПК { $originalName }, с { $tcBalance } ТК
 
 ## TraitorRole
 
@@ -32,22 +32,22 @@ traitor-role-codewords =
     Кодовые слова можно использовать в обычном разговоре, чтобы незаметно идентифицировать себя для других агентов Синдиката.
     Прислушивайтесь к ним и храните их в тайне.
 traitor-role-uplink-code =
-    Установите рингтон Вашего ПДА на [color = lightgray]{ $code }[/color] чтобы заблокировать или разблокировать аплинк.
+    Установите рингтон Вашего КПК на [color = lightgray]{ $code }[/color] чтобы заблокировать или разблокировать аплинк.
     Не забудьте заблокировать его и сменить код, иначе кто угодно из экипажа станции сможет открыть аплинк!
 # don't need all the flavour text for character menu
 traitor-role-codewords-short =
     Кодовые слова:
     { $codewords }.
-traitor-role-uplink-pen-code =
-    Поверните ручку на комбинацию [color = lightgray]{ $code }[/color], чтобы разблокировать аплинк.
-    Градусы обозначают углы поворота. Аплинк автоматически блокируется при закрытии.
 traitor-role-uplink-implant =
     Ваш имплант аплинк активирован, воспользуйтесь им из хотбара.
     Аплинк надежно защищён, пока кто-нибудь не извлечёт его из вашего тела.
-traitor-role-uplink-code-short = Ваш код аплинка: { $code }. Установите его в качестве рингтона ПДА для доступа к аплинку.
-traitor-role-uplink-pen-code-short = Ваш код аплинка ручки: { $code }. Чтобы разблокировать, поверните ручку. Блокируется при закрытии.
+traitor-role-uplink-pen-code =
+    Прокрутите ручку на комбинацию [color = lightgray]{ $code }[/color], чтобы разблокировать аплинк.
+    Градусы обозначают углы поворота. Аплинк автоматически блокируется при закрытии.
+traitor-role-uplink-code-short = Ваш код аплинка: { $code }. Установите его в качестве рингтона КПК для доступа к аплинку.
 traitor-role-uplink-implant-short = Ваш аплинк был имплантирован. Воспользуйтесь им из хотбара.
 traitor-role-moreinfo = Найдите больше информации о своей роли в меню персонажа.
+traitor-role-uplink-pen-code-short = Комбинация от Аплинка вашей ручки: { $code }. Прокрутите ручку для разблокировки. Блокируется при закрытии.
 traitor-role-nouplink = У вас нет аплинка Синдиката. Действуйте обдуманно.
 traitor-role-allegiances = Ваша приверженность:
 traitor-role-notes = Заметки от вашего нанимателя:

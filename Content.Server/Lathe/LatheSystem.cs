@@ -97,6 +97,7 @@ using Content.Shared.Emag.Systems;
 using Content.Shared.Lathe;
 using Content.Shared.Lathe.Prototypes;
 using Content.Shared.Materials;
+using Content.Shared._Orion.DocumentPrinter;
 using Content.Shared.Power;
 using Content.Shared.ReagentSpeed;
 using Content.Shared.Research.Components;
@@ -145,6 +146,7 @@ namespace Content.Server.Lathe
             SubscribeLocalEvent<LatheComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<LatheComponent, PowerChangedEvent>(OnPowerChanged);
             SubscribeLocalEvent<LatheComponent, TechnologyDatabaseModifiedEvent>(OnDatabaseModified);
+            SubscribeLocalEvent<LatheComponent, TechnologyDatabaseSynchronizedEvent>(OnDatabaseSynchronized); // Orion
             SubscribeLocalEvent<LatheComponent, ResearchRegistrationChangedEvent>(OnResearchRegistrationChanged);
 
             SubscribeLocalEvent<LatheComponent, LatheQueueRecipeMessage>(OnLatheQueueRecipeMessage);
@@ -314,6 +316,18 @@ namespace Content.Server.Lathe
                     else
                     {
                         var result = Spawn(resultProto, Transform(uid).Coordinates);
+                        // Orion-Start
+                        if (TryComp<DocumentPrinterComponent>(uid, out var printerComponent))
+                        {
+                            if (printerComponent.Queue.Count > 0 &&
+                                printerComponent.Queue[0].Item2.Result == resultProto)
+                            {
+                                var tuple = printerComponent.Queue[0];
+                                RaiseLocalEvent(uid, new PrintingDocumentEvent(result, tuple.Item1));
+                                printerComponent.Queue.RemoveAt(0);
+                            }
+                        }
+                        // Orion-End
                         _stack.TryMergeToContacts(result);
                         if (TryComp<ScannableForPointsComponent>(result, out var scannable)) // Goobstation
                             scannable.Points = 0; // Goobstation, this thing is to prevent ntr duping points via an emagged lathe
@@ -506,6 +520,13 @@ namespace Content.Server.Lathe
             UpdateUserInterfaceState(uid, component);
         }
 
+        // Orion-Start
+        private void OnDatabaseSynchronized(EntityUid uid, LatheComponent component, ref TechnologyDatabaseSynchronizedEvent args)
+        {
+            UpdateUserInterfaceState(uid, component);
+        }
+        // Orion-End
+
         protected override bool HasRecipe(EntityUid uid, LatheRecipePrototype recipe, LatheComponent component)
         {
             return GetAvailableRecipes(uid, component).Contains(recipe.ID);
@@ -517,11 +538,17 @@ namespace Content.Server.Lathe
         {
             if (_proto.TryIndex(args.ID, out LatheRecipePrototype? recipe))
             {
+            TryComp<DocumentPrinterComponent>(uid, out var printer); // Orion
                 var count = 0;
                 for (var i = 0; i < args.Quantity; i++)
                 {
                     if (TryAddToQueue(uid, recipe, component))
-                        count++;
+                // Orion-Edit-Start
+                {
+                    printer?.Queue.Add((args.Actor, recipe));
+                    count++;
+                }
+                // Orion-Edit-End
                     else
                         break;
                 }

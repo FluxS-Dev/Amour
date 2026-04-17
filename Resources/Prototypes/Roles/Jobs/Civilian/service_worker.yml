@@ -79,14 +79,17 @@
   description: job-description-serviceworker
   playTimeTracker: JobServiceWorker
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: Civilian
-    time: 900 #15 min # Amour
+    - !type:AnyOfRequirement # Amour edit - Discord OR playtime
+      requirements:
+        - !type:DiscordLinkRequirement
+        - !type:DepartmentTimeRequirement
+          department: Civilian
+          time: 900 #15 min
   startingGear: ServiceWorkerGear
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service
   guides: [ Service ] # goobstation
-  goobcoins: 10 #Goob content
+  goobcoins: 30 #Goob content # Amour-Edit
   access:
   - Service
   - Maintenance

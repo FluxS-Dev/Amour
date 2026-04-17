@@ -42,7 +42,8 @@
   - type: Lathe
     idleState: icon
     runningState: icon
-    staticPacks:
+    dynamicPacks: # Orion-Edit: Static > Dynamic
+    - AbductorEngineering # Orion
     - SharedBoardsStatic
     - EngineeringBoardsStatic
     - CircuitFloorsStatic
@@ -52,12 +53,12 @@
     - CablesStatic
     - MaterialsStatic
     - LightsStatic
+    - LatheMiscStatic
     - PowerCellsStatic
     - ElectronicsStatic
     - MiscSignallersStatic
     - NailgunStatic
     - NailsStatic
-    dynamicPacks:
     # Orion-Start
     - MegaCells
     # Orion-End
@@ -114,16 +115,17 @@
   - type: Lathe
     idleState: icon
     runningState: icon
-    staticPacks:
+    dynamicPacks: # Orion-Edit: Static > Dynamic
     - ToolsStatic
     - SharedBoardsStatic
     - CargoBoardsStatic
     - CablesStatic
+    - PartsStatic
+    - LatheMiscStatic
     - PowerCellsStatic
     - MiningToolsStatic
     - MiscSignallersStatic
     - CargoStatic
-    dynamicPacks:
     # Orion-Start
     - MegaCells
     # Orion-End
@@ -181,7 +183,7 @@
   - type: Lathe
     idleState: icon
     runningState: icon
-    staticPacks:
+    dynamicPacks: # Orion-Edit: Static > Dynamic
     - SharedBoardsStatic
     - EngineeringBoardsStatic
     - CircuitFloorsStatic
@@ -189,6 +191,7 @@
     - MedicalBoardsStaticGoob
     - ToolsStatic
     - PartsStatic
+    - LatheMiscStatic
     - AtmosStatic
     - CablesStatic
     - MaterialsStatic
@@ -201,7 +204,6 @@
     - ScienceExplosives # Goobstation - Roundstart Grenade Tech
     - GrenadeTriggersStatic # Goobstation - Roundstart Grenade Tech
     - MiscSignallersStatic
-    dynamicPacks:
     # Orion-Start
     - BodyBagsDynamic
     - MegaCells
@@ -275,7 +277,7 @@
   - type: Lathe
     idleState: icon
     runningState: icon
-    staticPacks:
+    dynamicPacks: # Orion-Edit: Static > Dynamic
     - ServiceBoardsStatic
     - ServiceBoardsStaticGoob
     - MaterialsStatic
@@ -283,11 +285,14 @@
     - ServiceStatic
     - PowerCellsStatic
     - LatheMiscStatic
+    - PartsStatic
     - ChemistryStatic
     - TapeRecorderStatic
     - CondimentStatic
-    dynamicPacks:
-    - OrionService # Orion
+    # Orion-Start
+    - BasicService
+    - Hydroponic
+    # Orion-End
     - Janitor
     - Instruments
     - FauxTiles
@@ -311,3 +316,40 @@
         - Sheet
         - RawMaterial
         - Ingot
+
+- type: entity
+  id: ERTTechFab
+  parent: [BaseLatheLube, BaseSiloUtilizer]
+  name: ERT techfab
+  description: Standard-issue ammunition and gear for Emergency Response Team deployments. Fast, basic, reliable.
+  components:
+    - type: Sprite
+      sprite: Structures/Machines/techfab.rsi
+      layers:
+        - state: icon
+          map: ["enum.LatheVisualLayers.IsRunning"]
+        - state: ert
+        - state: unlit
+          shader: unshaded
+          map: ["enum.PowerDeviceVisualLayers.Powered"]
+        - state: inserting
+          map: ["enum.MaterialStorageVisualLayers.Inserting"]
+        - state: panel
+          map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - type: Machine
+      board: ERTTechFabCircuitboard
+    - type: Lathe
+      idleState: icon
+      runningState: icon
+      staticPacks:
+      - SecurityAmmoStatic
+      - SecurityAmmoStaticGoob
+      - ERTAmmoStaticGoob
+      - SecurityHypoStatic
+      - SecurityEquipmentStaticGoob
+    - type: MaterialStorage
+      whitelist:
+        tags:
+          - Sheet
+          - RawMaterial
+          - Ingot

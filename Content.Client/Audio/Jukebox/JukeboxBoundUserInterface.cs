@@ -49,6 +49,13 @@ public sealed class JukeboxBoundUserInterface : BoundUserInterface
             SendMessage(new JukeboxStopMessage());
         };
 
+        // Orion-Start
+        _menu.OnLoopToggled += () =>
+        {
+            SendMessage(new JukeboxToggleLoopMessage());
+        };
+        // Orion-End
+
         _menu.OnSongSelected += SelectSong;
 
         _menu.SetTime += SetTime;
@@ -67,6 +74,7 @@ public sealed class JukeboxBoundUserInterface : BoundUserInterface
 
         _menu.SetAudioStream(jukebox.AudioStream);
         _menu.SetVolumeSlider(jukebox.Volume); // Orion
+        _menu.SetLoopButton(jukebox.LoopEnabled); // Orion
 
         if (_protoManager.TryIndex(jukebox.SelectedSongId, out var songProto))
         {
@@ -99,8 +107,12 @@ public sealed class JukeboxBoundUserInterface : BoundUserInterface
         // so it will go BRRRRT
         // Using ping gets us close enough that it SHOULD, MOST OF THE TIME, fall within the 0.1 second tolerance
         // that's still on engine so our playback position never gets corrected.
+        // Amour-Edit-Start: Fix PVS error with invalid AudioStream entity reference
         if (EntMan.TryGetComponent(Owner, out JukeboxComponent? jukebox) &&
+            jukebox.AudioStream != null &&
+            EntMan.EntityExists(jukebox.AudioStream.Value) &&
             EntMan.TryGetComponent(jukebox.AudioStream, out AudioComponent? audioComp))
+        // Amour-Edit-End
         {
             audioComp.PlaybackPosition = time;
         }
@@ -120,8 +132,12 @@ public sealed class JukeboxBoundUserInterface : BoundUserInterface
         var sentVolume = volume;
 
         // Prediction
+        // Amour-Edit-Start: Fix PVS error with invalid AudioStream entity reference
         if (EntMan.TryGetComponent(Owner, out JukeboxComponent? jukebox) &&
+            jukebox.AudioStream != null &&
+            EntMan.EntityExists(jukebox.AudioStream.Value) &&
             EntMan.TryGetComponent(jukebox.AudioStream, out AudioComponent? audioComp))
+        // Amour-Edit-End
         {
             audioComp.Volume = SharedJukeboxSystem.MapToRange(volume, jukebox.MinSlider, jukebox.MaxSlider, jukebox.MinVolume, jukebox.MaxVolume);
         }

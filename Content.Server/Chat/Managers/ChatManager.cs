@@ -201,6 +201,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
+using Content.Server._Amour.Stickers;
 
 namespace Content.Server.Chat.Managers;
 
@@ -231,6 +232,11 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!; // Amour - Boosters
     [Dependency] private readonly ChatProtectionSystem _chatProtection = default!; // Orion
+
+    // Amour edit start
+    private StickerSanitizerSystem _stickerSanitizer => _entitySystemManager.GetEntitySystem<StickerSanitizerSystem>();
+    // Amour edit end
+
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -374,9 +380,9 @@ internal sealed partial class ChatManager : IChatManager
         SendAdminAlert($"{playerName}{(antag ? " (ANTAG)" : "")} {message}");
     }
 
-    public void SendHookOOC(string sender, string message)
+    public void SendHookOOC(string sender, string message, bool isDiscordBridge = false) // Amour (add bool isDiscordBridge = false)
     {
-        if (!_oocEnabled && _configurationManager.GetCVar(CCVars.DisablingOOCDisablesRelay))
+        if (!_oocEnabled && _configurationManager.GetCVar(CCVars.DisablingOOCDisablesRelay) && !isDiscordBridge) // Amour (add && !isDiscordBridge)
         {
             return;
         }
@@ -442,7 +448,7 @@ internal sealed partial class ChatManager : IChatManager
         }
 
         Color? colorOverride = null;
-        var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", FormattedMessage.EscapeText(message)));
+        var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", _stickerSanitizer.SanitizeMessageWithStickers(message))); // Amour edit
 
         if (_adminManager.HasAdminFlag(player, AdminFlags.NameColor))
         {
@@ -457,7 +463,7 @@ internal sealed partial class ChatManager : IChatManager
             wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message-booster",
                 ("playerName", player.Name),
                 ("boosterColor", hexColor),
-                ("message", FormattedMessage.EscapeText(message)));
+                ("message", _stickerSanitizer.SanitizeMessageWithStickers(message))); // Amour edit
         }
         // RMC - Heavily modified for patreon.
         if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
@@ -469,20 +475,27 @@ internal sealed partial class ChatManager : IChatManager
                     ("tierIcon", tier.Icon),
                     ("patronColor", "#aa00ff"),
                     ("playerName", player.Name),
-                    ("message", FormattedMessage.EscapeText(message)));
+                    ("message", _stickerSanitizer.SanitizeMessageWithStickers(message))); // Amour edit
             }
             else
             {
                 wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message-no-icon",
                     ("patronColor", "#aa00ff"),
                     ("playerName", player.Name),
-                    ("message", FormattedMessage.EscapeText(message)));
+                    ("message", _stickerSanitizer.SanitizeMessageWithStickers(message))); // Amour edit
             }
         }
 
         //TODO: player.Name color, this will need to change the structure of the MsgChatMessage
         ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride, author: player.UserId);
         _mommiLink.SendOOCMessage(player.Name, message.Replace("@", "\\@").Replace("<", "\\<").Replace("/", "\\/")); // @ and < are both problematic for discord due to pinging. / is sanitized solely to kneecap links to murder embeds via blunt force
+        
+        // Amour - Discord OOC Bridge
+        if (_entitySystemManager.TryGetEntitySystem<_Amour.Discord.DiscordOocBridgeSystem>(out var discordBridge))
+        {
+            discordBridge.OnGameOocMessage(player.Name, message);
+        }
+        
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"OOC from {player:Player}: {message}");
     }
 
@@ -497,7 +510,7 @@ internal sealed partial class ChatManager : IChatManager
         var clients = _adminManager.ActiveAdmins.Select(p => p.Channel);
         var wrappedMessage = Loc.GetString("chat-manager-send-admin-chat-wrap-message",
                                         ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
-                                        ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+                                        ("playerName", player.Name), ("message", _stickerSanitizer.SanitizeMessageWithStickers(message))); // Amour edit
 
         foreach (var client in clients)
         {

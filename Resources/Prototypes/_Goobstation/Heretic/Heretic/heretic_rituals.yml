@@ -346,6 +346,7 @@
   outputEvent: !type:EventHereticAscension
 
 ### side knowledge
+# Orion-Edit-Start: Revert
 - type: hereticRitual
   id: RitualOfKnowledge
   locName: knowledge-path-side-knowledge-name
@@ -355,6 +356,7 @@
     state: icon
   customBehaviors:
   - !type:RitualKnowledgeBehavior
+# Orion-Edit-End
 
 ## stage 3
 - type: hereticRitual

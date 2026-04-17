@@ -139,18 +139,15 @@
   description: job-description-hos
   playTimeTracker: JobHeadOfSecurity
   requirements:
+    # Amour-Edit-Start
     - !type:RoleTimeRequirement
       role: JobWarden
-      time: 9000 #2.50 hrs # Amour
-    - !type:RoleTimeRequirement
-      role: JobSecurityOfficer
-      time: 18000 #5 hrs # Amour
+      time: 25200 # 7 hrs
     - !type:RoleTimeRequirement
       role: JobDetective
-      time: 1800 #30 min # Amour
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 18000 #5 hrs # Amour
+      time: 3600 # 1 h
+    # Amour-Edit-End
+    - !type:DiscordLinkRequirement # Amour
     - !type:AgeRequirement # Amour
       requiredAge: 23
     - !type:SpeciesRequirement # Amour
@@ -169,9 +166,9 @@
   supervisors: job-supervisors-captain
   canBeAntag: false
   guides: # goobstation
-  # Orion-Edit-Start
-  - SpaceLaw
-  # Orion-Edit-End
+  # Amour-Edit-Start
+  # - SpaceLaw # Disabled until guide is created
+  # Amour-Edit-End
   goobcoins: 45 #Goob content
   access:
   - HeadOfSecurity

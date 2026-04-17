@@ -24,6 +24,7 @@ public static class RichTextExtensions
         typeof(BoldTag), // [bold]
         typeof(ColorTag), // [color=Red] / [color=#FF0000]
         typeof(ItalicTag), // [italic]
+        typeof(Content.Goobstation.UIKit.UserInterface.RichText.TextureTag), // [tex]
     };
 
     /// <summary>

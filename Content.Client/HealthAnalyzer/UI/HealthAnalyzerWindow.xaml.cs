@@ -100,6 +100,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using System.Globalization;
 using Content.Goobstation.Shared.Disease.Components;
+using Content.Shared.Eye.Blinding.Components;
 
 namespace Content.Client.HealthAnalyzer.UI
 {
@@ -350,6 +351,17 @@ namespace Content.Client.HealthAnalyzer.UI
                 }
             }
 
+            // Orion-Start
+            if (_entityManager.TryGetComponent<BlindableComponent>(_target, out var blindable) && blindable.IsBlind)
+            {
+                ConditionsListContainer.AddChild(new RichTextLabel
+                {
+                    Text = Loc.GetString("health-analyzer-window-entity-blind-text"),
+                    Margin = new Thickness(0, 4),
+                });
+            }
+            // Orion-End
+
             /*foreach (var (woundablePain, pain) in msg.NervePainFeels)
             {
                 if (pain == 1.0
@@ -482,7 +494,8 @@ namespace Content.Client.HealthAnalyzer.UI
             return mobState switch
             {
                 MobState.Alive => Loc.GetString("health-analyzer-window-entity-alive-text"),
-                MobState.Critical => Loc.GetString("health-analyzer-window-entity-critical-text"),
+                MobState.SoftCritical => Loc.GetString("health-analyzer-window-entity-soft-critical-text"), // Orion-Edit
+                MobState.HardCritical => Loc.GetString("health-analyzer-window-entity-hard-critical-text"), // Orion
                 MobState.Dead => Loc.GetString("health-analyzer-window-entity-dead-text"),
                 _ => Loc.GetString("health-analyzer-window-entity-unknown-text"),
             };

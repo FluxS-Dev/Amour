@@ -128,6 +128,13 @@
     ClothingUniformJumpsuitMegaMan: 1
     ClothingUniformJumpsuitMegaManX: 1
     ClothingNeckMantleElderLizards: 2
+    ClothingUniformGi: 2
+    ClothingUniformKimonoBlue: 2
+    ClothingUniformKimonoPink: 2
+    ClothingUniformKimonoPurple: 2
+    ClothingUniformKimonoSky: 2
+    ClothingUniformKimonoGreen: 2
+    ClothingUniformKendoHakama: 1
     # Orion-End
     ClothingOuterSuitHotDog: 1 # Goob
     ClothingOuterSuitPickle: 1
@@ -152,6 +159,8 @@
     ClothingOuterSuitCarp: 2
     ClothingNeckCloakCarp: 1
     ClothingNeckCloakCarpAlt: 1
+    ClothingOuterArmorKendoBogu: 1
+    ClothingHeadHelmetKendoMen: 1
     # Orion-End
     ClothingOuterArmorHereticCostume: 1 # Goobstation
     ToyBladeEldritch: 1 # Goobstation

@@ -204,7 +204,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         foreach (var (group, groupLoadouts) in SelectedLoadouts)
         {
             // Check the group is even valid for this role.
-            if (!roleProto.Groups.Contains(group))
+            if (!roleProto.Groups.Contains(group) && !OverriddenGroups.Contains(group)) // Amour edit
             {
                 groupRemove.Add(group);
                 continue;
@@ -384,7 +384,13 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
     /// </summary>
     public bool AddLoadout(ProtoId<LoadoutGroupPrototype> selectedGroup, ProtoId<LoadoutPrototype> selectedLoadout, IPrototypeManager protoManager)
     {
-        var groupLoadouts = SelectedLoadouts[selectedGroup];
+        // Amour edit start
+        if (!SelectedLoadouts.TryGetValue(selectedGroup, out var groupLoadouts))
+        {
+            groupLoadouts = new List<Loadout>();
+            SelectedLoadouts[selectedGroup] = groupLoadouts;
+        }
+        // Amour edit end
 
         // Need to unselect existing ones if we're at or above limit
         var limit = Math.Max(0, groupLoadouts.Count + 1 - protoManager.Index(selectedGroup).MaxLimit);
@@ -425,7 +431,10 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
     {
         // Although this may bring us below minimum we'll let EnsureValid handle it.
 
-        var groupLoadouts = SelectedLoadouts[selectedGroup];
+        // Amour edit start
+        if (!SelectedLoadouts.TryGetValue(selectedGroup, out var groupLoadouts))
+            return false;
+        // Amour edit end
 
         for (var i = 0; i < groupLoadouts.Count; i++)
         {
@@ -448,7 +457,6 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
 
         if (!Role.Equals(other.Role) ||
             SelectedLoadouts.Count != other.SelectedLoadouts.Count ||
-            Points != other.Points ||
             EntityName != other.EntityName ||
             // Amour edit start
             EntityNameOverridden != other.EntityNameOverridden ||
@@ -478,6 +486,24 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Role, SelectedLoadouts, OverriddenGroups, Points, EntityName, EntityNameOverridden); // Amour edit
+        // Amour edit - use content-based hash for OverriddenGroups instead of reference
+        var overriddenGroupsHash = 0;
+        foreach (var group in OverriddenGroups.OrderBy(g => g.Id))
+        {
+            overriddenGroupsHash = HashCode.Combine(overriddenGroupsHash, group.GetHashCode());
+        }
+
+        var selectedLoadoutsHash = 0;
+        foreach (var (key, value) in SelectedLoadouts.OrderBy(x => x.Key.Id))
+        {
+            var valueHash = 0;
+            foreach (var loadout in value)
+            {
+                valueHash = HashCode.Combine(valueHash, loadout.GetHashCode());
+            }
+            selectedLoadoutsHash = HashCode.Combine(selectedLoadoutsHash, key.GetHashCode(), valueHash);
+        }
+        
+        return HashCode.Combine(Role, selectedLoadoutsHash, overriddenGroupsHash, EntityName, EntityNameOverridden);
     }
 }

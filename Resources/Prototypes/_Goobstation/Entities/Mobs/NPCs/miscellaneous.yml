@@ -27,6 +27,5 @@
     raffle:
       settings: default
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000
+      - !type:DiscordLinkRequirement # Amour edit
 

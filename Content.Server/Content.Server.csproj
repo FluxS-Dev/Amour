@@ -50,6 +50,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
+    <PackageReference Include="Discord.Net.Core" />
+    <PackageReference Include="Discord.Net.Rest" />
+    <PackageReference Include="Discord.Net.WebSocket" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Content.Packaging\Content.Packaging.csproj" />

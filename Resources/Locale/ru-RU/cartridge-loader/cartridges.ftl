@@ -1,8 +1,8 @@
 device-pda-slot-component-slot-name-cartridge = Картридж
 default-program-name = Программа
 notekeeper-program-name = Заметки
-nano-task-program-name = NanoTask
-news-read-program-name = Новости станции
+nano-task-program-name = НаноЗадачи
+news-read-program-name = НаноНовости
 crew-manifest-program-name = Манифест
 crew-manifest-cartridge-loading = Загрузка ...
 net-probe-program-name = NetProbe
@@ -84,6 +84,10 @@ wanted-list-status-label = [color=darkgray]статус:[/color] { $status ->
         [detained] [color=#b18644]под арестом[/color]
         [paroled] [color=green]освобождён по УДО[/color]
         [discharged] [color=green]освобождён[/color]
+        [search] [color=#33cccc]поиск[/color]
+        [perma] [color=#343434]перма[/color]
+        [dangerous] [color=red]опасный[/color]
+        [demote] [color=red]уволить[/color]
        *[other] нет
     }
 wanted-list-history-table-time-col = Время

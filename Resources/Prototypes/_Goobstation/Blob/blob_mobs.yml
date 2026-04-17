@@ -272,7 +272,7 @@
       showInHands: true
     - type: BlobObserver
     - type: Visibility
-      layer: 2
+      layer: 2 # Ghost visflag
     - type: ContentEye
     - type: MindContainer
     - type: Clickable
@@ -287,8 +287,7 @@
       mindRoles:
       - MindRoleGhostRoleSoloAntagonist
       requirements:
-      - !type:OverallPlaytimeRequirement
-        time: 18000 #5 hours
+        - !type:DiscordLinkRequirement # Amour edit
     - type: GhostTakeoverAvailable
     - type: Fixtures
       fixtures:

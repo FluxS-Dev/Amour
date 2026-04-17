@@ -14,8 +14,7 @@
     description: ghost-role-intern-desc
     rules: ghost-role-lead-intern-rules
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 36000 #10 hours
+      - !type:DiscordLinkRequirement # Amour edit
   - type: GhostRoleMobSpawner
     prototype: LeadIntern
 
@@ -47,8 +46,7 @@
     description: ghost-role-intern-desc
     rules: ghost-role-intern-rules
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 36000 #10 hours
+      - !type:DiscordLinkRequirement # Amour edit
   - type: GhostRoleMobSpawner
     prototype: NTIntern
 
@@ -67,8 +65,7 @@
     description: ghost-role-intern-desc
     rules: ghost-role-intern-rules
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 36000 #10 hours
+      - !type:DiscordLinkRequirement # Amour edit
   - type: GhostRoleMobSpawner
     prototype: NTNerdIntern
 

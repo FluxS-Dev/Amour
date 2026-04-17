@@ -1,5 +1,28 @@
+# standard for cap, hos and InteQ
 - type: entity
-  parent: ClothingHeadBase
+  abstract: true
+  parent: [ClothingHeadBase] 
+  id: ClothingHeadHatArmoredPlus
+  components:
+  - type: Armor
+    coverage:
+    - Head
+    traumaDeductions:
+      Dismemberment: 0.3
+      OrganDamage: 0.4
+      BoneDamage: 0.3
+      VeinsDamage: 0.1
+      NerveDamage: 0.1
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Heat: 0.7
+
+
+- type: entity
+  parent: [ClothingHeadHatArmoredPlus, BaseMinorContraband]
   id: ClothingHeadInteQBeret
   name: InteQ beret
   description: Brown beret with a gold emblem on it.
@@ -10,7 +33,7 @@
     sprite: _Orion/Clothing/Head/Hats/inteq_beret.rsi
 
 - type: entity
-  parent: [ClothingHeadBase, BaseMinorContraband]
+  parent: ClothingHeadInteQBeret
   id: ClothingHeadInteQHonorableBeret
   name: InteQ honorable beret
   description: White beret with a emblem on it.
@@ -21,7 +44,7 @@
     sprite: _Orion/Clothing/Head/Hats/inteq_honorable_beret.rsi
 
 - type: entity
-  parent: [ClothingHeadBase, BaseMinorContraband]
+  parent: ClothingHeadInteQBeret
   id: ClothingHeadHatInteQMAA
   name: InteQ master at arms hat
   description: Master at arms hat, looks intimidating, I doubt that you will like to communicate with its owner...
@@ -43,7 +66,7 @@
     sprite: _Orion/Clothing/Head/Hats/inteq_headband.rsi
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ ClothingHeadHatArmoredPlus, BaseCommandContraband ]
   id: ClothingHeadHatBeretCaptainWhite
   name: white captain beret
   description: White captain beret, an icon of style.
@@ -54,7 +77,7 @@
     sprite: _Orion/Clothing/Head/Hats/white_beret.rsi
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatBeretCaptainWhite
   id: ClothingHeadHatBeretSheriff
   name: sheriff beret
   description: Beret, a favorite among local sheriffs.
@@ -65,7 +88,7 @@
     sprite: _Orion/Clothing/Head/Hats/sheriff_beret.rsi
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatCapcap
   id: ClothingHeadHatCapcapWhite
   name: white cap cap
   description: Stylish white cap cap.
@@ -74,12 +97,9 @@
     sprite: _Orion/Clothing/Head/Hats/white_capcap.rsi
   - type: Clothing
     sprite: _Orion/Clothing/Head/Hats/white_capcap.rsi
-  - type: Tag
-    tags:
-    - HamsterWearable
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatCapcap
   id: ClothingHeadHatCapcapSheriff
   name: sheriff cap
   description: Stylish sheriff cap.
@@ -88,12 +108,9 @@
     sprite: _Orion/Clothing/Head/Hats/sheriff_capcap.rsi
   - type: Clothing
     sprite: _Orion/Clothing/Head/Hats/sheriff_capcap.rsi
-  - type: Tag
-    tags:
-    - HamsterWearable
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatCentcom
   id: ClothingHeadCapCentcomNaval
   name: naval cap
   description: A cap worn by those in the Nanotrasen Navy.
@@ -104,7 +121,7 @@
     sprite: _Orion/Clothing/Head/Hats/centcom_naval_cap.rsi
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatCentcom
   id: ClothingHeadHatBeretCentcomNaval
   name: naval beret
   description: A beret worn by those in the Nanotrasen Navy.
@@ -134,7 +151,7 @@
     node: tinfoilhat
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatArmored
   id: ClothingHeadHatUEGBeret
   name: UEG police beret
   description: Beret of police officers of the UEG, have emblem of the Ministry of Internal Affairs on it.
@@ -145,7 +162,7 @@
     sprite: _Orion/Clothing/Head/Hats/ueg_beret.rsi
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHatArmored
   id: ClothingHeadHatUEGOfficerCap
   name: UEG officer cap
   description: UEG officer cap, has a cockade with the insignia of the Ministry of the Interior.
@@ -154,34 +171,6 @@
     sprite: _Orion/Clothing/Head/Hats/ueg_officer_cap.rsi
   - type: Clothing
     sprite: _Orion/Clothing/Head/Hats/ueg_officer_cap.rsi
-
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatsBeretAtmos
-  name: atmospheric technician's beret
-  description: A blue beret with sewn emblem of engineering department. Smells like frezon.
-  components:
-  - type: Sprite
-    sprite: _Orion/Clothing/Head/Hats/beret_atmospheric_technician.rsi
-  - type: Clothing
-    sprite: _Orion/Clothing/Head/Hats/beret_atmospheric_technician.rsi
-  - type: Tag
-    tags:
-      - HamsterWearable
-
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatsParamedicBeret
-  name: paramedic's beret
-  description: A blue beret of a constantly busy job.
-  components:
-  - type: Sprite
-    sprite: _Orion/Clothing/Head/Hats/beret_paramedic.rsi
-  - type: Clothing
-    sprite: _Orion/Clothing/Head/Hats/beret_paramedic.rsi
-  - type: Tag
-    tags:
-      - HamsterWearable
 
 - type: entity
   parent: ClothingHeadHatSecurityTrooper
@@ -196,6 +185,37 @@
   - type: Tag
     tags:
       - HamsterWearable
+      - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatsBeretAtmos
+  name: atmospheric technician's beret
+  description: A blue beret with sewn emblem of engineering department. Smells like frezon.
+  components:
+  - type: Sprite
+    sprite: _Orion/Clothing/Head/Hats/beret_atmospheric_technician.rsi
+  - type: Clothing
+    sprite: _Orion/Clothing/Head/Hats/beret_atmospheric_technician.rsi
+  - type: Tag
+    tags:
+      - HamsterWearable
+      - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatsParamedicBeret
+  name: paramedic's beret
+  description: A blue beret of a constantly busy job.
+  components:
+  - type: Sprite
+    sprite: _Orion/Clothing/Head/Hats/beret_paramedic.rsi
+  - type: Clothing
+    sprite: _Orion/Clothing/Head/Hats/beret_paramedic.rsi
+  - type: Tag
+    tags:
+      - HamsterWearable
+      - WhitelistChameleon
 
 - type: entity
   parent: ClothingHeadBase
@@ -210,3 +230,25 @@
   - type: Tag
     tags:
       - HamsterWearable
+      - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHelmetKendoMen
+  name: men
+  description: The quintessential head armor of the kendo practitioner.
+  components:
+  - type: Sprite
+    sprite: _Orion/Clothing/Head/Helmets/men.rsi
+  - type: Clothing
+    sprite: _Orion/Clothing/Head/Helmets/men.rsi
+  - type: Armor
+    coverage:
+    - Head
+    traumaDeductions:
+      BoneDamage: 0.8
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.8
+        Piercing: 0.9

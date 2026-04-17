@@ -1,4 +1,4 @@
-﻿# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 # SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
@@ -11,17 +11,19 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: Medical
-    time: 9000 #2.50 hrs # Amour
+    time: 18000 # 5 hrs
   - !type:DepartmentTimeRequirement
     department: Security
-    time: 9000 #2.50 hrs # Amour
+    time: 14400 # 4 hrs # Amour-Edit
+  - !type:DiscordLinkRequirement # Amour
   startingGear: BrigmedicGear
   icon: "JobIconBrigmedic"
   supervisors: job-supervisors-hos
   canBeAntag: false
   guides:
-  # Orion-Edit-Start
-  # Orion-Edit-End
+  # Amour-Edit-Start
+  # - SOP-Security-Brigmedic # Disabled until guide is created
+  # Amour-Edit-End
   - Medicine
   goobcoins: 35
   access: # EE parity, make corpsman able function.

@@ -91,6 +91,7 @@
   - !type:HereticPathCondition
     stage: 2
 
+# Orion-Edit-Start: Revert
 - type: listing
   id: HereticSidePathKnowledge
   name: knowledge-path-side-knowledge-name
@@ -106,6 +107,7 @@
     stock: 1
   - !type:HereticPathCondition
     stage: 0
+# Orion-Edit-End
 
 - type: listing
   id: HereticSidePath6RustWalker

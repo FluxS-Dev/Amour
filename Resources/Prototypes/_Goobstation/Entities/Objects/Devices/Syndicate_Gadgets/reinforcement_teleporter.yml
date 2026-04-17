@@ -21,8 +21,7 @@
     raffle:
       settings: default
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
+      - !type:DiscordLinkRequirement # Amour edit
   - type: GhostRoleMobSpawner
     prototype: MobMothSyndy
   - type: EmitSoundOnUse

@@ -1173,9 +1173,6 @@
     sprite: _Amour/Ghosts/Dosharus-ghost.rsi
     color: "#ffffffe5"
 
-
-
-
 # DEN4IK_64 из _Honk
 - type: customGhost
   parent: CkeyPersonal
@@ -1195,3 +1192,23 @@
   - type: Sprite
     sprite: _Amour/Ghosts/DEN4IK_64-ghost.rsi
     color: "#ffffffe6" # 0.9 alpha
+
+# Perchta
+- type: customGhost
+  parent: CkeyPersonal
+  id: Perchta-ghost
+  restrictions:
+  - !type:CkeyRestriction
+    ckey: [ Perchta ]
+  entity: MobObserver-Perchta-ghost
+
+- type: entity
+  parent: MobObserverAmour
+  id: MobObserver-Perchta-ghost
+  suffix: Perchta
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Amour/Ghosts/Perchta-ghost.rsi
+    color: "#ffffffcc"
+    scale: 0.5, 0.5

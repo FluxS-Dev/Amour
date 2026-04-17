@@ -29,8 +29,7 @@
       raffle:
         settings: default
       requirements:
-      - !type:OverallPlaytimeRequirement
-        time: 18000 #5 hours
+        - !type:DiscordLinkRequirement # Amour edit
     - type: Sprite
       sprite: Markers/jobs.rsi
       layers:
@@ -118,8 +117,7 @@
     raffle:
       settings: default
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
+      - !type:DiscordLinkRequirement # Amour edit
   - type: GhostTakeoverAvailable
   - type: GlobalAntagonist # Orion
     antagonistPrototype: globalAntagonistBlob

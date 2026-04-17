@@ -27,3 +27,39 @@
   name: Егор Летов - Моя оборона
   path:
     path: /Audio/_Amour/Lobby/EgorLetov_MoyaOborona.ogg
+  
+- type: jukebox
+  id: CynthoniOfFlames
+  name: Sewerslvt - Cynthoni of Flames
+  path:
+    path: /Audio/_Amour/Lobby/Sewerslvt_CynthoniOfFlames.ogg
+
+- type: jukebox
+  id: BlissfulOverdose
+  name: Sewerslvt - Blissful Overdose
+  path:
+    path: /Audio/_Amour/Lobby/Sewerslvt_BlissfulOverdose.ogg
+
+- type: jukebox
+  id: CyberiaLyr1
+  name: Sewerslvt - Cyberia lyr1
+  path:
+    path: /Audio/_Amour/Lobby/Sewerslvt_CyberiaLyr1.ogg
+
+- type: jukebox
+  id: JvnkoStillLovesYou
+  name: Sewerslvt - Jvnko Still Loves You
+  path:
+    path: /Audio/_Amour/Lobby/Sewerslvt_JvnkoStillLovesYou.ogg
+
+- type: jukebox
+  id: SickTwistedDemented
+  name: Sewerslvt - Sick, Twisted, Demented
+  path:
+    path: /Audio/_Amour/Lobby/Sewerslvt_SickTwistedDemented.ogg
+
+- type: jukebox
+  id: Whatever
+  name: Sewerslvt - Whatever
+  path:
+    path: /Audio/_Amour/Lobby/Sewerslvt_Whatever.ogg

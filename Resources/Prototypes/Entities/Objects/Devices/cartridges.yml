@@ -97,8 +97,13 @@
   - type: Cartridge
     programName: notekeeper-program-name
     icon:
-      sprite:  Objects/Misc/books.rsi
-      state: book_icon
+      sprite: _Orion/Interface/Misc/program_icons.rsi # Orion-Edit
+      state: notes # Orion-Edit
+    # Orion-Start
+    screenState:
+      sprite: _Orion/Objects/Devices/pda.rsi
+      state: accounting
+    # Orion-End
   - type: NotekeeperCartridge
 
 
@@ -116,6 +121,11 @@
     icon:
       sprite: Interface/Misc/program_icons.rsi
       state: nano_task
+    # Orion-Start
+    screenState:
+      sprite: _Orion/Objects/Devices/pda.rsi
+      state: menu
+    # Orion-End
   - type: UIFragment
     ui: !type:NanoTaskUi
   - type: NanoTaskCartridge
@@ -136,6 +146,11 @@
     icon:
       sprite: Interface/Misc/program_icons.rsi
       state: news_read
+    # Orion-Start
+    screenState:
+      sprite: _Orion/Objects/Devices/pda.rsi
+      state: comm_monitor
+    # Orion-End
   - type: NewsReaderCartridge
 
 - type: entity
@@ -154,6 +169,11 @@
       icon:
         sprite: Interface/Misc/program_icons.rsi
         state: crew_manifest
+      # Orion-Start
+      screenState:
+        sprite: _Orion/Objects/Devices/pda.rsi
+        state: crew
+      # Orion-End
     - type: CrewManifestCartridge
 
 - type: entity
@@ -170,8 +190,13 @@
     - type: Cartridge
       programName: net-probe-program-name
       icon:
-        sprite: Structures/Machines/server.rsi
-        state: server
+        sprite: _Orion/Interface/Misc/program_icons.rsi # Orion-Edit
+        state: netprobe # Orion-Edit
+      # Orion-Start
+      screenState:
+        sprite: _Orion/Objects/Devices/pda.rsi
+        state: signal
+      # Orion-End
     - type: NetProbeCartridge
 
 - type: entity
@@ -191,8 +216,13 @@
     - type: Cartridge
       programName: log-probe-program-name
       icon:
-        sprite: Structures/Doors/Airlocks/Standard/security.rsi
-        state: closed
+        sprite: _Orion/Interface/Misc/program_icons.rsi # Orion-Edit
+        state: logprobe # Orion-Edit
+      # Orion-Start
+      screenState:
+        sprite: _Orion/Objects/Devices/pda.rsi
+        state: comm_logs
+      # Orion-End
     - type: LogProbeCartridge
     - type: GuideHelp
       guides:
@@ -215,8 +245,13 @@
   - type: Cartridge
     programName: wanted-list-program-name
     icon:
-      sprite: Objects/Misc/books.rsi
-      state: icon_magnifier
+      sprite: _Orion/Interface/Misc/program_icons.rsi # Orion-Edit
+      state: watchdog # Orion-Edit
+    # Orion-Start
+    screenState:
+      sprite: _Orion/Objects/Devices/pda.rsi
+      state: bounty
+    # Orion-End
   - type: WantedListCartridge
   - type: StealTarget
     stealGroup: WantedListCartridge
@@ -236,8 +271,13 @@
     - type: Cartridge
       programName: med-tek-program-name
       icon:
-        sprite: Objects/Specific/Medical/healthanalyzer.rsi
-        state: icon
+        sprite: _Orion/Interface/Misc/program_icons.rsi # Orion-Edit
+        state: medtek # Orion-Edit
+      # Orion-Start
+      screenState:
+        sprite: _Orion/Objects/Devices/pda.rsi
+        state: alert-red
+      # Orion-End
     - type: MedTekCartridge
 
 - type: entity
@@ -255,6 +295,11 @@
     - type: Cartridge
       programName: astro-nav-program-name
       icon:
-        sprite: Objects/Devices/gps.rsi
-        state: icon
+        sprite: _Orion/Interface/Misc/program_icons.rsi # Orion-Edit
+        state: astronav # Orion-Edit
+      # Orion-Start
+      screenState:
+        sprite: _Orion/Objects/Devices/pda.rsi
+        state: radarntos
+      # Orion-End
     - type: AstroNavCartridge

@@ -48953,7 +48953,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.5140686,21.049694
       parent: 2
-- proto: DVSmartFridgeMedical
+- proto: SmartFridgeMedical
   entities:
   - uid: 12220
     components:
@@ -82896,7 +82896,7 @@ entities:
     - type: Transform
       pos: -33.5,37.5
       parent: 2
-- proto: RandomHumanoidHECUSpawner
+- proto: KukriKnife # Amour-Edit
   entities:
   - uid: 15675
     components:

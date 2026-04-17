@@ -495,9 +495,11 @@
       color: "#87011c"
     - state: icon_law
       color: "#f7d61a"
-  - type: GuideHelp
-    guides:
-    - SpaceLaw
+  # Amour-Edit-Start
+  # - type: GuideHelp # Disabled until SpaceLaw guide is created
+  #   guides:
+  #   - SpaceLaw
+  # Amour-Edit-End
 
 - type: entity
   parent: BookBase

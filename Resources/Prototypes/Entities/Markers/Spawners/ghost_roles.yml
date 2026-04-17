@@ -114,8 +114,7 @@
     raffle:
       settings: default
     requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
+    - !type:DiscordLinkRequirement # Amour edit
   - type: GhostRoleMobSpawner
     prototype: MobRatKing
   - type: Sprite
@@ -205,9 +204,7 @@
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
     requirements: # Goobstation - ghost roles requirements
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 18000 #5 hours
+    - !type:DiscordLinkRequirement # Amour edit
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -263,8 +260,7 @@
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
+    - !type:DiscordLinkRequirement # Amour edit
   - type: Sprite
     layers:
     - state: green
@@ -285,8 +281,7 @@
     raffle:
       settings: default
     requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
+    - !type:DiscordLinkRequirement # Amour edit
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -328,9 +323,7 @@
     raffle:
       settings: default
     requirements: # Goobstation - ghost roles requirements
-    - !type:RoleTimeRequirement
-      role: JobBorg
-      time: 3600 #1 hour
+    - !type:DiscordLinkRequirement # Amour edit
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:

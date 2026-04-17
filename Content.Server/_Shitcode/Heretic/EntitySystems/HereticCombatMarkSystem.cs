@@ -54,6 +54,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StarMarkSystem _starMark = default!;
     [Dependency] private readonly HereticAbilitySystem _ability = default!;
+    [Dependency] private readonly HereticSystem _heretic = default!;
 
     public override void Initialize()
     {
@@ -118,7 +119,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
                 break;
 
             case "Void":
-                _voidcurse.DoCurse(target, 5);
+                _voidcurse.DoCurse(target, 3);
                 break;
 
             case "Cosmos":
@@ -138,7 +139,7 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
                     Del(cosmicMark.CosmicDiamondUid.Value); // Just in case
                 }
 
-                _stun.TryParalyze(target, cosmicMark.ParalyzeTime, true);
+                _stun.TryUpdateParalyzeDuration(target, cosmicMark.ParalyzeTime);
                 break;
 
             default:
@@ -151,15 +152,13 @@ public sealed class HereticCombatMarkSystem : SharedHereticCombatMarkSystem
 
         // transfers the mark to the next nearby person
         var look = _lookup.GetEntitiesInRange(target, 5f, flags: LookupFlags.Dynamic)
-            .Where(x => x != target && HasComp<HumanoidAppearanceComponent>(x) && !HasComp<HereticComponent>(x) && !HasComp<GhoulComponent>(x))
+            .Where(x => x != target && HasComp<HumanoidAppearanceComponent>(x) && !_heretic.IsHereticOrGhoul(x))
             .ToList();
         if (look.Count == 0)
             return true;
 
         _random.Shuffle(look);
         var lookent = look.First();
-        if (!HasComp<HumanoidAppearanceComponent>(lookent) || HasComp<HereticComponent>(lookent))
-            return true;
 
         var markComp = EnsureComp<HereticCombatMarkComponent>(lookent);
         markComp.DisappearTime = markComp.MaxDisappearTime;

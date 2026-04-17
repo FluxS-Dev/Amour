@@ -83,8 +83,11 @@
   description: job-description-chef
   playTimeTracker: JobChef
   requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 900 #15 min # Amour
+    - !type:AnyOfRequirement # Amour edit - Discord OR playtime
+      requirements:
+        - !type:DiscordLinkRequirement
+        - !type:OverallPlaytimeRequirement
+          time: 3600 # 1 hr
   startingGear: ChefGear
   icon: "JobIconChef"
   supervisors: job-supervisors-hop

@@ -134,15 +134,20 @@
   description: job-description-ce
   playTimeTracker: JobChiefEngineer
   requirements:
-    - !type:RoleTimeRequirement
-      role: JobAtmosphericTechnician
-      time: 9000 #2.50 hrs # Amour
-    - !type:RoleTimeRequirement
-      role: JobStationEngineer
-      time: 10800 #3 hrs # Amour
-    - !type:DepartmentTimeRequirement
+    - !type:DepartmentTimeRequirement # Amour edit - 1 hr minimum
       department: Engineering
-      time: 18000 #5 hrs # Amour
+      time: 10800 # 3 h
+    - !type:AnyOfRequirement # Amour edit - Discord OR playtime
+      requirements:
+        - !type:DiscordLinkRequirement
+        - !type:AllOfRequirement
+          requirements:
+            - !type:RoleTimeRequirement
+              role: JobAtmosphericTechnician
+              time: 9000 #2.50 hrs
+            - !type:RoleTimeRequirement
+              role: JobStationEngineer
+              time: 10800 #3 hrs
     - !type:AgeRequirement # Amour
       requiredAge: 23
   weight: 10
@@ -153,11 +158,11 @@
   antagAdvantage: 75 # Goobstation
 #  guides: # goobstation | Orion-Edit: Removed because dont have this SOP
 #  - Engineering
-#  - ChiefEngineer SOP
-#  - Engineering SOP
+#  - ChiefEngineerSOP
+#  - EngineeringSOP
 #  - Command
-#  - Emergencies SOP
-  goobcoins: 40 #Goob content
+#  - EmergenciesSOP
+  goobcoins: 80 #Goob content # Amour-Edit
   access:
   - Maintenance
   - Engineering
@@ -179,7 +184,7 @@
   id: ChiefEngineerGear
   equipment:
     id: CEPDA
-    eyes: ClothingEyesGlassesMeson
+#    eyes: ClothingEyesGlassesMeson # Orion-Edit: In loadout
     ears: ClothingHeadsetAltEngineering # Goobstation
     belt: ClothingBeltUtilityEngineering
   storage:

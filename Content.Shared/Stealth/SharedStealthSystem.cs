@@ -83,7 +83,7 @@ public abstract class SharedStealthSystem : EntitySystem
 
     private void OnMobStateChanged(EntityUid uid, StealthComponent component, MobStateChangedEvent args)// Goobstation - Stealth change
     {
-        if (args.NewMobState == MobState.Dead || args.NewMobState == MobState.Critical)
+        if (args.NewMobState is MobState.Dead or MobState.SoftCritical or MobState.HardCritical) // Orion-Edit
         {
             if (args.NewMobState == MobState.Dead)
                 component.Enabled = component.EnabledOnDeath;
@@ -132,6 +132,10 @@ public abstract class SharedStealthSystem : EntitySystem
             return;
 
         var delta = component.MovementVisibilityRate * (args.NewPosition.Position - args.OldPosition.Position).Length();
+
+        // goobstation - stealth breaking on move
+        if (component.BreakOnMove)
+            delta = stealthComp.MaxVisibility;
 
         ModifyVisibility(uid, delta, stealthComp); // Goobstation - Fixing stealth suit resolve error
     }
@@ -236,6 +240,20 @@ public abstract class SharedStealthSystem : EntitySystem
         if (!Resolve(uid, ref comp))
             return;
         comp.ThermalsImmune = value;
+    }
+
+    public void SetRevealOnAttack(Entity<StealthComponent> ent, bool state)
+    {
+        ent.Comp.RevealOnAttack = state;
+
+        Dirty(ent);
+    }
+
+    public void SetRevealOnDamage(Entity<StealthComponent> ent, bool state)
+    {
+        ent.Comp.RevealOnDamage = state;
+
+        Dirty(ent);
     }
     // Goobstation end
 }

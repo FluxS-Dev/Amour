@@ -188,6 +188,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         SubscribeLocalEvent<BlinkSpellEvent>(OnBlink);
         SubscribeLocalEvent<TileToggleSpellEvent>(OnTileToggle);
         SubscribeLocalEvent<PredictionToggleSpellEvent>(OnPredictionToggle);
+        SubscribeLocalEvent<RathenEvent>(OnRathen);
         SubscribeAllEvent<SetSwapSecondaryTarget>(OnSwapSecondaryTarget);
     }
 
@@ -221,7 +222,7 @@ public abstract class SharedSpellsSystem : EntitySystem
 
         if (TryComp(ev.Target, out StatusEffectsComponent? status))
         {
-            Stun.TryParalyze(ev.Target, ev.ParalyzeDuration, true, status);
+            Stun.TryUpdateParalyzeDuration(ev.Target, ev.ParalyzeDuration);
             _jitter.DoJitter(ev.Target, ev.StutterDuration, true, status: status);
         }
 
@@ -243,7 +244,7 @@ public abstract class SharedSpellsSystem : EntitySystem
 
         if (TryComp(ev.Target, out StatusEffectsComponent? status))
         {
-            Stun.TryParalyze(ev.Target, ev.ParalyzeDuration, true, status);
+            Stun.TryUpdateParalyzeDuration(ev.Target, ev.ParalyzeDuration);
             _jitter.DoJitter(ev.Target, ev.JitterStutterDuration, true, status: status);
             _stutter.DoStutter(ev.Target, ev.JitterStutterDuration, true, status);
         }
@@ -272,7 +273,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (!TryComp(ev.Target, out StatusEffectsComponent? status))
             return;
 
-        Stun.TryParalyze(ev.Target, ev.ParalyzeDuration, true, status);
+        Stun.TryUpdateParalyzeDuration(ev.Target, ev.ParalyzeDuration);
 
         var targetWizard = HasComp<WizardComponent>(ev.Target) || HasComp<ApprenticeComponent>(ev.Target);
 
@@ -423,9 +424,9 @@ public abstract class SharedSpellsSystem : EntitySystem
                 continue;
 
             if (HasComp<SiliconComponent>(target) || HasComp<BorgChassisComponent>(target))
-                Stun.TryParalyze(target, ev.SiliconStunTime / range, true, status);
+                Stun.TryUpdateParalyzeDuration(target, ev.SiliconStunTime / range);
             else
-                Stun.KnockdownOrStun(target, ev.KnockdownTime / range, true, status);
+                Stun.KnockdownOrStun(target, ev.KnockdownTime / range, true);
         }
 
         ev.Handled = true;
@@ -1083,9 +1084,13 @@ public abstract class SharedSpellsSystem : EntitySystem
             kill = true;
         }
 
-        if (_threshold.TryGetThresholdForState(ev.Performer, MobState.Critical, out var crit, thresholds) &&
-            targetHealth <= crit)
-            _threshold.SetMobStateThreshold(ev.Performer, targetHealth - 0.01, MobState.Critical, thresholds);
+        // Orion-Edit-Start
+        foreach (var state in new[] { MobState.SoftCritical, MobState.HardCritical })
+        {
+            if (_threshold.TryGetThresholdForState(ev.Performer, state, out var crit, thresholds) && crit >= targetHealth)
+                _threshold.SetMobStateThreshold(ev.Performer, targetHealth - 0.01, state, thresholds);
+        }
+        // Orion-Edit-End
 
         _threshold.SetMobStateThreshold(ev.Performer, targetHealth, MobState.Dead, thresholds);
 
@@ -1240,6 +1245,14 @@ public abstract class SharedSpellsSystem : EntitySystem
         else
             EnsureComp<CurseOfByondComponent>(ev.Target);
 
+        ev.Handled = true;
+    }
+    private void OnRathen(RathenEvent ev)
+    {
+        if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
+            return;
+
+        Rathen(ev);
         ev.Handled = true;
     }
 
@@ -1536,6 +1549,8 @@ public abstract class SharedSpellsSystem : EntitySystem
     }
 
     protected virtual void Blink(BlinkSpellEvent ev) { }
+
+    protected virtual void Rathen(RathenEvent ev) { }
 
     #endregion
 }

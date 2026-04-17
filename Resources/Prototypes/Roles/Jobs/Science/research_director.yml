@@ -137,12 +137,10 @@
   description: job-description-rd
   playTimeTracker: JobResearchDirector
   requirements:
-  - !type:RoleTimeRequirement
-    role: JobScientist
-    time: 10800 #3 hrs # Amour
   - !type:DepartmentTimeRequirement
     department: Science
-    time: 18000 #5 hrs # Amour
+    time: 14400 #4 hrs # Amour-Edit
+  - !type:DiscordLinkRequirement # Amour
   - !type:AgeRequirement # Amour
     requiredAge: 23
   weight: 10
@@ -154,9 +152,9 @@
 #  guides: # goobstation | Orion-Edit: Removed because dont have this SOP
 #  - Science
 #  - Command
-#  - ResearchDirector SOP
-#  - Science SOP
-  goobcoins: 40 #Goob content
+#  - ResearchDirectorSOP
+#  - ScienceSOP
+  goobcoins: 50 #Goob content # Amour-Edit
   access:
   - Research
   - Command

@@ -42,10 +42,10 @@
   - type: StaminaDamageOnCollide
     damage: 30
   - type: KnockdownOnCollide
-    behavior: DropIfStanding
+    dropItems: true
   - type: BlurOnCollide
   - type: TimedDespawn
-    lifetime: 0.4
+    lifetime: 0.6 # Orion-Edit: 0.4 > 0.6
   - type: Ammo
     muzzleFlash: null
   - type: Reflective
@@ -396,8 +396,8 @@
       - ReagentId: TearGas
         Quantity: 20
     spreadAmount: 5
-  - type: ActiveTimerTrigger
-    timeRemaining: 5
+  - type: TimerTrigger
+    delay: 5
   - type: DeleteOnTrigger
   - type: Projectile
     damage:

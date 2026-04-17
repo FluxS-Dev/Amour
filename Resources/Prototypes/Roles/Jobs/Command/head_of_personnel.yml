@@ -139,28 +139,26 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 7200 #2 hrs # Amour
+      time: 3600 #1 h # Amour-Edit
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 7200 #2 hrs # Amour
+      time: 7200 #2 hrs # Amour-Edit
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 7200 #2 hrs # Amour
+      time: 7200 #2 hrs # Amour-Edit
     - !type:DepartmentTimeRequirement
-      department: Security
-      time: 7200 #2 hrs # Amour
-    - !type:DepartmentTimeRequirement
-      department: Command
-      time: 7200 #2 hrs # Amour
+      department: Cargo
+      time: 3600 #1 h # Amour-Edit
+    - !type:DiscordLinkRequirement
     - !type:AgeRequirement # Amour
       requiredAge: 23
 #  guides: # goobstation | Orion-Edit: Removed because dont have this SOP
 #  - Command
 #  - Succession
-#  - StandardProcedures SOP
-#  - HeadOfPersonnel SOP
+#  - StandardProceduresSOP
+#  - HeadOfPersonnelSOP
 #  - Writing
-  goobcoins: 40 #Goob content
+  goobcoins: 70 #Goob content # Amour-Edit
   weight: 20
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
@@ -210,6 +208,7 @@
     #gloves: ClothingHandsGlovesHop
     ears: ClothingHeadsetAltCommand
     belt: BoxFolderClipboard
+    eyes: ClothingEyesHudCommand
   storage:
     back:
     - Flash

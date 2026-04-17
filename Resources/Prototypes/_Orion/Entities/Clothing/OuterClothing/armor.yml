@@ -225,3 +225,22 @@
   - type: ToggleableClothing
     clothingPrototypes: #goobstation change
       head: ClothingHeadHelmetAllianceAssassin
+
+- type: entity
+  parent: ClothingOuterArmorBasic
+  id: ClothingOuterArmorKendoBogu
+  name: bogu
+  description: A set of armor used in Kendo. It covers the waist, torso, and hands.
+  components:
+  - type: Sprite
+    sprite: _Orion/Clothing/OuterClothing/Armor/bogu.rsi
+  - type: Clothing
+    sprite: _Orion/Clothing/OuterClothing/Armor/bogu.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.8
+  - type: ClothingSpeedModifier
+    walkModifier: 0.95
+    sprintModifier: 0.85

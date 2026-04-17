@@ -234,6 +234,8 @@ public sealed partial class ChatUIController : UIController
     public event Action<ChatChannel, int?>? UnreadMessageCountsUpdated;
     public event Action<ChatMessage>? MessageAdded;
 
+    public Func<string, ChatSelectChannel, bool>? BeforeMessageSent; // Amour edit
+
     public override void Initialize()
     {
         _sawmill = Logger.GetSawmill("chat");
@@ -846,6 +848,11 @@ public sealed partial class ChatUIController : UIController
         _typingIndicator?.ClientSubmittedChatText();
 
         var text = box.ChatInput.Input.Text;
+
+        // Amour edit
+        if (BeforeMessageSent != null && !BeforeMessageSent(text, channel))
+            return;
+
         box.ChatInput.Input.Clear();
         box.ChatInput.Input.ReleaseKeyboardFocus();
         UpdateSelectedChannel(box);

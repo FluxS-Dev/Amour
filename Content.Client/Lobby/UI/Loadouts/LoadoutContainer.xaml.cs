@@ -25,7 +25,9 @@ namespace Content.Client.Lobby.UI.Loadouts;
 public enum LoadoutSourceType
 {
     UserSelected,
-    InheritedFromBase
+    InheritedFromBase,
+    PersonalFluff,
+    BoostySubscription
 }
 // Amour edit end
 

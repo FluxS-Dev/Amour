@@ -253,6 +253,13 @@
   - type: Construction
     graph: SpesosCounterfeit
     node: start
+  # Orion-Start
+  - type: PhysicalComposition
+    materialComposition:
+      SheetPaper: 100
+  - type: Material
+  # Orion-End
+  - type: StationAiWhitelist
 
 - type: entity
   name: paper scrap
@@ -632,3 +639,4 @@
       - !type:EmptyAllContainersBehaviour
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: StationAiWhitelist

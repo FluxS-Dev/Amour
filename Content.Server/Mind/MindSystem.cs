@@ -71,14 +71,15 @@ using Content.Goobstation.Shared.Mind.Components;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
-using Content.Server.Mind.Commands;
 using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
+using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Players;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Tag;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
@@ -341,6 +342,15 @@ public sealed class MindSystem : SharedMindSystem
             component!.Mind = mindId;
             mind.OwnedEntity = entity;
             mind.OriginalOwnedEntity ??= GetNetEntity(mind.OwnedEntity);
+
+            // Orion-Start
+            if (mind.FirstRoundParticipationTime == null
+                && (HasComp<HumanoidAppearanceComponent>(entity.Value)
+                    || HasComp<BorgBrainComponent>(entity.Value)
+                    || HasComp<BorgChassisComponent>(entity.Value)))
+                mind.FirstRoundParticipationTime = _gameTicker.RoundDuration();
+            // Orion-End
+
             Entity<MindComponent> mindEnt = (mindId, mind);
             Entity<MindContainerComponent> containerEnt = (entity.Value, component);
             RaiseLocalEvent(entity.Value, new MindAddedMessage(mindEnt, containerEnt));
@@ -435,11 +445,36 @@ public sealed class MindSystem : SharedMindSystem
             _tag.AddTag(mind.OwnedEntity.Value, SharedBindSoulSystem.IgnoreBindSoulTag);
         _tag.AddTag(target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
 
-        MakeSentientCommand.MakeSentient(target, EntityManager);
+        MakeSentient(target);
         TransferTo(mindId, target, ghostCheckOverride: true, mind: mind);
 
         if (mind.OwnedEntity != null) // Goobstation
             _tag.AddTag(mind.OwnedEntity.Value, SharedBindSoulSystem.IgnoreBindSoulTag);
         _tag.RemoveTag(target, SharedBindSoulSystem.IgnoreBindSoulTag); // Goobstation
+    }
+    // Goobstation start
+    // Used for thunderdome
+
+    /// <summary>
+    /// Moves a visiting entity to a new entity to visit.
+    /// </summary>
+    /// <param name="oldVisiting"> old entity we were visiting</param>
+    /// <param name="newVisiting"> new entity to visit</param>
+    /// <param name="oldVComp"> old entity <see cref="VisitingMindComponent"/>, required and will be set null to prevent unvisiting.</param>
+    /// <param name="mindComp"> mind component </param>
+    /// <param name="newReturn"> a new entity to which to return. Leave null to keep old one.</param>
+    public void MoveVisitingEntity(
+        EntityUid oldVisiting,
+        EntityUid newVisiting,
+        VisitingMindComponent oldVComp,
+        MindComponent mindComp,
+        EntityUid? newReturn = null
+    )
+    {
+        var newVComp = EnsureComp<VisitingMindComponent>(newVisiting);
+        newVComp.MindId = oldVComp.MindId;
+        oldVComp.MindId = null; // otherwise itll forcefully unvisit you.
+        mindComp.VisitingEntity = newVisiting;
+        mindComp.OwnedEntity = newReturn ?? mindComp.OwnedEntity;
     }
 }

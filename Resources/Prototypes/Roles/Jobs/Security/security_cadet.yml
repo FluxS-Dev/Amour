@@ -101,20 +101,21 @@
   playTimeTracker: JobSecurityCadet
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hrs # Amour
+      time: 18000 #5 hrs # Amour-Edit
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 18000 #5 hrs # Amour
-      inverted: true # stop playing intern if you're good at security!
+      time: 72000 #20 hrs # Amour-Edit
+      inverted: true # stop playing cadet if you're good at security!
+    - !type:DiscordLinkRequirement # Amour
   startingGear: SecurityCadetGear
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security
   canBeAntag: false
   guides: # goobstation
-  # Orion-Edit-Start
-  - SpaceLaw
-  # Orion-Edit-End
-  goobcoins: 30 #Goob content
+  # Amour-Edit-Start
+  # - SpaceLaw # Disabled until guide is created
+  # Amour-Edit-End
+  goobcoins: 20 #Goob content # Amour-Edit
   access:
   - Security
   - Brig

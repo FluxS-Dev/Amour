@@ -20,14 +20,15 @@
 
 using System.Linq;
 using Content.Goobstation.Shared.CrewMonitoring;
-using Content.Server.Jittering;
 using Content.Server.Power.EntitySystems;
 using Content.Server.PowerCell;
+using Content.Server.Popups;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Bed.Components;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
-using Content.Shared.Jittering;
+using Content.Shared.Emag.Systems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Medical.CrewMonitoring;
 using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Morgue.Components;
@@ -46,9 +47,9 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
     // Orion-Start
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly JitteringSystem _jitter = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly ContainerSystem _containerSystem = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
     // Orion-End
 
     public override void Initialize()
@@ -57,6 +58,7 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
         SubscribeLocalEvent<CrewMonitoringConsoleComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<CrewMonitoringConsoleComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
         SubscribeLocalEvent<CrewMonitoringConsoleComponent, BoundUIOpenedEvent>(OnUIOpened);
+        SubscribeLocalEvent<CrewMonitoringConsoleComponent, GotEmaggedEvent>(OnEmagged); // Orion
     }
 
     // Orion-Start
@@ -64,21 +66,24 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        foreach (var component in EntityQuery<CrewMonitoringConsoleComponent>())
+        var query = EntityQueryEnumerator<CrewMonitoringConsoleComponent>();
+        while (query.MoveNext(out var uid, out var component))
         {
+
+            if (component.EmagExpireTime.HasValue && _gameTiming.CurTime >= component.EmagExpireTime.Value) // Emag expiry timer
+            {
+                component.EmagExpireTime = null;
+                UpdateUserInterface(uid, component);
+            }
+
+            if (!this.IsPowered(uid, EntityManager))
+                continue;
+
             if (_gameTiming.CurTime < component.NextAlertTime)
                 continue;
 
             if (!component.DoAlert)
                 continue;
-
-            var uid = component.Owner;
-
-            if (!this.IsPowered(uid, EntityManager))
-            {
-                RemCompDeferred<JitteringComponent>(uid);
-                continue;
-            }
 
             var hasUnsecuredCorpse = HasUnsecuredCorpse(component);
             TriggerAlert(uid, component, hasUnsecuredCorpse);
@@ -103,7 +108,6 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
             }
 
             _audio.PlayPvs(component.AlertSound, uid, component.AlertAudioParams);
-            _jitter.AddJitter(uid, 10, 15);
         }
         else
         {
@@ -116,20 +120,28 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
                 if (component.NormalLightRadius != null)
                     _light.SetRadius(uid, component.NormalLightRadius.Value, light);
             }
-
-            RemCompDeferred<JitteringComponent>(uid);
         }
     }
 
     private bool HasUnsecuredCorpse(CrewMonitoringConsoleComponent component)
     {
-        foreach (var sensor in component.ConnectedSensors.Values)
+        IEnumerable<SuitSensorStatus> sensors = component.ConnectedSensors.Values;
+
+        if (component.Departments.Count > 0)
         {
-            // Check for corpses with coordinates sensor mode
-            if (sensor.IsAlive || sensor.Coordinates == null)
+            var allowed = component.Departments.Select(d => d.ToString()).ToHashSet();
+            sensors = sensors.Where(s => s.JobDepartments.Any(dep => allowed.Contains(dep)));
+        }
+
+        foreach (var s in sensors)
+        {
+            if (s.Mode != SuitSensorMode.SensorCords)
                 continue;
 
-            if (!TryGetEntity(sensor.OwnerUid, out var corpse) || Deleted(corpse.Value))
+            if (s.IsAlive || s.Coordinates == null)
+                continue;
+
+            if (!TryGetEntity(s.OwnerUid, out var corpse) || Deleted(corpse.Value))
                 continue;
 
             if (!IsCorpseSecured(corpse.Value))
@@ -200,18 +212,95 @@ public sealed class CrewMonitoringConsoleSystem : EntitySystem
             EnsureComp<NavMapComponent>(xform.GridUid.Value);
 
         // Update all sensors info
+        // Orion-Start: Filtering by departments
+        var allSensors = component.ConnectedSensors.Values.ToList();
+
+        if (component.Departments.Count > 0)
+        {
+            var allowed = component.Departments.Select(d => d.ToString()).ToHashSet();
+            allSensors = allSensors
+                .Where(s => s.JobDepartments.Any(dep => allowed.Contains(dep)))
+                .Select(s => new SuitSensorStatus(
+                    s.OwnerUid,
+                    s.SuitSensorUid,
+                    s.Name,
+                    s.Job,
+                    s.JobIcon,
+                    s.JobDepartments!.Where(dep => allowed.Contains(dep)).ToList(),
+                    s.Mode)
+                {
+                    IsAlive = s.IsAlive,
+                    TotalDamage = s.TotalDamage,
+                    TotalDamageThreshold = s.TotalDamageThreshold,
+                    Coordinates = s.Coordinates,
+                    IsCommandTracker = s.IsCommandTracker,
+                    Timestamp = s.Timestamp,
+                })
+                .ToList();
+        }
+
+        var temporaryEmagged = component.EmagExpireTime is { } expireAt && _gameTiming.CurTime < expireAt;
+        var effectiveIsEmagged = component.IsEmagged || temporaryEmagged; // For Emag
+        if (!effectiveIsEmagged)
+        {
+            allSensors = allSensors
+                .Where(s => s.Mode != SuitSensorMode.SensorOff)
+                .Select(s =>
+                {
+                    var p = new SuitSensorStatus(s.OwnerUid, s.SuitSensorUid, s.Name, s.Job, s.JobIcon, s.JobDepartments, s.Mode)
+                    {
+                        IsAlive = s.IsAlive,
+                        IsCommandTracker = s.IsCommandTracker,
+                        Timestamp = s.Timestamp,
+                    };
+                    switch (s.Mode)
+                    {
+                        case SuitSensorMode.SensorVitals:
+                            p.TotalDamage = s.TotalDamage;
+                            p.TotalDamageThreshold = s.TotalDamageThreshold;
+                            break;
+                        case SuitSensorMode.SensorCords:
+                            p.TotalDamage = s.TotalDamage;
+                            p.TotalDamageThreshold = s.TotalDamageThreshold;
+                            p.Coordinates = s.Coordinates;
+                            break;
+                    }
+                    return p;
+                })
+                .ToList();
+        }
+        // Orion-End
         // GoobStation - Start
         var isCommandOnly = HasComp<CrewMonitorScanningComponent>(uid);
 
-        var filteredSensors = component.ConnectedSensors
-            .Where(pair => isCommandOnly
-                ? pair.Value.IsCommandTracker
-                : !pair.Value.IsCommandTracker)
-            .Select(pair => pair.Value)
+        // Orion-Edit-Start: use allSensors (already department-filtered) instead of ConnectedSensors
+        var filteredSensors = allSensors
+            .Where(s => isCommandOnly
+                ? s.IsCommandTracker
+                : !s.IsCommandTracker)
             .ToList();
-        _uiSystem.SetUiState(uid, CrewMonitoringUIKey.Key, new CrewMonitoringState(filteredSensors));
+        _uiSystem.SetUiState(uid, CrewMonitoringUIKey.Key, new CrewMonitoringState(filteredSensors, effectiveIsEmagged));
+        // Orion-Edit-End
         // GoobStation - End
         //var allSensors = component.ConnectedSensors.Values.ToList();
         //_uiSystem.SetUiState(uid, CrewMonitoringUIKey.Key, new CrewMonitoringState(allSensors));
     }
+
+    // Orion-Start
+    private void OnEmagged(EntityUid uid, CrewMonitoringConsoleComponent component, ref GotEmaggedEvent ev)
+    {
+        var temporaryEmagged = component.EmagExpireTime is { } expireAt && _gameTiming.CurTime < expireAt;
+        if (ev.Handled || component.IsEmagged || temporaryEmagged)
+            return;
+
+        _audio.PlayPvs(component.SparkSound, uid);
+        _popup.PopupEntity(
+            Loc.GetString("emag-success", ("target", Identity.Entity(uid, EntityManager))),
+            uid);
+
+        component.EmagExpireTime = _gameTiming.CurTime + CrewMonitoringConsoleComponent.EmagDuration;
+        UpdateUserInterface(uid, component);
+        ev.Handled = true;
+    }
+    // Orion-End
 }

@@ -18,12 +18,14 @@
   - MagazineBoxShotgunHighCaliber
   - MagazineBoxShotgunSlugHighCaliber
   - MagazineBoxShotgunPracticeHighCaliber
+  - MagazineShotgunLeverRifleEmpty # Orion
 
 - type: latheRecipePack
   id: SecurityEquipmentStaticGoob
   recipes:
   - GrenadeFlashBang
   - BolaEnergy
+  - BodyBag #A pile of rotting rev carcases is on my hands.
 
 - type: latheRecipePack
   id: SecurityHypoStatic
@@ -41,6 +43,21 @@
   - PolymerBaton
   - SpearTelescopic
 
+- type: latheRecipePack
+  id: SecurityWeaponsNonEmaggableStaticGoob # At some point Terminus should be mapped and not printable, at least without research.
+  recipes:
+  - Terminus
+
+- type: latheRecipePack
+  id: ERTAmmoStaticGoob
+  recipes:
+  - MagazineBoxLightRifle
+  - MagazineLightRifleEmpty
+  - MagazineLightRifle
+  - MagazineMagnumEmpty
+  - MagazineMagnum
+  - MagazineBoxShotgunHighCaliber
+
 ## Dynamic
 - type: latheRecipePack
   id: SecurityWeaponsGoob
@@ -52,7 +69,7 @@
   - WeaponLaserCellSMG
   - WeaponLaserCellSniper
   - ClothingBackpackLMGBattery
-  - ClothingEyesGlassesSecurityContraDetect
+#  - ClothingEyesGlassesSecurityContraDetect # Orion-Edit
 
 - type: latheRecipePack
   id: SecurityAmmoGoob

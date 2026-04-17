@@ -22,4 +22,16 @@ public sealed class AmourCCVars
     /// </summary>
     public static readonly CVarDef<string> DiscordOocWebhookUrl =
         CVarDef.Create("discord.ooc_webhook_url", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    ///     Discord bot token for embedded OOC bridge bot.
+    /// </summary>
+    public static readonly CVarDef<string> DiscordOocBotToken =
+        CVarDef.Create("amour.discord_ooc_bot_token", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    ///     Discord channel ID for OOC bridge.
+    /// </summary>
+    public static readonly CVarDef<ulong> DiscordOocChannelId =
+        CVarDef.Create("amour.discord_ooc_channel_id", 0UL, CVar.SERVERONLY);
 }

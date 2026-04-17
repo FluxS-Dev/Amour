@@ -1,13 +1,15 @@
 using Content.Goobstation.Common.Effects;
+using Content.Server.Construction.Components;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared._Orion.Power.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Wall;
 using Robust.Shared.Utility;
 
 namespace Content.Server._Orion.Power.Systems;
@@ -26,7 +28,9 @@ public sealed class InducerSystem : EntitySystem
 
         SubscribeLocalEvent<InducerComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<InducerComponent, InducerDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<InducerComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
+        SubscribeLocalEvent<InducerComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<InducerComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
+        SubscribeLocalEvent<InducerComponent, GetVerbsEvent<Verb>>(OnGetRmbVerbs);
     }
 
     private void OnAfterInteract(EntityUid uid, InducerComponent component, AfterInteractEvent args)
@@ -89,9 +93,12 @@ public sealed class InducerSystem : EntitySystem
         if (!TryComp<BatteryComponent>(slot.Item.Value, out var sourceBattery))
             return;
 
-        var effectiveMultiplier = component.TransferMultiplier;
-        if (HasComp<GunComponent>(target))
-            effectiveMultiplier = component.GunTransferMultiplier;
+        var effectiveMultiplier = UsesStructureMultiplier(target)
+            ? component.StructureTransferMultiplier
+            : component.TransferMultiplier;
+
+        if (effectiveMultiplier <= 0f)
+            return;
 
         var baseEnergyToConsume = component.TransferRate * component.TransferDelay;
         baseEnergyToConsume = Math.Min(baseEnergyToConsume, sourceBattery.CurrentCharge);
@@ -119,35 +126,80 @@ public sealed class InducerSystem : EntitySystem
         }
     }
 
-    private void OnGetVerbs(EntityUid uid, InducerComponent component, GetVerbsEvent<AlternativeVerb> args)
+    private void OnUseInHand(EntityUid uid, InducerComponent comp, UseInHandEvent args)
     {
-        if (!args.CanAccess || !args.CanInteract)
+        if (args.Handled)
             return;
 
-        var priority = 0;
-        foreach (var rate in component.AvailableTransferRates)
+        CycleMode(uid, comp, args.User);
+        args.Handled = true;
+    }
+
+    private void OnGetAltVerbs(EntityUid uid, InducerComponent comp, GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        if (_itemSlots.TryGetSlot(uid, comp.PowerCellSlotId, out var slot) && slot.Item != null)
+            return;
+
+    }
+
+
+    private void OnGetRmbVerbs(EntityUid uid, InducerComponent comp, GetVerbsEvent<Verb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        var list = comp.AvailableTransferRates;
+        if (list is null || list.Count == 0)
+            return;
+
+        var prio = 0;
+        foreach (var rate in list)
         {
-            AlternativeVerb verb = new()
+            var r = rate;
+            args.Verbs.Add(new Verb
             {
-                Text = Loc.GetString("inducer-set-transfer-rate", ("rate", rate)),
-                Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/zap.svg.192dpi.png")),
                 Category = VerbCategory.SelectType,
+                Text = Loc.GetString("inducer-set-transfer-rate", ("rate", r)),
+                Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/zap.svg.192dpi.png")),
+                Priority = prio--,
                 Act = () =>
                 {
-                    if (Math.Abs(component.TransferRate - rate) < 0.01f)
-                        return;
-
-                    component.TransferRate = rate;
-                    Dirty(uid, component);
-                    _popup.PopupEntity(Loc.GetString("inducer-transfer-rate-set", ("rate", rate)), uid, args.User);
-                },
-
-                Priority = priority,
-            };
-
-            priority--;
-
-            args.Verbs.Add(verb);
+                    if (comp.TransferRate == r) return;
+                    comp.TransferRate = r;
+                    Dirty(uid, comp);
+                    _popup.PopupEntity(Loc.GetString("inducer-transfer-rate-set", ("rate", r)), uid, args.User);
+                }
+            });
         }
+    }
+
+
+    private void CycleMode(EntityUid uid, InducerComponent comp, EntityUid? user)
+    {
+        var list = comp.AvailableTransferRates;
+        if (list is null || list.Count == 0)
+            return;
+
+        var idx = list.IndexOf(comp.TransferRate);
+
+        comp.TransferRate = list[(idx + 1) % list.Count];
+        Dirty(uid, comp);
+
+        if (user != null)
+            _popup.PopupEntity(Loc.GetString("inducer-transfer-rate-set", ("rate", comp.TransferRate)), uid, user.Value);
+    }
+
+
+    private bool UsesStructureMultiplier(EntityUid target)
+    {
+        if (Transform(target).Anchored)
+            return true;
+
+        return HasComp<ApcComponent>(target)
+               || HasComp<MachineComponent>(target)
+               || HasComp<WallMountComponent>(target);
     }
 }

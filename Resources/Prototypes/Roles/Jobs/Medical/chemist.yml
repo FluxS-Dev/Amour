@@ -68,7 +68,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 9000 #2.50 hrs # Amour
+      time: 9000 #2.5 hrs # Amour-Edit
   startingGear: ChemistGear
   icon: "JobIconChemist"
   supervisors: job-supervisors-cmo

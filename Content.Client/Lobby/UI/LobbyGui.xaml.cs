@@ -77,9 +77,21 @@ namespace Content.Client.Lobby.UI
 
             LeaveButton.OnPressed += _ => _consoleHost.ExecuteCommand("disconnect");
             OptionsButton.OnPressed += _ => UserInterfaceManager.GetUIController<OptionsUIController>().ToggleWindow();
+            BoostyButton.OnPressed += _ => IoCManager.Resolve<IUriOpener>().OpenUri(new Uri("https://boosty.to/amourreborn")); // amour
 
             CollapseButton.OnPressed += _ => TogglePanel(false);
             ExpandButton.OnPressed += _ => TogglePanel(true);
+
+            // Orion-Start
+            LeftCollapseButton.OnPressed += _ => ToggleLeftPanel(false);
+            LeftExpandButton.OnPressed += _ => ToggleLeftPanel(true);
+
+            TopCollapseButton.OnPressed += _ => ToggleTopPanel(false);
+            TopExpandButton.OnPressed += _ => ToggleTopPanel(true);
+
+            AttributionCollapseButton.OnPressed += _ => ToggleAttributionPanel(false);
+            AttributionExpandButton.OnPressed += _ => ToggleAttributionPanel(true);
+            // Orion-End
         }
 
         public void SwitchState(LobbyGuiState state)
@@ -92,17 +104,26 @@ namespace Content.Client.Lobby.UI
                 case LobbyGuiState.Default:
                     DefaultState.Visible = true;
                     RightSide.Visible = true;
+                    // Orion-Start
+                    LeftSide.HorizontalExpand = false;
+                    LayoutSpacer.Visible = true;
+                    ExpandPanel.Visible = false;
+                    TopPanel.Visible = true;
+                    TopExpandPanel.Visible = false;
+                    LeftInfoPanel.Visible = true;
+                    LeftExpandPanel.Visible = false;
+                    AttributionPanel.Visible = false;
+                    AttributionExpandPanel.Visible = true;
+                    // Orion-End
                     break;
                 case LobbyGuiState.CharacterSetup:
                     CharacterSetupState.Visible = true;
 
-                    var actualWidth = (float) UserInterfaceManager.RootControl.PixelWidth;
-                    var setupWidth = (float) LeftSide.PixelWidth;
-
-                    if (1 - (setupWidth / actualWidth) > 0.30)
-                    {
-                        RightSide.Visible = false;
-                    }
+                    // Orion-Edit-Start
+                    LeftSide.HorizontalExpand = true;
+                    LayoutSpacer.Visible = false;
+                    RightSide.Visible = false;
+                    // Orion-Edit-End
 
                     UserInterfaceManager.GetUIController<LobbyUIController>().ReloadCharacterSetup();
 
@@ -116,6 +137,26 @@ namespace Content.Client.Lobby.UI
             ExpandPanel.Visible = !value;
         }
 
+        // Orion-Start
+        private void ToggleLeftPanel(bool value)
+        {
+            LeftInfoPanel.Visible = value;
+            LeftExpandPanel.Visible = !value;
+        }
+
+        private void ToggleTopPanel(bool value)
+        {
+            TopPanel.Visible = value;
+            TopExpandPanel.Visible = !value;
+        }
+
+        private void ToggleAttributionPanel(bool value)
+        {
+            AttributionPanel.Visible = value;
+            AttributionExpandPanel.Visible = !value;
+        }
+        // Orion-End
+
         public enum LobbyGuiState : byte
         {
             /// <summary>
@@ -125,7 +166,7 @@ namespace Content.Client.Lobby.UI
             /// <summary>
             ///  The character setup state.
             /// </summary>
-            CharacterSetup
+            CharacterSetup,
         }
     }
 }

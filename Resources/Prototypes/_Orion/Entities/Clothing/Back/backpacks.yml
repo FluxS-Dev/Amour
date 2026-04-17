@@ -15,3 +15,30 @@
   components:
   - type: Sprite
     sprite: _Orion/Clothing/Back/Backpacks/spaceninja_backpack.rsi
+
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackDelivery
+  name: delivery bag
+  description: A food delivery service backpack with aluminum foiling on the inside, which sustains heat.
+  components:
+  - type: Sprite
+    sprite: _Orion/Clothing/Back/Backpacks/delivery.rsi
+  - type: AntiRottingContainer # Anti-rotting food, etc.
+
+- type: entity
+  parent: BaseItem
+  id: ClothingBackpackHoldingInert
+  name: inert bag of holding
+  description: What is currently just an unwieldy block of metal with a slot ready to accept a bluespace anomaly core.
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Backpacks/holding.rsi
+    state: holding-broken
+  - type: Item
+    size: Ginormous
+    sprite: Clothing/Back/Backpacks/holding.rsi
+    heldPrefix: broken
+  - type: Tag
+    tags:
+    - InertBagOfHoldingBackpack

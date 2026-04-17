@@ -51,14 +51,22 @@ public abstract class SharedBedSystem : EntitySystem
         Dirty(bed);
 
         // Single action entity, cannot strap multiple entities to the same bed.
-        DebugTools.AssertEqual(args.Strap.Comp.BuckledEntities.Count, 1);
+//        DebugTools.AssertEqual(args.Strap.Comp.BuckledEntities.Count, 1); // Orion-Edit: DoubleBed
     }
 
     private void OnUnstrapped(Entity<HealOnBuckleComponent> bed, ref UnstrappedEvent args)
     {
-        _actionsSystem.RemoveAction(args.Buckle.Owner, bed.Comp.SleepAction);
-        _sleepingSystem.TryWaking(args.Buckle.Owner);
-        RemComp<HealOnBuckleHealingComponent>(bed);
+        // If the entity being unbuckled is terminating, we shouldn't try to act upon it, as some components may be gone
+        if (!Terminating(args.Buckle.Owner))
+        {
+            _actionsSystem.RemoveAction(args.Buckle.Owner, bed.Comp.SleepAction);
+            _sleepingSystem.TryWaking(args.Buckle.Owner);
+        }
+
+        // Orion-Edit-Start: Check for double bed
+        if (args.Strap.Comp.BuckledEntities.Count == 0)
+            RemComp<HealOnBuckleHealingComponent>(bed);
+        // Orion-Edit-End
     }
 
     private void OnStasisStrapped(Entity<StasisBedComponent> ent, ref StrappedEvent args)

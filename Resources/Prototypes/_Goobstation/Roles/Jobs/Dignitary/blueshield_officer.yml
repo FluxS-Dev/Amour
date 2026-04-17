@@ -1,4 +1,4 @@
-﻿# SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 DarkenedSynergy <70016079+DarkenedSynergy@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 GitHubUser53123 <110841413+GitHubUser53123@users.noreply.github.com>
@@ -35,17 +35,22 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 45000 #12.50 hrs # Amour
+      time: 54000 # 15 hours # Amour-Edit: Don't change this!
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 27000 #7.50 hrs # Amour
+      time: 36000 # 10 hours # Amour-Edit: Don't change this!
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 45000 #12.50 hrs # Amour
+      time: 72000 # 20 hours # Amour-Edit: Don't change this!
+    - !type:DiscordLinkRequirement
     - !type:AgeRequirement
       requiredAge: 21
+    - !type:SpeciesRequirement # Goob - None Felinid
+      inverted: true
+      species:
+      - Felinid
 #  guides: # Orion-Edit: Removed because dont have this SOP
-#  - BlueshieldOfficer SOP
+#  - BlueshieldOfficerSOP
 #  - Command
 #  - Succession
   goobcoins: 45

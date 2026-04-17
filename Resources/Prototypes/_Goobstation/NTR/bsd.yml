@@ -72,15 +72,7 @@
     raffle:
       settings: default
     requirements:
-    - !type:RoleTimeRequirement
-      role: JobMedicalDoctor
-      time: 10800 #3h
-    - !type:RoleTimeRequirement
-      role: JobSecurityOfficer
-      time: 10800 #3h
-    - !type:DepartmentTimeRequirement
-      department: Command
-      time: 10800 #3h
+      - !type:DiscordLinkRequirement # Amour edit
   - type: GhostRoleMobSpawner
     prototype: BlueShieldDeputy
 

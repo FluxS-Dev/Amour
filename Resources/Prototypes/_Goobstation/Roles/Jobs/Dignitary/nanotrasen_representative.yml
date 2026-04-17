@@ -1,4 +1,4 @@
-﻿# SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
@@ -99,9 +99,15 @@
   description: job-description-ntr
   playTimeTracker: JobNanotrasenRepresentative
   requirements:
+    - !type:AnyOfRequirement # Amour edit - Discord OR playtime
+      requirements:
+        - !type:DiscordLinkRequirement
+        - !type:DepartmentTimeRequirement
+          department: Command
+          time: 7200 #2 hours
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 90000 #25 hrs # Amour
+      time: 90000 #25 hours # Amour-Edit
     - !type:AgeRequirement
       requiredAge: 21
   weight: 20
@@ -112,9 +118,11 @@
   supervisors: job-supervisors-centcom
   canBeAntag: false
   guides:
-  # Orion-Edit-Start
-  - SpaceLaw
-  # Orion-Edit-End
+  # Amour-Edit-Start
+  # - SpaceLaw # Disabled until guide is created
+  # - SOP # Disabled until guide is created
+  # - SOP-Alerts # Disabled until guide is created
+  # Amour-Edit-End
   goobcoins: 40
   access:
   - Security

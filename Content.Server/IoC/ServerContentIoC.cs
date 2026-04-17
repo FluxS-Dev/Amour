@@ -165,9 +165,13 @@
 
 using Content.Server._Goobstation.Antag;
 using Content.Server._Orion.ServerProtection;
+using Content.Server._Orion.ServerProtection.Administration;
 using Content.Server._Orion.ServerProtection.Chat;
 using Content.Server._Orion.ServerProtection.Emoting;
 using Content.Server._RMC14.LinkAccount;
+using Content.Server._Amour.Loadouts;
+using Content.Server._Amour.Discord;
+using Content.Shared._Amour.Loadouts.Effects;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server._Amour.TTS;
@@ -250,10 +254,19 @@ namespace Content.Server.IoC
             IoCManager.Register<CVarControlManager>();
             IoCManager.Register<LastRolledAntagManager>(); // Goobstation - antag pity
             IoCManager.Register<LinkAccountManager>(); // RMC - Patreon
+            // Amour edit start
+            IoCManager.Register<IDiscordLinkChecker, DiscordLinkChecker>();
+            IoCManager.Register<Content.Shared._Amour.Discord.ISharedDiscordLinkManager, Content.Server._Amour.Discord.ServerDiscordLinkManager>();
+            IoCManager.Register<IBoostyTierManager, BoostyTierManager>();
+            IoCManager.Register<_Amour.Discord.DiscordOocBridgeService, _Amour.Discord.DiscordOocBridgeService>(); 
+            IoCManager.Register<Content.Server._Amour.Registry.ClientMetricsManager>();
+            // Amour edit end
             // Orion-Start
+            IoCManager.Register<ServerProtectionAuditManager>();
             IoCManager.Register<ServerProtectionPunishmentSystem>();
             IoCManager.Register<ChatProtectionSystem>();
             IoCManager.Register<EmoteProtectionSystem>();
+            IoCManager.Register<AdminActionProtectionSystem>();
             // Orion-End
             IoCManager.Register<TTSManager>(); // WD EDIT TTS
         }

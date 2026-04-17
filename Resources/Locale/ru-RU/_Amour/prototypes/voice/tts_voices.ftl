@@ -280,6 +280,48 @@ tts-voice-name-witch-doctor = Витч Доктор
 tts-voice-name-wraith-king = Врайт Кинг
 tts-voice-name-zeus = Зевс
 
+# Warhammer 40,000: Dawn of War
+tts-voice-name-chaos-cultists-dow = Культисты Хаоса
+tts-voice-name-chaos-marines-dow = Космодесантники Хаоса
+tts-voice-name-chaos-lord-dow = Лорд Хаоса
+tts-voice-name-chaos-sorceror-dow = Колдун Хаоса
+tts-voice-name-dark-eldar-archon-dow = Архон Тёмных Эльдар
+tts-voice-name-dark-eldar-mandrake-dow = Мандрагор Тёмных Эльдар
+tts-voice-name-dark-eldar-warrior-dow = Воин Тёмных Эльдар
+tts-voice-name-dark-eldar-wych-dow = Ведьма Тёмных Эльдар
+tts-voice-name-eldar-guardian-dow = Стражи Эльдар
+tts-voice-name-eldar-farseer-dow = Провидец Эльдар
+tts-voice-name-eldar-fire-dragon-dow = Огненный Дракон Эльдар
+tts-voice-name-eldar-warlock-dow = Колдун Эльдар
+tts-voice-name-guard-assassin-dow = Ассасин Имперской Гвардии
+tts-voice-name-guard-captain-dow = Капитан Имперской Гвардии
+tts-voice-name-guard-commissar-dow = Комиссар Имперской Гвардии
+tts-voice-name-guard-enginseer-dow = Техножрец Имперской Гвардии
+tts-voice-name-guard-sergeant-dow = Сержант Имперской Гвардии
+tts-voice-name-guard-heavy-weapons-dow = Команда тяжёлого оружия Имперской Гвардии
+tts-voice-name-guard-kasrkin-dow = Касркин Имперской Гвардии
+tts-voice-name-guard-ogryn-dow = Огрин Имперской Гвардии
+tts-voice-name-guard-priest-dow = Священник Имперской Гвардии
+tts-voice-name-guard-psyker-dow = Псайкер Имперской Гвардии
+tts-voice-name-ork-boys-dow = Бойзы Орков
+tts-voice-name-ork-flash-gitz-nobs-dow = Флэш Гитз и Нобы Орков
+tts-voice-name-ork-grots-dow = Гретчины Орков
+tts-voice-name-ork-warboss-dow = Варбосс Орков
+tts-voice-name-sisters-battle-sister-dow = Сестры Битвы
+tts-voice-name-sisters-missionary-dow = Миссионер Сестёр Битвы
+tts-voice-name-space-marines-2-dow = Космодесантники 2
+tts-voice-name-space-marines-chaplain-dow = Капеллан Космодесантников
+tts-voice-name-space-marines-dow = Космодесантники
+tts-voice-name-space-marines-force-commander-dow = Командир Сил Космодесантников
+tts-voice-name-space-marines-librarian-dow = Библиарий Космодесантников
+tts-voice-name-tau-ethereal-dow = Эфирный Тау
+tts-voice-name-tau-kroot-dow = Крууты Тау
+tts-voice-name-tutorial-female-dow = Инструкторша DOW
+tts-voice-name-tutorial-male-dow = Инструктор DOW
+
+# Kingpin: Life of Crime
+tts-voice-name-kingpin = Кингпин
+
 # MiSide
 tts-voice-name-mita = Мита
 tts-voice-name-mita-dream = Сонная Мита

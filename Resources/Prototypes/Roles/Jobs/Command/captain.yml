@@ -141,19 +141,20 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 7200 #2 hrs # Amour
+      time: 7200 # 2 h # Amour-Edit
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 7200 #2 hrs # Amour
+      time: 7200 # 2 h # Amour-Edit
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 7200 #2 hrs # Amour
+      time: 14400 # 4 hours
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 10800 #3 hrs # Amour
+      time: 14400 # 4 h # Amour-Edit
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 14000 #3.89 hrs # Amour
+      time: 28000 # 8 hours
+    - !type:DiscordLinkRequirement
     - !type:AgeRequirement # Amour
       requiredAge: 23
       #any MRP using our code might eventually want to use it
@@ -162,8 +163,8 @@
 #  guides: # goobstation | Orion-Edit: Removed because dont have this SOP
 #  - Command
 #  - Succession
-#  - StandardProcedures SOP
-#  - Captain SOP
+#  - StandardProceduresSOP
+#  - CaptainSOP
   goobcoins: 50 #Goob content
   weight: 20
   startingGear: CaptainGear
@@ -193,7 +194,7 @@
   id: CaptainGear
   equipment:
     shoes: ClothingShoesBootsLaceup
-    eyes: ClothingEyesGlassesSunglasses
+    eyes: ClothingEyesGlassesCommand
     #gloves: ClothingHandsGlovesCaptain - Goobstation, moved to loadouts
     id: CaptainPDA
     ears: ClothingHeadsetAltCommand

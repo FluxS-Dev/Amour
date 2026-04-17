@@ -6,6 +6,8 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.RichText;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Robust.Shared.Log;
+using Content.Shared._Amour.Stickers;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 
@@ -22,6 +24,14 @@ public sealed class TextureTag : BaseTextureTag, IMarkupTagHandler
         if (!node.Attributes.TryGetValue("path", out var rawPathParameter) ||
             !rawPathParameter.TryGetString(out var rawPath))
             return false;
+
+        // Amour edit start
+        if (!IsValidStickerPath(rawPath))
+        {
+            Logger.WarningS("texture-tag", $"Attempted to use non-whitelisted texture path: {rawPath}");
+            return false;
+        }
+        // Amour edit end
 
         if (!node.Attributes.TryGetValue("state", out var stateParameter) ||
             !stateParameter.TryGetString(out var state))
@@ -68,4 +78,17 @@ public sealed class TextureTag : BaseTextureTag, IMarkupTagHandler
         control = texture;
         return true;
     }
+
+    // Amour edit start
+    private bool IsValidStickerPath(string path)
+    {
+        foreach (var sticker in _prototypeManager.EnumeratePrototypes<StickerPrototype>())
+        {
+            if (sticker.TexturePath.ToString() == path)
+                return true;
+        }
+        
+        return false;
+    }
+    // Amour edit end
 }

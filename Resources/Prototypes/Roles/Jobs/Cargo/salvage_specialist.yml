@@ -1,4 +1,4 @@
-﻿# SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
+# SPDX-FileCopyrightText: 2022 Kara <lunarautomaton6@gmail.com>
 # SPDX-FileCopyrightText: 2022 Kara D <lunarautomaton6@gmail.com>
 # SPDX-FileCopyrightText: 2022 Lamrr <96937466+Lamrr@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2022 Morb <14136326+Morb0@users.noreply.github.com>
@@ -45,7 +45,7 @@
 # SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
 # SPDX-FileCopyrightText: 2024 redfire1331 <Redfire1331@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Арт <123451459+JustArt1m@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2024 ??? <123451459+JustArt1m@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
 # SPDX-FileCopyrightText: 2025 Aineias1 <dmitri.s.kiselev@gmail.com>
@@ -74,10 +74,13 @@
   description: job-description-salvagespec
   playTimeTracker: JobSalvageSpecialist
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: Cargo
-      time: 4500 #1.25 hrs # Amour
+    - !type:AnyOfRequirement # Amour edit - Discord OR playtime
+      requirements:
+        - !type:DiscordLinkRequirement
+        - !type:OverallPlaytimeRequirement
+          time: 3600 # 1 hr
   icon: "JobIconShaftMiner"
+
   startingGear: SalvageSpecialistGear
 #  guides: # goobstation | Orion-Edit: Removed because dont have this SOP
 #  - Salvage
@@ -89,17 +92,15 @@
   - Salvage
   - Maintenance
   - External
-
 - type: startingGear
   id: SalvageSpecialistGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
     id: SalvagePDA
+## Goob comment out - jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
     ears: ClothingHeadsetCargo
   storage: # DeltaV: Add mining voucher
     back:
     - MiningVoucher
-
 - type: chameleonOutfit
   id: SalvageSpecialistChameleonOutfit
   job: SalvageSpecialist

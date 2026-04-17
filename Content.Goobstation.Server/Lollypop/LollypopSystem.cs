@@ -1,14 +1,16 @@
 using Content.Server.Popups;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Server.Nutrition.Components;
-using Content.Server.Nutrition.EntitySystems;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry;
 using Content.Shared.Clothing;
+using Content.Shared.Nutrition;
+using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.EntitySystems;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Lollypop;
@@ -17,7 +19,7 @@ public sealed class LollypopSystem : EntitySystem
 {
 
     [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly FoodSystem _food = default!;
+    [Dependency] private readonly IngestionSystem _ingestion = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly StomachSystem _stomach = default!;
     [Dependency] private readonly ReactiveSystem _reaction = default!;
@@ -25,28 +27,36 @@ public sealed class LollypopSystem : EntitySystem
     [Dependency] private readonly FlavorProfileSystem _flavorProfile = default!;
     [Dependency] private readonly IGameTiming _time = default!;
 
-
-
     public override void Initialize()
     {
-        SubscribeLocalEvent<LollypopComponent,ClothingGotEquippedEvent>(OnEquipt);
-        SubscribeLocalEvent<LollypopComponent,ClothingGotUnequippedEvent>(OnUnequipt);
+        SubscribeLocalEvent<LollypopComponent, ClothingGotEquippedEvent>(OnEquipt);
+        SubscribeLocalEvent<LollypopComponent, ClothingGotUnequippedEvent>(OnUnequipt);
     }
 
     public override void Update(float frameTime)
     {
-        var query = EntityManager.EntityQueryEnumerator<LollypopComponent, ClothingComponent, FoodComponent>();
+        var query = EntityManager.EntityQueryEnumerator<LollypopComponent, ClothingComponent, EdibleComponent>();
+        List<(EntityUid Uid, EdibleComponent Edible, EntityUid User)>? fullyEaten = null;
 
-        while (query.MoveNext(out var queryUid, out var lollypop, out var clothing, out var food))
+        while (query.MoveNext(out var queryUid, out var lollypop, out var clothing, out var edible))
         {
             if (clothing.InSlotFlag != lollypop.CheckSlot)
                 continue;
 
-            if(lollypop.NextBite > _time.CurTime && lollypop.NextBite != TimeSpan.Zero)
+            if (lollypop.NextBite > _time.CurTime && lollypop.NextBite != TimeSpan.Zero)
                 continue;
 
-            Eat((queryUid,lollypop),food);
+            Eat((queryUid, lollypop), edible, ref fullyEaten);
             lollypop.NextBite = _time.CurTime + lollypop.BiteInterval;
+        }
+
+        if (fullyEaten != null)
+        {
+            foreach (var (uid, edible, user) in fullyEaten)
+            {
+                _ingestion.SpawnTrash((uid, edible), user);
+                EntityManager.QueueDeleteEntity(uid);
+            }
         }
     }
 
@@ -56,13 +66,13 @@ public sealed class LollypopSystem : EntitySystem
         ent.Comp.NextBite = _time.CurTime + ent.Comp.BiteInterval;
 
         // add popup of taste
-        if (!TryComp<FoodComponent>(ent.Owner, out var food))
+        if (!TryComp<EdibleComponent>(ent.Owner, out var edible))
             return;
-        if (!_solutionContainer.TryGetSolution(ent.Owner, food.Solution, out var soln, out _))
+        if (!_solutionContainer.TryGetSolution(ent.Owner, edible.Solution, out var soln, out _))
             return;
 
         var flavors = _flavorProfile.GetLocalizedFlavorsMessage(args.Wearer, soln.Value.Comp.Solution);
-        _popup.PopupEntity(Loc.GetString(food.EatMessage, ("food", ent.Owner), ("flavors", flavors)), args.Wearer,args.Wearer);
+        _popup.PopupEntity(Loc.GetString("edible-nom", ("food", ent.Owner), ("flavors", flavors)), args.Wearer, args.Wearer);
     }
 
     private void OnUnequipt(Entity<LollypopComponent> ent, ref ClothingGotUnequippedEvent args)
@@ -71,19 +81,19 @@ public sealed class LollypopSystem : EntitySystem
         ent.Comp.NextBite = TimeSpan.Zero;
     }
 
-    private void Eat(Entity<LollypopComponent> ent, FoodComponent food)
+    private void Eat(Entity<LollypopComponent> ent, EdibleComponent edible, ref List<(EntityUid Uid, EdibleComponent Edible, EntityUid User)>? fullyEaten)
     {
-        if(ent.Comp.HeldBy == null)
+        if (ent.Comp.HeldBy == null)
             return;
 
         if (!TryComp<BodyComponent>(ent.Comp.HeldBy, out var body))
             return;
         if (!_body.TryGetBodyOrganEntityComps<StomachComponent>((ent.Comp.HeldBy.Value, body), out var stomachs))
             return;
-        if (!_solutionContainer.TryGetSolution(ent.Owner, food.Solution, out var soln, out var solution))
+        if (!_solutionContainer.TryGetSolution(ent.Owner, edible.Solution, out var soln, out var solution))
             return;
 
-        var transferAmount = FixedPoint2.Min( ent.Comp.Ammount, solution.Volume);
+        var transferAmount = FixedPoint2.Min(ent.Comp.Ammount, solution.Volume);
 
         var split = _solutionContainer.SplitSolution(soln.Value, transferAmount);
 
@@ -115,12 +125,15 @@ public sealed class LollypopSystem : EntitySystem
         _reaction.DoEntityReaction(ent.Comp.HeldBy.Value, solution, ReactionMethod.Ingestion);
         _stomach.TryTransferSolution(stomachToUse!.Value.Owner, split, stomachToUse);
 
-        if (soln.Value.Comp.Solution.Volume > FixedPoint2.Zero )
+        if (soln.Value.Comp.Solution.Volume > FixedPoint2.Zero)
             return; // end if there is solution left
 
         if (ent.Comp.DeleteOnEmpty)
-            _food.DeleteAndSpawnTrash(food,ent.Owner,ent.Comp.HeldBy.Value);
+        {
+            fullyEaten ??= new List<(EntityUid, EdibleComponent, EntityUid)>();
+            fullyEaten.Add((ent.Owner, edible, ent.Comp.HeldBy!.Value));
+        }
 
-        ent.Comp.NextBite  = TimeSpan.Zero; // lollypop is empty stop checking
+        ent.Comp.NextBite = TimeSpan.Zero; // lollypop is empty stop checking
     }
 }

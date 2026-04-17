@@ -7,8 +7,8 @@
 # SPDX-FileCopyrightText: 2020 Swept <jamesurquhartwebb@gmail.com>
 # SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <zddm@outlook.es>
-# SPDX-FileCopyrightText: 2020 V�ctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2020 V�ctor Aguilera Puerto <zddm@outlook.es>
+# SPDX-FileCopyrightText: 2020 V ctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2020 V ctor Aguilera Puerto <zddm@outlook.es>
 # SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2021 Galactic Chimp <GalacticChimpanzee@gmail.com>
 # SPDX-FileCopyrightText: 2021 Kara D <lunarautomaton6@gmail.com>
@@ -211,6 +211,9 @@
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: TimedDespawn
     lifetime: 10
+  - type: Tracer # Orion
+    color: "#FFFFFFFF"
+    length: 3
 
 - type: entity
   id: BaseBulletTrigger # Trigger-on-collide bullets
@@ -219,6 +222,7 @@
   components:
   - type: TriggerOnCollide
     fixtureID: projectile
+    maxTriggers: 1
   - type: Projectile
     damage:
       types:
@@ -249,6 +253,9 @@
     damage:
       types:
         Blunt: 1
+  - type: Tracer # Orion
+    color: "#CCCCCCFF"
+    length: 3
 
 - type: entity
   id: BaseBulletIncendiary
@@ -267,6 +274,9 @@
     energy: 7.0
   - type: IgniteOnCollide
     fireStacks: 0.5
+  - type: Tracer # Orion
+    color: "#D1B479FF"
+    length: 3
 
 - type: entity
   id: BaseBulletAP
@@ -283,6 +293,9 @@
       types:
         Piercing: 11 # 20% decrease
     ignoreResistances: true
+  - type: Tracer # Orion
+    color: "#71C978FF"
+    length: 3
 
 - type: entity
   id: BaseBulletUranium
@@ -298,6 +311,9 @@
     damage:
       types:
         Radiation: 11
+  - type: Tracer # Orion
+    color: "#71C978FF"
+    length: 3
 
 # Energy projectiles
 - type: entity
@@ -334,13 +350,46 @@
   - type: Projectile
     damage:
       types:
-        Heat: 5
+        Shock: 1
     soundHit:
       path: "/Audio/Weapons/Guns/Hits/taser_hit.ogg"
     forceSound: true
+  - type: TimedDespawn
+    lifetime: 0.170 # Very short range
+  - type: StunOnCollide
+    stunAmount: 0
+    knockdownAmount: 2.5 # Enough to subdue and follow up with a stun batong
+    slowdownAmount: 2.5
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
+
+- type: entity
+  parent: BulletTaser
+  id: BulletTaserSuper
+  categories: [ HideSpawnMenu ]
+  name: taser bolt
+  description: If you can see this, you've probably been stun-meta'd
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: Structures/Power/Generation/Tesla/energy_miniball.rsi
+    color: "#ffff33"
+    layers:
+    - state: tesla_projectile
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+    color: "#ffff33"
+    radius: 2.0
+    energy: 7.01
+  - type: TimedDespawn
+    lifetime: 1.0 # Not so short range
   - type: StunOnCollide
     stunAmount: 5
-    knockdownAmount: 5
+    knockdownAmount: 10
+    slowdownAmount: 10
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
 
 - type: entity
   name : disabler bolt
@@ -977,6 +1026,7 @@
     totalIntensity: 150 # a ~2 tile radius
     intensitySlope: 5
     maxIntensity: 10
+    canCreateVacuum: false
   - type: SmartLinkBlacklist  # Goobstation
 
 - type: entity
@@ -993,14 +1043,11 @@
     range: 7
   - type: SpawnOnTrigger
     proto: GrenadeFlashEffect
-  - type: ActiveTimerTrigger
-    timeRemaining: 0.3
   - type: DeleteOnTrigger
   - type: Flashbang # Goobstation
     minProtectionRange: 7 # Can't stun/knockdown people wearing any ear protection
   - type: SmartLinkBlacklist  # Goobstation
 
-# This is supposed to spawn shrapnel and stuff so uhh... TODO?
 - type: entity
   id: BulletGrenadeFrag
   name: frag grenade
@@ -1014,9 +1061,16 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    totalIntensity: 175 # about a ~6 tile radius
+    totalIntensity: 50
     intensitySlope: 1
-    maxIntensity: 10
+    maxIntensity: 5
+    canCreateVacuum: false
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ProjectileGrenade
+    fillPrototype: PelletClusterLessLethal
+    capacity: 30
   - type: SmartLinkBlacklist  # Goobstation
 
 - type: entity
@@ -1029,8 +1083,6 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
     - state: cleanade
-  - type: ActiveTimerTrigger
-    timeRemaining: 0.3
   - type: SmokeOnTrigger
     duration: 3.5
     spreadAmount: 30
@@ -1039,7 +1091,7 @@
       reagents:
       - ReagentId: SpaceCleaner
         Quantity: 30
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound: /Audio/Items/smoke_grenade_smoke.ogg
   - type: ExplodeOnTrigger
   - type: Explosive

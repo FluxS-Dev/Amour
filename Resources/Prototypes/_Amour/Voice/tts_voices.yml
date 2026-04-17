@@ -1649,6 +1649,274 @@
   sex: Male
   source: Dota 2
 
+# Warhammer 40,000: Dawn of War
+- type: ttsVoice
+  id: ChaosCultistsDow
+  name: tts-voice-name-chaos-cultists-dow
+  speaker: chaos_marines_cultists_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: ChaosMarinesDow
+  name: tts-voice-name-chaos-marines-dow
+  speaker: chaos_marines_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: ChaosLordDow
+  name: tts-voice-name-chaos-lord-dow
+  speaker: chaos_marines_lord_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: ChaosSorcerorDow
+  name: tts-voice-name-chaos-sorceror-dow
+  speaker: chaos_marines_sorceror_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: DarkEldarArchonDow
+  name: tts-voice-name-dark-eldar-archon-dow
+  speaker: dark_eldar_archon_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: DarkEldarMandrakeDow
+  name: tts-voice-name-dark-eldar-mandrake-dow
+  speaker: dark_eldar_mandrake_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: DarkEldarWarriorDow
+  name: tts-voice-name-dark-eldar-warrior-dow
+  speaker: dark_eldar_warrior_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: DarkEldarWychDow
+  name: tts-voice-name-dark-eldar-wych-dow
+  speaker: dark_eldar_wych_dow
+  sex: Female
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: EldarGuardianDow
+  name: tts-voice-name-eldar-guardian-dow
+  speaker: eldar_dow
+  sex: Female
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: EldarFarseerDow
+  name: tts-voice-name-eldar-farseer-dow
+  speaker: eldar_farseer_dow
+  sex: Female
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: EldarFireDragonDow
+  name: tts-voice-name-eldar-fire-dragon-dow
+  speaker: eldar_fire_dragon_dow
+  sex: Female
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: EldarWarlockDow
+  name: tts-voice-name-eldar-warlock-dow
+  speaker: eldar_warlock_dow
+  sex: Female
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: GuardAssassinDow
+  name: tts-voice-name-guard-assassin-dow
+  speaker: guard_assassin_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: GuardCaptainDow
+  name: tts-voice-name-guard-captain-dow
+  speaker: guard_captain_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: GuardCommissarDow
+  name: tts-voice-name-guard-commissar-dow
+  speaker: guard_commissar_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: GuardEnginserDow
+  name: tts-voice-name-guard-enginseer-dow
+  speaker: guard_enginseer_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: GuardSergeantDow
+  name: tts-voice-name-guard-sergeant-dow
+  speaker: guard_guardsman_sergeant_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: GuardHeavyWeaponsDow
+  name: tts-voice-name-guard-heavy-weapons-dow
+  speaker: guard_heavy_weapons_platoon_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: GuardKasrkinDow
+  name: tts-voice-name-guard-kasrkin-dow
+  speaker: guard_karskin_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: GuardOgrynDow
+  name: tts-voice-name-guard-ogryn-dow
+  speaker: guard_ogryn_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: GuardPriestDow
+  name: tts-voice-name-guard-priest-dow
+  speaker: guard_priest_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: GuardPsykerDow
+  name: tts-voice-name-guard-psyker-dow
+  speaker: guard_psyker_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: OrkBoysDow
+  name: tts-voice-name-ork-boys-dow
+  speaker: orks_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: OrkFlashGitzNobsDow
+  name: tts-voice-name-ork-flash-gitz-nobs-dow
+  speaker: orks_flashgitznobs_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: OrkGrotsDow
+  name: tts-voice-name-ork-grots-dow
+  speaker: orks_grots_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: OrkWarbossDow
+  name: tts-voice-name-ork-warboss-dow
+  speaker: orks_warboss_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: SistersBattleSisterDow
+  name: tts-voice-name-sisters-battle-sister-dow
+  speaker: sisters_battle_sister_dow
+  sex: Female
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: SistersMissionaryDow
+  name: tts-voice-name-sisters-missionary-dow
+  speaker: sisters_missionary_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: SpaceMarines2Dow
+  name: tts-voice-name-space-marines-2-dow
+  speaker: space_marines_2_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: SpaceMarinesChaplainDow
+  name: tts-voice-name-space-marines-chaplain-dow
+  speaker: space_marines_chaplain_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: SpaceMarinesDow
+  name: tts-voice-name-space-marines-dow
+  speaker: space_marines_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: SpaceMarinesForceCommanderDow
+  name: tts-voice-name-space-marines-force-commander-dow
+  speaker: space_marines_force_commander_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: SpaceMarinesLibrarianDow
+  name: tts-voice-name-space-marines-librarian-dow
+  speaker: space_marines_librarian_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: TauEtherealDow
+  name: tts-voice-name-tau-ethereal-dow
+  speaker: tau_ethereal_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: TauKrootDow
+  name: tts-voice-name-tau-kroot-dow
+  speaker: tau_kroot_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: TutorialFemaleDow
+  name: tts-voice-name-tutorial-female-dow
+  speaker: tutorial_f_dow
+  sex: Female
+  source: "Warhammer 40,000: Dawn of War"
+
+- type: ttsVoice
+  id: TutorialMaleDow
+  name: tts-voice-name-tutorial-male-dow
+  speaker: tutorial_m_dow
+  sex: Male
+  source: "Warhammer 40,000: Dawn of War"
+
+# Kingpin: Life of Crime
+- type: ttsVoice
+  id: Kingpin
+  name: tts-voice-name-kingpin
+  speaker: kingpin
+  sex: Male
+  source: "Kingpin: Life of Crime"
+
 # MiSide
 - type: ttsVoice
   id: Mita

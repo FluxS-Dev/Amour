@@ -53,14 +53,7 @@
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 7200 #2 hours
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 7200 #2 hours
+      - !type:DiscordLinkRequirement # Amour edit
   - type: AbductorScientist
   - type: SurgeryIgnoreClothing
   - type: Sanitized
@@ -81,11 +74,7 @@
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 10800 #3 hours
+      - !type:DiscordLinkRequirement # Amour edit
   - type: AbductorScientist
   - type: SurgeryIgnoreClothing
   - type: Sanitized
@@ -106,11 +95,7 @@
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 10800 #3 hours
+      - !type:DiscordLinkRequirement # Amour edit
   - type: RandomMetadata
     nameSegments:
       - AbductorAgentPrefix
@@ -201,14 +186,7 @@
     raffle:
       settings: default
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 7200 #2 hours
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 7200 #2 hours
+      - !type:DiscordLinkRequirement # Amour edit
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -243,11 +221,7 @@
     raffle:
       settings: default
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 10800 #3 hours
+      - !type:DiscordLinkRequirement # Amour edit
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -282,11 +256,7 @@
     raffle:
       settings: default
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 10800 #3 hours
+      - !type:DiscordLinkRequirement # Amour edit
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:

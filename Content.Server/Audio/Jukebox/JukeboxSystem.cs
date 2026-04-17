@@ -50,6 +50,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using JukeboxComponent = Content.Shared.Audio.Jukebox.JukeboxComponent;
 
 namespace Content.Server.Audio.Jukebox;
@@ -59,6 +60,7 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
 {
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!; // Orion
 
     public override void Initialize()
     {
@@ -69,6 +71,7 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
         SubscribeLocalEvent<JukeboxComponent, JukeboxStopMessage>(OnJukeboxStop);
         SubscribeLocalEvent<JukeboxComponent, JukeboxSetTimeMessage>(OnJukeboxSetTime);
         SubscribeLocalEvent<JukeboxComponent, JukeboxSetVolumeMessage>(OnJukeboxSetVolume); // Orion
+        SubscribeLocalEvent<JukeboxComponent, JukeboxToggleLoopMessage>(OnJukeboxToggleLoop); // Orion
         SubscribeLocalEvent<JukeboxComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<JukeboxComponent, ComponentShutdown>(OnComponentShutdown);
 
@@ -85,9 +88,26 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
 
     private void OnJukeboxPlay(EntityUid uid, JukeboxComponent component, ref JukeboxPlayingMessage args)
     {
-        if (Exists(component.AudioStream))
+        // Amour-Edit-Start: Fix PVS error with invalid AudioStream entity reference
+        // Clean up invalid AudioStream reference
+        if (component.AudioStream != null && !Exists(component.AudioStream))
+        {
+            component.AudioStream = null;
+        }
+
+        if (component.AudioStream != null && Exists(component.AudioStream))
+        // Amour-Edit-End
         {
             Audio.SetState(component.AudioStream, AudioState.Playing);
+
+            // Orion-Start
+            if (component.PlaybackStartTime == null && component.CurrentPlaybackOffset > 0)
+            {
+                Audio.SetPlaybackPosition(component.AudioStream, component.CurrentPlaybackOffset);
+            }
+            component.PlaybackStartTime = _gameTiming.CurTime;
+            Dirty(uid, component);
+            // Orion-End
         }
         else
         {
@@ -99,23 +119,70 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
                 return;
             }
 
-            component.AudioStream = Audio.PlayPvs(jukeboxProto.Path, uid, AudioParams.Default.WithMaxDistance(10f).WithVolume(MapToRange(component.Volume, component.MinSlider, component.MaxSlider, component.MinVolume, component.MaxVolume)))?.Entity; // Orion
+            component.AudioStream = Audio.PlayPvs(jukeboxProto.Path, uid, AudioParams.Default.WithMaxDistance(10f).WithVolume(MapToRange(component.Volume, component.MinSlider, component.MaxSlider, component.MinVolume, component.MaxVolume)))?.Entity; // Orion-Edit
+            // Orion-Start
+            component.PlaybackStartTime = _gameTiming.CurTime;
+            component.CurrentPlaybackOffset = 0f;
+            // Orion-End
             Dirty(uid, component);
         }
     }
 
     private void OnJukeboxPause(Entity<JukeboxComponent> ent, ref JukeboxPauseMessage args)
     {
+        // Amour-Edit-Start: Fix PVS error with invalid AudioStream entity reference
+        // Clean up invalid AudioStream reference
+        if (ent.Comp.AudioStream != null && !Exists(ent.Comp.AudioStream))
+        {
+            ent.Comp.AudioStream = null;
+            Dirty(ent);
+            return;
+        }
+
+        if (ent.Comp.AudioStream == null)
+            return;
+        // Amour-Edit-End
+
         Audio.SetState(ent.Comp.AudioStream, AudioState.Paused);
+
+        // Orion-Start
+        if (!ent.Comp.PlaybackStartTime.HasValue)
+            return;
+
+        var elapsed = (float)(_gameTiming.CurTime - ent.Comp.PlaybackStartTime.Value).TotalSeconds;
+        ent.Comp.CurrentPlaybackOffset += elapsed;
+        ent.Comp.PlaybackStartTime = null;
+        Dirty(ent);
+        // Orion-End
     }
 
     private void OnJukeboxSetTime(EntityUid uid, JukeboxComponent component, JukeboxSetTimeMessage args)
     {
-        if (TryComp(args.Actor, out ActorComponent? actorComp))
+        if (!TryComp(args.Actor, out ActorComponent? actorComp))
+            return;
+
+        // Amour-Edit-Start: Fix PVS error with invalid AudioStream entity reference
+        // Clean up invalid AudioStream reference
+        if (component.AudioStream != null && !Exists(component.AudioStream))
         {
-            var offset = actorComp.PlayerSession.Channel.Ping * 1.5f / 1000f;
-            Audio.SetPlaybackPosition(component.AudioStream, args.SongTime + offset);
+            component.AudioStream = null;
+            Dirty(uid, component);
+            return;
         }
+
+        if (component.AudioStream == null)
+            return;
+        // Amour-Edit-End
+
+        var offset = actorComp.PlayerSession.Channel.Ping * 1.5f / 1000f;
+        var newPosition = args.SongTime + offset; // Orion
+        Audio.SetPlaybackPosition(component.AudioStream, newPosition); // Orion-Edit
+
+        // Orion-Start
+        component.CurrentPlaybackOffset = newPosition;
+        component.PlaybackStartTime = _gameTiming.CurTime;
+        Dirty(uid, component);
+        // Orion-End
     }
 
     // Orion-Start
@@ -123,10 +190,25 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
     {
         SetJukeboxVolume(uid, component, args.Volume);
 
-        if (!TryComp<AudioComponent>(component.AudioStream, out var audioComponent))
+        // Amour-Edit-Start: Fix PVS error with invalid AudioStream entity reference
+        // Clean up invalid AudioStream reference
+        if (component.AudioStream != null && !Exists(component.AudioStream))
+        {
+            component.AudioStream = null;
+            Dirty(uid, component);
             return;
+        }
+
+        if (component.AudioStream == null || !TryComp<AudioComponent>(component.AudioStream, out _))
+            return;
+        // Amour-Edit-End
 
         Audio.SetVolume(component.AudioStream, MapToRange(args.Volume, component.MinSlider, component.MaxSlider, component.MinVolume, component.MaxVolume));
+    }
+
+    private void OnJukeboxToggleLoop(EntityUid uid, JukeboxComponent component, JukeboxToggleLoopMessage args)
+    {
+        ToggleLoop(uid, component);
     }
     // Orion-End
 
@@ -147,12 +229,36 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
 
     private void Stop(Entity<JukeboxComponent> entity)
     {
-        Audio.SetState(entity.Comp.AudioStream, AudioState.Stopped);
+        // Amour-Edit-Start: Fix PVS error with invalid AudioStream entity reference
+        // Clean up invalid AudioStream reference
+        if (entity.Comp.AudioStream != null && !Exists(entity.Comp.AudioStream))
+        {
+            entity.Comp.AudioStream = null;
+        }
+
+        if (entity.Comp.AudioStream != null)
+        {
+            Audio.SetState(entity.Comp.AudioStream, AudioState.Stopped);
+        }
+        // Amour-Edit-End
+
+        // Orion-Start
+        entity.Comp.CurrentPlaybackOffset = 0f;
+        entity.Comp.PlaybackStartTime = null;
+        // Orion-End
         Dirty(entity);
     }
 
     private void OnJukeboxSelected(EntityUid uid, JukeboxComponent component, JukeboxSelectedMessage args)
     {
+        // Amour-Edit-Start: Fix PVS error with invalid AudioStream entity reference
+        // Clean up invalid AudioStream reference
+        if (component.AudioStream != null && !Exists(component.AudioStream))
+        {
+            component.AudioStream = null;
+        }
+        // Amour-Edit-End
+
         if (!Audio.IsPlaying(component.AudioStream))
         {
             component.SelectedSongId = args.SongId;
@@ -182,6 +288,38 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
                     TryUpdateVisualState(uid, comp);
                 }
             }
+
+            // Orion-Start
+            // Amour-Edit-Start: Fix PVS error with invalid AudioStream entity reference
+            // Clean up invalid AudioStream reference
+            if (comp.AudioStream != null && !Exists(comp.AudioStream))
+            {
+                comp.AudioStream = null;
+                comp.PlaybackStartTime = null;
+                comp.CurrentPlaybackOffset = 0f;
+                Dirty(uid, comp);
+                continue;
+            }
+
+            if (!comp.LoopEnabled || !comp.PlaybackStartTime.HasValue || comp.AudioStream == null ||
+                !TryComp<AudioComponent>(comp.AudioStream, out var audioComp))
+                continue;
+            // Amour-Edit-End
+
+            var audioLength = Audio.GetAudioLength(audioComp.FileName);
+            var elapsed = (float)(_gameTiming.CurTime - comp.PlaybackStartTime.Value).TotalSeconds;
+            var currentPosition = comp.CurrentPlaybackOffset + elapsed;
+
+            if (!(currentPosition >= audioLength.TotalSeconds))
+                continue;
+
+            // Restart track
+            Audio.SetPlaybackPosition(comp.AudioStream, 0f);
+            Audio.SetState(comp.AudioStream, AudioState.Playing);
+            comp.CurrentPlaybackOffset = 0f;
+            comp.PlaybackStartTime = _gameTiming.CurTime;
+            Dirty(uid, comp);
+            // Orion-End
         }
     }
 
@@ -189,6 +327,12 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
     private void SetJukeboxVolume(EntityUid uid, JukeboxComponent component, float volume)
     {
         component.Volume = volume;
+        Dirty(uid, component);
+    }
+
+    private void ToggleLoop(EntityUid uid, JukeboxComponent component)
+    {
+        component.LoopEnabled = !component.LoopEnabled;
         Dirty(uid, component);
     }
     // Orion-End

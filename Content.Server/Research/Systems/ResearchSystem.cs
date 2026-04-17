@@ -27,6 +27,7 @@ using Content.Shared.Research.Components;
 using Content.Shared.Research.Systems;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Server.Research.Systems
@@ -41,6 +42,7 @@ namespace Content.Server.Research.Systems
         [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly RadioSystem _radio = default!;
+        [Dependency] private readonly IRobustRandom _random = default!; // Orion
 
         public override void Initialize()
         {
@@ -49,6 +51,10 @@ namespace Content.Server.Research.Systems
             InitializeConsole();
             InitializeSource();
             InitializeServer();
+            // Orion-Start
+            InitializeExperiments();
+            InitializeDiscovery();
+            // Orion-End
 
             SubscribeLocalEvent<TechnologyDatabaseComponent, ResearchRegistrationChangedEvent>(OnDatabaseRegistrationChanged);
         }
@@ -96,15 +102,20 @@ namespace Content.Server.Research.Systems
             return GetServers(client).Select(x => x.Comp.Id).ToArray();
         }
 
-        public HashSet<Entity<ResearchServerComponent>> GetServers(EntityUid client)
+        public List<Entity<ResearchServerComponent>> GetServers(EntityUid client) // Orion-Edit
         {
             var clientXform = Transform(client);
             if (clientXform.GridUid is not { } grid)
-                return [];
+                return new List<Entity<ResearchServerComponent>>(); // Orion-Edit
 
-            var set = new HashSet<Entity<ResearchServerComponent>>();
-            _lookup.GetGridEntities(grid, set);
-            return set;
+            // Orion-Edit-Start
+            var servers = new HashSet<Entity<ResearchServerComponent>>();
+            _lookup.GetGridEntities(grid, servers);
+
+            return servers
+                .OrderBy(ent => ent.Comp.Id)
+                .ToList();
+            // Orion-Edit-End
         }
 
         public override void Update(float frameTime)

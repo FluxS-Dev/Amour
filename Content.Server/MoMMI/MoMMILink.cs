@@ -121,7 +121,7 @@ namespace Content.Server.MoMMI
             var sender = message.Sender;
             var contents = message.Contents.ReplaceLineEndings(" ");
 
-            _taskManager.RunOnMainThread(() => _chatManager.SendHookOOC(sender, contents));
+            _taskManager.RunOnMainThread(() => _chatManager.SendHookOOC(sender, contents, isDiscordBridge: true)); // Amour  isDiscordBridge: true
 
             await context.RespondAsync("Success", HttpStatusCode.OK);
             return true;

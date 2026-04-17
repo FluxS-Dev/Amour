@@ -1,0 +1,24 @@
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    Title="{Loc 'amour-ui-link-discord-title'}"
+    MinSize="400 200"
+    SetSize="450 250">
+    
+    <BoxContainer Orientation="Vertical" Margin="10">
+        <RichTextLabel Name="StatusLabel" 
+                      Access="Public"
+                      Margin="0 0 0 10"
+                      HorizontalAlignment="Center"/>
+        
+        <RichTextLabel Name="InstructionLabel" 
+                      Access="Public"
+                      Margin="0 0 0 20"/>
+        
+        <Button Name="CopyButton" 
+                Access="Public"
+                Text="{Loc 'amour-ui-link-discord-copy'}"
+                HorizontalAlignment="Center"
+                MinSize="200 40"/>
+    </BoxContainer>
+</controls:FancyWindow>

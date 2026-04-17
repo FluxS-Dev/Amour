@@ -65,7 +65,6 @@ using Content.Shared._EinsteinEngines.Revolutionary;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Heretic;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mind.Components;
@@ -83,8 +82,8 @@ using Content.Shared.Zombies;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Common.Conversion;
+using Content.Shared._EinsteinEngines.Revolutionary.Components;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -222,17 +221,18 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
     private void OnPostConvert(EntityUid uid, HeadRevolutionaryComponent comp, ref AfterRevolutionaryConvertedEvent ev)
     {
         // Einstein Engines - Revolutionary Manifesto - Use RevolutionaryConverterSystem instead of hardcoding flashes
-        // GoobStation - check if headRev's ability enabled
+        // GoobStation START - check if headRev's ability enabled
         if (!comp.ConvertAbilityEnabled)
             return;
-
-        // Goobstation - Something something check for 30 conditions of mute or otherwise speech impeding shit that makes book pointless
-        if (HasComp<MumbleAccentComponent>(uid) // Muzzles to bypass speech is bad
-            || HasComp<MutedComponent>(uid)) // No speech = No convert
+        if (!TryComp<RevolutionaryConverterComponent>(ev.Used, out var revconv))
             return;
-        // Goob edit end (for now)
+        // Goobstation - Something something check for 30 conditions of mute or otherwise speech impeding shit that makes book pointless
+        if ((HasComp<MumbleAccentComponent>(ev.User) // Muzzles to bypass speech is bad
+            || HasComp<MutedComponent>(ev.User)) && !revconv.BypassMuted) // No speech = No convert but still convert if BYPASS
+            return;
+        // Goob edit END (for now) of course for now you dumbass
 
-        if (uid != ev.User)
+        if (uid != ev.User) // Goob
             return;
 
         var alwaysConvertible = HasComp<AlwaysRevolutionaryConvertibleComponent>(ev.Target);
@@ -241,8 +241,8 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
             return;
 
         // goob - event instead of whatever the fuck the hascomp obelisk below is (whoever did this needs to be flogged)
-        var convEv = new BeforeConversionEvent();
-        RaiseLocalEvent(ev.Target, ref convEv);
+        var convEv = new BeforeConversionEvent(ev.Target);
+        RaiseLocalEvent(ev.Target, ref convEv, true);
 
         if (HasComp<RevolutionaryComponent>(ev.Target) ||
             HasComp<MindShieldComponent>(ev.Target) ||
@@ -250,7 +250,6 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
             !alwaysConvertible ||
             !_mobState.IsAlive(ev.Target) ||
             HasComp<ZombieComponent>(ev.Target) ||
-            HasComp<HereticComponent>(ev.Target) || // goob edit - no more heretic revs
             HasComp<AntagImmuneComponent>(ev.Target)) // Antag immune MEANS antag immune.
         {
             if (ev.User != null)
@@ -363,7 +362,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
                     continue;
 
                 _npcFaction.RemoveFaction(uid, RevolutionaryNpcFaction);
-                _stun.TryParalyze(uid, stunTime, true);
+                _stun.TryUpdateParalyzeDuration(uid, stunTime);
                 RemCompDeferred<RevolutionaryComponent>(uid);
                 _popup.PopupEntity(Loc.GetString("rev-break-control", ("name", Identity.Entity(uid, EntityManager))), uid);
                 _adminLogManager.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(uid)} was deconverted due to all Head Revolutionaries dying.");

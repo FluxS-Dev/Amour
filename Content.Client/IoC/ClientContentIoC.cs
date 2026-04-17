@@ -120,7 +120,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Client._Amour.Loadouts;
 using Content.Client._Amour.TTS;
+using Content.Shared._Amour.Loadouts.Effects;
 using Content.Client._RMC14.LinkAccount;
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
@@ -188,6 +190,10 @@ namespace Content.Client.IoC
             collection.Register<LinkAccountManager>(); // RMC14
             collection.Register<ClientsidePlaytimeTrackingManager>();
             collection.Register<TTSManager>(); // WD EDIT TTS
+            collection.Register<IBoostyTierManager, BoostyTierManager>(); // Amour - Boosty tier for loadouts
+            collection.Register<Content.Client._Amour.Discord.DiscordLinkManager>(); // Amour - Discord linking
+            collection.Register<Content.Shared._Amour.Discord.ISharedDiscordLinkManager, Content.Client._Amour.Discord.DiscordLinkManager>(); // Amour - Discord linking interface
+            collection.Register<Content.Client._Amour.Registry.ClientMetricsManager>(); // Amour edit
         }
     }
 }

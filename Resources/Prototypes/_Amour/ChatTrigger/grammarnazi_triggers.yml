@@ -1,0 +1,45 @@
+﻿
+- type: grammarnaziBotTrigger
+  id: Grammar1
+  trigger: шатл
+  description: grammarnazi-trigger-desc-grammar1
+
+- type: grammarnaziBotTrigger
+  id: Grammar2
+  trigger: инжинер
+  description: grammarnazi-trigger-desc-grammar2
+
+- type: grammarnaziBotTrigger
+  id: Grammar3
+  trigger: разгермитизация
+  description: grammarnazi-trigger-desc-grammar3
+  
+- type: grammarnaziBotTrigger
+  id: Grammar4
+  trigger: медецинский
+  description: grammarnazi-trigger-desc-grammar4
+
+- type: grammarnaziBotTrigger
+  id: Grammar5
+  trigger: "[зделать; зделаю; зделай]"
+  description: grammarnazi-trigger-desc-grammar5
+
+- type: grammarnaziBotTrigger
+  id: Grammar6
+  trigger: "[расса; рассу]"
+  description: grammarnazi-trigger-desc-grammar6
+
+- type: grammarnaziBotTrigger
+  id: Grammar7
+  trigger: петомец
+  description: grammarnazi-trigger-desc-grammar7
+
+- type: grammarnaziBotTrigger
+  id: Grammar9
+  trigger: асистент
+  description: grammarnazi-trigger-desc-grammar9
+  
+- type: grammarnaziBotTrigger
+  id: Grammar10
+  trigger: "[какой нибудь; какой то; какой либо; кое что]"
+  description: grammarnazi-trigger-desc-grammar10

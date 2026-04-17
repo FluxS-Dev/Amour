@@ -182,7 +182,26 @@ public abstract partial class SharedBuckleSystem
             return;
 
         if (!CanUnbuckle(ent!, args.Puller, false))
+        {
             args.Cancel();
+            return;
+        }
+
+        // Goobstation - doafter for unbuckle by others
+        if (args.Puller != ent.Owner
+            && TryComp<StrapComponent>(ent.Comp.BuckledTo, out var strap)
+            && strap.UnbuckleDoafterTime > 0)
+        {
+            args.Cancel();
+            var doAfter = new DoAfterArgs(EntityManager, args.Puller, TimeSpan.FromSeconds(strap.UnbuckleDoafterTime), new UnbuckleDoAfterEvent(), ent.Owner, target: ent.Owner)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+            };
+            _doAfter.TryStartDoAfter(doAfter);
+            return;
+        }
+        // Goobstation
     }
 
     private void OnPullStarted(Entity<BuckleComponent> ent, ref PullStartedMessage args)
@@ -240,7 +259,16 @@ public abstract partial class SharedBuckleSystem
             return;
         }
 
-        var delta = (xform.LocalPosition - strapComp.BuckleOffset).LengthSquared();
+        // Orion-Start
+        if (!strapComp.BuckleOffsets.TryGetValue(buckle.Owner, out var buckleOffset))
+        {
+            buckleOffset = xform.LocalPosition;
+            strapComp.BuckleOffsets[buckle.Owner] = buckleOffset;
+            Dirty(strapUid, strapComp);
+        }
+        // Orion-End
+
+        var delta = (xform.LocalPosition - buckleOffset).LengthSquared(); // Orion-Edit
         if (delta > 1e-5)
             Unbuckle(buckle, (strapUid, strapComp), null);
     }
@@ -286,10 +314,10 @@ public abstract partial class SharedBuckleSystem
     // WD EDIT START
     private void OnUnbuckleDoAfter(EntityUid uid, BuckleComponent component, UnbuckleDoAfterEvent args)
     {
-        if (args.Cancelled || !CanUnbuckle((uid, component), uid, true, out var strap))
+        if (args.Cancelled || !CanUnbuckle((uid, component), args.User, true, out var strap)) // Goobstation
             return;
 
-        Unbuckle((uid, component), strap, uid);
+        Unbuckle((uid, component), strap, args.User); // Goobstation
     }
     // WD EDIT END
 
@@ -303,12 +331,14 @@ public abstract partial class SharedBuckleSystem
         if (TryComp(buckle.Comp.BuckledTo, out StrapComponent? old))
         {
             old.BuckledEntities.Remove(buckle);
+            old.BuckleOffsets.Remove(buckle); // Orion
             Dirty(buckle.Comp.BuckledTo.Value, old);
         }
 
         if (strap is {} strapEnt && Resolve(strapEnt.Owner, ref strapEnt.Comp))
         {
             strapEnt.Comp.BuckledEntities.Add(buckle);
+            strapEnt.Comp.BuckleOffsets[buckle] = strapEnt.Comp.BuckleOffset; // Orion
             Dirty(strapEnt);
             _alerts.ShowAlert(buckle, strapEnt.Comp.BuckledAlertType);
         }
@@ -481,7 +511,7 @@ public abstract partial class SharedBuckleSystem
         _rotationVisuals.SetHorizontalAngle(buckle.Owner, strap.Comp.Rotation);
 
         var xform = Transform(buckle);
-        var coords = new EntityCoordinates(strap, strap.Comp.BuckleOffset);
+        var coords = new EntityCoordinates(strap, GetBuckleOffset(strap.Comp, buckle.Owner)); // Orion-Edit
         _transform.SetCoordinates(buckle, xform, coords, rotation: Angle.Zero);
 
         _joints.SetRelay(buckle, strap);
@@ -542,6 +572,18 @@ public abstract partial class SharedBuckleSystem
         }
         // WD EDIT END
 
+        // Goobstation - doafter for unbuckle by others
+        if (user != null && buckle.Owner != user && strap.Comp.UnbuckleDoafterTime > 0)
+        {
+            var doAfter = new DoAfterArgs(EntityManager, user.Value, TimeSpan.FromSeconds(strap.Comp.UnbuckleDoafterTime), new UnbuckleDoAfterEvent(), buckle.Owner, target: buckle.Owner)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+            };
+            return _doAfter.TryStartDoAfter(doAfter);
+        }
+        // Goobstation
+
         Unbuckle(buckle!, strap, user);
         return true;
     }
@@ -573,6 +615,7 @@ public abstract partial class SharedBuckleSystem
 
         _audio.PlayPredicted(strap.Comp.UnbuckleSound, strap, user);
 
+        var buckleOffset = GetBuckleOffset(strap.Comp, buckle.Owner); // Orion
         SetBuckledTo(buckle, null);
 
         var buckleXform = Transform(buckle);
@@ -587,10 +630,12 @@ public abstract partial class SharedBuckleSystem
             _transform.SetWorldRotationNoLerp((buckle, buckleXform), oldBuckledToWorldRot);
 
             // TODO: This is doing 4 moveevents this is why I left the warning in, if you're going to remove it make it only do 1 moveevent.
-            if (strap.Comp.BuckleOffset != Vector2.Zero)
+            // Orion-Edit-Start
+            if (buckleOffset != Vector2.Zero)
             {
-                buckleXform.Coordinates = oldBuckledXform.Coordinates.Offset(strap.Comp.BuckleOffset);
+                _transform.SetCoordinates(buckle, buckleXform, oldBuckledXform.Coordinates.Offset(buckleOffset));
             }
+            // Orion-Edit-End
         }
 
         _rotationVisuals.ResetHorizontalAngle(buckle.Owner);
@@ -610,6 +655,13 @@ public abstract partial class SharedBuckleSystem
         var strapEv = new UnstrappedEvent(strap, buckle);
         RaiseLocalEvent(strap, ref strapEv);
     }
+
+    // Orion-Start
+    private static Vector2 GetBuckleOffset(StrapComponent strap, EntityUid buckle)
+    {
+        return strap.BuckleOffsets.GetValueOrDefault(buckle, strap.BuckleOffset);
+    }
+    // Orion-End
 
     public bool CanUnbuckle(Entity<BuckleComponent?> buckle, EntityUid user, bool popup)
     {

@@ -71,14 +71,19 @@
   description: job-description-lawyer
   playTimeTracker: JobLawyer
   requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 4500 #1.25 hrs # Amour
+    - !type:AnyOfRequirement # Amour edit - Discord OR playtime
+      requirements:
+        - !type:DiscordLinkRequirement
+        - !type:OverallPlaytimeRequirement
+          time: 3600 # 1 hr
   startingGear: LawyerGear
   icon: "JobIconLawyer"
   supervisors: job-supervisors-hop
   guides: # goobstation
-  - SpaceLaw
-#  - Legal SOP # Orion-Edit: Removed because dont have this SOP
+  # Amour-Edit-Start
+  # - SpaceLaw # Disabled until guide is created
+  # Amour-Edit-End
+#  - LegalSOP # Orion-Edit: Removed because dont have this SOP
   goobcoins: 10 #Goob content
   access:
   - Service

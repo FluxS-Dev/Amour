@@ -7,29 +7,29 @@ namespace Content.Shared._Orion.Power.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class InducerComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public string PowerCellSlotId = "inducer_power_cell_slot";
 
     [DataField, AutoNetworkedField]
-    public float TransferRate;
+    public int TransferRate;
 
-    [DataField]
-    public List<float> AvailableTransferRates = new();
+    [DataField, AutoNetworkedField]
+    public List<int> AvailableTransferRates = new();
 
     [DataField]
     public float TransferDelay;
 
     /// <summary>
-    ///     Multiply transferring energy.
+    ///     Multiply transferring energy for non-anchored entities (weapons, batteries, clothing, etc.).
     /// </summary>
     [DataField]
     public float TransferMultiplier;
 
     /// <summary>
-    ///     Multiply transferring energy for guns.
+    ///     Multiply transferring energy for machines, only fucking machines!!!
     /// </summary>
     [DataField]
-    public float GunTransferMultiplier;
+    public float StructureTransferMultiplier;
 
     [DataField]
     public float MaxDistance;

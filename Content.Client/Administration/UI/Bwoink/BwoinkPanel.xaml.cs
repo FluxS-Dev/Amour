@@ -21,6 +21,8 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Client._Amour.Stickers.UI;
+using Content.Shared.Administration;
 
 namespace Content.Client.Administration.UI.Bwoink
 {
@@ -53,6 +55,11 @@ namespace Content.Client.Administration.UI.Bwoink
             };
             SenderLineEdit.OnTextEntered += Input_OnTextEntered;
             SenderLineEdit.OnTextChanged += Input_OnTextChanged;
+            
+            // Amour edit start
+            StickerBtn.OnStickerSelected += sticker => StickerInputHelper.InsertSticker(SenderLineEdit, sticker);
+            // Amour edit end
+            
             UpdateTypingIndicator();
         }
 

@@ -8,6 +8,7 @@ using System.Numerics;
 using Content.Goobstation.UIKit.UserInterface.Controls;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
 
 namespace Content.Goobstation.UIKit.UserInterface.RichText;
 
@@ -21,13 +22,17 @@ public abstract class BaseTextureTag
         string? tooltip,
         [NotNullWhen(true)] out Control? control)
     {
-        var texture = new TooltipTextureRect(tooltip, offset);
+        // Amour edit start
+        var adjustedOffset = offset + new Vector2(-6, -4);
+        var texture = new TooltipTextureRect(tooltip, adjustedOffset);
 
         texture.Texture = tex;
         texture.TextureScale = new Vector2(scaleValue, scaleValue);
+        texture.MaxSize = new Vector2(120, 120);
 
         control = texture;
         return true;
+        // Amour edit end
     }
 
     protected static bool TryDrawIconEntity(NetEntity netEntity, long spriteSize, [NotNullWhen(true)] out Control? control)

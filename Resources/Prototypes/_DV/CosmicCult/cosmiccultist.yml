@@ -5,6 +5,5 @@
   setPreference: true
   objective: roles-antag-cosmiccult-description
   requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 43200 # 12h
+    - !type:DiscordLinkRequirement # Amour edit
   guides: [ CosmicCult ]

@@ -280,6 +280,48 @@ tts-voice-name-witch-doctor = Witch Doctor
 tts-voice-name-wraith-king = Wraith King
 tts-voice-name-zeus = Zeus
 
+# Warhammer 40,000: Dawn of War
+tts-voice-name-chaos-cultists-dow = Chaos Cultists
+tts-voice-name-chaos-marines-dow = Chaos Space Marines
+tts-voice-name-chaos-lord-dow = Chaos Lord
+tts-voice-name-chaos-sorceror-dow = Chaos Sorceror
+tts-voice-name-dark-eldar-archon-dow = Dark Eldar Archon
+tts-voice-name-dark-eldar-mandrake-dow = Dark Eldar Mandrake
+tts-voice-name-dark-eldar-warrior-dow = Dark Eldar Warrior
+tts-voice-name-dark-eldar-wych-dow = Dark Eldar Wych
+tts-voice-name-eldar-guardian-dow = Eldar Guardians
+tts-voice-name-eldar-farseer-dow = Eldar Farseer
+tts-voice-name-eldar-fire-dragon-dow = Eldar Fire Dragon
+tts-voice-name-eldar-warlock-dow = Eldar Warlock
+tts-voice-name-guard-assassin-dow = Imperial Guard Assassin
+tts-voice-name-guard-captain-dow = Imperial Guard Captain
+tts-voice-name-guard-commissar-dow = Imperial Guard Commissar
+tts-voice-name-guard-enginseer-dow = Imperial Guard Enginseer
+tts-voice-name-guard-sergeant-dow = Imperial Guard Sergeant
+tts-voice-name-guard-heavy-weapons-dow = Imperial Guard Heavy Weapons Team
+tts-voice-name-guard-kasrkin-dow = Imperial Guard Kasrkin
+tts-voice-name-guard-ogryn-dow = Imperial Guard Ogryn
+tts-voice-name-guard-priest-dow = Imperial Guard Priest
+tts-voice-name-guard-psyker-dow = Imperial Guard Psyker
+tts-voice-name-ork-boys-dow = Ork Boyz
+tts-voice-name-ork-flash-gitz-nobs-dow = Ork Flash Gitz & Nobs
+tts-voice-name-ork-grots-dow = Ork Gretchins
+tts-voice-name-ork-warboss-dow = Ork Warboss
+tts-voice-name-sisters-battle-sister-dow = Sisters of Battle
+tts-voice-name-sisters-missionary-dow = Sisters of Battle Missionary
+tts-voice-name-space-marines-2-dow = Space Marines 2
+tts-voice-name-space-marines-chaplain-dow = Space Marines Chaplain
+tts-voice-name-space-marines-dow = Space Marines
+tts-voice-name-space-marines-force-commander-dow = Space Marines Force Commander
+tts-voice-name-space-marines-librarian-dow = Space Marines Librarian
+tts-voice-name-tau-ethereal-dow = Tau Ethereal
+tts-voice-name-tau-kroot-dow = Tau Kroot
+tts-voice-name-tutorial-female-dow = Tutorial Instructor (Female)
+tts-voice-name-tutorial-male-dow = Tutorial Instructor (Male)
+
+# Kingpin: Life of Crime
+tts-voice-name-kingpin = Kingpin
+
 # MiSide
 tts-voice-name-mita = Mita
 tts-voice-name-mita-dream = Sleepy Mita

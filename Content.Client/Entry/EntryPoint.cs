@@ -119,6 +119,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared._Amour.Loadouts.Effects;
 using Content.Client._Amour.TTS;
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
@@ -200,6 +201,8 @@ namespace Content.Client.Entry
         [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
         [Dependency] private readonly ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
         [Dependency] private readonly TTSManager _ttsManager = default!; // WD EDIT TTS
+        [Dependency] private readonly IBoostyTierManager _boostyTierManager = default!; // Amour - Boosty tier
+        [Dependency] private readonly Content.Client._Amour.Registry.ClientMetricsManager _clientMetrics = default!; // Amour edit
 
         public override void Init()
         {
@@ -281,6 +284,7 @@ namespace Content.Client.Entry
         {
             base.Shutdown();
             _titleWindowManager.Shutdown();
+            _boostyTierManager.Reset(); // Amour - clear cached tier on disconnect
         }
 
         public override void PostInit()
@@ -306,6 +310,8 @@ namespace Content.Client.Entry
             _documentParsingManager.Initialize();
             _titleWindowManager.Initialize();
             _ttsManager.Initialize(); // WD EDIT TTS
+            _boostyTierManager.Initialize(); // Amour - Boosty tier
+            _clientMetrics.Initialize(); // Amour edit
 
             _baseClient.RunLevelChanged += (_, args) =>
             {

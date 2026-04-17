@@ -40,6 +40,22 @@ namespace Content.Shared.Humanoid.Markings
         [DataField("sexRestriction")]
         public Sex? SexRestriction { get; private set; }
 
+        // Amour edit start
+        /// <summary>
+        /// List of usernames that are allowed to use this marking.
+        /// If null or empty, the marking is available to everyone.
+        /// </summary>
+        [DataField("allowedUsers")]
+        public List<string>? AllowedUsers { get; private set; }
+
+        /// <summary>
+        /// Minimum Boosty subscription tier required to use this marking.
+        /// 0 = available to everyone.
+        /// </summary>
+        [DataField("minBoostyTier")]
+        public int MinBoostyTier { get; private set; } = 0;
+        // Amour edit end
+
         [DataField("followSkinColor")]
         public bool FollowSkinColor { get; private set; } = false;
 

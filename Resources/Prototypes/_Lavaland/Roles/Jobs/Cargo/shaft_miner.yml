@@ -5,10 +5,8 @@
   description: job-description-shaftminer
   playTimeTracker: JobShaftMiner
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: Cargo
-    time: 9000 # 2.5 hrs
-  icon: "JobIconLavaShaftMiner" # Wizden's icon is already called shaft miner for whatever reason.
+    - !type:DiscordLinkRequirement # Amour edit
+  icon: "JobIconShaftMiner" # Orion-Edit: Changed to JobIconShaftMiner
   startingGear: ShaftMinerGear
   guides:
   - Salvage # TODO lavaland guide
@@ -24,9 +22,9 @@
 - type: startingGear
   id: ShaftMinerGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitShaftMiner
+## Goob comment out - jumpsuit: ClothingUniformJumpsuitShaftMiner
     id: MinerPDA
-    ears: ClothingHeadsetCargo
+    ears: ClothingHeadsetMining
   storage:
     back:
     - MiningVoucher

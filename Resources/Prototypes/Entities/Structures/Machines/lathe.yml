@@ -420,7 +420,7 @@
     runningState: building
     unlitIdleState: unlit
     unlitRunningState: unlit-building
-    staticPacks:
+    dynamicPacks: # Orion-Edit: Static > Dynamic
     - ToolsStatic
     - PartsStatic
     - AtmosStatic
@@ -578,26 +578,32 @@
     producingSound: /Audio/Machines/circuitprinter.ogg
     idleState: icon
     runningState: building
-    staticPacks:
-    #- ScienceBoardsStatic - Goobstation - Moved to Scifab
+    dynamicPacks: # Orion-Edit: Static > Dynamic
+    - ScienceBoardsStatic # Orion-Edit
     - ServiceBoardsStatic
     - CargoBoardsStatic
-    #- MedicalBoardsStatic - Goobstation - Moved to Scifab and Medfab
-    #- EngineeringBoardsStatic - Goobstation - Moved to Scifab and Engifab
+    - MedicalBoardsStatic # Orion-Edit
+    - EngineeringBoardsStatic # Orion-Edit
     - CircuitFloorsStatic
     # Goobstation Packs
     - SharedBoardsStatic
     - MedicalBoardsStaticGoob
     - SecurityBoardsStaticGoob
     - ServiceBoardsStaticGoob
-    dynamicPacks:
     - EngineeringBoards
     - CargoBoards
     - MedicalBoards
     - ServiceBoards
-    #- ScienceBoards - Goobstation - Moved to Scifab
+    - ScienceBoards # Orion-Edit
     - CameraBoards
-    #- MechBoards - Goobstation - split between departmental lathes
+    # Orion-Start
+    - MechBoards
+    - MechBoardsCargo
+    - MechBoardsCivilian
+    - MedicalBoardsGoob
+    - MechBoardsScience
+    - MechBoardsSecurity
+    # Orion-End
     - ShuttleBoards
     # Goobstation Packs
     - SharedBoards
@@ -641,7 +647,8 @@
   - type: Lathe
     idleState: fab-idle
     runningState: fab-active
-    staticPacks:
+    dynamicPacks: # Orion-Edit: Static > Dynamic
+    - AILawboards # Orion
     - RoboticsStatic
     - BorgModulesStatic
     - BorgLimbsStatic
@@ -653,7 +660,6 @@
     - PartsStatic
     - CablesStatic
     - PowerCellsStatic
-    dynamicPacks:
     - Robotics
     - BorgModules
     - MechParts
@@ -752,7 +758,7 @@
   - type: Lathe
     idleState: icon
     runningState: icon
-    staticPacks:
+    dynamicPacks: # Orion-Edit: Static > Dynamic
     - SecurityEquipmentStatic
     - SecurityPracticeStatic
     - SecurityAmmoStatic
@@ -768,7 +774,6 @@
     - ScienceExplosives
     - GrenadeTriggersStatic
     - SecurityWeaponsStaticGoob
-    dynamicPacks:
     - SalvageSecurityBoards
     - SalvageSecurityWeapons
     - SecurityEquipment
@@ -823,7 +828,7 @@
     - type: Lathe
       idleState: icon
       runningState: icon
-      staticPacks:
+      dynamicPacks: # Orion-Edit: Static > Dynamic
       - SecurityAmmoStatic
       # Goobstation Packs
       - SecurityAmmoStaticGoob
@@ -860,7 +865,7 @@
   - type: Lathe
     idleState: icon
     runningState: icon
-    staticPacks:
+    dynamicPacks: # Orion-Edit: Static > Dynamic
     - TopicalsStatic
     - ChemistryStatic
     - MedicalStatic
@@ -870,6 +875,7 @@
     - SurgeryStatic
     # Orion-Start
     - EmptyMedicalSprayBottlesStatic
+    - AbductorMedical
     # Orion-End
     # Goobstation Packs
     - ParamedHypoStatic
@@ -882,7 +888,6 @@
     - GrenadeTriggersStatic
     # Einstein Engines Packs
     - SyringeCase
-    dynamicPacks:
     # Orion-Start
     - BodyBagsDynamic
     # Orion-End
@@ -897,6 +902,7 @@
     - MedicalBoards
     - Janitor
     - Genetics
+    - MedicalCloning
     # Einstein Engines Packs
     - Translators # Language
     - TranslatorImplanters # Language
@@ -910,7 +916,7 @@
     stealGroup: MedicalTechFabCircuitboard
 
 - type: entity
-  parent: BaseLathe
+  parent: [BaseLatheLube, BaseSiloUtilizer] #Goob edit
   id: UniformPrinter
   name: uniform printer
   description: Prints new or replacement uniforms.
@@ -943,6 +949,7 @@
     - Scarves
     - Carpets
     - Bedsheets
+    - DoubleBedsheets # Orion
     # Goobstation Packs
     - ClothingCasualJumpsuits
     - ClothingCommandSummer
@@ -1097,7 +1104,7 @@
     - SheetifierStatic
 
 - type: entity
-  parent: BaseLathe
+  parent: [ BaseLatheLube, BaseSiloUtilizer ] # Orion-Edit: BaseSiloUtilizer
   id: CutterMachine
   name: cutter machine
   description: This is a cutter. It cuts. Add variety to your station floor with eye-pleasing patterns! Don't stick your fingers in.

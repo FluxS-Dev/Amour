@@ -25,6 +25,7 @@
 # SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 Flareguy <78941145+Flareguy@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 Floofi <126319569+Shadowtheprotogen546@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2024 Ghagliiarghii <68826635+Ghagliiarghii@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 Gyrandola <pasta.frollagg@gmail.com>
 # SPDX-FileCopyrightText: 2024 HS <81934438+HolySSSS@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 Hannah Giovanna Dawson <karakkaraz@gmail.com>
@@ -94,11 +95,9 @@
 # SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
 # SPDX-FileCopyrightText: 2025 Aineias1 <dmitri.s.kiselev@gmail.com>
 # SPDX-FileCopyrightText: 2025 Alpaccalypse <21291379+Alpaccalypse@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Boaz1111 <149967078+Boaz1111@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
-# SPDX-FileCopyrightText: 2025 Ghagliiarghii <68826635+Ghagliiarghii@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 # SPDX-FileCopyrightText: 2025 Hanz <41141796+Hanzdegloker@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
@@ -106,15 +105,12 @@
 # SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
 # SPDX-FileCopyrightText: 2025 JustinWinningham <justinmwinningham@gmail.com>
 # SPDX-FileCopyrightText: 2025 K-Dynamic <20566341+K-Dynamic@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 LevitatingTree <114672939+LevitatingTree@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 McBosserson <148172569+McBosserson@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Milon <plmilonpl@gmail.com>
 # SPDX-FileCopyrightText: 2025 NathanielJ14 <nathanielalbert1202@gmail.com>
 # SPDX-FileCopyrightText: 2025 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Nox <nebulousnox38@gmail.com>
 # SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
 # SPDX-FileCopyrightText: 2025 Ps3Moira <113228053+ps3moira@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Radezolid <snappednexus@gmail.com>
 # SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
 # SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
@@ -126,7 +122,6 @@
 # SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 TheBorzoiMustConsume <197824988+TheBorzoiMustConsume@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Unlumination <144041835+Unlumy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Will-Oliver-Br <164823659+Will-Oliver-Br@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
@@ -169,7 +164,6 @@ BackmenVendingMachineSovietSoda: RandomVending
 
 FloorHardCatwalkDarkIron: Catwalk
 
-PrinterDoc: null
 Shower: null
 
 AntiPsychicKnife: null
@@ -250,10 +244,10 @@ WeaponDominatorNT: WeaponDisabler
 WindoorMTFMedicalLocked: WindoorSecureCentralCommandLocked
 
 GunSafeRifleLecter: GunSafeRandomHeavyRifleAlertLocked
-GunSafeSubMachineGunDrozd: GunSafeRandomLightRifleAlertLocked
+GunSafeSubMachineGunDrozd: GunSafeRandomSubMachineGunAlertLocked
 GunSafeShotgunEnforcer: GunSafeRandomAutoShotgunAlertLocked
 GunSafeShotgunKammerer: GunSafeRandomPumpShotgunAlertLocked
-GunSafeSubMachineGunWt550: GunSafeRandomSubMachineGunAlertLocked
+GunSafeSubMachineGunWt550: GunSafeRandomLightRifleAlertLocked
 GunSafeLaserCarbine: GunSafeRandomLaserCarbineAlertLocked
 GunSafePistolMk58: GunSafeRandomPistolAlertUnlocked
 
@@ -308,24 +302,26 @@ AirlockZookeeperGlassLocked: AirlockServiceGlassLocked
 AirlockZookeeperLocked: AirlockServiceLocked
 AlwaysPoweredLightPostSmallRed: null
 AsteroidAltRock: AsteroidRock
-BenchParkBambooMiddle: null
-BenchParkLeft: null
-BenchParkMiddle: null
-BenchParkRight: null
-BenchPewLeft: null
-BenchPewMiddle: null
-BenchPewRight: null
-BenchSofaCorpLeft: null
-BenchSofaCorpMiddle: null
-BenchSofaCorpRight: null
-BenchSofaLeft: null
-BenchSofaRight: null
-BenchSteelLeft: null
-BenchSteelMiddle: null
-BenchSteelRight: null
-BenchSteelWhiteLeft: null
-BenchSteelWhiteMiddle: null
-BenchSteelWhiteRight: null
+# Orion-Edit-Start: Returned for mapping
+#BenchParkBambooMiddle: null
+#BenchParkLeft: null
+#BenchParkMiddle: null
+#BenchParkRight: null
+#BenchPewLeft: null
+#BenchPewMiddle: null
+#BenchPewRight: null
+#BenchSofaCorpLeft: null # Goob edit
+#BenchSofaCorpMiddle: null # Goob edit
+#BenchSofaCorpRight: null # Goob edit
+#BenchSofaLeft: null
+#BenchSofaRight: null
+#BenchSteelLeft: null
+#BenchSteelMiddle: null
+#BenchSteelRight: null
+#BenchSteelWhiteLeft: null
+#BenchSteelWhiteMiddle: null
+#BenchSteelWhiteRight: null
+# Orion-Edit-End
 BoardGameSpawner: null
 BoxColoredLighttube: BoxLighttube
 BoxEncryptionKeyPrisoner: BoxEncryptionKeyPassenger
@@ -338,7 +334,7 @@ ClothingHeadHatFedoraBlack: null
 ClothingHeadHatFedoraChoc: null
 ClothingHeadHatFezMantis: null
 ClothingHeadPrisonGuard: null
-ClothingUniformMartialGi: null
+ClothingUniformMartialGi: ClothingUniformGi # Orion-Edit
 ClothingUniformTShirtKhakiPants: null
 ComputerShipyard: null
 CourierBag: null
@@ -366,7 +362,7 @@ GunSafeEnergyGunMini: null
 GunSafeVulcanRifle: null
 HatSpawner: null
 KitchenDeepFryer: null
-KvassTankFull: null
+#KvassTankFull: null # Orion-Edit: Removed
 LockerForensicMantisFilled: null
 LunchboxSecurityFilledRandom: null
 MagazineBoxSpecialPractice: null
@@ -376,23 +372,23 @@ PaintingMothBigCatch: null
 PaintingSpoon: null
 PlushieMothMusician: null
 PlushieMothRandom: null
-PosterContrabandBreadLies: null
+#PosterContrabandBreadLies: null # Orion-Edit: Removed
 PosterContrabandGotWood: null
 PosterContrabandSafetyMothSyndie: null
 PosterContrabandSaucerNumberOne: null
-PosterLegitBarDrinks: null
-PosterLegitBotanyFood: null
+#PosterLegitBarDrinks: null # Orion-Edit: Removed
+#PosterLegitBotanyFood: null # Orion-Edit: Removed
 PosterLegitChknDnnr: null
 PosterLegitCornzza: null
 PosterLegitDejaVu: null
 PosterLegitDontPanic: null
-PosterLegitEatMeat: null
+#PosterLegitEatMeat: null # Orion-Edit: Removed
 PosterLegitFuckAround: null
-PosterLegitHotDonkExplosion: null
+#PosterLegitHotDonkExplosion: null # Orion-Edit: Removed
 PosterLegitMedicate: null
 PosterLegitNoTouching: null
-PosterLegitPieSlice: null
-PosterLegitPizzaHope: null
+#PosterLegitPieSlice: null # Orion-Edit: Removed
+#PosterLegitPizzaHope: null # Orion-Edit: Removed
 PosterLegitSafetyMothBoH: null
 PosterLegitSafetyMothFires: null
 PosterLegitSafetyMothGlimmer: null
@@ -413,7 +409,7 @@ Roboisseur: null
 SalvagePartsSpawnerLow: null
 SalvagePartsSpawnerMid: null
 SecBreachingHammer: null
-Shinai: null
+#Shinai: null # Orion-Edit: Removed
 ShockCollar: null
 shuttle_manipulator: null
 SignConspiracyBoard: null
@@ -439,7 +435,7 @@ SpeedLoaderSpecialPractice: null
 SuitStorageCorpsman: null
 SuitStorageParamedic: null
 TableWoodReinforced: TableWood
-tatamimat: null
+#TatamiMat: null # Orion-Edit: Removed
 ToyRenault: null
 ToySiobhan: null
 VendingMachineBoozeUnlocked: null
@@ -447,7 +443,7 @@ VendingMachineBoxingDrobe: null
 VendingMachineCourierDrobe: null
 VendingMachineMNKDrobe: null
 VendingMachineRepDrobe: null
-WallPaper: null
+#WallPaper: null # Orion-Edit
 WarpPointAI: null
 WarpPointArrivals: null
 WarpPointAtmos: null
@@ -629,10 +625,10 @@ CrystalSubspaceStockPart: null
 TransmitterSubspaceStockPart: null
 
 # 2024-01-10
-ClothingHeadHatHoodRad: null
+#ClothingHeadHatHoodRad: null # Orion-Edit: Removed
 
 # 2024-01-12
-SpaceMedipen: null
+#SpaceMedipen: null # Orion-Edit: Removed
 
 # 2024-01-18
 ClothingHeadHelmetVoidParamed: null
@@ -676,8 +672,8 @@ ActionVehicleHorn: null
 #CrateFunSyndicateSegway: null Goobstation - Re-add vehicles
 MobTaxiBot: null
 # MobSupplyBot: null
-SpawnVehicleMotobike: null
-SpawnVehicleATV: null
+#SpawnVehicleMotobike: null # Orion-Edit: Removed
+#SpawnVehicleATV: null # Orion-Edit: Removed
 #SpawnVehicleSecway: null Goobstation - Re-add vehicles
 #SpawnVehicleJanicart: null Goobstation - Re-add vehicles
 #VehicleJanicart: null Goobstation - Re-add vehicles
@@ -897,8 +893,8 @@ CentcomPDAFake: null
 CentcomIDCardSyndie: null
 
 # 2024-09-06
-AntimovCircuitBoard: null
-OverlordCircuitBoard: null
+#AntimovCircuitBoard: null # Orion-Edit: Removed
+#OverlordCircuitBoard: null # Orion-Edit: Removed
 
 # 2024-09-08
 HatBase: null
@@ -1021,7 +1017,7 @@ BorgModuleAdvancedTreatment: null
 FoodCondimentPacketFrostoil: FoodCondimentPacketColdsauce
 
 # 2025-02-05
-WeaponSubMachineGunVector: null
+#WeaponSubMachineGunVector: null # Orion-Edit: Removed
 WeaponSubMachineGunVectorRubber: null
 
 # 2025-02-11
@@ -1032,9 +1028,9 @@ PosterContrabandLustyExomorph: PosterContrabandLustyXenomorph
 PosterContrabandBustyBackdoorExoBabes6: PosterContrabandBustyBackdoorXenoBabes6
 
 # 2025-02-20
-MagazineBoxAntiMaterielBig: null
-MagazineBoxCaselessRifle10x24: null
-MagazineBoxCaselessRifleBig: null
+#MagazineBoxAntiMaterielBig: null # Orion-Edit: Removed
+#MagazineBoxCaselessRifle10x24: null # Orion-Edit: Removed
+#MagazineBoxCaselessRifleBig: null # Orion-Edit: Removed
 MagazinePistolHighCapacityRubber: null
 
 # 2025-03-09 - Shitmed Woundmed, separating torsos into chest and groin
@@ -1065,7 +1061,7 @@ CargoMailTeleporter: MailTeleporter
 ClothingMaskBlushingMime: ClothingMaskSexyMime
 ClothingMaskBlushingClown: ClothingMaskSexyMime
 MachineMaterialSilo: null
-CrateMaterialSilo: null
+#CrateMaterialSilo: null # Orion-Edit: Removed
 
 # 2025-03-29
 ClothingBackpackDuffelSyndicateRaidBundle: ClothingBackpackSyndicateRaidBundle
@@ -1124,9 +1120,6 @@ PlushieBlackburnKobliska: null
 
 # 2025-06-13 Goobstation
 BroomWitch: Broomstick
-
-# 2025-06-04 Goobstation
-SmartFridge: DVSmartFridgeMedical
 
 # 2025-05-02
 CigPackMixedNasty: CigPackMixed
@@ -1199,6 +1192,9 @@ FoodDonutJellySlugcat: FoodDonutJellyScurret
 
 # 2026-01-04
 GhostBarSpawner: null
+
+# 2026-01-18
+DVSmartFridgeMedical: SmartFridgeMedical
 
 # 2026-01-10 Goobstation Change Mapped Chem to Energy Chem by default
 ChemDispenser: EnergyChemDispenser

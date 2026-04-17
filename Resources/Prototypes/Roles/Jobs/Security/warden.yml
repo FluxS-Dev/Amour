@@ -135,26 +135,26 @@
   description: job-description-warden
   playTimeTracker: JobWarden
   requirements:
+    # Amour-Edit-Start
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer
-      time: 9000 #2.50 hrs # Amour
+      time: 21600 #6 hrs # Amour-Edit
     - !type:RoleTimeRequirement
       role: JobBrigmedic
-      time: 9000 #2.50 hrs # Amour
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 18000 #5 hrs # Amour
+      time: 14400 #4 hrs # Amour-Edit
+    # Amour-Edit-End
+    - !type:DiscordLinkRequirement # Amour
   weight: 5
   startingGear: WardenGear
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos
   canBeAntag: false
   guides: # goobstation
-  - SpaceLaw
-  # Orion-Edit-Start
-  # Orion-Edit-End
+  # Amour-Edit-Start
+  # - SpaceLaw # Disabled until guide is created
+  # Amour-Edit-End
   - KravMaga
-  goobcoins: 35 #Goob content
+  goobcoins: 75 #Goob content # Amour-Edit
   access:
   - Security
   - Brig

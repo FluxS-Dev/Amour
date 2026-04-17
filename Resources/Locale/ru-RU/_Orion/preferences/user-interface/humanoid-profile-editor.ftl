@@ -20,3 +20,4 @@ humanoid-profile-editor-link-tooltip =
     Примечание: Если ссылка содержит в себе вредоносные материалы — сообщите об этом администрации.
 
 humanoid-profile-editor-preference-pda-ringtone-label = Рингтон ПДА:
+trait-category-mood = Черты настроения

@@ -64,6 +64,8 @@
     sprite: Objects/Specific/Janitorial/soap.rsi
     storedRotation: -90
   - type: Slippery
+    slipData: # Orion
+      stunTime: 1
   - type: StepTrigger
     intersectRatio: 0.2
     triggerGroups: # Goobstation
@@ -175,9 +177,11 @@
   - type: SolutionContainerVisuals
     fillBaseName: syndie-
   - type: Slippery
+    staminaDamage: 50
     slipData:
-      paralyzeTime: 3
-      launchForwardsMultiplier: 3
+      stunTime: 2 # Orion
+      knockdownTime: 4 # Orion-Edit: 3 > 4
+      launchForwardsMultiplier: 5 # Orion-Edit: 3 > 5
   - type: Item
     heldPrefix: syndie
   - type: FlavorProfile
@@ -203,9 +207,8 @@
     layers:
     - state: syndie-soaplet
   - type: Slippery
-    slipData:
-      paralyzeTime: 1.5 # these things are tiny
-      launchForwardsMultiplier: 1.5
+    slipData: # Orion
+      knockdownTime: 3
   - type: StepTrigger
     intersectRatio: 0.04
     triggerGroups: # Goobstation
@@ -213,6 +216,7 @@
       - SlipEntity
   - type: Item
     heldPrefix: syndie
+    size: Tiny
   - type: Fixtures
     fixtures:
       slips:
@@ -231,10 +235,16 @@
         - ItemMask
   - type: DeleteOnTrigger
   - type: EmitSoundOnTrigger
+    predicted: true
+    positional: true
     sound:
       path: "/Audio/Effects/Fluids/splat.ogg"
       params:
-        volume: -20
+        volume: -8
+  - type: Tag # Orion
+    tags:
+    - Trash
+    - Soap
 
 - type: entity
   name: soap
@@ -276,9 +286,11 @@
   - type: SolutionContainerVisuals
     fillBaseName: omega-
   - type: Slippery
+    staminaDamage: 50
     slipData:
-      paralyzeTime: 5.0
-      launchForwardsMultiplier: 3.0
+      stunTime: 3 # Orion
+      knockdownTime: 6.0 # Orion-Edit: 5 > 6
+      launchForwardsMultiplier: 7.0 # Orion-Edit: 3 > 7
   - type: Item
     heldPrefix: omega
   - type: SolutionContainerManager

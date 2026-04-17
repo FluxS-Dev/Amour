@@ -92,3 +92,52 @@
     state: sheath
   - type: Clothing
     sprite: _Orion/Clothing/Belt/centcomm_sheath.rsi
+
+- type: entity
+  parent: ClothingBeltSheath
+  id: ClothingBeltKatanaSheath
+  name: katana sheaths
+  description: An ornate belt designed to hold a pair of samurai's blades, or daisho.
+  components:
+  - type: Sprite
+    sprite: _Orion/Clothing/Belt/katanasheath.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Orion/Clothing/Belt/katanasheath.rsi
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      item: !type:ContainerSlot {}
+      item2: !type:ContainerSlot {}
+  - type: ItemSlots
+    slots:
+      item:
+        name: Katana
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - Katana
+      item2:
+        name: Wakizashi
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - Wakizashi
+  - type: ItemMapper
+    mapLayers:
+      sheath-katana:
+        whitelist:
+          tags:
+          - Katana
+      sheath-wakizashi:
+        whitelist:
+          tags:
+          - Wakizashi
+  - type: Appearance

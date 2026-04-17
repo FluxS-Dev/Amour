@@ -424,7 +424,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         if (_prototypeManager.HasIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID)))
         {
-            var loadout = profile.GetLoadoutOrDefault(LoadoutSystem.GetJobPrototype(job.ID), _playerManager.LocalSession, profile.Species, EntityManager, _prototypeManager);
+            // Amour edit: use GetEffectiveLoadout to include BaseCrew groups in preview
+            var loadout = profile.GetEffectiveLoadout(LoadoutSystem.GetJobPrototype(job.ID), _playerManager.LocalSession, _prototypeManager);
             GiveDummyLoadout(dummy, loadout, clothingMode); // Orion-Edit
         }
     }
@@ -443,6 +444,11 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     {
         if (roleLoadout is null)
             return;
+
+        // Amour edit start
+        if (!_inventory.TryGetSlots(uid, out var slots))
+            return;
+        // Amour edit end
 
         foreach (var group in roleLoadout.SelectedLoadouts.Values)
         {
@@ -467,12 +473,29 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
                     }
                 }
                 // Orion-End
-                // Orion-Edit-Start
+                // Amour-Edit-Start
                 else
                 {
-                    _spawn.EquipStartingGear(uid, loadoutProto);
+                    foreach (var slot in slots)
+                    {
+                        string itemType;
+
+                        if (_prototypeManager.TryIndex(loadoutProto.StartingGear, out var loadoutGear))
+                            itemType = ((IEquipmentLoadout) loadoutGear).GetGear(slot.Name);
+                        else
+                            itemType = ((IEquipmentLoadout) loadoutProto).GetGear(slot.Name);
+
+                        if (string.IsNullOrEmpty(itemType))
+                            continue;
+
+                        if (_inventory.TryUnequip(uid, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
+                            EntityManager.DeleteEntity(unequippedItem.Value);
+
+                        var item = EntityManager.SpawnEntity(itemType, MapCoordinates.Nullspace);
+                        _inventory.TryEquip(uid, item, slot.Name, true, true);
+                    }
                 }
-                // Orion-Edit-End
+                // Amour-Edit-End
             }
         }
     }
@@ -608,7 +631,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (!_prototypeManager.HasIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID)))
             return dummyEnt;
 
-        var loadout = humanoid.GetLoadoutOrDefault(LoadoutSystem.GetJobPrototype(job.ID), _playerManager.LocalSession, humanoid.Species, EntityManager, _prototypeManager);
+        // Amour edit: use GetEffectiveLoadout to include BaseCrew groups in preview
+        var loadout = humanoid.GetEffectiveLoadout(LoadoutSystem.GetJobPrototype(job.ID), _playerManager.LocalSession, _prototypeManager);
         GiveDummyLoadout(dummyEnt, loadout, clothingMode);
         // Orion-Edit-End
 

@@ -3,6 +3,7 @@
   groups:
   - GroupTankHarness
   - SalvageSpecialistNeck # TODO add a special cloak specifically for shaft miners
+  - ShaftMinerJumpsuit #Goob
   - SalvageSpecialistBackpack
   - SalvageSpecialistOuterClothing
   - SalvageSpecialistShoes
@@ -15,3 +16,9 @@
   - SalvageEnvirohelm
   - SalvageEnvirosuit
   - SalvageEnvirogloves
+  # Orion-Start
+  - Undershirt
+  - Underwear
+  - Socks
+  - Wrists
+  # Orion-End

@@ -16,8 +16,7 @@
   setPreference: true
   objective: roles-antag-changeling-description
   requirements:
-  - !type:OverallPlaytimeRequirement
-      time: 36000 #10 hrs
+  - !type:DiscordLinkRequirement # Amour edit
   - !type:SpeciesRequirement
     inverted: true
     species:

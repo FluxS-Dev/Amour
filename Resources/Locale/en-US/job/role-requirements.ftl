@@ -15,6 +15,7 @@
 role-timer-department-insufficient = You require [color=yellow]{$time}[/color] more playtime in the [color={$departmentColor}]{$department}[/color] department to unlock this.
 role-timer-department-too-high = You require [color=yellow]{$time}[/color] less playtime in the [color={$departmentColor}]{$department}[/color] department to select this. (Are you trying to play a trainee role?)
 role-timer-overall-insufficient = You require [color=yellow]{$time}[/color] more overall playtime to unlock this.
+role-timer-any-of-requirement-failed = You must meet at least one of the following requirements:
 role-timer-overall-too-high = You require [color=yellow]{$time}[/color] less overall playtime to select this. (Are you trying to play a trainee role?)
 role-timer-role-insufficient = You require [color=yellow]{$time}[/color] more playtime with [color={$departmentColor}]{$job}[/color] to unlock this.
 role-timer-role-too-high = You require[color=yellow] {$time}[/color] less playtime with [color={$departmentColor}]{$job}[/color] to select this. (Are you trying to play a trainee role?)

@@ -13,14 +13,13 @@
     allowMovement: true
     name: cortical-borer-ghostrole-name
     description: cortical-borer-ghostrole-desc
-    rules: ghost-role-information-freeagent-rules
+    rules: ghost-role-information-antagonist-rules
     mindRoles:
-    - MindRoleGhostRoleFreeAgent
+    - MindRoleCorticalBorer
     raffle:
       settings: default
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 36000 # 10 hrs
+      - !type:DiscordLinkRequirement # Amour edit
   - type: GhostTakeoverAvailable
   - type: Sprite
     scale: 0.6, 0.6
@@ -88,6 +87,8 @@
     interfaces:
       enum.CorticalBorerDispenserUiKey.Key:
         type: CorticalBorerDispenserBoundUserInterface
+      enum.CorticalBorerForceSpeakUiKey.Key:
+        type: CorticalBorerForceSpeakBoundUserInterface
       enum.HealthAnalyzerUiKey.Key:
         type: HealthAnalyzerBoundUserInterface
   - type: CollectiveMind
@@ -107,6 +108,11 @@
   - type: Body
     thermalVisibility: false
   - type: UniversalLanguageSpeaker
+  - type: AntagObjectives
+    objectives:
+    - CorticalBorerSurviveObjective
+    - CorticalBorerWillingHostsObjective
+    - CorticalBorerEggsObjective
   - type: GlobalAntagonist
     antagonistPrototype: globalAntagonistCorticalBorer
 
@@ -126,10 +132,9 @@
     description: cortical-borer-ghostrole-desc
     rules: ghost-role-information-freeagent-rules
     requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 36000 # 10 hrs
+      - !type:DiscordLinkRequirement # Amour edit
     mindRoles:
-    - MindRoleGhostRoleFreeAgent
+    - MindRoleCorticalBorer
   - type: GhostRoleMobSpawner
     prototype: MobCorticalBorer
   - type: Damageable

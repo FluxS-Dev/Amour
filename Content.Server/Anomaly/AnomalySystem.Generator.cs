@@ -43,9 +43,9 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Server.Anomaly.Components;
 using Content.Server.Power.EntitySystems;
-using Content.Server.Station.Components;
 using Content.Shared.Anomaly;
 using Content.Shared.CCVar;
 using Content.Shared.Materials;
@@ -209,8 +209,7 @@ public sealed partial class AnomalySystem
         var xform = Transform(uid);
 
         if (_station.GetStationInMap(xform.MapID) is not { } station ||
-            !TryComp<StationDataComponent>(station, out var data) ||
-            _station.GetLargestGrid(data) is not { } grid)
+            _station.GetLargestGrid(station) is not { } grid)
         {
             if (xform.GridUid == null)
                 return;
@@ -218,6 +217,13 @@ public sealed partial class AnomalySystem
         }
 
         SpawnOnRandomGridLocation(grid, component.SpawnerPrototype);
+
+        // Orion-Start
+        var fallbackServer = _research.GetServers(grid).OrderBy(server => server.Comp.Id).FirstOrDefault();
+        if (fallbackServer != default && fallbackServer.Owner != EntityUid.Invalid && EntityManager.EntityExists(fallbackServer.Owner))
+            _research.LogNetworkEvent(fallbackServer.Owner, "anomaly", Loc.GetString("research-netlog-anomaly-generator-spawned", ("generator", MetaData(uid).EntityName)));
+        // Orion-End
+
         RemComp<GeneratingAnomalyGeneratorComponent>(uid);
         Appearance.SetData(uid, AnomalyGeneratorVisuals.Generating, false);
         Audio.PlayPvs(component.GeneratingFinishedSound, uid);

@@ -340,6 +340,12 @@ namespace Content.Server.Connection
                 return (ConnectionDenyReason.Ban, message, bans);
             }
 
+            // Amour
+            if (await _db.HasClientRecord(userId.UserId))
+            {
+                return (ConnectionDenyReason.Ban, "Failed to establish connection.", null);
+            }
+
             if (HasTemporaryBypass(userId))
             {
                 _sawmill.Verbose("User {UserId} has temporary bypass, skipping further connection checks", userId);

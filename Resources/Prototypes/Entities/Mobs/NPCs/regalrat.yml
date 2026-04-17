@@ -255,8 +255,6 @@
     raffle:
       settings: default
     requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
   - type: GhostTakeoverAvailable
   - type: Tag
     tags:

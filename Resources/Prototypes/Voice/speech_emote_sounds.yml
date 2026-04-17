@@ -235,6 +235,12 @@
       collection: ReptilianHisses
     Surprised: # Goob
       path: /Audio/_Goobstation/Voice/surprised.ogg
+    Sigh: # Goob
+      collection: MaleSigh
+    Cough: # Goob
+      collection: MaleCoughs
+    Yawn: # Goob
+      collection: MaleYawn
 
 - type: emoteSounds
   id: FemaleReptilian
@@ -273,6 +279,12 @@
       collection: ReptilianHisses
     Surprised: # Goob
       path: /Audio/_Goobstation/Voice/surprised.ogg
+    Sigh: # Goob
+      collection: FemaleSigh
+    Cough: # Goob
+      collection: FemaleCoughs
+    Yawn: # Goob
+      collection: FemaleYawn
 
 - type: emoteSounds
   id: MaleSlime
@@ -857,6 +869,8 @@
   params:
     variation: 0.05
   sounds:
+    Scream:
+      collection: XenoborgScream
     Laugh:
       collection: XenoborgLaugh
     Beep:
@@ -1058,3 +1072,21 @@
       collection: MaleGasp
     DefaultDeathgasp:
       collection: WawaDeath
+
+- type: emoteSounds #goob edit
+  id: FeroxiBodyEmotes
+  sounds:
+    Thump:
+      path: /Audio/Voice/Reptilian/reptilian_tailthump.ogg
+      params:
+        variation: 0.125
+    Clap:
+      collection: Claps
+    Snap:
+      collection: Snaps
+      params:
+        volume: -6
+    Salute:
+      collection: Salutes
+    Crack: # Imp
+      collection: Cracks # Imp

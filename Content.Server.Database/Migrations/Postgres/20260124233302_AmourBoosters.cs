@@ -11,13 +11,6 @@ namespace Content.Server.Database.Migrations.Postgres
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "voice",
-                table: "profile",
-                type: "text",
-                nullable: false,
-                defaultValue: "");
-
             migrationBuilder.CreateTable(
                 name: "amour_boosters",
                 columns: table => new
@@ -43,10 +36,6 @@ namespace Content.Server.Database.Migrations.Postgres
         {
             migrationBuilder.DropTable(
                 name: "amour_boosters");
-
-            migrationBuilder.DropColumn(
-                name: "voice",
-                table: "profile");
         }
     }
 }

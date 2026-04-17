@@ -1,12 +1,15 @@
-﻿- type: job
+- type: job
   id: Roboticist
   name: job-name-roboticist
   description: job-description-roboticist
   playTimeTracker: JobRoboticist
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: Science
-      time: 7200 #2 hrs # Amour
+    - !type:AnyOfRequirement # Amour edit - Discord OR playtime
+      requirements:
+        - !type:DiscordLinkRequirement
+        - !type:DepartmentTimeRequirement
+          department: Science
+          time: 14400 #4 hrs
   startingGear: RoboticistGear
   icon: "JobIconRoboticist"
   supervisors: job-supervisors-rd

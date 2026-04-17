@@ -63,11 +63,14 @@
   description: job-description-technical-assistant
   playTimeTracker: JobTechnicalAssistant
   requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 3600 #1 hrs # Amour
+    - !type:AnyOfRequirement # Amour edit - Discord OR playtime
+      requirements:
+        - !type:DiscordLinkRequirement
+        - !type:OverallPlaytimeRequirement
+          time: 7200 # 2 hrs
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 18000 #5 hrs # Amour
+      time: 36000 #10 hrs
       inverted: true # stop playing intern if you're good at engineering!
   startingGear: TechnicalAssistantGear
   icon: "JobIconTechnicalAssistant"
@@ -76,7 +79,7 @@
   - Construction
   - Power
   - Networking
-  goobcoins: 20 #Goob content
+  goobcoins: 30 #Goob content # Amour-Edit
   access:
   - Maintenance
   - Engineering

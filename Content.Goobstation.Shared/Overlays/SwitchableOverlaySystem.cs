@@ -9,6 +9,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Flash;
 using Content.Shared.Inventory;
+using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
@@ -25,6 +26,7 @@ public abstract class SwitchableOverlaySystem<TComp, TEvent> : EntitySystem // t
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!; // Orion
 
     public override void Initialize()
     {
@@ -98,6 +100,15 @@ public abstract class SwitchableOverlaySystem<TComp, TEvent> : EntitySystem // t
 
     private void OnGetState(EntityUid uid, TComp component, ref ComponentGetState args)
     {
+        var lightRadius = 0f;
+        string? thermalShader = null;
+
+        if (component is ThermalVisionComponent thermal)
+        {
+            lightRadius = thermal.LightRadius;
+            thermalShader = thermal.ThermalShader;
+        }
+
         args.State = new SwitchableVisionOverlayComponentState
         {
             Color = component.Color,
@@ -107,7 +118,8 @@ public abstract class SwitchableOverlaySystem<TComp, TEvent> : EntitySystem // t
             ActivateSound = component.ActivateSound,
             DeactivateSound = component.DeactivateSound,
             ToggleAction = component.ToggleAction,
-            LightRadius = component is ThermalVisionComponent thermal ? thermal.LightRadius : 0f,
+            LightRadius = lightRadius,
+            ThermalShader = thermalShader,
             DrawOverlay = component.DrawOverlay,
             OverlayOpacity = component.OverlayOpacity,
         };
@@ -135,12 +147,16 @@ public abstract class SwitchableOverlaySystem<TComp, TEvent> : EntitySystem // t
         }
 
         if (component is ThermalVisionComponent thermal)
+        {
             thermal.LightRadius = state.LightRadius;
+            thermal.ThermalShader = state.ThermalShader;
+        }
 
         if (component.IsActive == state.IsActive)
             return;
 
         component.IsActive = state.IsActive;
+        UpdateVisuals(uid, component); // Orion
 
         RaiseSwitchableOverlayToggledEvent(uid,
             component.IsEquipment ? Transform(uid).ParentUid : uid,
@@ -162,6 +178,7 @@ public abstract class SwitchableOverlaySystem<TComp, TEvent> : EntitySystem // t
     private void OnInit(EntityUid uid, TComp component, ComponentInit args)
     {
         component.PulseAccumulator = component.PulseTime;
+        UpdateVisuals(uid, component); // Orion
     }
 
     private void OnMapInit(EntityUid uid, TComp component, MapInitEvent args)
@@ -190,13 +207,25 @@ public abstract class SwitchableOverlaySystem<TComp, TEvent> : EntitySystem // t
         if (component.PulseTime > 0f)
         {
             component.PulseAccumulator = activate ? 0f : component.PulseTime;
+            UpdateVisuals(uid, component); // Orion
             return;
         }
 
         component.IsActive = activate;
+        UpdateVisuals(uid, component); // Orion
         _actions.SetToggled(component.ToggleActionEntity, activate); // WD EDIT - it's white dream system but okay
         Dirty(uid, component);
     }
+
+    // Orion-Start
+    private void UpdateVisuals(EntityUid uid, TComp component)
+    {
+        if (!TryComp<AppearanceComponent>(uid, out var appearance))
+            return;
+
+        _appearance.SetData(uid, ToggleableVisuals.Enabled, component.IsActive, appearance);
+    }
+    // Orion-End
 
     private void RaiseSwitchableOverlayToggledEvent(EntityUid uid, EntityUid user, bool activated)
     {

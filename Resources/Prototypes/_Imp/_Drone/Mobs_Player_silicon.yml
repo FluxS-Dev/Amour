@@ -29,6 +29,7 @@
     damageContainer: Inorganic
   - type: Bloodstream
     bloodReagent: Oil
+    bloodMaxVolume: 50
     bloodlossDamage:
       types:
         Bloodloss:
@@ -114,16 +115,33 @@
       tags:
       - DroneUsable
       - Trash
+      - Crayon
     blacklist:
       tags:
       - Syringe
       - HighRiskItem
       - Sidearm
       - Taser
+      - Flash
       components:
+      - Handcuff
       - Gun
       - EnergySword
       - Nuke # Amour
+  - type: ContainerContainer # imp.
+    containers:
+      cell_slot: !type:ContainerSlot { }
+  - type: PowerCellSlot # imp.
+    cellSlotId: cell_slot
+    fitsInCharger: true
+  - type: PowerCellDraw # imp
+    drawRate: 0.6
+  - type: ItemSlots # imp
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium
+        disableEject: true
   - type: Instrument # imp
     allowPercussion: false
     handheld: false
@@ -159,12 +177,17 @@
   - type: StationMap #imp
   - type: GhostRole
     requirements:
-    - !type:DepartmentTimeRequirement
-      department: Engineering
-      time: 36000 # ten hours
-    - !type:DepartmentTimeRequirement
-      department: Silicon
-      time: 18000 # five hours
+    - !type:AnyOfRequirement # Amour edit - Discord OR playtime
+      requirements:
+        - !type:DiscordLinkRequirement
+        - !type:AllOfRequirement
+          requirements:
+            - !type:DepartmentTimeRequirement
+              department: Engineering
+              time: 36000 # ten hours
+            - !type:DepartmentTimeRequirement
+              department: Silicon
+              time: 18000 # five hours
     makeSentient: true
     name: ghost-role-information-drone-name
     description: ghost-role-information-drone-description
@@ -178,6 +201,12 @@
   - type: MovementSpeedModifier
     baseWalkSpeed : 5
     baseSprintSpeed : 5
+    minimumFrictionSpeed: 0
+    weightlessAcceleration: 1.2
+    weightlessFriction: 1
+    weightlessFrictionNoInput: 2
+    offGridFriction: 1.5
+    weightlessModifier: 1
   - type: MobState
     allowedStates:
     - Alive
@@ -185,7 +214,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      60: Dead
+      25: Dead
   #- type: Flash # Goobstation - Remove drone flashing.
   - type: NoSlip
   - type: StatusEffects
@@ -216,7 +245,7 @@
       sprite: _Imp/Drone/drone.rsi
       state: shell
     name: drone
-  - type: MovementIgnoreGravity
+  - type: MovementAlwaysTouching
   - type: Fixtures
     fixtures:
       fix1:
@@ -239,10 +268,8 @@
   - type: LanguageKnowledge # Einstein Engines - Language
     speaks:
     - DroneTalk
-    - RobotTalk
     understands:
     - DroneTalk
-    - RobotTalk
     - TauCetiBasic
   - type: TypingIndicator
     proto: robot
@@ -259,10 +286,10 @@
   - type: UnpoweredFlashlight
   - type: PointLight
     enabled: false
-    radius: 3.5
-    softness: 1
-    mask: /Textures/Effects/LightMasks/cone.png
-    autoRot: true
+    radius: 4
+    energy: 0.8
+    softness: 10
+    color: "#bfe9ff"
   - type: ProtectedFromStepTriggers
   - type: DamageOnInteractProtection # Goobstation - Copied from borgs
     damageProtection:
@@ -280,9 +307,8 @@
     - VimPilot
     - Bot # Goobstation
   - type: CollectiveMind # Goobstation
-    defaultChannel: Binary
+    defaultChannel: Dronemind
     channels:
-    - Binary
     - Dronemind
   - type: Access
     tags:
@@ -290,3 +316,5 @@
     - Maintenance
     - Atmospherics # Goobstation
   - type: ContributorName # Goobstation - Maint drones get up to date contributor names
+  - type: DroneVision
+  - type: ZombieImmune

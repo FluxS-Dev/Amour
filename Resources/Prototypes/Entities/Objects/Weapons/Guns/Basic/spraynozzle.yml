@@ -24,6 +24,7 @@
   - type: Gun
     cameraRecoilScalar: 0 #no recoil
     fireRate: 4
+    projectileSpeed: 18 # Orion
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -31,7 +32,9 @@
       path: /Audio/Weapons/Guns/Gunshots/water_spray.ogg
   - type: Appearance
   - type: ClothingSlotAmmoProvider
-    targetSlot: BACK
+    targetSlot:
+    - BACK
+    - suitStorage #goob edit
     providerWhitelist:
       tags:
       - NozzleBackTank

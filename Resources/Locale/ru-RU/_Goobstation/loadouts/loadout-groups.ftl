@@ -30,6 +30,10 @@ loadout-group-paramedic-envirogloves = экоперчатки парамедик
 loadout-group-psychologist-envirohelm = экошлем психолога
 loadout-group-psychologist-envirosuit = экокостюм психолога
 loadout-group-psychologist-envirogloves = экоперчатки психолога
+# Virologist
+loadout-group-virology-envirohelm = экошлем вирусолога
+loadout-group-virology-envirosuit = экокостюм вирусолога
+loadout-group-virology-envirogloves = экоперчатки вирусолога
 # Cargo Technician
 loadout-group-cargo-technician-envirohelm = экошлем грузчика
 loadout-group-cargo-technician-envirosuit = экокостюм грузчика
@@ -146,11 +150,12 @@ loadout-group-reporter-envirogloves = экоперчатки репортера
 loadout-group-captain-envirohelm = экошлем капитана
 loadout-group-captain-envirosuit = экокостюм капитана
 loadout-group-captain-envirogloves = экоперчатки капитана
-loadout-group-captain-gloves = перчатки капитана
+loadout-group-captain-gloves = Капитан, перчатки
 # Salvage Specialist
 loadout-group-salvage-envirohelm = экошлем утилизатора
 loadout-group-salvage-envirosuit = экокостюм утилизатора
 loadout-group-salvage-envirogloves = экоперчатки утилизатора
+loadout-group-salvage-specialist-jumpsuit = комбинезон утилизатора
 # Chemist
 loadout-group-chemist-envirohelm = экошлем химика
 loadout-group-chemist-envirosuit = экокостюм химика
@@ -175,3 +180,5 @@ loadout-group-boxer-envirohelm = экошлем боксёра
 loadout-group-boxer-envirosuit = экокостюм боксёра
 # Misc
 loadout-group-plasma-tank = баллон плазмы
+# Shaft Miner
+loadout-group-shaft-miner-jumpsuit = комбинезон шахтёра

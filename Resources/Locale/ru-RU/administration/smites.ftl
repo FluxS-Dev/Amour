@@ -60,6 +60,7 @@ admin-smite-omni-accent-name = Омни-акцент
 
 ## Smite descriptions
 
+admin-smite-crawler-name = Ползун
 admin-smite-hell-teleport-name = отправить в Ад
 admin-smite-explode-description = Взрывает цель.
 admin-smite-chess-dimension-description = Изгоняет цель в шахматное измерение.
@@ -102,6 +103,7 @@ admin-smite-super-bonk-description = Заставляет цель ударит�
 admin-smite-terminate-description = Создаёт экстерминатора с ролью призрака, с единственной задачей - убить выбранную цель.
 admin-smite-super-slip-description = Очень сильно поскальзывает цель.
 admin-smite-omni-accent-description = Заставляет цель говорить с почти каждым возможным акцентом.
+admin-smite-crawler-description = Заставляет цель упасть и лишает возможности подняться. Для лучшего эффекта также удаляет руки!
 admin-smite-super-bonk-lite-description = Заставляет цель удариться о каждый стол на станции и за её пределами. Прекращает действовать после смерти цели.
 admin-smite-hell-teleport-description = Телепортирует объект в Ад.
 
