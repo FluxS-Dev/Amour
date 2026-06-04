@@ -61,7 +61,7 @@ public sealed partial class BanManager
             return;
         }
 
-        KickMatchingConnectedPlayers(ban, "ban notification");
+        await HandleMatchingConnectedPlayers(ban, "ban notification"); // Amour
     }
 
     private bool CheckBanRateLimit()

@@ -145,6 +145,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Robust.Shared.Prototypes;
 using Content.Shared._Amour.Stickers;
+using Content.Server._Amour.Gulag;
 using Content.Server._Amour.Stickers;
 
 namespace Content.Server.Administration.Systems
@@ -166,6 +167,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!;
         [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
         [Dependency] private readonly IBanManager _banManager = default!; // Orion
+        [Dependency] private readonly GulagSystem _gulag = default!; // Amour
         [Dependency] private readonly StickerSanitizerSystem _stickerSanitizer = default!; // Amour edit
 
         [GeneratedRegex(@"^https://(?:(?:canary|ptb)\.)?discord\.com/api/webhooks/(\d+)/((?!.*/).*)$")]
@@ -786,6 +788,11 @@ namespace Content.Server.Administration.Systems
             base.OnBwoinkTextMessage(message, eventArgs);
 
             var senderSession = eventArgs.SenderSession;
+
+            // Amour start
+            if (_gulag.IsUserGulagged(senderSession.UserId))
+                return;
+            // Amour end
 
             // TODO: Sanitize text?
             // Confirm that this person is actually allowed to send a message here.

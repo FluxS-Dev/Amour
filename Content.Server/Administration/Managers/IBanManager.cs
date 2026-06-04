@@ -37,6 +37,13 @@ public interface IBanManager
     /// <param name="severity">Severity of the resulting ban note</param>
     /// <param name="reason">Reason for the ban</param>
     public void CreateServerBan(NetUserId? target, string? targetUsername, NetUserId? banningAdmin, (IPAddress, int)? addressRange, ImmutableTypedHwid? hwid, uint? minutes, NoteSeverity severity, string reason);
+
+    /// <summary>
+    /// Amour add: Applies an edited server ban to matching connected players.
+    /// </summary>
+    /// <param name="banId">The id of the edited server ban.</param>
+    public Task HandleServerBanChangedAsync(int banId);
+
     public HashSet<string>? GetRoleBans(NetUserId playerUserId);
     public HashSet<ProtoId<JobPrototype>>? GetJobBans(NetUserId playerUserId);
 

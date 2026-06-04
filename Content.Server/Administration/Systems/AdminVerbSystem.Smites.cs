@@ -106,6 +106,7 @@
 
 using System.Threading;
 using Content.Goobstation.Common.Speech;
+using Content.Server._Amour.Gulag;
 using Content.Server.Administration.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
@@ -174,6 +175,7 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly FlammableSystem _flammableSystem = default!;
     [Dependency] private readonly GhostKickManager _ghostKickManager = default!;
+    [Dependency] private readonly GulagSystem _gulag = default!; // Amour
     [Dependency] private readonly SharedGodmodeSystem _sharedGodmodeSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifierSystem = default!;
@@ -674,6 +676,23 @@ public sealed partial class AdminVerbSystem
                 Message = string.Join(": ", nyanifyName, Loc.GetString("admin-smite-nyanify-description"))
             };
             args.Verbs.Add(nyanify);
+
+            // Amour start
+            var goodBoyName = Loc.GetString("admin-smite-good-boy-name").ToLowerInvariant();
+            Verb goodBoy = new()
+            {
+                Text = goodBoyName,
+                Category = VerbCategory.Smite,
+                Icon = new SpriteSpecifier.Rsi(new("/Textures/_Amour/Clothing/Neck/lewd_neck.rsi"), "shockcollar"),
+                Act = () =>
+                {
+                    _gulag.TryEquipGoodBoyCollar(args.Target, replaceExisting: true);
+                },
+                Impact = LogImpact.Extreme,
+                Message = string.Join(": ", goodBoyName, Loc.GetString("admin-smite-good-boy-description"))
+            };
+            args.Verbs.Add(goodBoy);
+            // Amour end
 
             var killSignName = Loc.GetString("admin-smite-kill-sign-name").ToLowerInvariant();
             Verb killSign = new()

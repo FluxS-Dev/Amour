@@ -6,6 +6,12 @@ namespace Content.Shared._Amour.CCVar;
 public sealed class AmourCCVars
 {
     /// <summary>
+    ///     Number of gulag ore points required to reduce a temporary ban by one second.
+    /// </summary>
+    public static readonly CVarDef<double> GulagPointsToTimeRatio =
+        CVarDef.Create("amour.gulag.points_to_time", 0.01d, CVar.SERVERONLY);
+
+    /// <summary>
     ///     Automatically toggles OOC depending on current online player count.
     /// </summary>
     public static readonly CVarDef<bool> OocAutoToggleEnabled =

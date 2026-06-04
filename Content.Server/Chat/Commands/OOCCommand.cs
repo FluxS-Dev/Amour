@@ -12,6 +12,7 @@
 //
 // SPDX-License-Identifier: MIT
 
+using Content.Server._Amour.Gulag;
 using Content.Server.Chat.Managers;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
@@ -22,6 +23,7 @@ namespace Content.Server.Chat.Commands
     internal sealed class OOCCommand : LocalizedCommands
     {
         [Dependency] private readonly IChatManager _chatManager = default!;
+        [Dependency] private readonly IEntityManager _entityManager = default!; // Amour
 
         public override string Command => "ooc";
 
@@ -39,6 +41,19 @@ namespace Content.Server.Chat.Commands
             var message = string.Join(" ", args).Trim();
             if (string.IsNullOrEmpty(message))
                 return;
+
+            // Amour start
+            if (player.AttachedEntity is { Valid: true } entity)
+            {
+                var regulatingCollar = _entityManager.EntitySysManager.GetEntitySystem<GulagRegulatingCollarSystem>();
+                if (regulatingCollar.TryPunishChatMessage(entity))
+                    return;
+            }
+
+            var gulag = _entityManager.EntitySysManager.GetEntitySystem<GulagSystem>();
+            if (gulag.IsUserGulagged(player.UserId))
+                return;
+            // Amour end
 
             _chatManager.TrySendOOCMessage(player, message, OOCChatType.OOC);
         }

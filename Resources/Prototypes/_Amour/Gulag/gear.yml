@@ -1,0 +1,16 @@
+- type: startingGear
+  id: GulagRegulatingCollarGear
+  equipment:
+    neck: GulagRegulatingCollar
+
+- type: startingGear
+  id: GulagGoodBoyCollarGear
+  equipment:
+    neck: GulagRegulatingCollarGoodBoy
+
+- type: startingGear
+  parent: GulagRegulatingCollarGear
+  id: GulagPrisonerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPrisoner
+    shoes: ClothingShoesBootsWork

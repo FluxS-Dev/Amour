@@ -20,6 +20,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._Amour.Gulag;
 using Content.Server._Orion.ServerProtection.Administration;
 using Content.Server.Chat.Managers;
 using Content.Server.Database;
@@ -215,20 +216,49 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             _adminActionProtection.ReportBanAction(banningAdmin.Value, adminName, targetName);
         // Orion-End
 
-        KickMatchingConnectedPlayers(banDef, "newly placed ban");
+        await HandleMatchingConnectedPlayers(banDef, "newly placed ban"); // Amour
     }
 
-    private void KickMatchingConnectedPlayers(ServerBanDef def, string source)
+    // Amour start
+    public async Task HandleServerBanChangedAsync(int banId)
     {
+        var ban = await _db.GetServerBanAsync(banId);
+        if (ban is null)
+            return;
+
+        var gulag = _systems.GetEntitySystem<GulagSystem>();
+        if (ban.Unban is not null ||
+            ban.ExpirationTime is { } expiration && expiration <= DateTimeOffset.UtcNow)
+        {
+            await gulag.RefreshTemporaryBanAsync(banId);
+            return;
+        }
+
+        await HandleMatchingConnectedPlayers(ban, "edited ban");
+    }
+
+    private async Task HandleMatchingConnectedPlayers(ServerBanDef def, string source)
+    {
+        var gulag = _systems.GetEntitySystem<GulagSystem>();
+
         foreach (var player in _playerManager.Sessions)
         {
-            if (BanMatchesPlayer(player, def))
+            if (!BanMatchesPlayer(player, def))
+                continue;
+
+            if (def.ExpirationTime == null)
             {
                 KickForBanDef(player, def);
                 _sawmill.Info($"Kicked player {player.Name} ({player.UserId}) through {source}");
             }
+            else
+            {
+                await gulag.HandleTemporaryBanAsync(player);
+                _sawmill.Info($"Sent player {player.Name} ({player.UserId}) to the gulag through {source}");
+            }
         }
     }
+    // Amour end
 
     private bool BanMatchesPlayer(ICommonSession player, ServerBanDef ban)
     {

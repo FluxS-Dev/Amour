@@ -333,12 +333,15 @@ namespace Content.Server.Connection
             }
 
             var bans = await _db.GetServerBansAsync(addr, userId, hwId, modernHwid, includeUnbanned: false);
-            if (bans.Count > 0)
+            // Amour start
+            var permanentBans = bans.Where(ban => ban.ExpirationTime == null).ToList();
+            if (permanentBans.Count > 0)
             {
-                var firstBan = bans[0];
+                var firstBan = permanentBans[0];
                 var message = firstBan.FormatBanMessage(_cfg, _loc);
-                return (ConnectionDenyReason.Ban, message, bans);
+                return (ConnectionDenyReason.Ban, message, permanentBans);
             }
+            // Amour end
 
             // Amour
             if (await _db.HasClientRecord(userId.UserId))

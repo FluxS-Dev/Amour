@@ -706,6 +706,29 @@ namespace Content.Server.Database
             await db.DbContext.SaveChangesAsync();
         }
 
+        // Amour start
+        public async Task<bool> TryEditServerBanExpiration(
+            int id,
+            DateTimeOffset expectedExpiration,
+            DateTimeOffset expiration,
+            Guid editedBy,
+            DateTimeOffset editedAt)
+        {
+            await using var db = await GetDb();
+
+            var updated = await db.DbContext.Ban
+                .Where(b => b.Id == id &&
+                            b.Unban == null &&
+                            b.ExpirationTime == expectedExpiration.UtcDateTime)
+                .ExecuteUpdateAsync(setters => setters
+                    .SetProperty(b => b.ExpirationTime, expiration.UtcDateTime)
+                    .SetProperty(b => b.LastEditedById, editedBy)
+                    .SetProperty(b => b.LastEditedAt, editedAt.UtcDateTime));
+
+            return updated != 0;
+        }
+        // Amour end
+
         protected static async Task<ServerBanExemptFlags?> GetBanExemptionCore(
             DbGuard db,
             NetUserId? userId,
