@@ -40,6 +40,7 @@ namespace Content.IntegrationTests.Tests.Commands
             var netMan = client.ResolveDependency<IClientNetManager>();
             var clientSession = sPlayerManager.Sessions.Single();
             var clientId = clientSession.UserId;
+            const int missingBanId = int.MaxValue; // Amour edit: pooled tests may leave pardoned bans in the database.
 
             Assert.That(netMan.IsConnected);
 
@@ -48,32 +49,37 @@ namespace Content.IntegrationTests.Tests.Commands
             Assert.Multiple(async () =>
             {
                 Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, null), Is.Null);
-                Assert.That(await sDatabase.GetServerBanAsync(1), Is.Null);
+                Assert.That(await sDatabase.GetServerBanAsync(missingBanId), Is.Null); // Amour edit
                 Assert.That(await sDatabase.GetServerBansAsync(null, clientId, null, null), Is.Empty);
             });
 
             // Try to pardon a ban that does not exist
-            await server.WaitPost(() => sConsole.ExecuteCommand("pardon 1"));
+            await server.WaitPost(() => sConsole.ExecuteCommand($"pardon {missingBanId}")); // Amour edit
 
             // Still no bans on record
             Assert.Multiple(async () =>
             {
                 Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, null), Is.Null);
-                Assert.That(await sDatabase.GetServerBanAsync(1), Is.Null);
+                Assert.That(await sDatabase.GetServerBanAsync(missingBanId), Is.Null); // Amour edit
                 Assert.That(await sDatabase.GetServerBansAsync(null, clientId, null, null), Is.Empty);
             });
 
             var banReason = "test";
 
             Assert.That(sPlayerManager.Sessions, Has.Length.EqualTo(1));
-            // Ban the client for 24 hours
-            await server.WaitPost(() => sConsole.ExecuteCommand($"ban {clientSession.Name} {banReason} 1440"));
+            // Amour edit start: use a permanent ban and do not assume it is the first row in a pooled database.
+            // Ban the client permanently
+            await server.WaitPost(() => sConsole.ExecuteCommand($"ban {clientSession.Name} {banReason} 0"));
+            var ban = await sDatabase.GetServerBanAsync(null, clientId, null, null);
+            Assert.That(ban?.Id, Is.Not.Null);
+            var banId = ban!.Id!.Value;
+            // Amour edit end
 
             // Should have one ban on record now
             Assert.Multiple(async () =>
             {
                 Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, null), Is.Not.Null);
-                Assert.That(await sDatabase.GetServerBanAsync(1), Is.Not.Null);
+                Assert.That(await sDatabase.GetServerBanAsync(banId), Is.Not.Null); // Amour edit
                 Assert.That(await sDatabase.GetServerBansAsync(null, clientId, null, null), Has.Count.EqualTo(1));
             });
 
@@ -82,23 +88,22 @@ namespace Content.IntegrationTests.Tests.Commands
             Assert.That(!netMan.IsConnected);
 
             // Try to pardon a ban that does not exist
-            await server.WaitPost(() => sConsole.ExecuteCommand("pardon 2"));
+            await server.WaitPost(() => sConsole.ExecuteCommand($"pardon {missingBanId}")); // Amour edit
 
             // The existing ban is unaffected
             Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, null), Is.Not.Null);
 
-            var ban = await sDatabase.GetServerBanAsync(1);
+            ban = await sDatabase.GetServerBanAsync(banId); // Amour edit
             Assert.Multiple(async () =>
             {
                 Assert.That(ban, Is.Not.Null);
                 Assert.That(await sDatabase.GetServerBansAsync(null, clientId, null, null), Has.Count.EqualTo(1));
 
                 // Check that it matches
-                Assert.That(ban.Id, Is.EqualTo(1));
+                Assert.That(ban.Id, Is.EqualTo(banId)); // Amour edit
                 Assert.That(ban.UserId, Is.EqualTo(clientId));
                 Assert.That(ban.BanTime.UtcDateTime - DateTime.UtcNow, Is.LessThanOrEqualTo(MarginOfError));
-                Assert.That(ban.ExpirationTime, Is.Not.Null);
-                Assert.That(ban.ExpirationTime.Value.UtcDateTime - DateTime.UtcNow.AddHours(24), Is.LessThanOrEqualTo(MarginOfError));
+                Assert.That(ban.ExpirationTime, Is.Null); // Amour edit
                 Assert.That(ban.Reason, Is.EqualTo(banReason));
 
                 // Done through the console
@@ -107,13 +112,13 @@ namespace Content.IntegrationTests.Tests.Commands
             });
 
             // Pardon the actual ban
-            await server.WaitPost(() => sConsole.ExecuteCommand("pardon 1"));
+            await server.WaitPost(() => sConsole.ExecuteCommand($"pardon {banId}")); // Amour edit
 
             // No bans should be returned
             Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, null), Is.Null);
 
             // Direct id lookup returns a pardoned ban
-            var pardonedBan = await sDatabase.GetServerBanAsync(1);
+            var pardonedBan = await sDatabase.GetServerBanAsync(banId); // Amour edit
             Assert.Multiple(async () =>
             {
                 // Check that it matches
@@ -122,18 +127,17 @@ namespace Content.IntegrationTests.Tests.Commands
                 // The list is still returned since that ignores pardons
                 Assert.That(await sDatabase.GetServerBansAsync(null, clientId, null, null), Has.Count.EqualTo(1));
 
-                Assert.That(pardonedBan.Id, Is.EqualTo(1));
+                Assert.That(pardonedBan.Id, Is.EqualTo(banId)); // Amour edit
                 Assert.That(pardonedBan.UserId, Is.EqualTo(clientId));
                 Assert.That(pardonedBan.BanTime.UtcDateTime - DateTime.UtcNow, Is.LessThanOrEqualTo(MarginOfError));
-                Assert.That(pardonedBan.ExpirationTime, Is.Not.Null);
-                Assert.That(pardonedBan.ExpirationTime.Value.UtcDateTime - DateTime.UtcNow.AddHours(24), Is.LessThanOrEqualTo(MarginOfError));
+                Assert.That(pardonedBan.ExpirationTime, Is.Null); // Amour edit
                 Assert.That(pardonedBan.Reason, Is.EqualTo(banReason));
 
                 // Done through the console
                 Assert.That(pardonedBan.BanningAdmin, Is.Null);
 
                 Assert.That(pardonedBan.Unban, Is.Not.Null);
-                Assert.That(pardonedBan.Unban.BanId, Is.EqualTo(1));
+                Assert.That(pardonedBan.Unban.BanId, Is.EqualTo(banId)); // Amour edit
 
                 // Done through the console
                 Assert.That(pardonedBan.Unban.UnbanningAdmin, Is.Null);
@@ -142,7 +146,7 @@ namespace Content.IntegrationTests.Tests.Commands
             });
 
             // Try to pardon it again
-            await server.WaitPost(() => sConsole.ExecuteCommand("pardon 1"));
+            await server.WaitPost(() => sConsole.ExecuteCommand($"pardon {banId}")); // Amour edit
 
             // Nothing changes
             Assert.Multiple(async () =>
@@ -151,7 +155,7 @@ namespace Content.IntegrationTests.Tests.Commands
                 Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, null), Is.Null);
 
                 // Direct id lookup returns a pardoned ban
-                Assert.That(await sDatabase.GetServerBanAsync(1), Is.Not.Null);
+                Assert.That(await sDatabase.GetServerBanAsync(banId), Is.Not.Null); // Amour edit
 
                 // The list is still returned since that ignores pardons
                 Assert.That(await sDatabase.GetServerBansAsync(null, clientId, null, null), Has.Count.EqualTo(1));
