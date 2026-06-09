@@ -315,3 +315,9 @@ qodana.yaml
 
 # Discord Bot
 /DiscordBot/
+
+# Local AI assistant configuration
+/.agents/
+/.claude/
+/.codex/
+/.cursor/

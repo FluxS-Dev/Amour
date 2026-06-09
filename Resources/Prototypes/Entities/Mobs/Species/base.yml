@@ -598,6 +598,7 @@
     - Viral
     - Bacterial
     - Parasite
+  - type: ObraDinnBody # Goobstation
   # </Goobstation>
   - type: Mood # Orion
 
