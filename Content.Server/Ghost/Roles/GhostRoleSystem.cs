@@ -44,6 +44,7 @@
 
 using System.Linq;
 using Content.Server._Amour.Gulag;
+using Content.Server._Amour.Ghost.Roles.Components;
 using Content.Server.Administration.Logs;
 using Content.Server.EUI;
 using Content.Server.Ghost.Roles.Components;
@@ -515,6 +516,14 @@ public sealed class GhostRoleSystem : EntitySystem
         if (!_ghostRoles.TryGetValue(identifier, out var roleEnt))
             return;
 
+        // RW start
+        if (TryComp<SsdAmnesiacGhostRoleComponent>(roleEnt.Owner, out var ssdComp) &&
+            ssdComp.OriginalUserId == player.UserId)
+        {
+            return;
+        }
+        // RW end
+
         if (roleEnt.Comp.RaffleConfig is not null)
         {
             JoinRaffle(player, identifier);
@@ -538,6 +547,14 @@ public sealed class GhostRoleSystem : EntitySystem
 
         if (!_ghostRoles.TryGetValue(identifier, out var role))
             return false;
+
+        // RW start
+        if (TryComp<SsdAmnesiacGhostRoleComponent>(role.Owner, out var ssdComp) &&
+            ssdComp.OriginalUserId == player.UserId)
+        {
+            return false;
+        }
+        // RW end
 
         var ev = new TakeGhostRoleEvent(player);
         RaiseLocalEvent(role, ref ev);
@@ -611,6 +628,14 @@ public sealed class GhostRoleSystem : EntitySystem
         {
             if (metaQuery.GetComponent(uid).EntityPaused)
                 continue;
+
+            // RW start
+            if (player != null && TryComp<SsdAmnesiacGhostRoleComponent>(uid, out var ssdComp) &&
+                ssdComp.OriginalUserId == player.UserId)
+            {
+                continue;
+            }
+            // RW end
 
 
             var kind = GhostRoleKind.FirstComeFirstServe;
