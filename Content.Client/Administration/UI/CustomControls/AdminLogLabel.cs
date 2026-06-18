@@ -25,7 +25,7 @@ public sealed class AdminLogLabel : RichTextLabel
 
         var formatted = new FormattedMessage();
         formatted.AddMarkupOrThrow($"{impactText} [bold]{log.Date:HH:mm:ss}[/bold]: ");
-        formatted.AddMarkupPermissive(log.Message)
+        formatted.AddMarkupPermissive(log.Message);
         // Orion-End
 
         SetMessage(formatted); // Orion-Edit
