@@ -193,6 +193,21 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
             return;
         }
 
+        // RW start
+        foreach (var t in msg.Tracks)
+        {
+            if (t == null)
+                continue;
+
+            if ((t.TrackName != null && t.TrackName.Length > 256) ||
+                (t.InstrumentName != null && t.InstrumentName.Length > 256) ||
+                (t.ProgramName != null && t.ProgramName.Length > 256))
+            {
+                Log.Warning($"{args.SenderSession.UserId.ToString()} - Sent track name/instrument name/program name over the safety limit!");
+                return;
+            }
+        }
+        // RW end
 
         foreach (var t in msg.Tracks)
         {
@@ -221,6 +236,11 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
     {
         var uid = GetEntity(msg.Uid);
         var master = GetEntity(msg.Master);
+
+        // RW start
+        if (master == uid)
+            return;
+        // RW end
 
         if (!HasComp<ActiveInstrumentComponent>(uid))
             return;
@@ -389,6 +409,39 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
             return;
         }
 
+        // RW start
+        if (msg.MidiEvent.Length > MaxMidiEventsPerBatch * 10)
+        {
+            instrument.BatchesDropped++;
+            return;
+        }
+
+        if (instrument.RespectMidiLimits)
+        {
+            if (msg.MidiEvent.Length > MaxMidiEventsPerBatch)
+            {
+                instrument.BatchesDropped++;
+                return;
+            }
+
+            if (instrument.MidiEventCount + 1 > MaxMidiEventsPerSecond)
+            {
+                instrument.BatchesDropped++;
+                return;
+            }
+        }
+        else
+        {
+            if (instrument.MidiEventCount + 1 > MaxMidiEventsPerSecond * 5)
+            {
+                instrument.BatchesDropped++;
+                return;
+            }
+        }
+
+        instrument.MidiEventCount++;
+        // RW end
+
         var send = true;
 
         var minTick = uint.MaxValue;
@@ -429,13 +482,15 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
             }
         }
 
-        if (++instrument.MidiEventCount > MaxMidiEventsPerSecond
-            || msg.MidiEvent.Length > MaxMidiEventsPerBatch)
-        {
-            instrument.BatchesDropped++;
-
-            send = false;
-        }
+        // RW start
+        // if (++instrument.MidiEventCount > MaxMidiEventsPerSecond
+        //     || msg.MidiEvent.Length > MaxMidiEventsPerBatch)
+        // {
+        //     instrument.BatchesDropped++;
+        //
+        //     send = false;
+        // }
+        // RW end
 
         instrument.LastSequencerTick = Math.Max(maxTick, minTick);
 
