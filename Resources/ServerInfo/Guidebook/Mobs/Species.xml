@@ -30,7 +30,6 @@
   </Box>
   <Box>
     <GuideEntityEmbed Entity="MobShadowkin" Caption="Shadowkin"/>
-    <GuideEntityEmbed Entity="MobHydrakin" Caption="Hydrakin"/>
   </Box>
 
 </Document>
