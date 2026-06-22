@@ -35,7 +35,7 @@
   name: lavaland-inteq-sizo
   path: /Maps/_Orion/Lavaland/InteQ_Sizo.yml
   priority: 1
-  patchToPlanet: true
+  patchToPlanet: false
 
 - type: lavalandGridRuin
   id: BiodomeBeach

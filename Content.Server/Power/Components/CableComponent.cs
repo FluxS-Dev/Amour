@@ -59,6 +59,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Power.EntitySystems;
+using Content.Server._Lavaland.Procedural.Systems;
 using Content.Shared.Power;
 using Content.Shared.Tools;
 using Content.Shared.Tools.Systems;
@@ -70,7 +71,7 @@ namespace Content.Server.Power.Components;
 ///     Allows the attached entity to be destroyed by a cutting tool, dropping a piece of cable.
 /// </summary>
 [RegisterComponent]
-[Access(typeof(CableSystem))]
+[Access(typeof(CableSystem), typeof(LavalandSystem))] // RW
 public sealed partial class CableComponent : Component
 {
     [DataField]
@@ -91,6 +92,15 @@ public sealed partial class CableComponent : Component
 
     [DataField("cuttingDelay")]
     public float CuttingDelay = 1f;
+
+    // RW start
+    /// <summary>
+    ///     Prevents the cable from being cut/dropped/deleted when it is unanchored.
+    ///     Used when patching/teleporting ruins.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool PreventCutOnUnanchor = false;
+    // RW end
 }
 
 /// <summary>

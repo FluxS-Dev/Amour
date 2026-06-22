@@ -28,6 +28,7 @@ using Content.Server.GameTicking;
 using Content.Server.Parallax;
 using Content.Server.Procedural;
 using Content.Server.Shuttles.Systems;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Maps;
@@ -65,6 +66,7 @@ public sealed partial class LavalandSystem : EntitySystem
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
+    [Dependency] private readonly SharedRoofSystem _roof = default!; // RW
 
     private EntityQuery<MapGridComponent> _gridQuery;
     private EntityQuery<TransformComponent> _xformQuery;

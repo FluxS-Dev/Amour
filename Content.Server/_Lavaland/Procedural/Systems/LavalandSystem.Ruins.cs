@@ -11,6 +11,9 @@ using Content.Server.Procedural;
 using Content.Shared._Lavaland.Procedural.Prototypes;
 using Content.Shared.Decals;
 using Content.Shared.Maps;
+using Content.Server.Power.Components;
+using Content.Shared.Light.Components;
+using Content.Shared.Light.EntitySystems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -171,7 +174,7 @@ public sealed partial class LavalandSystem
             return;
         }
 
-        usedSpace.Add(ruinBox);
+        usedSpace.Add(ruinBox.Translated(coord.Value)); // RW
         coords.Remove(coord.Value);
 
         // Teleport it into place on preloader map
@@ -235,7 +238,7 @@ public sealed partial class LavalandSystem
 
         Spawn(ruin.SpawnedMarker, new EntityCoordinates(lavaland, coord.Value));
 
-        usedSpace.Add(ruinBox);
+        usedSpace.Add(ruinBox.Translated(coord.Value)); // RW
         coords.Remove(coord.Value);
     }
 
@@ -386,19 +389,51 @@ public sealed partial class LavalandSystem
 
         _map.SetTiles(lavaland.Owner, lavaland.Comp, _tiles);
 
+        // RW start
+        // Copy roof data
+        if (TryComp<RoofComponent>(grid.Owner, out var roofComp))
+        {
+            var planetRoof = EnsureComp<RoofComponent>(lavaland.Owner);
+            foreach (var (chunkOrigin, bitMask) in roofComp.Data)
+            {
+                for (var x = 0; x < RoofComponent.ChunkSize; x++)
+                {
+                    for (var y = 0; y < RoofComponent.ChunkSize; y++)
+                    {
+                        var bitFlag = (ulong) 1 << (x + y * RoofComponent.ChunkSize);
+                        if ((bitMask & bitFlag) == bitFlag)
+                        {
+                            var oldTilePos = chunkOrigin * RoofComponent.ChunkSize + new Vector2i(x, y);
+                            _roof.SetRoof((lavaland.Owner, lavaland.Comp, planetRoof), oldTilePos + offset, true);
+                        }
+                    }
+                }
+            }
+        }
+
         // Teleport all entities
         var ents = new HashSet<Entity<TransformComponent>>();
         _lookup.GetChildEntities(grid, ents);
         foreach (var (teleportEnt, xform) in ents)
         {
             var anchored = xform.Anchored;
-            var newPos = new EntityCoordinates(lavaland.Owner, xform.LocalPosition + offset);
+            var localPos = xform.LocalPosition;
+
+            TryComp<CableComponent>(teleportEnt, out var cable);
+            if (cable != null)
+                cable.PreventCutOnUnanchor = true;
+
+            var newPos = new EntityCoordinates(lavaland.Owner, localPos + offset);
             _transform.SetParent(teleportEnt, lavaland);
             _transform.SetCoordinates(teleportEnt, newPos);
 
             if (anchored)
                 _transform.AnchorEntity(teleportEnt);
+
+            if (cable != null)
+                cable.PreventCutOnUnanchor = false;
         }
+        // RW end
 
         // Spawn decals
         if (TryComp<DecalGridComponent>(grid.Owner, out var loadedDecals))

@@ -91,6 +91,11 @@ public sealed partial class CableSystem : EntitySystem
         if (TerminatingOrDeleted(uid))
             return;
 
+        // RW start
+        if (cable.PreventCutOnUnanchor)
+            return;
+        // RW end
+
         // This entity should not be un-anchorable. But this can happen if the grid-tile is deleted (RCD, explosion,
         // etc). In that case: behave as if the cable had been cut.
         Spawn(cable.CableDroppedOnCutPrototype, Transform(uid).Coordinates);
