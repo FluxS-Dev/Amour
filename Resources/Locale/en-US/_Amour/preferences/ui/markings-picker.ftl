@@ -1,0 +1,11 @@
+marking-gradient-toggle = Use gradient
+marking-body-gradient-primary-color = Body color:
+marking-body-gradient-secondary-color = Gradient color:
+marking-gradient-position = Gradient point:
+marking-gradient-blur = Blur:
+marking-gradient-color = Gradient color:
+marking-gradient-layer-color = Gradient color {$layer}:
+humanoid-profile-editor-hair-gradient-toggle = Hair: gradient
+humanoid-profile-editor-hair-gradient-color = Hair gradient color
+humanoid-profile-editor-facial-hair-gradient-toggle = Facial hair: gradient
+humanoid-profile-editor-facial-hair-gradient-color = Facial hair gradient color

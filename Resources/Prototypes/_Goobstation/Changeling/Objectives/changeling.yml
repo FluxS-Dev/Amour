@@ -73,6 +73,20 @@
     description: objective-condition-absorb-other-description
   - type: AbsorbChangelingCondition
 
+# RW start
+- type: entity
+  parent: BaseChangelingObjective
+  id: ChangelingEvolutionaryApexObjective
+  name: Evolutionary Apex
+  description: Consume more genomes and bodies than any other sibling on the station to prove your dominance.
+  components:
+  - type: Objective
+    icon:
+      sprite: _Goobstation/Changeling/changeling_abilities.rsi
+      state: absorb_dna
+  - type: ChangelingEvolutionaryApexCondition
+# RW end
+
 - type: entity
   parent: BaseChangelingObjective
   id: ChangelingStealDNAObjective

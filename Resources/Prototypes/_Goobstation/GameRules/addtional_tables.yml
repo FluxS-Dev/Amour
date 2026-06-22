@@ -24,16 +24,16 @@
     - id: KingRatMigration
     - id: NinjaSpawn
     - id: ParadoxCloneSpawn
-    #- id: RevenantSpawn
+    # - id: RevenantSpawn
     - id: SleeperAgents
-   # - id: ZombieOutbreak removed for low pop too little sec
-   # - id: LoneOpsSpawn removed for low pop too little sec
-    - id: DerelictCyborgSpawn
-    #- id: BlobSpawn # Goobstation - removed for low pop too little sec
+    # - id: ZombieOutbreak removed for low pop too little sec
+    # - id: LoneOpsSpawn removed for low pop too little sec
+    # - id: DerelictCyborgSpawn RW
+    # - id: BlobSpawn # Goobstation - removed for low pop too little sec
     - id: LoneAbductorSpawn
     - id: DuoAbductorSpawn
     - id: BingleSpawn
-   #- id: SlaughterDemonMidround
+    # - id: SlaughterDemonMidround
    #- id: XenomorphsInfestation #  removed for low pop too little sec
     - id: SlasherSpawn
     - id: SpacePirates

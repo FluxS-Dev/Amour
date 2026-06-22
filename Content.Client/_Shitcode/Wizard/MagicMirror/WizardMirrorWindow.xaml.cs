@@ -144,7 +144,7 @@ public sealed partial class WizardMirrorWindow : DefaultWindow
             ClearMarking(Profile.Appearance.HairStyleId);
             Profile = Profile.WithCharacterAppearance(
                 Profile.Appearance.WithHairStyleName(newStyle.id));
-            ReloadPreview();
+            ReloadProfilePreview(); // RW
         };
 
         HairStylePicker.OnColorChanged += newColor =>
@@ -155,7 +155,7 @@ public sealed partial class WizardMirrorWindow : DefaultWindow
             Profile = Profile.WithCharacterAppearance(
                 Profile.Appearance.WithHairColor(newColor.marking.MarkingColors[0]));
             UpdateCMarkingsHair();
-            ReloadPreview();
+            ReloadProfilePreview(); // RW
         };
 
         FacialHairPicker.OnMarkingSelect += newStyle =>
@@ -166,7 +166,7 @@ public sealed partial class WizardMirrorWindow : DefaultWindow
             ClearMarking(Profile.Appearance.FacialHairStyleId);
             Profile = Profile.WithCharacterAppearance(
                 Profile.Appearance.WithFacialHairStyleName(newStyle.id));
-            ReloadPreview();
+            ReloadProfilePreview(); // RW
         };
 
         FacialHairPicker.OnColorChanged += newColor =>
@@ -177,7 +177,7 @@ public sealed partial class WizardMirrorWindow : DefaultWindow
             Profile = Profile.WithCharacterAppearance(
                 Profile.Appearance.WithFacialHairColor(newColor.marking.MarkingColors[0]));
             UpdateCMarkingsFacialHair();
-            ReloadPreview();
+            ReloadProfilePreview(); // RW
         };
 
         HairStylePicker.OnSlotRemove += _ =>
@@ -190,7 +190,7 @@ public sealed partial class WizardMirrorWindow : DefaultWindow
             );
             UpdateHairPickers();
             UpdateCMarkingsHair();
-            ReloadPreview();
+            ReloadProfilePreview(); // RW
         };
 
         FacialHairPicker.OnSlotRemove += _ =>
@@ -203,7 +203,7 @@ public sealed partial class WizardMirrorWindow : DefaultWindow
             );
             UpdateHairPickers();
             UpdateCMarkingsFacialHair();
-            ReloadPreview();
+            ReloadProfilePreview(); // RW
         };
 
         HairStylePicker.OnSlotAdd += delegate
@@ -226,7 +226,7 @@ public sealed partial class WizardMirrorWindow : DefaultWindow
 
             UpdateHairPickers();
             UpdateCMarkingsHair();
-            ReloadPreview();
+            ReloadProfilePreview(); // RW
         };
 
         FacialHairPicker.OnSlotAdd += delegate
@@ -249,7 +249,7 @@ public sealed partial class WizardMirrorWindow : DefaultWindow
 
             UpdateHairPickers();
             UpdateCMarkingsFacialHair();
-            ReloadPreview();
+            ReloadProfilePreview(); // RW
         };
 
         #endregion Hair

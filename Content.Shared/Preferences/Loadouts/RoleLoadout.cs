@@ -73,6 +73,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.CCVar;
+using Content.Shared.Humanoid;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -195,7 +196,52 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
                 continue;
 
             // Data will get set below.
-            SelectedLoadouts[groupProto] = new List<Loadout>();
+            // RW edit: SelectedLoadouts[groupProto] = new List<Loadout>(); ->
+            var loadouts = new List<Loadout>();
+            SelectedLoadouts[groupProto] = loadouts;
+
+            // RW start
+            if (groupProto.Id == "Underwear")
+            {
+                ProtoId<LoadoutPrototype>? defaultUnderwear = null;
+                if (profile.Sex == Sex.Male)
+                    defaultUnderwear = new ProtoId<LoadoutPrototype>("UnderwearBoxerShorts");
+                else if (profile.Sex == Sex.Female)
+                    defaultUnderwear = new ProtoId<LoadoutPrototype>("Panties");
+
+                if (defaultUnderwear != null && protoManager.TryIndex(defaultUnderwear.Value, out var loadoutProto))
+                {
+                    var defaultLoadout = new Loadout()
+                    {
+                        Prototype = loadoutProto.ID,
+                    };
+
+                    if (IsValid(profile, session, defaultLoadout.Prototype, collection, out _))
+                    {
+                        loadouts.Add(defaultLoadout);
+                    }
+                }
+            }
+            else if (groupProto.Id == "Undershirt")
+            {
+                ProtoId<LoadoutPrototype>? defaultUndershirt = null;
+                if (profile.Sex == Sex.Female)
+                    defaultUndershirt = new ProtoId<LoadoutPrototype>("Bra");
+
+                if (defaultUndershirt != null && protoManager.TryIndex(defaultUndershirt.Value, out var loadoutProto))
+                {
+                    var defaultLoadout = new Loadout()
+                    {
+                        Prototype = loadoutProto.ID,
+                    };
+
+                    if (IsValid(profile, session, defaultLoadout.Prototype, collection, out _))
+                    {
+                        loadouts.Add(defaultLoadout);
+                    }
+                }
+            }
+            // RW end
         }
 
         // Reset points to recalculate.
@@ -344,6 +390,50 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
                     Apply(loadoutProto);
                 }
             }
+            // RW start
+            else if (groupProto.ID == "Underwear")
+            {
+                ProtoId<LoadoutPrototype>? defaultUnderwear = null;
+                if (profile.Sex == Sex.Male)
+                    defaultUnderwear = new ProtoId<LoadoutPrototype>("UnderwearBoxerShorts");
+                else if (profile.Sex == Sex.Female)
+                    defaultUnderwear = new ProtoId<LoadoutPrototype>("Panties");
+
+                if (defaultUnderwear != null && protoManager.TryIndex(defaultUnderwear.Value, out var loadoutProto))
+                {
+                    var defaultLoadout = new Loadout()
+                    {
+                        Prototype = loadoutProto.ID,
+                    };
+
+                    if (IsValid(profile, session, defaultLoadout.Prototype, collection, out _))
+                    {
+                        loadouts.Add(defaultLoadout);
+                        Apply(loadoutProto);
+                    }
+                }
+            }
+            else if (groupProto.ID == "Undershirt")
+            {
+                ProtoId<LoadoutPrototype>? defaultUndershirt = null;
+                if (profile.Sex == Sex.Female)
+                    defaultUndershirt = new ProtoId<LoadoutPrototype>("Bra");
+
+                if (defaultUndershirt != null && protoManager.TryIndex(defaultUndershirt.Value, out var loadoutProto))
+                {
+                    var defaultLoadout = new Loadout()
+                    {
+                        Prototype = loadoutProto.ID,
+                    };
+
+                    if (IsValid(profile, session, defaultLoadout.Prototype, collection, out _))
+                    {
+                        loadouts.Add(defaultLoadout);
+                        Apply(loadoutProto);
+                    }
+                }
+            }
+            // RW end
         }
     }
 

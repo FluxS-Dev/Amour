@@ -29,10 +29,13 @@ ent-CleanerGrenade = cleanade
 ent-TearGasGrenade = tear gas grenade
     .desc = A riot control tear gas grenade. Causes irritation, pain and makes you cry your eyes out.
 ent-MetalFoamGrenade = metal foam grenade
-    .desc = An emergency tool used for patching hull breaches with special quick-set metal foam. Almost as good as real floors!
+    .desc = An emergency tool used for patching up holes. Almost as good as real walls.
 ent-AirGrenade = air grenade
     .desc = A special solid state chemical grenade used for quickly releasing standard air into a spaced area. Fills up to 30 tiles!
 ent-GrenadeDummy = trick grenade
     .desc = All the grenade without any of the boom.
 ent-SyndieTrickyBomb = syndicate trickybomb
     .desc = A syndicate-manufactured explosive used to make an excellent distraction.
+
+ent-SingularityGrenade = singularity grenade
+    .desc = Grenade that simulates the power of a singularity, pulling things in a heap.

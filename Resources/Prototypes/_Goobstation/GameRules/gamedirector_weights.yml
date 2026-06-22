@@ -25,7 +25,7 @@
     BlobGameMode: 0.05
     Wizard: 0.025
     CosmicCult: 0.05 # make it semi often so we can test it
-    Honkops: 0.01
+    # Honkops: 0.01 RW
 
 
 - type: incompatibleModes

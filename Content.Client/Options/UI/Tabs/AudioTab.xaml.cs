@@ -116,6 +116,13 @@ public sealed partial class AudioTab : Control
 
         InitializeVoiceTypeSelector(); // Amour - TTS
 
+        // Orion-Start
+        Control.AddOptionPercentSlider(
+            CCVars.RadioVolume,
+            SliderVolumeRadio,
+            scale: ContentAudioSystem.RadioMultiplier);
+        // Orion-End
+
         Control.AddOptionPercentSlider(
             CVars.MidiVolume,
             SliderVolumeMidi,

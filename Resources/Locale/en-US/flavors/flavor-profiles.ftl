@@ -248,6 +248,7 @@ flavor-complex-vermouth = like herbal grape rinds
 flavor-complex-ale = like bread
 flavor-complex-tonic-water = like angry water
 flavor-complex-cola = like cola
+flavor-complex-brepsi = quiet... and standard...
 flavor-complex-energy-drink = like battery acid
 flavor-complex-dr-gibb = like malpractice
 flavor-complex-ginger-soda = like ginger

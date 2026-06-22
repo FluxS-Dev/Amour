@@ -1,4 +1,4 @@
-ent-DrinkCartonBaseFull = { ent-DrinkBase }
+ent-DrinkCartonBaseFull = carton
     .suffix = Full
     .desc = { ent-DrinkBase.desc }
 ent-DrinkCartonBaseLargeFull = { ent-DrinkCartonBaseFull }
@@ -24,4 +24,4 @@ ent-DrinkOatMilkCarton = oat milk
 ent-DrinkJuiceLemonCarton = lemon juice
     .desc = First it's sour, then it's still sour.
 ent-DrinkJuicePineappleCarton = pineapple juice
-    .desc = Tastes like a tropical vacation far from space.
+    .desc = The delicious juice of a pineapple.

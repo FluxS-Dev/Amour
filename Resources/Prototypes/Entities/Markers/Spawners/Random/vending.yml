@@ -47,9 +47,20 @@
     - VendingMachineSpaceUp
     - VendingMachineStarkist
     - VendingMachineSweetToof # Goobstation
-    rarePrototypes:
-    - VendingMachineKink # Amour
-    rareChance: 0.015 # Amour 1.5%
+    # Reserve: Orchid's Barmania - Vendichaos start
+    - VendingMachineFitness
+    - VendingMachineHotfood
+    - VendingMachineSolsnack
+    - VendingMachineWeeb
+    - VendingMachineCigs  # Twice for bigger chance
+    - VendingMachineSoups  # Reserve
+    - VendingMachineEnergyDrinks  # Reserve
+    - VendingMachineBottles  # Reserve
+    - VendingMachineIcedDrinks  # Reserve
+    - VendingMachineCartons  # Reserve
+    - VendingMachineIceCream  # Reserve
+    - VendingMachineJellyDonuts  # Reserve
+    # Reserve: Orchid's Barmania - Vendichaos end
     chance: 1
 
 

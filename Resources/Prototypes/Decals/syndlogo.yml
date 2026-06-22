@@ -3,8 +3,15 @@
 #
 # SPDX-License-Identifier: MIT
 
+# RW START - mapping editor decal hierarchy parents
+
+- type: decal
+  id: SyndicateLogo
+  abstract: true
+
 - type: decal
   id: syndlogo1
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -12,6 +19,7 @@
 
 - type: decal
   id: syndlogo2
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -19,6 +27,7 @@
 
 - type: decal
   id: syndlogo3
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -26,6 +35,7 @@
 
 - type: decal
   id: syndlogo4
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -33,6 +43,7 @@
 
 - type: decal
   id: syndlogo5
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -40,6 +51,7 @@
 
 - type: decal
   id: syndlogo6
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -47,6 +59,7 @@
 
 - type: decal
   id: syndlogo7
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -54,6 +67,7 @@
 
 - type: decal
   id: syndlogo8
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -61,6 +75,7 @@
 
 - type: decal
   id: syndlogo9
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -68,6 +83,7 @@
 
 - type: decal
   id: syndlogo10
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -75,6 +91,7 @@
 
 - type: decal
   id: syndlogo11
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -82,6 +99,7 @@
 
 - type: decal
   id: syndlogo12
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -89,6 +107,7 @@
 
 - type: decal
   id: syndlogo13
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -96,6 +115,7 @@
 
 - type: decal
   id: syndlogo14
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -103,6 +123,7 @@
 
 - type: decal
   id: syndlogo15
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -110,6 +131,7 @@
 
 - type: decal
   id: syndlogo16
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -117,6 +139,7 @@
 
 - type: decal
   id: syndlogo17
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -124,6 +147,7 @@
 
 - type: decal
   id: syndlogo18
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
@@ -131,7 +155,9 @@
 
 - type: decal
   id: syndlogo19
+  parent: SyndicateLogo
   tags: ["syndicate"]
   sprite:
     sprite: Decals/syndlogo.rsi
     state: syndlogo19
+# RW END

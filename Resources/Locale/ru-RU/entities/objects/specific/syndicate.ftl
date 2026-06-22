@@ -1,0 +1,13 @@
+# Corvax-HiddenDesc-Start
+ent-BaseUplinkRadio20TC = { ent-BaseUplinkRadio }
+    .suffix = 20 ТК
+    .desc = { ent-BaseUplinkRadio.desc }
+ent-BaseUplinkRadio25TC = { ent-BaseUplinkRadio }
+    .suffix = 25 ТК
+    .desc = { ent-BaseUplinkRadio.desc }
+ent-BaseUplinkRadio40TC = { ent-BaseUplinkRadio }
+    .suffix = 40 ТК, ЯдерныйОперативник
+    .desc = { ent-BaseUplinkRadio.desc }
+ent-BaseUplinkRadio60TC = { ent-BaseUplinkRadio }
+    .suffix = 60 ТК, СолоОпер
+    .desc = { ent-BaseUplinkRadio.desc }

@@ -30,6 +30,7 @@ public sealed class SSDTimerSystem : EntitySystem
 
 		var timeFellAsleep = component.FallAsleepTime - TimeSpan.FromSeconds(_icSsdSleepTime);
 		var time = _timing.CurTime - timeFellAsleep;
-		args.PushMarkup(Loc.GetString("comp-ssd-person-examined", ("ent", uid), ("time", (int) time.TotalMinutes)));
+        // RW commented
+		// args.PushMarkup(Loc.GetString("comp-ssd-person-examined", ("ent", uid), ("time", (int) time.TotalMinutes)));
     }
 }

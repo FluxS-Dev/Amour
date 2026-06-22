@@ -49,6 +49,7 @@ using JetBrains.Annotations;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
+using Content.Shared.Popups;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
@@ -69,6 +70,10 @@ namespace Content.Server.Chemistry.EntitySystems
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly OpenableSystem _openable = default!;
         [Dependency] private readonly HandsSystem _handsSystem = default!;
+        // RW start
+        [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+        [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+        // RW end
 
         public override void Initialize()
         {
@@ -176,6 +181,41 @@ namespace Content.Server.Chemistry.EntitySystems
             var storedContainer = storage.StoredItems.FirstOrDefault(kvp => kvp.Value == storageLocation).Key;
             if (storedContainer == EntityUid.Invalid)
                 return;
+
+            // RW start
+            if (TryComp<ChemicalLinkComponent>(reagentDispenser.Owner, out var link) && link.LinkedDevice is { } linkedMaster && Exists(linkedMaster))
+            {
+                if (_transformSystem.InRange(reagentDispenser.Owner, linkedMaster, 1.5f))
+                {
+                    if (_solutionContainerSystem.TryGetSolution(linkedMaster, SharedChemMaster.BufferSolutionName, out var dstSoln, out var dstSolution))
+                    {
+                        if (_solutionContainerSystem.TryGetDrainableSolution(storedContainer, out var srcLink, out _))
+                        {
+                            var amount = (int)reagentDispenser.Comp.DispenseAmount;
+                            var actualAmount = FixedPoint2.Min(amount, FixedPoint2.Min(srcLink.Value.Comp.Solution.Volume, dstSolution.AvailableVolume));
+                            if (actualAmount > 0)
+                            {
+                                _openable.SetOpen(storedContainer);
+                                var split = _solutionContainerSystem.SplitSolution(srcLink.Value, actualAmount);
+                                _solutionContainerSystem.AddSolution(dstSoln.Value, split);
+                            }
+                            else if (dstSolution.AvailableVolume <= 0)
+                            {
+                                _popupSystem.PopupEntity(Loc.GetString("chemical-linker-buffer-full"), reagentDispenser.Owner, message.Actor);
+                            }
+                        }
+                    }
+                    UpdateUiState(reagentDispenser);
+                    ClickSound(reagentDispenser);
+                    return;
+                }
+                else
+                {
+                    _popupSystem.PopupEntity(Loc.GetString("chemical-linker-dispenser-too-far"), reagentDispenser.Owner, message.Actor);
+                    return;
+                }
+            }
+            // RW end
 
             var outputContainer = _itemSlotsSystem.GetItemOrNull(reagentDispenser, SharedReagentDispenser.OutputSlotName);
             if (outputContainer is not { Valid: true } || !_solutionContainerSystem.TryGetFitsInDispenser(outputContainer.Value, out var solution, out _))

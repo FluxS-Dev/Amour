@@ -159,7 +159,7 @@
     - id: Thief
       prob: 0.5
     - id: Heretic # goob edit
-      prob: 0.2
+      prob: 0.0 # RW 0.2 > 0.0
     - id: Devil # Goob
       prob: 0.02
     - id: Shadowling # Goob

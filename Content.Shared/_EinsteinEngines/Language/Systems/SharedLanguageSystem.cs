@@ -1,5 +1,6 @@
 using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared.GameTicking;
+using Content.Shared.Zombies;
 using Robust.Shared.Prototypes;
 using System.Text;
 
@@ -80,6 +81,11 @@ public abstract class SharedLanguageSystem : EntitySystem
 
     public virtual bool CanUnderstand(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
     {
+        // RW start
+        if (TryComp<ZombieComponent>(ent, out var zombie))
+            return language == zombie.ForcedLanguage;
+        // RW end
+
         if (language == PsychomanticPrototype || language == UniversalPrototype || TryComp<UniversalLanguageSpeakerComponent>(ent, out var uni) && uni.Enabled)
             return true;
 
@@ -88,6 +94,11 @@ public abstract class SharedLanguageSystem : EntitySystem
 
     public virtual bool CanSpeak(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
     {
+        // RW start
+        if (TryComp<ZombieComponent>(ent, out var zombie))
+            return language == zombie.ForcedLanguage;
+        // RW end
+
         if (!Resolve(ent, ref ent.Comp, logMissing: false))
             return false;
 

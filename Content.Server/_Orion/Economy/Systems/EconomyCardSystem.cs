@@ -17,6 +17,7 @@ using Content.Shared.Roles.Jobs;
 using Content.Shared.Stacks;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server._Orion.Economy.Systems;
 
@@ -32,6 +33,7 @@ public sealed class EconomyCardSystem : EntitySystem
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private static readonly ProtoId<StackPrototype> HolochipStackId = "CreditHolochip";
     private static readonly ProtoId<StackPrototype> CreditStackId = "Credit";
@@ -191,6 +193,14 @@ public sealed class EconomyCardSystem : EntitySystem
         if (args.Actor is not { Valid: true } user || args.Amount <= 0)
             return;
 
+        // RW start
+        if (_timing.CurTime < ent.Comp.NextWithdrawTime)
+        {
+            _popup.PopupEntity(Loc.GetString("economy-card-withdraw-cooldown"), ent, user, PopupType.MediumCaution);
+            return;
+        }
+        // RW end
+
         if (!ResolveAccount(ent, user, out var account, args.AccountIdOverride))
             return;
 
@@ -205,6 +215,8 @@ public sealed class EconomyCardSystem : EntitySystem
 
         if (!_bank.Withdraw(account, args.Amount, "card-withdrawal", GetNetEntity(user)))
             return;
+
+        ent.Comp.NextWithdrawTime = _timing.CurTime + TimeSpan.FromSeconds(2.0); // RW
 
         var holochip = _stack.Spawn(args.Amount, stackProto, Transform(user).Coordinates);
         _hands.PickupOrDrop(user, holochip);

@@ -47,3 +47,10 @@ chem-master-window-sort-type-none = Sort by: Oldest First
 chem-master-window-sort-type-alphabetical = Sort by: Alphabetical
 chem-master-window-sort-type-quantity = Sort by: Quantity
 chem-master-window-sort-type-latest = Sort by: Recent First
+
+chemical-linker-saved-device = Saved { $device } to multitool.
+chemical-linker-linked = Successfully linked { $dispenser } and { $master }!
+chemical-linker-not-adjacent = Devices must be adjacent to be linked!
+chemical-linker-unlinked = Link cleared.
+chemical-linker-buffer-full = Linked ChemMaster's buffer is full!
+chemical-linker-dispenser-too-far = Linked ChemMaster is too far away!

@@ -64,10 +64,12 @@ using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Stealth.Components;
 using Content.Shared.Store.Components;
+using Content.Server.Store.Components;
 using Content.Shared.StatusEffect;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Content.Shared.Actions.Components;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
@@ -83,6 +85,8 @@ public sealed partial class ChangelingSystem
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!; //for biodegrade unweld
     #endregion
+
+    public const float AbilityTransferChance = 0.25f; // RW
 
     public void SubscribeAbilities()
     {
@@ -115,12 +119,14 @@ public sealed partial class ChangelingSystem
         SubscribeLocalEvent<ChangelingIdentityComponent, ActionFleshmendEvent>(OnHealUltraSwag);
         SubscribeLocalEvent<ChangelingIdentityComponent, ActionLastResortEvent>(OnLastResort);
         SubscribeLocalEvent<ChangelingIdentityComponent, ActionLesserFormEvent>(OnLesserForm);
-        SubscribeLocalEvent<ChangelingIdentityComponent, ActionHivemindAccessEvent>(OnHivemindAccess);
+        // RW start
+        // Hivemind Access was turned into a base ability
+        // SubscribeLocalEvent<ChangelingIdentityComponent, ActionHivemindAccessEvent>(OnHivemindAccess);
+        // RW end
+
         SubscribeLocalEvent<ChangelingIdentityComponent, AbsorbBiomatterEvent>(OnAbsorbBiomatter);
         SubscribeLocalEvent<ChangelingIdentityComponent, AbsorbBiomatterDoAfterEvent>(OnAbsorbBiomatterDoAfter);
     }
-
-    #region Basic Abilities
 
     private void OnOpenEvolutionMenu(EntityUid uid, ChangelingIdentityComponent comp, ref OpenEvolutionMenuEvent args)
     {
@@ -218,7 +224,14 @@ public sealed partial class ChangelingSystem
             {
                 popup = Loc.GetString("changeling-absorb-end-self-ling");
                 bonusChemicals += targetChemComp.ResourceData.MaxAmount / 2;
-                bonusEvolutionPoints += targetComp.TotalEvolutionPoints / 2;
+                // RW start
+                bonusEvolutionPoints += 2;
+                if (TryComp<StoreComponent>(uid, out var userStore) &&
+                    TryComp<StoreComponent>(target, out var targetStore))
+                {
+                    CopyChangelingAbilities(uid, target, userStore, targetStore);
+                }
+                // RW end
                 bonusChangelingAbsorbs += targetComp.TotalChangelingsAbsorbed + 1;
             }
 
@@ -236,7 +249,9 @@ public sealed partial class ChangelingSystem
         {
             popup = Loc.GetString("changeling-absorb-end-self");
             bonusChemicals += 10;
-            bonusEvolutionPoints += 2;
+            // RW start
+            // bonusEvolutionPoints += 2; // Ordinary crew no longer gives evolution points
+            // RW end
 
             biomassValid = true;
         }
@@ -290,6 +305,58 @@ public sealed partial class ChangelingSystem
         }
 
     }
+
+    // RW start
+    private void CopyChangelingAbilities(EntityUid user, EntityUid target, StoreComponent userStore, StoreComponent targetStore)
+    {
+        foreach (var targetListing in targetStore.Listings)
+        {
+            if (targetListing.PurchaseAmount <= 0)
+                continue;
+
+            var userListing = userStore.Listings.FirstOrDefault(x => x.ID == targetListing.ID);
+            if (userListing == null)
+                continue;
+
+            if (userListing.PurchaseAmount < targetListing.PurchaseAmount)
+            {
+                if (!_rand.Prob(AbilityTransferChance))
+                    continue;
+
+                userListing.PurchaseAmount = targetListing.PurchaseAmount;
+
+                if (!string.IsNullOrWhiteSpace(targetListing.ProductAction))
+                {
+                    if (userListing.ProductActionEntity == null)
+                    {
+                        EntityUid? actionId;
+                        if (!_mind.TryGetMind(user, out var mind, out _))
+                            actionId = _actions.AddAction(user, targetListing.ProductAction);
+                        else
+                            actionId = _actionContainer.AddAction(mind, targetListing.ProductAction);
+
+                        if (actionId != null)
+                        {
+                            userListing.ProductActionEntity = actionId;
+                            userStore.BoughtEntities.Add(actionId.Value);
+                            var refundComp = EnsureComp<StoreRefundComponent>(actionId.Value);
+                            refundComp.StoreEntity = userStore.Owner;
+                            refundComp.Data = userListing;
+                        }
+                    }
+                }
+
+                if (targetListing.ProductEvent != null)
+                {
+                    if (!targetListing.RaiseProductEventOnUser)
+                        RaiseLocalEvent(targetListing.ProductEvent);
+                    else
+                        RaiseLocalEvent(user, targetListing.ProductEvent);
+                }
+            }
+        }
+    }
+    // RW end
 
     public List<ProtoId<ReagentPrototype>> BiomassAbsorbedChemicals = new() { "Nutriment", "Protein", "UncookedAnimalProteins", "Fat" }; // fat so absorbing raw meat good
     private void OnAbsorbBiomatter(EntityUid uid, ChangelingIdentityComponent comp, ref AbsorbBiomatterEvent args)
@@ -415,7 +482,7 @@ public sealed partial class ChangelingSystem
         args.Handled = true;
     }
 
-    #endregion
+    // RW: #endregion
 
     #region Combat Abilities
 
@@ -888,6 +955,10 @@ public sealed partial class ChangelingSystem
         args.Handled = true;
     }
     public ProtoId<CollectiveMindPrototype> HivemindProto = "Lingmind";
+
+    // RW start
+    // Hivemind Access was turned into a base ability
+    /*
     public void OnHivemindAccess(EntityUid uid, ChangelingIdentityComponent comp, ref ActionHivemindAccessEvent args)
     {
         if (args.Handled)
@@ -908,6 +979,8 @@ public sealed partial class ChangelingSystem
 
         args.Handled = true;
     }
+    */
+    // RW end
 
     #endregion
 }

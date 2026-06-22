@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 SPDX-FileCopyrightText: 2022 Flipp Syder <76629141+vulppine@users.noreply.github.com>
 SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
 SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
@@ -171,14 +171,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                             <!-- Amour edit start: gradient controls placed right under the main hair color -->
                             <BoxContainer Margin="10" Orientation="Horizontal">
                                 <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                    <humanoid:SingleMarkingPicker Name="HairStylePicker" Category="Hair" />
+                                    <humanoid:SingleMarkingPicker Name="HairStylePicker" Category="Hair" ShowGradient="False" /> <!-- RW -->
                                     <CheckBox Name="HairGradientToggle" Text="{Loc 'humanoid-profile-editor-hair-gradient-toggle'}" />
                                     <BoxContainer Name="HairGradientColorContainer" Orientation="Vertical" Visible="False">
                                         <Label Text="{Loc 'humanoid-profile-editor-hair-gradient-color'}" />
                                     </BoxContainer>
                                 </BoxContainer>
                                 <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                    <humanoid:SingleMarkingPicker Name="FacialHairPicker" Category="FacialHair" />
+                                    <humanoid:SingleMarkingPicker Name="FacialHairPicker" Category="FacialHair" ShowGradient="False" /> <!-- RW -->
                                     <CheckBox Name="FacialHairGradientToggle" Text="{Loc 'humanoid-profile-editor-facial-hair-gradient-toggle'}" />
                                     <BoxContainer Name="FacialHairGradientColorContainer" Orientation="Vertical" Visible="False">
                                         <Label Text="{Loc 'humanoid-profile-editor-facial-hair-gradient-color'}" />

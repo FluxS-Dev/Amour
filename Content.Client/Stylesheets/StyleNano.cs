@@ -781,10 +781,240 @@ namespace Content.Client.Stylesheets
             var directionIconQuestionTex = resCache.GetTexture("/Textures/Interface/VerbIcons/information.svg.192dpi.png");
             var directionIconHereTex = resCache.GetTexture("/Textures/Interface/VerbIcons/dot.svg.192dpi.png");
 
+            var switchButtonTrackFill = resCache.GetTexture("/Textures/Interface/Nano/switchbutton_track_fill.svg.96dpi.png");
+            var switchButtonTrackOutline = resCache.GetTexture("/Textures/Interface/Nano/switchbutton_track_outline.svg.96dpi.png");
+            var switchButtonThumbFill = resCache.GetTexture("/Textures/Interface/Nano/switchbutton_thumb_fill.svg.96dpi.png");
+            var switchButtonThumbOutline = resCache.GetTexture("/Textures/Interface/Nano/switchbutton_thumb_outline.svg.96dpi.png");
+            var switchButtonSymbolOff = resCache.GetTexture("/Textures/Interface/Nano/switchbutton_symbol_off.svg.96dpi.png");
+            var switchButtonSymbolOn = resCache.GetTexture("/Textures/Interface/Nano/switchbutton_symbol_on.svg.96dpi.png");
+
             Stylesheet = new Stylesheet(BaseRules.Concat(new[]
             {
                 Element().Class("monospace")
                     .Prop("font", notoSansMono),
+
+                // SwitchButton
+                Element<SwitchButton>().Prop(SwitchButton.StylePropertySeparation, 10),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, null),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassTrackFill }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(TextureRect.StylePropertyTexture, switchButtonTrackFill),
+                        new StyleProperty(Control.StylePropertyModulateSelf, PanelDark),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, null),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassTrackOutline }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(TextureRect.StylePropertyTexture, switchButtonTrackOutline),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#545562")),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, null),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassThumbFill }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(TextureRect.StylePropertyTexture, switchButtonThumbFill),
+                        new StyleProperty(Control.StylePropertyModulateSelf, ButtonColorDefault),
+                        new StyleProperty(nameof(Control.HorizontalAlignment), Control.HAlignment.Left),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, null),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassThumbOutline }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(TextureRect.StylePropertyTexture, switchButtonThumbOutline),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#7A7F9D")),
+                        new StyleProperty(nameof(Control.HorizontalAlignment), Control.HAlignment.Left),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, null),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassSymbol }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(TextureRect.StylePropertyTexture, switchButtonSymbolOff),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#545562")),
+                    }),
+
+                // Pressed styles
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassPressed }),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassTrackFill }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#3c854a")),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassPressed }),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassSymbol }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(TextureRect.StylePropertyTexture, switchButtonSymbolOn),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassPressed }),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassThumbFill }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(nameof(Control.HorizontalAlignment), Control.HAlignment.Right),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassPressed }),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassThumbOutline }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(nameof(Control.HorizontalAlignment), Control.HAlignment.Right),
+                    }),
+
+                // Disabled styles
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassDisabled }),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassTrackFill }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#2C2D35")),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassDisabled }),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassTrackOutline }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#2C2D35")),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassDisabled }),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassThumbFill }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, ButtonColorDisabled),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassDisabled }),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassThumbOutline }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#5F6281")),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassDisabled }),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassSymbol }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#40414E")),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassDisabled }),
+                        new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#5F6281")),
+                    }),
+
+                // Both pressed & disabled styles
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassPressed, ContainerButton.StylePseudoClassDisabled }),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassTrackFill }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#224C2B")),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), null, null, new[] { ContainerButton.StylePseudoClassPressed, ContainerButton.StylePseudoClassDisabled }),
+                        new SelectorElement(typeof(TextureRect), new[] { SwitchButton.StyleClassSymbol }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#3c854a")),
+                    }),
+
+                // highlight
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), new[] { "highlight" }, null, new[] { ContainerButton.StylePseudoClassDisabled }),
+                        new SelectorElement(typeof(Label), new[] { SwitchButton.StyleClassMainLabel }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, NanoGold),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), new[] { "highlight" }, null, null),
+                        new SelectorElement(typeof(Label), new[] { SwitchButton.StyleClassMainLabel }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#87704C")),
+                    }),
+
+                // SwitchButton.StyleClassColorStateLabels
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), new[] { SwitchButton.StyleClassColorStateLabels }, null, null),
+                        new SelectorElement(typeof(Label), new[] { SwitchButton.StyleClassOffStateLabel }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, DangerousRedFore),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), new[] { SwitchButton.StyleClassColorStateLabels }, null, new[] { ContainerButton.StylePseudoClassDisabled }),
+                        new SelectorElement(typeof(Label), new[] { SwitchButton.StyleClassOffStateLabel }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#9B2236")),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), new[] { SwitchButton.StyleClassColorStateLabels }, null, null),
+                        new SelectorElement(typeof(Label), new[] { SwitchButton.StyleClassOnStateLabel }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, GoodGreenFore),
+                    }),
+
+                new StyleRule(
+                    new SelectorChild(
+                        new SelectorElement(typeof(SwitchButton), new[] { SwitchButton.StyleClassColorStateLabels }, null, new[] { ContainerButton.StylePseudoClassDisabled }),
+                        new SelectorElement(typeof(Label), new[] { SwitchButton.StyleClassOnStateLabel }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#2C5E35")),
+                    }),
                 // Window title.
                 new StyleRule(
                     new SelectorElement(typeof(Label), new[] {DefaultWindow.StyleClassWindowTitle}, null, null),

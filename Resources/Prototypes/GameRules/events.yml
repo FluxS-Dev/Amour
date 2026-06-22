@@ -162,9 +162,9 @@
     - id: ClericalError
     - id: CockroachMigration
     - id: GasLeak
-    - id: GreytideVirus
+    # - id: GreytideVirus RW
     - id: IonStorm # its calm like 90% of the time smh
-    - id: JobDistributionError
+    # - id: JobDistributionError RW
     - id: KudzuGrowth
     - id: MassHallucinations
 #    - id: MimicVendorRule # Orion-Edit: Morph better!!!
@@ -202,7 +202,7 @@
     - id: SleeperAgents
     - id: ZombieOutbreak
     - id: LoneOpsSpawn
-    - id: DerelictCyborgSpawn
+    # - id: DerelictCyborgSpawn RW
     - id: BlobSpawn # Goobstation - Blob
     - id: LoneAbductorSpawn # Shitmed - Starlight Abductors
     - id: DuoAbductorSpawn # Shitmed - Starlight Abductors
@@ -491,9 +491,9 @@
   id: ParadoxCloneSpawn
   components:
   - type: StationEvent
-    weight: 5
+    weight: 1 # RW 5 > 1
     duration: null
-    earliestStart: 20
+    earliestStart: 60 # RW 20 > 60
     reoccurrenceDelay: 20
     minimumPlayers: 15
     eventType: Chaotic # Goobstation
@@ -613,7 +613,7 @@
     startAudio:
       path: /Audio/Announcements/gasleak_start.ogg # Orion-Edit
     endAnnouncement: station-event-gas-leak-end-announcement
-    weight: 8
+    weight: 4 # RW 8 > 4
     chaos:
       Atmos: 100
       Medical: 50

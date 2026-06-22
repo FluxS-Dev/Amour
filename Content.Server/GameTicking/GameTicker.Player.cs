@@ -40,6 +40,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
+using Content.Server._RW.Administration;
 
 namespace Content.Server.GameTicking
 {
@@ -87,12 +88,19 @@ namespace Content.Server.GameTicking
 
                     var record = await _db.GetPlayerRecordByUserId(args.Session.UserId);
                     var firstConnection = record != null &&
-                                          Math.Abs((record.FirstSeenTime - record.LastSeenTime).TotalMinutes) < 1;
-
-                    _chatManager.SendAdminAnnouncement(firstConnection
-                        ? Loc.GetString("player-first-join-message", ("name", args.Session.Name))
-                        : Loc.GetString("player-join-message", ("name", args.Session.Name)));
-
+                                          Math.Abs((record.FirstSeenTime - record.LastSeenTime).TotalMinutes) < 60; //RW - until 1hr played total
+                    // RW START - notification of the registration date
+                    if (firstConnection)
+                    {
+                        var creationDate = await AuthApiHelper.GetCreationDate(args.Session.UserId.ToString());
+                        _chatManager.SendAdminAnnouncement(Loc.GetString("player-first-join-message", ("name", args.Session.Name)) +
+                                                           Loc.GetString("player-first-join-account-date", ("creationDate", creationDate)));
+                    }
+                    else
+                    {
+                        _chatManager.SendAdminAnnouncement(Loc.GetString("player-join-message", ("name", args.Session.Name)));
+                    }
+                    // RW END
                     RaiseNetworkEvent(GetConnectionStatusMsg(), session.Channel);
 
                     if (firstConnection && _cfg.GetCVar(CCVars.AdminNewPlayerJoinSound))

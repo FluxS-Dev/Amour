@@ -10,7 +10,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Server.Changeling.Objectives.Components;
+using Content.Goobstation.Shared.Changeling.Components;
 using Content.Server.Objectives.Systems;
+using Content.Goobstation.Server._RW.Objectives.Components;
 using Content.Shared.Objectives.Components;
 
 namespace Content.Goobstation.Server.Changeling.Objectives.Systems;
@@ -26,6 +28,7 @@ public sealed partial class ChangelingObjectiveSystem : EntitySystem
         SubscribeLocalEvent<AbsorbConditionComponent, ObjectiveGetProgressEvent>(OnAbsorbGetProgress);
         SubscribeLocalEvent<StealDNAConditionComponent, ObjectiveGetProgressEvent>(OnStealDNAGetProgress);
         SubscribeLocalEvent<AbsorbChangelingConditionComponent, ObjectiveGetProgressEvent>(OnAbsorbChangelingGetProgress);
+        SubscribeLocalEvent<ChangelingEvolutionaryApexConditionComponent, ObjectiveGetProgressEvent>(OnAbsorbMoreGetProgress); // RW
     }
 
     private void OnAbsorbGetProgress(EntityUid uid, AbsorbConditionComponent comp, ref ObjectiveGetProgressEvent args)
@@ -50,4 +53,49 @@ public sealed partial class ChangelingObjectiveSystem : EntitySystem
         else
             args.Progress = 1f;
     }
+
+    // RW start
+    private void OnAbsorbMoreGetProgress(EntityUid uid, ChangelingEvolutionaryApexConditionComponent comp, ref ObjectiveGetProgressEvent args)
+    {
+        var selfEntity = args.Mind.OwnedEntity;
+        if (selfEntity == null)
+        {
+            args.Progress = 0f;
+            return;
+        }
+
+        if (!TryComp<ChangelingIdentityComponent>(selfEntity, out var selfIdentity))
+        {
+            args.Progress = 0f;
+            return;
+        }
+
+        var selfAbsorbed = selfIdentity.TotalAbsorbedEntities;
+        var maxOtherAbsorbed = -1;
+        var hasOtherLings = false;
+
+        var query = EntityQueryEnumerator<ChangelingIdentityComponent>();
+        while (query.MoveNext(out var lingUid, out var lingComp))
+        {
+            if (lingUid == selfEntity)
+                continue;
+
+            hasOtherLings = true;
+            if (lingComp.TotalAbsorbedEntities > maxOtherAbsorbed)
+            {
+                maxOtherAbsorbed = lingComp.TotalAbsorbedEntities;
+            }
+        }
+
+        if (hasOtherLings)
+        {
+            args.Progress = selfAbsorbed > maxOtherAbsorbed ? 1f : 0f;
+        }
+        else
+        {
+            // If there are no other lings, this objective is trivially met.
+            args.Progress = 1f;
+        }
+    }
+    // RW end
 }

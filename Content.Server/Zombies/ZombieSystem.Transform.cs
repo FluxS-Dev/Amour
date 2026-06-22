@@ -57,6 +57,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Traits;
+using Content.Server._RW.Zombies;
 using Content.Server.Atmos.Components;
 using Content.Server.Body.Components;
 using Content.Server.Chat;
@@ -165,6 +166,15 @@ public sealed partial class ZombieSystem
         if (!Resolve(target, ref mobState, logMissing: false))
             return;
 
+        // RW start
+        if (TryComp<PendingZombieComponent>(target, out var pendingZombie)
+            && pendingZombie.OriginalSkinColor is { } originalSkinColor
+            && TryComp<HumanoidAppearanceComponent>(target, out var pendingHumanoid))
+        {
+            _humanoidAppearance.SetSkinColor(target, originalSkinColor, verify: false, humanoid: pendingHumanoid);
+        }
+        // RW end
+
         //you're a real zombie now, son.
         RaiseLocalEvent(target, new RejuvenateEvent(false, false)); // Shitmed Change
 
@@ -192,12 +202,15 @@ public sealed partial class ZombieSystem
         RemComp<LegsParalyzedComponent>(target);
         RemComp<ComplexInteractionComponent>(target);
 
-        //funny voice
-        var accentType = "zombie";
-        if (TryComp<ZombieAccentOverrideComponent>(target, out var accent))
-            accentType = accent.Accent;
-
-        EnsureComp<ReplacementAccentComponent>(target).Accent = accentType;
+        // RW start
+        // Zombie speech now uses the forced Zombie language instead of a replacement accent.
+        // //funny voice
+        // var accentType = "zombie";
+        // if (TryComp<ZombieAccentOverrideComponent>(target, out var accent))
+        //     accentType = accent.Accent;
+        //
+        // EnsureComp<ReplacementAccentComponent>(target).Accent = accentType;
+        // RW end
 
         //This is needed for stupid entities that fuck up combat mode component
         //in an attempt to make an entity not attack. This is the easiest way to do it.
@@ -324,6 +337,8 @@ public sealed partial class ZombieSystem
 
             //Greeting message for new bebe zombers
             _chatMan.DispatchServerMessage(session, Loc.GetString("zombie-infection-greeting"));
+
+            _eui.OpenEui(new ZombieRoleEui(), session); // RW edit
 
             // Notificate player about new role assignment
             _audio.PlayGlobal(zombiecomp.GreetSoundNotification, session);

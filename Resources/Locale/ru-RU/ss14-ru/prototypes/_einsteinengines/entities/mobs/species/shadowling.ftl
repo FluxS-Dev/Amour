@@ -1,4 +1,4 @@
-ent-BaseMobShadowling = Урист МакКошмар
+ent-BaseMobShadowling = Урист МакТенеморф
     .desc = { ent-BaseMobSpeciesOrganic.desc }
 ent-MobShadowlingDummy = { ent-BaseSpeciesDummy }
     .desc = { ent-BaseSpeciesDummy.desc }

@@ -69,9 +69,9 @@
       - Window
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/window.rsi
+    sprite: Structures/Windows/window.rsi
   - type: Icon
-    sprite: _Amour/Structures/Windows/window.rsi
+    sprite: Structures/Windows/window.rsi
     state: full
   - type: Physics
     bodyType: Static
@@ -137,7 +137,7 @@
     damageDivisor: 2
     trackAllDamage: true
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks.rsi
+      sprite: Structures/Windows/cracks.rsi
   - type: StaticPrice
     price: 100
   - type: BlockWeather
@@ -150,9 +150,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/tinted_window.rsi
+    sprite: Structures/Windows/tinted_window.rsi
   - type: Icon
-    sprite: _Amour/Structures/Windows/tinted_window.rsi
+    sprite: Structures/Windows/tinted_window.rsi
   - type: IconSmooth
     base: twindow
   - type: Construction
@@ -207,10 +207,10 @@
         collection: GlassSmack
   - type: Sprite
     drawdepth: Mobs
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: Structures/Windows/directional.rsi
     state: window
   - type: Icon
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: Structures/Windows/directional.rsi
     state: window
   - type: InteractionPopup
     interactSuccessString: comp-window-knock
@@ -276,7 +276,7 @@
     thresholds: [5, 10, 20]
     trackAllDamage: true
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks_directional.rsi
+      sprite: Structures/Windows/cracks_directional.rsi
   - type: StaticPrice
     price: 15
 
@@ -299,10 +299,10 @@
     - Window
   components:
   - type: Sprite
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: Structures/Windows/directional.rsi
     state: frosted_window
   - type: Icon
-    sprite: _Amour/Structures/Windows/directional.rsi
+    sprite: Structures/Windows/directional.rsi
     state: frosted_window
   - type: StaticPrice
     price: 35
@@ -318,7 +318,7 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Amour/Structures/Windows/window_diagonal.rsi
+    sprite: Structures/Windows/window_diagonal.rsi
     state: state0
   - type: Tag
     tags:
@@ -328,7 +328,7 @@
     key: windows
     base: state
   - type: Icon
-    sprite: _Amour/Structures/Windows/window_diagonal.rsi
+    sprite: Structures/Windows/window_diagonal.rsi
     state: state0
   - type: Fixtures
     fixtures:
@@ -350,7 +350,7 @@
     - East
   - type: DamageVisuals
     damageOverlay:
-      sprite: _Amour/Structures/Windows/cracks_diagonal.rsi
+      sprite: Structures/Windows/cracks_diagonal.rsi
   - type: Construction
     graph: WindowDiagonal
     node: windowDiagonal

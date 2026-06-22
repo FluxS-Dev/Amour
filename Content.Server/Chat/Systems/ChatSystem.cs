@@ -148,6 +148,7 @@ using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Station.Components;
 using Content.Shared.Whitelist;
+using Content.Shared.Zombies;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -218,6 +219,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     private bool _deadLoocEnabled;
     private bool _critLoocEnabled;
     private bool _DeadchatEnabled; // RMC14
+    private bool _nsfwContentEnabled; // RW
     private readonly bool _adminLoocEnabled = true;
 
     public override void Initialize()
@@ -228,6 +230,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         Subs.CVar(_configurationManager, CCVars.DeadLoocEnabled, OnDeadLoocEnabledChanged, true);
         Subs.CVar(_configurationManager, CCVars.CritLoocEnabled, OnCritLoocEnabledChanged, true);
         Subs.CVar(_configurationManager, RMCCVars.RMCDeadChatEnabled, OnDeadChatEnabledChanged, true); // RMC14
+        Subs.CVar(_configurationManager, CCVars.NsfwContentEnabled, value => _nsfwContentEnabled = value, true); // RW
 
         SubscribeLocalEvent<GameRunLevelChangedEvent>(OnGameChange);
     }
@@ -405,6 +408,10 @@ public sealed partial class ChatSystem : SharedChatSystem
             message = message[1..];
         }
 
+        // RW start
+        var originalMessageForZombieSpeechLimit = message;
+        // RW end
+
         var language = languageOverride ?? _language.GetLanguage(source); // Einstein Engines - Language
 
         bool shouldCapitalize = (desiredType != InGameICChatType.Emote);
@@ -490,6 +497,11 @@ public sealed partial class ChatSystem : SharedChatSystem
             desiredType = InGameICChatType.Whisper;
         // Orion-End
 
+        // RW start
+        if (desiredType == InGameICChatType.Speak)
+            ApplyZombieSpeechLimit(source, originalMessageForZombieSpeechLimit, ref message);
+        // RW end
+
         // Otherwise, send whatever type.
         switch (desiredType)
         {
@@ -506,6 +518,9 @@ public sealed partial class ChatSystem : SharedChatSystem
                 _telepath.SendTelepathicChat(source, message, range == ChatTransmitRange.HideChat);
                 break;
             case InGameICChatType.QuietEmote: // Amour - Quiet emote with 2 tile range
+                if (!_nsfwContentEnabled)
+                    return;
+
                 SendEntityQuietEmote(source, message, range, nameOverride, language, hideLog: hideLog, ignoreActionBlocker: ignoreActionBlocker);
                 break;
         }
@@ -518,6 +533,85 @@ public sealed partial class ChatSystem : SharedChatSystem
                message.StartsWith(RadioChannelPrefix) ||
                message.StartsWith(RadioChannelAltPrefix);
     }
+
+    // RW start
+    private void ApplyZombieSpeechLimit(EntityUid source, string originalMessage, ref string message)
+    {
+        if (!TryComp<ZombieComponent>(source, out var zombie)
+            || zombie.MaxSpeakCharacters < 0)
+            return;
+
+        var curTime = _gameTiming.CurTime;
+        if (CountZombieSpeakCharacters(originalMessage, zombie.SpeakLimitIgnoredWords) <= zombie.MaxSpeakCharacters
+            && zombie.NextMeaningfulSpeakTime <= curTime)
+        {
+            zombie.NextMeaningfulSpeakTime = curTime + zombie.MeaningfulSpeakCooldown;
+            return;
+        }
+
+        ReplaceZombieSpeechWithMumbling(zombie, ref message);
+    }
+
+    private void ReplaceZombieSpeechWithMumbling(ZombieComponent zombie, ref string message)
+    {
+        if (zombie.SpeakLimitReplacementMessages.Count == 0)
+            return;
+
+        message = Loc.GetString(_random.Pick(zombie.SpeakLimitReplacementMessages));
+    }
+
+    private static int CountZombieSpeakCharacters(string message, IReadOnlyList<string> ignoredWords)
+    {
+        var count = 0;
+
+        for (var i = 0; i < message.Length;)
+        {
+            if (char.IsWhiteSpace(message[i]))
+            {
+                i++;
+                continue;
+            }
+
+            if (TryReadIgnoredZombieWord(message, i, ignoredWords, out var wordLength))
+            {
+                i += wordLength;
+                continue;
+            }
+
+            count++;
+            i++;
+        }
+
+        return count;
+    }
+
+    private static bool TryReadIgnoredZombieWord(
+        string message,
+        int index,
+        IReadOnlyList<string> ignoredWords,
+        out int wordLength)
+    {
+        wordLength = 0;
+
+        foreach (var word in ignoredWords)
+        {
+            if (string.IsNullOrWhiteSpace(word)
+                || index + word.Length > message.Length
+                || !message.AsSpan(index, word.Length).Equals(word, StringComparison.OrdinalIgnoreCase)
+                || index > 0 && char.IsLetterOrDigit(message[index - 1]))
+                continue;
+
+            var end = index + word.Length;
+            if (end < message.Length && char.IsLetterOrDigit(message[end]))
+                continue;
+
+            wordLength = word.Length;
+            return true;
+        }
+
+        return false;
+    }
+    // RW end
 
     private bool CanUseRadio(EntityUid source)
     {
@@ -728,22 +822,48 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var Number = $"{sourseCollectiveMindComp.Minds[collectiveMind.ID]}";
 
+        _playerManager.TryGetSessionByEntity(source, out var senderSession);
         var admins = _adminManager.ActiveAdmins
+            .Where(p => p != senderSession)
             .Select(p => p.Channel);
 
-        string messageWrap = Loc.GetString("collective-mind-chat-wrap-message",
-            ("message", message),
-            ("channel", collectiveMind.LocalizedName),
-            ("number", Number));
-        string namedMessageWrap = Loc.GetString("collective-mind-chat-wrap-message-named",
-            ("source", source),
-            ("message", message),
-            ("channel", collectiveMind.LocalizedName));
-        string adminMessageWrap = Loc.GetString("collective-mind-chat-wrap-message-admin",
-            ("source", source),
-            ("message", message),
-            ("channel", collectiveMind.LocalizedName),
-            ("number", Number));
+        string messageWrap;
+        string namedMessageWrap;
+        string adminMessageWrap;
+
+        // RW start
+        if (collectiveMind.ID == "Lingmind")
+        {
+            var lingNumber = GetLingGreekLetter(sourseCollectiveMindComp.Minds[collectiveMind.ID]);
+            messageWrap = Loc.GetString("collective-mind-chat-wrap-message-ling",
+                ("message", message),
+                ("number", lingNumber));
+            namedMessageWrap = Loc.GetString("collective-mind-chat-wrap-message-named-ling",
+                ("source", source),
+                ("message", message),
+                ("number", lingNumber));
+            adminMessageWrap = Loc.GetString("collective-mind-chat-wrap-message-admin-ling",
+                ("source", source),
+                ("message", message),
+                ("number", lingNumber));
+        }
+        else
+        {
+            messageWrap = Loc.GetString("collective-mind-chat-wrap-message",
+                ("message", message),
+                ("channel", collectiveMind.LocalizedName),
+                ("number", Number));
+            namedMessageWrap = Loc.GetString("collective-mind-chat-wrap-message-named",
+                ("source", source),
+                ("message", message),
+                ("channel", collectiveMind.LocalizedName));
+            adminMessageWrap = Loc.GetString("collective-mind-chat-wrap-message-admin",
+                ("source", source),
+                ("message", message),
+                ("channel", collectiveMind.LocalizedName),
+                ("number", Number));
+        }
+        // RW end
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"CollectiveMind chat from {ToPrettyString(source):Player}: {message}");
 
@@ -1103,6 +1223,44 @@ public sealed partial class ChatSystem : SharedChatSystem
             }
     }
     // Orion-End
+
+    // RW start
+    private string GetLingGreekLetter(int number)
+    {
+        if (number <= 0)
+            return "unknown";
+
+        var index = (number - 1) % 23 + 1;
+        var division = (number - 1) / 23;
+
+        var locKey = $"collective-mind-lingmind-letter-{index}";
+        var letter = Loc.GetString(locKey);
+
+        if (division > 0)
+        {
+            letter += $" {GetRomanNumeral(division + 1)}";
+        }
+
+        return letter;
+    }
+
+    private string GetRomanNumeral(int number)
+    {
+        if (number <= 0) return string.Empty;
+        var roman = new System.Text.StringBuilder();
+        int[] values = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+        string[] symbols = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+        for (int i = 0; i < values.Length; i++)
+        {
+            while (number >= values[i])
+            {
+                number -= values[i];
+                roman.Append(symbols[i]);
+            }
+        }
+        return roman.ToString();
+    }
+    // RW end
 
     private void SendEntityEmote(
         EntityUid source,

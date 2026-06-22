@@ -86,7 +86,7 @@ guide-entry-sop-emergencyresponseteam = ОБР (Отряд Быстрого Ре
 # guide-entry-sop-doctorintern = Врач/Интерн
 # - Наука
 # guide-entry-sop-roboticist = Робототехник
-# guide-entry-sop-scientist = Ученый
+# guide-entry-sop-scientist = Учёный
 # - Охрана
 # guide-entry-sop-brigmedic = Бригмедик
 # guide-entry-sop-detective = Детектив
@@ -101,3 +101,66 @@ guide-entry-sop-emergencyresponseteam = ОБР (Отряд Быстрого Ре
 # guide-entry-sop-librarian = Библиотекарь
 # guide-entry-sop-mime = Мим
 # guide-entry-sop-reporter = Репортёр
+guide-entry-sop-alert-levels = Коды станции
+guide-entry-sop-emergencies = Чрезвычайные ситуации
+guide-entry-sop-jobs = Профессии
+guide-entry-sop-legal = Закон
+guide-entry-sop-standards = Стандартные процедуры
+# - Вложенные каталоги
+guide-entry-sop-cargo = Отдел снабжения
+guide-entry-sop-command = Командование
+guide-entry-sop-engineering = Инженерный отдел
+guide-entry-sop-medical = Медицинский отдел
+guide-entry-sop-science = Научный отдел
+guide-entry-sop-service = Сервис
+# - Уровни оповещения
+guide-entry-sop-execution = Казни
+guide-entry-sop-permabrig = Перманентный бриг
+guide-entry-sop-punishments = Наказания
+guide-entry-sop-searches = Обыски
+# - Груз
+guide-entry-sop-cargotech = Грузчик
+guide-entry-sop-salvage = Утилизатор
+guide-entry-sop-shaft-miner = Шахтер
+# - Командование
+guide-entry-sop-ntr = ПНТ
+guide-entry-sop-bso = Офицер "Синий Щит"
+guide-entry-sop-captain = Капитан
+guide-entry-sop-hop = ГП
+guide-entry-sop-hos = ГСБ
+guide-entry-sop-rd = НР
+guide-entry-sop-cmo = ГВ
+guide-entry-sop-ce = СИ
+guide-entry-sop-qm = КМ
+# - Инженерный
+guide-entry-sop-atmostech = Атмос
+guide-entry-sop-stationengineer = Инженер
+# - Медицина
+guide-entry-sop-chemist = Химик
+guide-entry-sop-doctorintern = Врач
+# - Science
+guide-entry-sop-roboticist = Роботехник
+# - Наука
+guide-entry-sop-robotocist = Робототехник
+guide-entry-sop-scientist = Учёный
+# - Security
+guide-entry-sop-brigmedic = Бригмедик
+# - Безопасность
+guide-entry-sop-detective = Детектив
+guide-entry-sop-officercadet = Офицер/Кадет
+guide-entry-sop-warden = Смотритель
+# - Обслуживание
+guide-entry-sop-bartender = Бармен
+guide-entry-sop-botanist = Ботаник
+guide-entry-sop-chef = Шеф-повар
+guide-entry-sop-clown = Клоун
+guide-entry-sop-janitor = Уборщик
+guide-entry-sop-librarian = Библиотекарь
+guide-entry-sop-mime = Мим
+guide-entry-sop-reporter = Репортер
+# - Космический закон
+guide-entry-space-law-violations-minor = 1ХХ статьи (лёгкие)
+guide-entry-space-law-violations-average = 2ХХ статьи (средние)
+guide-entry-space-law-violations-serious = 3ХХ статьи (тяжкие)
+
+# - Боевые искусства

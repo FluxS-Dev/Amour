@@ -41,12 +41,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using System.Text;
+using Content.Shared.HealthExaminable;
+using Content.Shared.Speech;
 using Content.Server._EinsteinEngines.Language;
+using Content.Server._RW.Zombies;
 using Content.Server.Actions;
 using Content.Server.Body.Systems;
 using Content.Server.Chat;
 using Content.Server.Chat.Systems;
 using Content.Server.Emoting.Systems;
+using Content.Server.EUI;
 using Content.Server.Roles;
 using Content.Server.Speech.EntitySystems;
 using Content.Shared._EinsteinEngines.Language.Components;
@@ -108,8 +113,36 @@ namespace Content.Server.Zombies
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedRoleSystem _role = default!;
         [Dependency] private readonly LanguageSystem _language = default!;
+        [Dependency] private readonly EuiManager _eui = default!; // RW edit
+        [Dependency] private readonly MobThresholdSystem _mobThreshold = default!; // RW edit
 
         public readonly ProtoId<NpcFactionPrototype> Faction = "Zombie";
+
+        // RW start
+        private const int PendingZombieStagePale = PendingZombieComponent.PendingZombieStagePale;
+        private const int PendingZombieStageSlowed = PendingZombieComponent.PendingZombieStageSlowed;
+        private const int PendingZombieStageFinal = PendingZombieComponent.PendingZombieStageFinal;
+        private const string PendingZombieLanguage = "Zombie";
+        private const double PendingZombieStageSlowedSeconds = 180;
+        private const double PendingZombieStageFinalSeconds = 300;
+        private const double PendingZombieDeathSeconds = 420;
+        private const double PendingZombieForcedTransformSeconds = 540;
+        private static readonly TimeSpan PendingZombieTickInterval = TimeSpan.FromSeconds(1);
+        private static readonly Color PendingZombieGreenSkin = new(0.45f, 0.51f, 0.29f);
+        private static readonly string[] PendingZombieGroans =
+        [
+            "accent-words-zombie-1",
+            "accent-words-zombie-2",
+            "accent-words-zombie-3",
+            "accent-words-zombie-4",
+            "accent-words-zombie-5",
+            "accent-words-zombie-6",
+            "accent-words-zombie-7",
+            "accent-words-zombie-8",
+            "accent-words-zombie-9",
+            "accent-words-zombie-10",
+        ];
+        // RW end
 
         public const SlotFlags ProtectiveSlots =
             SlotFlags.FEET |
@@ -134,6 +167,7 @@ namespace Content.Server.Zombies
             SubscribeLocalEvent<ZombieComponent, TryingToSleepEvent>(OnSleepAttempt);
             SubscribeLocalEvent<ZombieComponent, GetCharactedDeadIcEvent>(OnGetCharacterDeadIC);
             SubscribeLocalEvent<ZombieComponent, GetCharacterUnrevivableIcEvent>(OnGetCharacterUnrevivableIC);
+            SubscribeLocalEvent<ZombieComponent, ComponentStartup>(OnStartup); // RW edit
             SubscribeLocalEvent<ZombieComponent, MindAddedMessage>(OnMindAdded);
             SubscribeLocalEvent<ZombieComponent, MindRemovedMessage>(OnMindRemoved);
 
@@ -147,6 +181,13 @@ namespace Content.Server.Zombies
             // Goob Edit - Prevent Zombies Speaking/Understanding Languages
             SubscribeLocalEvent<ZombieComponent, DetermineEntityLanguagesEvent>(OnLanguageApply);
             SubscribeLocalEvent<ZombieComponent, ComponentShutdown>(OnShutdown);
+
+            // RW start
+            SubscribeLocalEvent<PendingZombieComponent, ComponentShutdown>(OnPendingShutdown);
+            SubscribeLocalEvent<PendingZombieComponent, DetermineEntityLanguagesEvent>(OnPendingLanguageApply);
+            SubscribeLocalEvent<PendingZombieComponent, AccentGetEvent>(OnPendingAccentGet);
+            SubscribeLocalEvent<PendingZombieComponent, HealthBeingExaminedEvent>(OnPendingHealthExamined);
+            // RW end
         }
 
         private void OnBeforeRemoveAnomalyOnDeath(Entity<PendingZombieComponent> ent, ref BeforeRemoveAnomalyOnDeathEvent args)
@@ -166,7 +207,9 @@ namespace Content.Server.Zombies
 
             EnsureComp(uid, out PendingZombieComponent pendingComp);
 
-            pendingComp.GracePeriod = _random.Next(pendingComp.MinInitialInfectedGrace, pendingComp.MaxInitialInfectedGrace);
+            pendingComp.GracePeriod = pendingComp.MinInitialInfectedGrace == pendingComp.MaxInitialInfectedGrace
+                ? pendingComp.MinInitialInfectedGrace
+                : _random.Next(pendingComp.MinInitialInfectedGrace, pendingComp.MaxInitialInfectedGrace);
         }
 
         private void OnPendingMapInit(EntityUid uid, PendingZombieComponent component, MapInitEvent args)
@@ -187,32 +230,73 @@ namespace Content.Server.Zombies
 
             // Hurt the living infected
             var query = EntityQueryEnumerator<PendingZombieComponent, DamageableComponent, MobStateComponent>();
-            while (query.MoveNext(out var uid, out var comp, out var damage, out var mobState))
+            while (query.MoveNext(out var uid, out var comp, out var damage, out _))
             {
                 // Process only once per second
                 if (comp.NextTick > curTime)
                     continue;
 
-                comp.NextTick = curTime + TimeSpan.FromSeconds(1f);
+                comp.NextTick = curTime + PendingZombieTickInterval;
 
-                comp.GracePeriod -= TimeSpan.FromSeconds(1f);
                 if (comp.GracePeriod > TimeSpan.Zero)
-                    continue;
+                {
+                    comp.GracePeriod -= PendingZombieTickInterval;
+                    if (comp.GracePeriod > TimeSpan.Zero)
+                    {
+                        continue;
+                    }
 
-                if (_random.Prob(comp.InfectionWarningChance))
-                    _popup.PopupEntity(Loc.GetString(_random.Pick(comp.InfectionWarnings)), uid, uid);
+                    comp.GracePeriod = TimeSpan.Zero;
+                }
 
-                var multiplier = _mobState.IsCritical(uid, mobState)
-                    ? comp.CritDamageMultiplier
-                    : 1f;
+                // RW start
+                comp.ActiveDuration += PendingZombieTickInterval;
+                var seconds = comp.ActiveDuration.TotalSeconds;
 
-                _damageable.TryChangeDamage(uid,
-                    comp.Damage * multiplier,
-                    true,
-                    false,
-                    damage,
-                    targetPart: TargetBodyPart.All, // Shitmed Change
-                    splitDamage: SplitDamageBehavior.SplitEnsureAll); // Shitmed Change
+                var newStage = seconds >= PendingZombieStageFinalSeconds
+                    ? PendingZombieStageFinal
+                    : seconds >= PendingZombieStageSlowedSeconds
+                        ? PendingZombieStageSlowed
+                        : PendingZombieStagePale;
+
+                if (newStage != comp.CurrentStage)
+                {
+                    comp.CurrentStage = newStage;
+                    ApplyPendingZombieStage(uid, comp, newStage);
+                }
+                else if (comp.CurrentStage == PendingZombieStageSlowed)
+                {
+                    UpdatePendingZombieStageTwoAppearance(uid, comp, seconds);
+                }
+
+                Dirty(uid, comp);
+
+                if (comp.CurrentStage == PendingZombieStageFinal)
+                {
+                    if (seconds >= PendingZombieForcedTransformSeconds)
+                    {
+                        ZombifyEntity(uid);
+                        continue;
+                    }
+
+                    if (_mobThreshold.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold)
+                        && deadThreshold.HasValue)
+                    {
+                        var damageLeft = deadThreshold.Value - damage.TotalDamage;
+                        if (damageLeft > 0)
+                        {
+                            var timeLeft = PendingZombieDeathSeconds - seconds;
+                            if (timeLeft > 0)
+                            {
+                                var dmgTick = damageLeft.Float() / (float) timeLeft;
+                                var dmgSpec = new DamageSpecifier();
+                                dmgSpec.DamageDict.Add("Poison", dmgTick);
+                                _damageable.TryChangeDamage(uid, dmgSpec, true, false, damage, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+                            }
+                        }
+                    }
+                }
+                // RW end
             }
 
             // Heal the zombified
@@ -486,6 +570,11 @@ namespace Content.Server.Zombies
         {
             if (!_role.MindHasRole<ZombieRoleComponent>(args.Mind))
                 _role.MindAddRole(args.Mind, "MindRoleZombie", mind: args.Mind.Comp);
+
+            // RW start
+            if (_player.TryGetSessionById(args.Mind.Comp.UserId, out var session))
+                _eui.OpenEui(new ZombieRoleEui(), session);
+            // RW end
         }
 
         // Remove the role when getting cloned, getting gibbed and borged, or leaving the body via any other method.
@@ -523,5 +612,199 @@ namespace Content.Server.Zombies
         }
 
         #endregion
+
+        // RW start
+        private void OnPendingShutdown(EntityUid uid, PendingZombieComponent component, ComponentShutdown args)
+        {
+            if (TerminatingOrDeleted(uid) || HasComp<ZombieComponent>(uid))
+                return;
+
+            if (component.OriginalSkinColor is { } originalColor && TryComp<HumanoidAppearanceComponent>(uid, out var humanoid))
+            {
+                _humanoidAppearance.SetSkinColor(uid, originalColor, verify: false, humanoid: humanoid);
+            }
+
+            if (component.CurrentStage >= PendingZombieStageSlowed)
+                _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
+
+            if (component.CurrentStage >= PendingZombieStageFinal)
+                _language.UpdateEntityLanguages(uid);
+        }
+
+        private void OnPendingLanguageApply(EntityUid uid, PendingZombieComponent component, ref DetermineEntityLanguagesEvent args)
+        {
+            if (HasComp<ZombieComponent>(uid))
+                return;
+
+            if (component.CurrentStage == PendingZombieStageFinal)
+            {
+                args.SpokenLanguages.Remove(PendingZombieLanguage);
+                args.UnderstoodLanguages.Add(PendingZombieLanguage);
+            }
+        }
+
+        private void OnPendingAccentGet(EntityUid uid, PendingZombieComponent component, AccentGetEvent args)
+        {
+            if (HasComp<ZombieComponent>(uid))
+                return;
+
+            if (component.CurrentStage >= PendingZombieStageSlowed)
+            {
+                var message = args.Message;
+                var words = message.Split(' ');
+                var replacedAny = false;
+
+                for (var i = 0; i < words.Length; i++)
+                {
+                    if (string.IsNullOrWhiteSpace(words[i]))
+                        continue;
+
+                    if (_random.Prob(0.25f))
+                    {
+                        var groanKey = _random.Pick(PendingZombieGroans);
+                        words[i] = Loc.GetString(groanKey);
+                        replacedAny = true;
+                    }
+                }
+
+                if (replacedAny)
+                {
+                    message = string.Join(" ", words);
+                }
+
+                args.Message = Accentuate(message, 0.8f);
+            }
+        }
+
+        private void OnPendingHealthExamined(EntityUid uid, PendingZombieComponent component, ref HealthBeingExaminedEvent args)
+        {
+            if (component.CurrentStage == PendingZombieStagePale)
+            {
+                args.Message.PushNewline();
+                args.Message.AddMarkupOrThrow(Loc.GetString("bloodstream-component-looks-pale", ("target", uid)));
+            }
+            else if (component.CurrentStage == PendingZombieStageSlowed)
+            {
+                args.Message.PushNewline();
+                args.Message.AddMarkupOrThrow(Loc.GetString("zombie-infection-looks-greenish", ("target", uid)));
+            }
+        }
+
+        private void ApplyPendingZombieStage(EntityUid uid, PendingZombieComponent component, int newStage)
+        {
+            if (TryComp<HumanoidAppearanceComponent>(uid, out var humanoid))
+            {
+                component.OriginalSkinColor ??= humanoid.SkinColor;
+                var originalColor = component.OriginalSkinColor.Value;
+
+                var skinColor = newStage switch
+                {
+                    PendingZombieStagePale => Color.InterpolateBetween(originalColor, Color.White, 0.4f),
+                    PendingZombieStageSlowed => GetPendingZombieStageTwoSkinColor(component, 0),
+                    PendingZombieStageFinal => PendingZombieGreenSkin,
+                    _ => humanoid.SkinColor,
+                };
+
+                _humanoidAppearance.SetSkinColor(uid, skinColor, verify: false, humanoid: humanoid);
+            }
+
+            if (newStage == PendingZombieStagePale)
+            {
+                _popup.PopupEntity(Loc.GetString("zombie-infection-stage-pale"), uid, uid);
+            }
+            else if (newStage == PendingZombieStageSlowed)
+            {
+                _popup.PopupEntity(Loc.GetString("zombie-infection-stage-slowed"), uid, uid);
+                _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
+            }
+            else if (newStage == PendingZombieStageFinal)
+            {
+                _popup.PopupEntity(Loc.GetString("zombie-infection-stage-final"), uid, uid);
+                EnsureComp<LanguageSpeakerComponent>(uid);
+                _language.UpdateEntityLanguages(uid);
+            }
+        }
+
+        private void UpdatePendingZombieStageTwoAppearance(EntityUid uid, PendingZombieComponent component, double seconds)
+        {
+            if (!TryComp<HumanoidAppearanceComponent>(uid, out var humanoid))
+                return;
+
+            var stageProgress = Math.Clamp(
+                (seconds - PendingZombieStageSlowedSeconds) / (PendingZombieStageFinalSeconds - PendingZombieStageSlowedSeconds),
+                0,
+                1);
+
+            _humanoidAppearance.SetSkinColor(uid, GetPendingZombieStageTwoSkinColor(component, stageProgress), verify: false, humanoid: humanoid);
+        }
+
+        private Color GetPendingZombieStageTwoSkinColor(PendingZombieComponent component, double stageProgress)
+        {
+            var originalColor = component.OriginalSkinColor ?? Color.White;
+            var paleColor = Color.InterpolateBetween(originalColor, Color.White, 0.4f);
+            return Color.InterpolateBetween(paleColor, PendingZombieGreenSkin, (float) stageProgress);
+        }
+
+        private string Accentuate(string message, float scale)
+        {
+            var sb = new StringBuilder();
+
+            foreach (var character in message)
+            {
+                if (_random.Prob(scale / 3f))
+                {
+                    var lower = char.ToLowerInvariant(character);
+                    var newString = lower switch
+                    {
+                        'o' => "u",
+                        's' => "ch",
+                        'a' => "ah",
+                        'u' => "oo",
+                        'c' => "k",
+                        // Russian
+                        'о' => "у",
+                        'с' => "ш",
+                        'а' => "ах",
+                        'у' => "уу",
+                        'и' => "ы",
+                        'е' => "ээ",
+                        _ => $"{character}",
+                    };
+
+                    sb.Append(newString);
+                }
+
+                if (_random.Prob(scale / 20f))
+                {
+                    if (character == ' ')
+                    {
+                        sb.Append(Loc.GetString("slur-accent-confused"));
+                    }
+                    else if (character == '.')
+                    {
+                        sb.Append(' ');
+                        sb.Append(Loc.GetString("slur-accent-burp"));
+                    }
+                }
+
+                if (!_random.Prob(scale * 3 / 20))
+                {
+                    sb.Append(character);
+                    continue;
+                }
+
+                var next = _random.Next(1, 3) switch
+                {
+                    1 => "'",
+                    2 => $"{character}{character}",
+                    _ => $"{character}{character}{character}",
+                };
+
+                sb.Append(next);
+            }
+
+            return sb.ToString();
+        }
+        // RW end
     }
 }

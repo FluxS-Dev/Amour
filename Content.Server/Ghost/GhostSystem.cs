@@ -95,6 +95,7 @@ using Content.Server._Goobstation.Wizard.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
+using Content.Server._Amour.Gulag;
 using Content.Server.Ghost.Components;
 using Content.Server.Mind;
 using Content.Server.Preferences.Managers;
@@ -178,6 +179,7 @@ namespace Content.Server.Ghost
         [Dependency] private readonly GhostVisibilitySystem _ghostVisibility = default!;
         [Dependency] private readonly SharedBodySystem _bodySystem = default!; // Shitmed Change
         [Dependency] private readonly IServerPreferencesManager _prefs = default!; // Orion
+        [Dependency] private readonly GulagSystem _gulagSystem = default!; // RW
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -409,6 +411,11 @@ namespace Content.Server.Ghost
                 return;
             }
 
+            // RW start
+            if (_gulagSystem.IsUserGulagged(args.SenderSession.UserId))
+                return;
+            // RW end
+
             // Orion-Start
             var players = GetPlayerWarps();
             var places = GetLocationWarps();
@@ -427,6 +434,11 @@ namespace Content.Server.Ghost
                 Log.Warning($"User {args.SenderSession.Name} tried to warp to {msg.Target} without being a ghost.");
                 return;
             }
+
+            // RW start
+            if (_gulagSystem.IsUserGulagged(args.SenderSession.UserId))
+                return;
+            // RW end
 
             var target = GetEntity(msg.Target);
 
@@ -461,6 +473,11 @@ namespace Content.Server.Ghost
                 Log.Warning($"User {args.SenderSession.Name} tried to ghostnado without being a ghost.");
                 return;
             }
+
+            // RW start
+            if (_gulagSystem.IsUserGulagged(args.SenderSession.UserId))
+                return;
+            // RW end
 
             if (_followerSystem.GetMostGhostFollowed() is not { } target)
                 return;

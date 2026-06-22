@@ -386,3 +386,23 @@
   id: Brainrot77
   trigger: "[изоли; изольки]" # НЕ ТРОГАТЬ БЛЯТЬ, ПЕДАЛЬНЫЙ КОНСИЛИУМ (в голове куаморга) РЕШИЛ ЧТО ЭТО БРЕЙНРОТ, ЗНАЧИТ ЭТО БРЕЙНРОТ, ВОЗРАЖЕНИЯ ПРИНИМАЮТСЯ ТОЛЬКО В ФОРМЕ СОЧИНЕНИЯ, 300 СЛОВ МИНИМУМ, С АРГУМЕНТАМИ ТОГО, ЧТО ИЗОЛИ НЕ БРЕЙНРОТ. 
   description: brainrot-trigger-desc-generic
+
+- type: brainrotBotTrigger
+  id: Brainrot78
+  trigger: хай
+  description: brainrot-trigger-desc-generic
+
+- type: brainrotBotTrigger
+  id: Brainrot79
+  trigger: ку
+  description: brainrot-trigger-desc-generic
+
+- type: brainrotBotTrigger
+  id: Brainrot80
+  trigger: дек
+  description: brainrot-trigger-desc-generic
+
+- type: brainrotBotTrigger
+  id: Brainrot81
+  trigger: вард
+  description: brainrot-trigger-desc-generic

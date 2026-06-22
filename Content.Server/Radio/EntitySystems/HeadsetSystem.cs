@@ -18,6 +18,7 @@ using Content.Server._EinsteinEngines.Language;
 using Content.Server.Chat.Systems;
 using Content.Server.Emp;
 using Content.Server.Radio.Components;
+using Content.Shared._Orion.Radio;
 using Content.Shared.Chat;
 using Content.Shared.Examine;
 using Content.Shared.Inventory;
@@ -26,6 +27,8 @@ using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -183,9 +186,6 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
                 args.Channel,
                 headsetEntity.Value
             );
-
-            args.Channel = null;
-            break;
         }
     }
     // Orion-End
@@ -222,6 +222,12 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         }
     }
 
+    // Orion-Start: Radio sound
+
+    private static readonly SoundSpecifier DefaultOnSound =
+        new SoundPathSpecifier("/Audio/_Orion/Radio/basic.ogg");
+
+    // Orion-End
     private void OnHeadsetReceive(EntityUid uid, HeadsetComponent component, ref RadioReceiveEvent args)
     {
         // Einstein Engines - Language begin
@@ -241,6 +247,22 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
                 Message = canUnderstand ? args.OriginalChatMsg : args.LanguageObfuscatedChatMsg
             };
             _netMan.ServerSendMessage(msg, actor.PlayerSession.Channel);
+
+            // Orion-Start
+            var sound = args.Channel.OnSendSound ?? DefaultOnSound;
+            if (sound is SoundPathSpecifier sps)
+            {
+                RaiseNetworkEvent(new PlayRadioBarkEvent
+                {
+                    Path = sps.Path.ToString(),
+                    Params = sps.Params,
+                }, actor.PlayerSession.Channel);
+            }
+            else if (sound is SoundCollectionSpecifier)
+            {
+                Log.Warning($"Radio channel {args.Channel.ID} uses SoundCollectionSpecifier, which is not supported for PlayRadioBarkEvent. Falling back to silent playback.");
+            }
+            // Orion-End
         }
         // Einstein Engines - Language end
     }

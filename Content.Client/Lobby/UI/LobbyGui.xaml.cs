@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2022 Jesse Rougeau <jmaster9999@gmail.com>
 // SPDX-FileCopyrightText: 2022 ZeroDayDaemon <60460608+ZeroDayDaemon@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Flipp Syder <76629141+vulppine@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2023 Flipp Syder <76629141+vulppine@vulppine.dev>
 // SPDX-FileCopyrightText: 2024 12rabbits <53499656+12rabbits@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 Alzore <140123969+Blackern5000@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 ArtisticRoomba <145879011+ArtisticRoomba@users.noreply.github.com>
@@ -81,17 +81,6 @@ namespace Content.Client.Lobby.UI
 
             CollapseButton.OnPressed += _ => TogglePanel(false);
             ExpandButton.OnPressed += _ => TogglePanel(true);
-
-            // Orion-Start
-            LeftCollapseButton.OnPressed += _ => ToggleLeftPanel(false);
-            LeftExpandButton.OnPressed += _ => ToggleLeftPanel(true);
-
-            TopCollapseButton.OnPressed += _ => ToggleTopPanel(false);
-            TopExpandButton.OnPressed += _ => ToggleTopPanel(true);
-
-            AttributionCollapseButton.OnPressed += _ => ToggleAttributionPanel(false);
-            AttributionExpandButton.OnPressed += _ => ToggleAttributionPanel(true);
-            // Orion-End
         }
 
         public void SwitchState(LobbyGuiState state)
@@ -104,26 +93,17 @@ namespace Content.Client.Lobby.UI
                 case LobbyGuiState.Default:
                     DefaultState.Visible = true;
                     RightSide.Visible = true;
-                    // Orion-Start
-                    LeftSide.HorizontalExpand = false;
-                    LayoutSpacer.Visible = true;
-                    ExpandPanel.Visible = false;
-                    TopPanel.Visible = true;
-                    TopExpandPanel.Visible = false;
-                    LeftInfoPanel.Visible = true;
-                    LeftExpandPanel.Visible = false;
-                    AttributionPanel.Visible = false;
-                    AttributionExpandPanel.Visible = true;
-                    // Orion-End
                     break;
                 case LobbyGuiState.CharacterSetup:
                     CharacterSetupState.Visible = true;
 
-                    // Orion-Edit-Start
-                    LeftSide.HorizontalExpand = true;
-                    LayoutSpacer.Visible = false;
-                    RightSide.Visible = false;
-                    // Orion-Edit-End
+                    var actualWidth = (float) UserInterfaceManager.RootControl.PixelWidth;
+                    var setupWidth = (float) LeftSide.PixelWidth;
+
+                    if (1 - (setupWidth / actualWidth) > 0.30)
+                    {
+                        RightSide.Visible = false;
+                    }
 
                     UserInterfaceManager.GetUIController<LobbyUIController>().ReloadCharacterSetup();
 
@@ -137,26 +117,6 @@ namespace Content.Client.Lobby.UI
             ExpandPanel.Visible = !value;
         }
 
-        // Orion-Start
-        private void ToggleLeftPanel(bool value)
-        {
-            LeftInfoPanel.Visible = value;
-            LeftExpandPanel.Visible = !value;
-        }
-
-        private void ToggleTopPanel(bool value)
-        {
-            TopPanel.Visible = value;
-            TopExpandPanel.Visible = !value;
-        }
-
-        private void ToggleAttributionPanel(bool value)
-        {
-            AttributionPanel.Visible = value;
-            AttributionExpandPanel.Visible = !value;
-        }
-        // Orion-End
-
         public enum LobbyGuiState : byte
         {
             /// <summary>
@@ -166,7 +126,7 @@ namespace Content.Client.Lobby.UI
             /// <summary>
             ///  The character setup state.
             /// </summary>
-            CharacterSetup,
+            CharacterSetup
         }
     }
 }

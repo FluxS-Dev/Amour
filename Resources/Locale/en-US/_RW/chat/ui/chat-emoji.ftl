@@ -1,0 +1,12 @@
+hud-chatbox-emoji-button-tooltip = Emoji picker
+hud-chatbox-emoji-preview = {$emoji} :{$alias}:
+hud-chatbox-emoji-preview-empty = Pick an emoji
+hud-chatbox-emoji-category-custom = Custom
+hud-chatbox-emoji-category-smileys = Smileys & People
+hud-chatbox-emoji-category-nature = Nature
+hud-chatbox-emoji-category-food = Food & Drink
+hud-chatbox-emoji-category-activities = Activities
+hud-chatbox-emoji-category-travel = Travel
+hud-chatbox-emoji-category-objects = Objects
+hud-chatbox-emoji-category-symbols = Symbols
+hud-chatbox-emoji-category-flags = Flags

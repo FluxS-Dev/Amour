@@ -47,6 +47,7 @@ using Content.Goobstation.Shared.Changeling;
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Changeling.Systems;
+using Content.Shared._Starlight.CollectiveMind;
 using Content.Goobstation.Shared.Flashbang;
 using Content.Goobstation.Shared.GrabIntent;
 using Content.Goobstation.Shared.InternalResources.Data;
@@ -121,6 +122,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IRobustRandom _rand = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private readonly ActionContainerSystem _actionContainer = default!; // RW
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
@@ -203,7 +205,15 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     }
 
     private void OnPolymorphed(Entity<ChangelingIdentityComponent> ent, ref PolymorphedEvent args)
-        => _polymorph.CopyPolymorphComponent<ChangelingIdentityComponent>(ent, args.NewEntity);
+    {
+        _polymorph.CopyPolymorphComponent<ChangelingIdentityComponent>(ent, args.NewEntity);
+        // RW start
+        if (HasComp<HivemindComponent>(ent))
+            _polymorph.CopyPolymorphComponent<HivemindComponent>(ent, args.NewEntity);
+        if (HasComp<CollectiveMindComponent>(ent))
+            _polymorph.CopyPolymorphComponent<CollectiveMindComponent>(ent, args.NewEntity);
+        // RW end
+    }
 
     private void OnPolymorphedTakeTwo(Entity<ChangelingComponent> ent, ref PolymorphedEvent args)
         => _polymorph.CopyPolymorphComponent<ChangelingComponent>(ent, args.NewEntity);
@@ -757,6 +767,13 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         // make their blood unreal
         _blood.ChangeBloodReagent(ent.Owner, "BloodChangeling");
+
+        // RW start
+        EnsureComp<HivemindComponent>(ent);
+        var mind = EnsureComp<CollectiveMindComponent>(ent);
+        mind.Channels.Add(HivemindProto);
+        mind.CanUseInCrit = true;
+        // RW end
     }
 
     // in the future ChangelingIdentity should have its own system and be ONLY used for holding stored DNA and handling transformations.

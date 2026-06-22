@@ -36,7 +36,6 @@
   - FoodPlateTin
   - FoodPlateMuffinTin
   - FoodKebabSkewer
-  - DocumentPrinterMachineCircuitboard # Orion
   - LightReplacer
   - SprayBottle
   - TrashBag
@@ -56,6 +55,8 @@
   - ElectricGrillMachineCircuitboard
   - BoozeDispenserMachineCircuitboard
   - SodaDispenserMachineCircuitboard
+  - SauceDispenserMachineCircuitboard  # Reserve: Orchid's Barmania - Vendichaos
+  - DocumentPrinterMachineCircuitboard # Orion
 
 ## Dynamic
 

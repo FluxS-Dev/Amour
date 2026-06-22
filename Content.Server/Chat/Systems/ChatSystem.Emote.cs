@@ -34,6 +34,7 @@ using Content.Shared.Speech;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Server.Chat.Systems;
 
@@ -41,8 +42,13 @@ namespace Content.Server.Chat.Systems;
 public partial class ChatSystem
 {
     [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private FrozenDictionary<string, EmotePrototype> _wordEmoteDict = FrozenDictionary<string, EmotePrototype>.Empty;
+    // RW start
+    private static readonly TimeSpan SameEmoteCooldown = TimeSpan.FromSeconds(3);
+    private readonly Dictionary<(EntityUid Source, ProtoId<EmotePrototype> Emote), TimeSpan> _lastVoluntaryEmoteTimes = new();
+    // RW end
 
     protected override void OnPrototypeReload(PrototypesReloadedEventArgs obj)
     {
@@ -278,6 +284,15 @@ public partial class ChatSystem
     /// <returns>True if the emote was performed, false otherwise.</returns>
     private bool TryInvokeEmoteEvent(EntityUid uid, EmotePrototype proto, bool voluntary = false)
     {
+        // RW start
+        var emoteId = new ProtoId<EmotePrototype>(proto.ID);
+        if (voluntary && TryGetSameEmoteCooldown(uid, emoteId, out var seconds))
+        {
+            PopupSameEmoteCooldown(uid, seconds);
+            return false;
+        }
+        // RW end
+
         var beforeEv = new BeforeEmoteEvent(uid, proto);
         RaiseLocalEvent(uid, ref beforeEv);
 
@@ -308,11 +323,44 @@ public partial class ChatSystem
             return false;
         }
 
+        // RW start
+        if (voluntary)
+            _lastVoluntaryEmoteTimes[(uid, emoteId)] = _gameTiming.CurTime;
+        // RW end
+
         var ev = new EmoteEvent(proto, voluntary);
         RaiseLocalEvent(uid, ref ev);
 
         return true;
     }
+
+    // RW start
+    private bool TryGetSameEmoteCooldown(EntityUid uid, ProtoId<EmotePrototype> emoteId, out int seconds)
+    {
+        seconds = 0;
+        var key = (uid, emoteId);
+        if (!_lastVoluntaryEmoteTimes.TryGetValue(key, out var lastEmoteTime))
+            return false;
+
+        var remaining = lastEmoteTime + SameEmoteCooldown - _gameTiming.CurTime;
+        if (remaining > TimeSpan.Zero)
+        {
+            seconds = Math.Max(1, (int) Math.Ceiling(remaining.TotalSeconds));
+            return true;
+        }
+
+        _lastVoluntaryEmoteTimes.Remove(key);
+        return false;
+    }
+
+    private void PopupSameEmoteCooldown(EntityUid uid, int seconds)
+    {
+        _popupSystem.PopupEntity(
+            Loc.GetString("chat-system-emote-cooldown", ("seconds", seconds)),
+            uid,
+            uid);
+    }
+    // RW end
 }
 
 /// <summary>

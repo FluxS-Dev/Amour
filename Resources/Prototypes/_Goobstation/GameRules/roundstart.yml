@@ -56,9 +56,10 @@
   - type: AntagObjectives
     objectives:
     - ChangelingSurviveObjective
-    - ChangelingStealDNAObjective
+    # - ChangelingStealDNAObjective RW off
     - ChangelingAbsorbObjective
     - EscapeIdentityObjective
+    - ChangelingEvolutionaryApexObjective # RW
   - type: AntagSelection
     selectionTime: IntraPlayerSpawn
     agentName: changeling-roundend-name

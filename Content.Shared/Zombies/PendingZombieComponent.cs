@@ -25,7 +25,7 @@ namespace Content.Shared.Zombies;
 /// <summary>
 /// Temporary because diseases suck.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState] // RW
 public sealed partial class PendingZombieComponent : Component
 {
     /// <summary>
@@ -48,23 +48,43 @@ public sealed partial class PendingZombieComponent : Component
     [DataField("nextTick", customTypeSerializer:typeof(TimeOffsetSerializer))]
     public TimeSpan NextTick;
 
+    // RW start
+    // /// <summary>
+    // /// The amount of time left before the infected begins to take damage.
+    // /// </summary>
+    // [DataField("gracePeriod"), ViewVariables(VVAccess.ReadWrite)]
+    // public TimeSpan GracePeriod = TimeSpan.Zero;
+    //
+    // /// <summary>
+    // /// The minimum amount of time initial infected have before they start taking infection damage.
+    // /// </summary>
+    // [DataField]
+    // public TimeSpan MinInitialInfectedGrace = TimeSpan.FromMinutes(1.0f); ///Goobchange
+    //
+    // /// <summary>
+    // /// The maximum amount of time initial infected have before they start taking damage.
+    // /// </summary>
+    // [DataField]
+    // public TimeSpan MaxInitialInfectedGrace = TimeSpan.FromMinutes(2.0f); ///Goobchange
+
     /// <summary>
-    /// The amount of time left before the infected begins to take damage.
+    /// The amount of time left before active infection symptoms begin.
     /// </summary>
     [DataField("gracePeriod"), ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan GracePeriod = TimeSpan.Zero;
+    public TimeSpan GracePeriod = TimeSpan.FromMinutes(1);
 
     /// <summary>
-    /// The minimum amount of time initial infected have before they start taking infection damage.
+    /// The minimum amount of time initial infected have before active infection symptoms begin.
     /// </summary>
     [DataField]
-    public TimeSpan MinInitialInfectedGrace = TimeSpan.FromMinutes(1.0f); ///Goobchange
+    public TimeSpan MinInitialInfectedGrace = TimeSpan.FromMinutes(1); ///Goobchange
 
     /// <summary>
-    /// The maximum amount of time initial infected have before they start taking damage.
+    /// The maximum amount of time initial infected have before active infection symptoms begin.
     /// </summary>
     [DataField]
-    public TimeSpan MaxInitialInfectedGrace = TimeSpan.FromMinutes(2.0f); ///Goobchange
+    public TimeSpan MaxInitialInfectedGrace = TimeSpan.FromMinutes(1); ///Goobchange
+    // RW end
 
     /// <summary>
     /// The chance each second that a warning will be shown.
@@ -81,4 +101,22 @@ public sealed partial class PendingZombieComponent : Component
         "zombie-infection-warning",
         "zombie-infection-underway"
     };
+
+    // RW start
+    public const int PendingZombieStagePale = 1;
+    public const int PendingZombieStageSlowed = 2;
+    public const int PendingZombieStageFinal = 3;
+
+    [DataField("activeDuration"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public TimeSpan ActiveDuration = TimeSpan.Zero;
+
+    [DataField("originalSkinColor"), ViewVariables(VVAccess.ReadWrite)]
+    public Color? OriginalSkinColor;
+
+    [DataField("currentStage"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public int CurrentStage = 0;
+
+    [DataField("speedModifier"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public float SpeedModifier = 0.8f;
+    // RW end
 }

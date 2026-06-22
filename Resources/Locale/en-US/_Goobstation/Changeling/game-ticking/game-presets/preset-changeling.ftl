@@ -22,6 +22,7 @@ changeling-role-greeting =
     You are a changeling who has absorbed and taken the form of {$name}!
     Your objectives are listed in the character menu.
     Absorb, shapeshift and evolve to complete them!
+    To communicate with the hivemind, send messages with the prefix +г (e.g. +г hello).
 
 changeling-role-greeting-short =
     You are a changeling who has absorbed and taken the initial form of {$name}.

@@ -18,18 +18,15 @@ using Content.Client.Stylesheets;
 using Content.Shared.Chat;
 using Content.Shared.Input;
 using Robust.Client.UserInterface.Controls;
-using Content.Client._Amour.Stickers.UI;
-using Content.Shared.Chat;
 
 namespace Content.Client.UserInterface.Systems.Chat.Controls;
 
 [Virtual]
-public class ChatInputBox : PanelContainer
+public partial class ChatInputBox : PanelContainer // RW
 {
     public readonly ChannelSelectorButton ChannelSelector;
     public readonly HistoryLineEdit Input;
     public readonly ChannelFilterButton FilterButton;
-    public readonly StickerButton StickerButton;
     protected readonly BoxContainer Container;
     protected ChatChannel ActiveChannel { get; private set; } = ChatChannel.Local;
 
@@ -59,21 +56,7 @@ public class ChatInputBox : PanelContainer
         };
         Container.AddChild(Input);
 
-        // Amour edit start
-        StickerButton = new StickerButton
-        {
-            Name = "StickerButton",
-            Visible = false,
-            StyleClasses = {"chatSelectorOptionButton"}
-        };
-        StickerButton.OnStickerSelected += sticker => 
-        {
-            // Insert sticker if in OOC or Admin channels
-            if (ActiveChannel == ChatChannel.OOC || ActiveChannel == ChatChannel.Admin || ActiveChannel == ChatChannel.AdminChat)
-                StickerInputHelper.InsertSticker(Input, sticker);
-        };
-        Container.AddChild(StickerButton);
-        // Amour edit end
+        InitializeEmojiPicker(); // RW
 
         FilterButton = new ChannelFilterButton
         {
@@ -88,8 +71,6 @@ public class ChatInputBox : PanelContainer
     private void UpdateActiveChannel(ChatSelectChannel selectedChannel)
     {
         ActiveChannel = (ChatChannel) selectedChannel;
-        // Amour edit: Stickers are available in OOC and Admin chat
-        StickerButton.Visible = (ActiveChannel == ChatChannel.OOC || ActiveChannel == ChatChannel.Admin || ActiveChannel == ChatChannel.AdminChat);
     }
 
     private static string GetChatboxInfoPlaceholder()

@@ -868,8 +868,8 @@
       min: 0
       max: 2
   - type: XAEApplyComponents
-    applyIfAlreadyHave: true
-    refreshOnReactivate: true
+    applyIfAlreadyHave: false # RW: true > false
+    refreshOnReactivate: false # RW: true > false
     components:
     - type: EntityTableSpawner
       deleteSpawnerAfterSpawn: false

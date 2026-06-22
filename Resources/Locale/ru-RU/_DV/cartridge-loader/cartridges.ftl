@@ -146,8 +146,8 @@ mail-metrics-progress-percent = Успешность: { $successRate }%
 ## NanoChat
 
 # General
-nano-chat-program-name = НаноМакс
-nano-chat-title = НаноМакс
+nano-chat-program-name = НаноЧат
+nano-chat-title = НаноЧат
 nano-chat-new-chat = Новый чат
 nano-chat-contacts = КОНТАКТЫ
 nano-chat-no-chats = Нет активных чатов
@@ -176,9 +176,9 @@ nano-chat-job-placeholder = Введите должность (опционал�
 nano-chat-cancel = Отмена
 nano-chat-create = Создать
 # LogProbe additions
-log-probe-scan-nanochat = Просканированы логи НаноМакс { $card }
+log-probe-scan-nanochat = Просканированы логи НаноЧат { $card }
 log-probe-header-access = Доступ сканера логов
-log-probe-header-nanochat = Сканер логов НаноМакс
+log-probe-header-nanochat = Сканер логов НаноЧат
 log-probe-label-message = Сообщение
 log-probe-card-number = Карта: { $number }
 log-probe-recipients = { $count } Получателей

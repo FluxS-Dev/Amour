@@ -34,7 +34,6 @@ using Robust.Shared.Utility;
 
 // Shitmed Change
 using System.Linq;
-using Content.Shared._Orion.Localizations;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Localizations;
@@ -172,7 +171,7 @@ public abstract class SharedArmorSystem : EntitySystem
             {
                 // Orion-Start
                 var protectionPercent = (1f - coefficientArmor.Value) * 100f;
-                var rounded = (int) MathF.Round(MathF.Abs(protectionPercent) / 10f);
+                var rounded = (int) MathF.Round(protectionPercent); // RW revert roman
 
                 if (rounded == 0)
                     continue;
@@ -180,13 +179,16 @@ public abstract class SharedArmorSystem : EntitySystem
 
                 // Orion-Edit-Start
                 msg.PushNewline();
+                /*
                 var armorType = Loc.GetString("armor-damage-type-class-" + coefficientArmor.Key.ToLower());
                 var sign = protectionPercent < 0f ? "-" : string.Empty;
                 var roman = RomanNumerals.ToRoman(rounded);
+                */
+                var armorType = Loc.GetString("armor-damage-type-" + coefficientArmor.Key.ToLower()); // RW armor-damage-type-class- -> armor-damage-type-
 
-                msg.AddMarkupOrThrow(Loc.GetString("armor-coefficient-class-value",
+                msg.AddMarkupOrThrow(Loc.GetString("armor-coefficient-value", // RW armor-coefficient-class-value > armor-coefficient-value
                     ("type", armorType),
-                    ("class", $"{sign}{roman}"))
+                    ("value", rounded)) // RW "class", $"{sign}{roman}" > "value", rounded
                 );
                 // Orion-Edit-End
             }

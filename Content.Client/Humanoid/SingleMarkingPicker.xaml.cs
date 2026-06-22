@@ -15,6 +15,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
+using Robust.Shared.Utility;
 
 namespace Content.Client.Humanoid;
 
@@ -49,6 +50,17 @@ public sealed partial class SingleMarkingPicker : BoxContainer
     ///     Sends a 'slot' number, and the marking in question.
     /// </summary>
     public Action<(int slot, Marking marking)>? OnColorChanged;
+
+    // RW start
+    [Robust.Shared.ViewVariables.ViewVariables(Robust.Shared.ViewVariables.VVAccess.ReadWrite)]
+    public bool ShowGradient { get; set; } = true;
+
+    private bool _currentUseGradient;
+    private float _currentGradientPosition;
+    private float _currentGradientBlur;
+    private List<Color> _currentSecondaryColors = new();
+    private List<BoxContainer> _currentGradientContainers = new();
+    // RW end
 
     // current selected slot
     private int _slot = -1;
@@ -245,6 +257,7 @@ public sealed partial class SingleMarkingPicker : BoxContainer
         }
     }
 
+    // RW start
     private void PopulateColors()
     {
         if (_markings == null
@@ -264,25 +277,215 @@ public sealed partial class SingleMarkingPicker : BoxContainer
             marking = new Marking(marking.MarkingId, proto.Sprites.Count);
         }
 
+        var supportsGradient = ShowGradient && MarkingSupportsGradient(proto); // RW
+        _currentUseGradient = supportsGradient && marking.UseGradient;
+        _currentGradientPosition = Marking.ClampGradientPosition(marking.GradientPosition);
+        _currentGradientBlur = Marking.ClampGradientBlur(marking.GradientBlur);
+
+        _currentSecondaryColors.Clear();
+        _currentGradientContainers.Clear();
+
+        if (supportsGradient)
+        {
+            var gradientToggleContainer = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+            };
+            var gradientCheck = new CheckBox
+            {
+                Text = Loc.GetString("marking-gradient-toggle"),
+                Pressed = _currentUseGradient,
+            };
+            gradientCheck.OnToggled += args =>
+            {
+                _currentUseGradient = args.Pressed;
+                foreach (var c in _currentGradientContainers)
+                    c.Visible = _currentUseGradient;
+
+                ApplyCurrentGradient(marking);
+                _markings[Slot] = marking;
+                OnColorChanged!((_slot, marking));
+            };
+            gradientToggleContainer.AddChild(gradientCheck);
+            ColorSelectorContainer.AddChild(gradientToggleContainer);
+        }
+
+        var stateNames = GetMarkingStateNames(proto);
+
         for (var i = 0; i < marking.MarkingColors.Count; i++)
         {
+            var colorContainer = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                HorizontalExpand = true
+            };
+            ColorSelectorContainer.AddChild(colorContainer);
+
             var selector = new ColorSelectorSliders
             {
                 HorizontalExpand = true
             };
             selector.Color = marking.MarkingColors[i];
-            selector.SelectorType = ColorSelectorSliders.ColorSelectorType.Hsv; // defaults color selector to HSV
+            selector.SelectorType = ColorSelectorSliders.ColorSelectorType.Hsv;
+
+            colorContainer.AddChild(new Label { Text = $"{stateNames[i]} color:" });
+            colorContainer.AddChild(selector);
 
             var colorIndex = i;
             selector.OnColorChanged += color =>
             {
                 marking.SetColor(colorIndex, color);
+                ApplyCurrentGradient(marking);
+                _markings[Slot] = marking;
                 OnColorChanged!((_slot, marking));
             };
 
-            ColorSelectorContainer.AddChild(selector);
+            var secondarySource = marking.SecondaryMarkingColors;
+            var secondaryStart = secondarySource != null && i < secondarySource.Count
+                ? ToSelectorColor(secondarySource[i])
+                : ToSelectorColor(marking.MarkingColors[i]);
+            while (_currentSecondaryColors.Count <= i)
+                _currentSecondaryColors.Add(secondaryStart);
+            _currentSecondaryColors[i] = secondaryStart;
+        }
+
+        if (supportsGradient)
+        {
+            AddGradientEditor(marking, proto, stateNames);
         }
     }
+
+    private static bool MarkingSupportsGradient(MarkingPrototype marking) =>
+        marking.SupportsGradient ||
+        marking.MarkingCategory is MarkingCategories.Hair or MarkingCategories.FacialHair;
+
+    private static Color ToSelectorColor(Color color) => new(color.RByte, color.GByte, color.BByte);
+
+    private List<string> GetMarkingStateNames(MarkingPrototype marking)
+    {
+        var stateNames = new List<string>();
+        foreach (var sprite in marking.Sprites)
+        {
+            switch (sprite)
+            {
+                case SpriteSpecifier.Rsi rsi:
+                    stateNames.Add(rsi.RsiState);
+                    break;
+                case SpriteSpecifier.Texture texture:
+                    stateNames.Add(texture.TexturePath.Filename);
+                    break;
+                default:
+                    stateNames.Add(Loc.GetString("marking-unknown-state"));
+                    break;
+            }
+        }
+        return stateNames;
+    }
+
+    private void AddGradientEditor(Marking marking, MarkingPrototype prototype, IReadOnlyList<string> stateNames)
+    {
+        var editor = new BoxContainer
+        {
+            Orientation = LayoutOrientation.Vertical,
+            Visible = _currentUseGradient,
+            HorizontalExpand = true
+        };
+        _currentGradientContainers.Add(editor);
+        ColorSelectorContainer.AddChild(editor);
+
+        editor.AddChild(BuildGradientSliderRow(
+            "marking-gradient-position",
+            0,
+            100,
+            Math.Clamp((int) MathF.Round(Marking.ClampGradientPosition(_currentGradientPosition) * 100f), 0, 100),
+            value =>
+            {
+                _currentGradientPosition = value / 100f;
+                ApplyCurrentGradient(marking);
+                _markings![Slot] = marking;
+                OnColorChanged!((_slot, marking));
+            }));
+        editor.AddChild(BuildGradientSliderRow(
+            "marking-gradient-blur",
+            10,
+            100,
+            Math.Clamp((int) MathF.Round(Marking.ClampGradientBlur(_currentGradientBlur) * 100f), 10, 100),
+            value =>
+            {
+                _currentGradientBlur = value / 100f;
+                ApplyCurrentGradient(marking);
+                _markings![Slot] = marking;
+                OnColorChanged!((_slot, marking));
+            }));
+        AddGradientColorControls(editor, marking, prototype, stateNames);
+    }
+
+    private BoxContainer BuildGradientSliderRow(
+        string labelId,
+        int minimum,
+        int maximum,
+        int value,
+        Action<int> onValueChanged)
+    {
+        var row = new BoxContainer
+        {
+            Orientation = LayoutOrientation.Horizontal,
+            HorizontalExpand = true
+        };
+        row.AddChild(new Label { Text = Loc.GetString(labelId) });
+
+        var slider = new SliderIntInput
+        {
+            MinValue = minimum,
+            MaxValue = maximum,
+            Value = Math.Clamp(value, minimum, maximum),
+            HorizontalExpand = true,
+        };
+        slider.OnValueChanged += onValueChanged;
+        row.AddChild(slider);
+        return row;
+    }
+
+    private void AddGradientColorControls(
+        BoxContainer editor,
+        Marking marking,
+        MarkingPrototype prototype,
+        IReadOnlyList<string> stateNames)
+    {
+        for (var colorIndex = 0; colorIndex < prototype.Sprites.Count; colorIndex++)
+        {
+            var layerIndex = colorIndex;
+            var selector = new ColorSelectorSliders
+            {
+                SelectorType = ColorSelectorSliders.ColorSelectorType.Hsv,
+                Color = ToSelectorColor(_currentSecondaryColors[layerIndex]),
+                HorizontalExpand = true
+            };
+            var label = layerIndex >= stateNames.Count
+                ? Loc.GetString("marking-gradient-color")
+                : Loc.GetString("marking-gradient-layer-color", ("layer", stateNames[layerIndex]));
+
+            editor.AddChild(new Label { Text = label });
+            editor.AddChild(selector);
+            selector.OnColorChanged += _ =>
+            {
+                _currentSecondaryColors[layerIndex] = selector.Color;
+                ApplyCurrentGradient(marking);
+                _markings![Slot] = marking;
+                OnColorChanged!((_slot, marking));
+            };
+        }
+    }
+
+    private void ApplyCurrentGradient(Marking marking)
+    {
+        marking.UseGradient = _currentUseGradient;
+        marking.GradientPosition = Marking.ClampGradientPosition(_currentGradientPosition);
+        marking.GradientBlur = Marking.ClampGradientBlur(_currentGradientBlur);
+        for (var i = 0; i < _currentSecondaryColors.Count; i++)
+            marking.SetGradientColor(i, _currentSecondaryColors[i]);
+    }
+    // RW end
 
     private void SelectMarking(ItemList.ItemListSelectedEventArgs args)
     {
@@ -304,6 +507,19 @@ public sealed partial class SingleMarkingPicker : BoxContainer
         {
             _markings[Slot].SetColor(i, oldMarking.MarkingColors[i]);
         }
+
+        // RW start
+        _markings[Slot].UseGradient = oldMarking.UseGradient;
+        _markings[Slot].GradientPosition = oldMarking.GradientPosition;
+        _markings[Slot].GradientBlur = oldMarking.GradientBlur;
+        if (oldMarking.SecondaryMarkingColors != null)
+        {
+            for (var i = 0; i < _markings[Slot].MarkingColors.Count && i < oldMarking.SecondaryMarkingColors.Count; i++)
+            {
+                _markings[Slot].SetGradientColor(i, oldMarking.SecondaryMarkingColors[i]);
+            }
+        }
+        // RW end
 
         PopulateColors();
 

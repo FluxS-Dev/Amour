@@ -1,4 +1,4 @@
-ent-DrinkCanBaseFull = { ent-BaseItem }
+ent-DrinkCanBaseFull = can
     .desc = { ent-BaseItem.desc }
 ent-DrinkColaCan = Space Cola can
     .desc = A sweet, carbonated soft drink.

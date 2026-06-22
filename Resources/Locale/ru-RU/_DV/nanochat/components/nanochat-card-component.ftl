@@ -8,8 +8,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Examine
-nanochat-card-examine-no-number = На карте НаноМакс ещё нет назначенного номера.
-nanochat-card-examine-number = На карте НаноМакс отображается #{ $number }.
+nanochat-card-examine-no-number = На карте НаноЧат ещё нет назначенного номера.
+nanochat-card-examine-number = На карте НаноЧат отображается #{ $number }.
 # Microwave interactions
 nanochat-card-microwave-erased = { $card } пищит, и все сообщения стираются!
 nanochat-card-microwave-scrambled = { $card } потрескивает, пока её сообщения искажаются!

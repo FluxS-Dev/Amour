@@ -19,6 +19,9 @@ public abstract class SharedZombieSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ZombieComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
+        // RW start
+        SubscribeLocalEvent<PendingZombieComponent, RefreshMovementSpeedModifiersEvent>(OnPendingRefreshSpeed);
+        // RW end
         SubscribeLocalEvent<ZombieComponent, RefreshNameModifiersEvent>(OnRefreshNameModifiers);
         SubscribeLocalEvent<ZombificationResistanceComponent, ArmorExamineEvent>(OnArmorExamine);
         SubscribeLocalEvent<ZombificationResistanceComponent, InventoryRelayedEvent<ZombificationResistanceQueryEvent>>(OnResistanceQuery);
@@ -45,6 +48,17 @@ public abstract class SharedZombieSystem : EntitySystem
         var mod = component.ZombieMovementSpeedDebuff;
         args.ModifySpeed(mod, mod);
     }
+
+    // RW start
+    private void OnPendingRefreshSpeed(EntityUid uid, PendingZombieComponent component, RefreshMovementSpeedModifiersEvent args)
+    {
+        if (component.CurrentStage >= PendingZombieComponent.PendingZombieStageSlowed)
+        {
+            var mod = component.SpeedModifier;
+            args.ModifySpeed(mod, mod);
+        }
+    }
+    // RW end
 
     private void OnRefreshNameModifiers(Entity<ZombieComponent> entity, ref RefreshNameModifiersEvent args)
     {

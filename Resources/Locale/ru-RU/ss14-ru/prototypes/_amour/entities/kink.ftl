@@ -1,10 +1,3 @@
-advertisement-kink-1 = Ох~~ во мне столько... товара!
-advertisement-kink-2 = Я очень.. надеюсь что тебе.. что то.. понравилось~
-kink-machine-thanks-1 = Спасибо за покупку.. сэмпай~~
-
-ent-VendingMachineKink = Kink'o'Mat
-    .desc = Вендомат для всех ваших невыразимых желаний.
-
 ent-DildoHuman = дилдо
     .desc = Дилдо издаёт жужжащие звуки.
 ent-DildoAvian = дилдо (птичье)

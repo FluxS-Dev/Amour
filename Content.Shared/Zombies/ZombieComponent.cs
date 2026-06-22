@@ -123,8 +123,54 @@ public sealed partial class ZombieComponent : Component
     ///     language that bypasses accent filter, and it prevents them from understanding everything
     ///     else while being zombified.
     /// </remarks>
+    // RW start
     [DataField]
-    public ProtoId<LanguagePrototype> ForcedLanguage = "Xeno"; // Xeno until we make a zombie/ignorant language that is unobtainable.
+    // public ProtoId<LanguagePrototype> ForcedLanguage = "Xeno"; // Xeno until we make a zombie/ignorant language that is unobtainable.
+    public ProtoId<LanguagePrototype> ForcedLanguage = "Zombie";
+
+    /// <summary>
+    ///     Maximum amount of non-whitespace characters a zombie can say in normal speech.
+    /// </summary>
+    [DataField]
+    public int MaxSpeakCharacters = 14;
+
+    /// <summary>
+    ///     Words that do not count towards <see cref="MaxSpeakCharacters"/>.
+    /// </summary>
+    [DataField]
+    public List<string> SpeakLimitIgnoredWords = new()
+    {
+        "brains",
+        "\u043c\u043e\u0437\u0433\u0438",
+    };
+
+    /// <summary>
+    ///     Cooldown between meaningful zombie speech attempts.
+    /// </summary>
+    [DataField]
+    public TimeSpan MeaningfulSpeakCooldown = TimeSpan.FromSeconds(10);
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan NextMeaningfulSpeakTime = TimeSpan.Zero;
+
+    /// <summary>
+    ///     Zombie phrases used when normal speech exceeds <see cref="MaxSpeakCharacters"/> or is on cooldown.
+    /// </summary>
+    [DataField]
+    public List<LocId> SpeakLimitReplacementMessages = new()
+    {
+        "accent-words-zombie-1",
+        "accent-words-zombie-2",
+        "accent-words-zombie-3",
+        "accent-words-zombie-4",
+        "accent-words-zombie-5",
+        "accent-words-zombie-6",
+        "accent-words-zombie-7",
+        "accent-words-zombie-8",
+        "accent-words-zombie-9",
+        "accent-words-zombie-10",
+    };
+    // RW end
 
     /// <summary>
     /// The baseline infection chance you have if you have no protective gear

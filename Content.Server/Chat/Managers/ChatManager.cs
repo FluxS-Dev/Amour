@@ -201,7 +201,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
-using Content.Server._Amour.Stickers;
 
 namespace Content.Server.Chat.Managers;
 
@@ -233,10 +232,6 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!; // Amour - Boosters
     [Dependency] private readonly ChatProtectionSystem _chatProtection = default!; // Orion
 
-    // Amour edit start
-    private StickerSanitizerSystem _stickerSanitizer => _entitySystemManager.GetEntitySystem<StickerSanitizerSystem>();
-    // Amour edit end
-
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -256,6 +251,7 @@ internal sealed partial class ChatManager : IChatManager
 
         _configurationManager.OnValueChanged(CCVars.OocEnabled, OnOocEnabledChanged, true);
         _configurationManager.OnValueChanged(CCVars.AdminOocEnabled, OnAdminOocEnabledChanged, true);
+        _configurationManager.OnValueChanged(CCVars.ChatEmojiAllowedChannels, OnEmojiAllowedChannelsChanged, true); // RW
 
         RegisterRateLimits();
     }
@@ -468,7 +464,7 @@ internal sealed partial class ChatManager : IChatManager
         }
 
         Color? colorOverride = null;
-        var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", _stickerSanitizer.SanitizeMessageWithStickers(message))); // Amour edit
+        var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", FormattedMessage.EscapeText(message)));
 
         if (_adminManager.HasAdminFlag(player, AdminFlags.NameColor))
         {
@@ -483,7 +479,7 @@ internal sealed partial class ChatManager : IChatManager
             wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message-booster",
                 ("playerName", player.Name),
                 ("boosterColor", hexColor),
-                ("message", _stickerSanitizer.SanitizeMessageWithStickers(message))); // Amour edit
+                ("message", FormattedMessage.EscapeText(message)));
         }
         // RMC - Heavily modified for patreon.
         if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
@@ -495,14 +491,14 @@ internal sealed partial class ChatManager : IChatManager
                     ("tierIcon", tier.Icon),
                     ("patronColor", "#aa00ff"),
                     ("playerName", player.Name),
-                    ("message", _stickerSanitizer.SanitizeMessageWithStickers(message))); // Amour edit
+                    ("message", FormattedMessage.EscapeText(message)));
             }
             else
             {
                 wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message-no-icon",
                     ("patronColor", "#aa00ff"),
                     ("playerName", player.Name),
-                    ("message", _stickerSanitizer.SanitizeMessageWithStickers(message))); // Amour edit
+                    ("message", FormattedMessage.EscapeText(message)));
             }
         }
 
@@ -530,7 +526,7 @@ internal sealed partial class ChatManager : IChatManager
         var clients = _adminManager.ActiveAdmins.Select(p => p.Channel);
         var wrappedMessage = Loc.GetString("chat-manager-send-admin-chat-wrap-message",
                                         ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
-                                        ("playerName", player.Name), ("message", _stickerSanitizer.SanitizeMessageWithStickers(message))); // Amour edit
+                                        ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
 
         foreach (var client in clients)
         {
@@ -556,6 +552,8 @@ internal sealed partial class ChatManager : IChatManager
     // Goobstation Edit - Coalescing Chat
     public void ChatMessageToOne(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, INetChannel client, Color? colorOverride = null, bool recordReplay = false, string? audioPath = null, float audioVolume = 0, NetUserId? author = null, bool canCoalesce = true)
     {
+        ApplyEmojiPolicy(channel, ref message, ref wrappedMessage); // RW
+
         var user = author == null ? null : EnsurePlayer(author);
         var netSource = _entityManager.GetNetEntity(source);
         user?.AddEntity(netSource);
@@ -578,6 +576,8 @@ internal sealed partial class ChatManager : IChatManager
 
     public void ChatMessageToMany(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, bool recordReplay, List<INetChannel> clients, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, NetUserId? author = null, bool canCoalesce = true)
     {
+        ApplyEmojiPolicy(channel, ref message, ref wrappedMessage); // RW
+
         var user = author == null ? null : EnsurePlayer(author);
         var netSource = _entityManager.GetNetEntity(source);
         user?.AddEntity(netSource);
@@ -612,6 +612,8 @@ internal sealed partial class ChatManager : IChatManager
 
     public void ChatMessageToAll(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, bool recordReplay, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, NetUserId? author = null)
     {
+        ApplyEmojiPolicy(channel, ref message, ref wrappedMessage); // RW
+
         var user = author == null ? null : EnsurePlayer(author);
         var netSource = _entityManager.GetNetEntity(source);
         user?.AddEntity(netSource);

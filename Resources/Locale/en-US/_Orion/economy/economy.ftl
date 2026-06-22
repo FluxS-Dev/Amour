@@ -24,6 +24,7 @@ economy-card-manual-account-warning = Technical field. Use only if card binding 
 economy-card-account-override-placeholder = Enter account ID
 economy-card-status-no-account = No linked account
 economy-card-status-no-funds = Insufficient funds
+economy-card-withdraw-cooldown = Please wait before withdrawing again.
 
 character-info-job-with-account = { $job } | Account: { $account }
 

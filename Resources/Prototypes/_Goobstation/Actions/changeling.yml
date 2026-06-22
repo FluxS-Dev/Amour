@@ -818,26 +818,28 @@
   - type: InternalResourcesAction
     resourceProto: ChangelingChemicals
     useAmount: 20
-
-- type: entity
-  parent: BaseAction
-  id: ActionHivemindAccess
-  name: Hivemind Access
-  description: Tune your chemical receptors for hivemind communication.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Action
-    checkCanInteract: false
-    checkConsciousness: false
-    itemIconStyle: NoItem
-    icon:
-      sprite: _Goobstation/Changeling/changeling_abilities.rsi
-      state: hivemind_access
-  - type: InstantAction
-    event: !type:ActionHivemindAccessEvent {}
-  - type: ChangelingAction
-    useOnFire: true
-    useInLesserForm: true
+# RW start
+# Hivemind Access was turned into a base ability
+# - type: entity
+#   parent: BaseAction
+#   id: ActionHivemindAccess
+#   name: Hivemind Access
+#   description: Tune your chemical receptors for hivemind communication.
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: Action
+#     checkCanInteract: false
+#     checkConsciousness: false
+#     itemIconStyle: NoItem
+#     icon:
+#       sprite: _Goobstation/Changeling/changeling_abilities.rsi
+#       state: hivemind_access
+#   - type: InstantAction
+#     event: !type:ActionHivemindAccessEvent {}
+#   - type: ChangelingAction
+#     useOnFire: true
+#     useInLesserForm: true
+# RW end
 
 - type: entity
   parent: BaseAction

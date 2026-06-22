@@ -34,3 +34,10 @@ chem-master-window-sort-type-none = Сорт. по: Сначала старые
 chem-master-window-sort-type-alphabetical = Сорт. по: По алфавиту
 chem-master-window-sort-type-quantity = Сорт. по: Количество
 chem-master-window-sort-type-latest = Сорт. по: Сначала новые
+
+chemical-linker-saved-device = { $device } записан в мультитул.
+chemical-linker-linked = Успешно связаны { $dispenser } и { $master }!
+chemical-linker-not-adjacent = Машины должны стоять вплотную друг-к-другу!
+chemical-linker-unlinked = Связь разорвана.
+chemical-linker-buffer-full = Буфер связанного химмастера переполнен!
+chemical-linker-dispenser-too-far = Связанный химмастер слишком далеко!

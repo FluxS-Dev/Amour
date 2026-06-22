@@ -92,3 +92,5 @@ ent-ClothingOuterWinterColorWhite = белая зимняя куртка
     .desc = { ent-ClothingOuterWinterCoatToggleable.desc }
 ent-ClothingOuterWinterColorYellow = жёлтая зимняя куртка
     .desc = { ent-ClothingOuterWinterCoatToggleable.desc }
+ent-ClothingOuterWinterSeniourSecArmored = бронированная зимняя куртка службы безопасности
+    .desc = Прочное, утилитарное зимнее пальто, предназначенное для защиты сотрудников службы безопасности от любых угроз и переохлаждения.

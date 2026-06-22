@@ -4,7 +4,6 @@
 # SPDX-License-Identifier: MIT
 
 iff-console-window-title = IFF console
-iff-console-show-iff-label = Show IFF
-iff-console-show-vessel-label = Show vessel
-iff-console-on = On
-iff-console-off = Off
+iff-console-show-iff-label = Broadcast IFF
+iff-console-on = Broadcasting
+iff-console-off = Running silent

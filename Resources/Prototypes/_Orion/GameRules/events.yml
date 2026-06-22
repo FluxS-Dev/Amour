@@ -20,7 +20,7 @@
       path: /Audio/Effects/metal_break1.ogg
     weight: 6
     duration: 1
-    minimumPlayers: 15
+    minimumPlayers: 30 # RW 15 > 30
     earliestStart: 30
     reoccurrenceDelay: 50
     eventType: HostilesSpawn

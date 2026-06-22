@@ -92,6 +92,7 @@ using Content.Shared.Power;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.UserInterface;
+using Content.Shared.Silicons.StationAi;
 using Content.Shared.VendingMachines;
 using Content.Shared.Wall;
 using Robust.Server.GameObjects;
@@ -225,6 +226,11 @@ namespace Content.Server.VendingMachines
         {
             if (basePrice <= 0)
                 return 0;
+
+            // RW start
+            if (user != null && HasComp<StationAiHeldComponent>(user.Value))
+                return 0;
+            // RW end
 
             if (!TryComp<VendingMachinePricingComponent>(ent.Owner, out var pricing))
                 return basePrice;

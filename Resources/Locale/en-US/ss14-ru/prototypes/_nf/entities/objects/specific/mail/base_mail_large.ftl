@@ -1,5 +1,5 @@
-ent-BaseMailLarge = package
+ent-BaseMailLarge = посылка
     .desc = { ent-BaseMail.desc }
 ent-MailLargeAdminFun = { ent-BaseMailLarge }
-    .suffix = adminfun
+    .suffix = Адмем, Большая
     .desc = { ent-BaseMailLarge.desc }

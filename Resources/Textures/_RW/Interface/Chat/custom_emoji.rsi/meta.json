@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "foxei1 (Discord), zastupnic (Discord), kuamorg (Discord)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "happy"
+        },
+        {
+            "name": "loveyou"
+        },
+        {
+            "name": "ok"
+        },
+        {
+            "name": "stareyard"
+        }
+    ]
+}

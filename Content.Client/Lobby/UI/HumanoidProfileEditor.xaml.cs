@@ -327,6 +327,7 @@ namespace Content.Client.Lobby.UI
             _requirements = requirements;
             _controller = UserInterfaceManager.GetUIController<LobbyUIController>();
             _sprite = _entManager.System<SpriteSystem>();
+            _parsingMan = IoCManager.Resolve<DocumentParsingManager>();
 
             _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
             _allowFlavorText = _cfgManager.GetCVar(CCVars.FlavorText);
@@ -464,24 +465,21 @@ namespace Content.Client.Lobby.UI
                     return;
 
                 _speciesWindow?.Dispose();
+                _speciesWindow = null;
 
                 if (!args.Pressed)
-                {
-                    _speciesWindow = null;
-                }
-                else
-                {
-                    _speciesWindow = new(
-                        Profile,
-                        prototypeManager,
-                        _controller,
-                        _resManager);
+                    return;
 
-                    _speciesWindow.OpenCenteredLeft();
-                    var oldProfile = Profile.Clone();
-                    _speciesWindow.ChooseAction += args =>
+                _speciesWindow = new SpeciesWindow(new SpeciesWindowContext(
+                    Profile,
+                    _prototypeManager,
+                    _resManager,
+                    _parsingMan,
+                    _controller,
+                    species =>
                     {
-                        SetSpecies(args);
+                        var oldProfile = Profile.Clone();
+                        SetSpecies(species);
                         OnSkinColorOnValueChangedKeepColor(oldProfile);
                         UpdateHairPickers();
                         _speciesWindow?.Dispose();
@@ -489,13 +487,13 @@ namespace Content.Client.Lobby.UI
                         var name1 = _prototypeManager.Index(Profile?.Species ?? "Human").Name;
                         NewSpeciesButton.Text = Loc.GetString(name1);
                         NewSpeciesButton.Pressed = false;
-                    };
-                    _speciesWindow.OnClose += () =>
+                    },
+                    () =>
                     {
                         NewSpeciesButton.Pressed = false;
                         _speciesWindow = null;
-                    };
-                }
+                    }));
+                _speciesWindow.OpenCenteredLeft();
             };
             // Orion-End
 
@@ -549,7 +547,7 @@ namespace Content.Client.Lobby.UI
                     return;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithHairStyleName(newStyle.id));
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
             };
 
             HairStylePicker.OnColorChanged += newColor =>
@@ -559,7 +557,7 @@ namespace Content.Client.Lobby.UI
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithHairColor(newColor.marking.MarkingColors[0]));
                 UpdateCMarkingsHair();
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
             };
 
             FacialHairPicker.OnMarkingSelect += newStyle =>
@@ -568,7 +566,7 @@ namespace Content.Client.Lobby.UI
                     return;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithFacialHairStyleName(newStyle.id));
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
             };
 
             FacialHairPicker.OnColorChanged += newColor =>
@@ -578,7 +576,7 @@ namespace Content.Client.Lobby.UI
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithFacialHairColor(newColor.marking.MarkingColors[0]));
                 UpdateCMarkingsFacialHair();
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
             };
 
             HairStylePicker.OnSlotRemove += _ =>
@@ -590,7 +588,7 @@ namespace Content.Client.Lobby.UI
                 );
                 UpdateHairPickers();
                 UpdateCMarkingsHair();
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
             };
 
             FacialHairPicker.OnSlotRemove += _ =>
@@ -602,7 +600,7 @@ namespace Content.Client.Lobby.UI
                 );
                 UpdateHairPickers();
                 UpdateCMarkingsFacialHair();
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
             };
 
             HairStylePicker.OnSlotAdd += delegate ()
@@ -622,7 +620,7 @@ namespace Content.Client.Lobby.UI
 
                 UpdateHairPickers();
                 UpdateCMarkingsHair();
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
             };
 
             FacialHairPicker.OnSlotAdd += delegate ()
@@ -642,7 +640,7 @@ namespace Content.Client.Lobby.UI
 
                 UpdateHairPickers();
                 UpdateCMarkingsFacialHair();
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
             };
 
             // Amour edit start: hair gradient setup.
@@ -657,7 +655,7 @@ namespace Content.Client.Lobby.UI
                     return;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithHairColor2(newColor));
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
                 SetDirty();
             };
             _amourHairGradientPositionSlider = AddGradientSlider(
@@ -670,7 +668,7 @@ namespace Content.Client.Lobby.UI
                         return;
                     Profile = Profile.WithCharacterAppearance(
                         Profile.Appearance.WithHairGradientPosition(value / 100f));
-                    ReloadPreview();
+                    ReloadProfilePreview(); // RW
                     SetDirty();
                 });
             _amourHairGradientBlurSlider = AddGradientSlider(
@@ -684,7 +682,7 @@ namespace Content.Client.Lobby.UI
                     var blur = Math.Max(value / 100f, HumanoidCharacterAppearance.MinHairGradientBlur);
                     Profile = Profile.WithCharacterAppearance(
                         Profile.Appearance.WithHairGradientBlur(blur));
-                    ReloadPreview();
+                    ReloadProfilePreview(); // RW
                     SetDirty();
                 });
 
@@ -695,7 +693,7 @@ namespace Content.Client.Lobby.UI
                 HairGradientColorContainer.Visible = args.Pressed;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithHairUseGradient(args.Pressed));
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
                 SetDirty();
             };
 
@@ -710,7 +708,7 @@ namespace Content.Client.Lobby.UI
                     return;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithFacialHairColor2(newColor));
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
                 SetDirty();
             };
             _amourFacialHairGradientPositionSlider = AddGradientSlider(
@@ -723,7 +721,7 @@ namespace Content.Client.Lobby.UI
                         return;
                     Profile = Profile.WithCharacterAppearance(
                         Profile.Appearance.WithFacialHairGradientPosition(value / 100f));
-                    ReloadPreview();
+                    ReloadProfilePreview(); // RW
                     SetDirty();
                 });
             _amourFacialHairGradientBlurSlider = AddGradientSlider(
@@ -736,7 +734,7 @@ namespace Content.Client.Lobby.UI
                         return;
                     Profile = Profile.WithCharacterAppearance(
                         Profile.Appearance.WithFacialHairGradientBlur(value / 100f));
-                    ReloadPreview();
+                    ReloadProfilePreview(); // RW
                     SetDirty();
                 });
 
@@ -747,7 +745,7 @@ namespace Content.Client.Lobby.UI
                 FacialHairGradientColorContainer.Visible = args.Pressed;
                 Profile = Profile.WithCharacterAppearance(
                     Profile.Appearance.WithFacialHairUseGradient(args.Pressed));
-                ReloadPreview();
+                ReloadProfilePreview(); // RW
                 SetDirty();
             };
 
@@ -2314,6 +2312,97 @@ namespace Content.Client.Lobby.UI
                     Profile = Profile?.WithGender(Gender.Epicene);
                     break;
             }
+
+            // RW start
+            if (Profile != null)
+            {
+                var baseLoadout = Profile.BaseLoadout.Clone();
+                var underwearGroup = new ProtoId<LoadoutGroupPrototype>("Underwear");
+                var undershirtGroup = new ProtoId<LoadoutGroupPrototype>("Undershirt");
+                var changed = false;
+
+                if (newSex == Sex.Male)
+                {
+                    if (baseLoadout.SelectedLoadouts.TryGetValue(underwearGroup, out var underwearList))
+                    {
+                        if (underwearList.Count == 1 && underwearList[0].Prototype == "Panties")
+                        {
+                            underwearList[0] = new Loadout { Prototype = "UnderwearBoxerShorts" };
+                            changed = true;
+                        }
+                        else if (underwearList.Count == 0)
+                        {
+                            underwearList.Add(new Loadout { Prototype = "UnderwearBoxerShorts" });
+                            changed = true;
+                        }
+                    }
+                    else
+                    {
+                        baseLoadout.SelectedLoadouts[underwearGroup] = new List<Loadout>
+                        {
+                            new() { Prototype = "UnderwearBoxerShorts" }
+                        };
+                        changed = true;
+                    }
+
+                    if (baseLoadout.SelectedLoadouts.TryGetValue(undershirtGroup, out var undershirtList))
+                    {
+                        if (undershirtList.Count == 1 && undershirtList[0].Prototype == "Bra")
+                        {
+                            undershirtList.Clear();
+                            changed = true;
+                        }
+                    }
+                }
+                else if (newSex == Sex.Female)
+                {
+                    if (baseLoadout.SelectedLoadouts.TryGetValue(underwearGroup, out var underwearList))
+                    {
+                        if (underwearList.Count == 1 && underwearList[0].Prototype == "UnderwearBoxerShorts")
+                        {
+                            underwearList[0] = new Loadout { Prototype = "Panties" };
+                            changed = true;
+                        }
+                        else if (underwearList.Count == 0)
+                        {
+                            underwearList.Add(new Loadout { Prototype = "Panties" });
+                            changed = true;
+                        }
+                    }
+                    else
+                    {
+                        baseLoadout.SelectedLoadouts[underwearGroup] = new List<Loadout>
+                        {
+                            new() { Prototype = "Panties" }
+                        };
+                        changed = true;
+                    }
+
+                    if (baseLoadout.SelectedLoadouts.TryGetValue(undershirtGroup, out var undershirtList))
+                    {
+                        if (undershirtList.Count == 0)
+                        {
+                            undershirtList.Add(new Loadout { Prototype = "Bra" });
+                            changed = true;
+                        }
+                    }
+                    else
+                    {
+                        baseLoadout.SelectedLoadouts[undershirtGroup] = new List<Loadout>
+                        {
+                            new() { Prototype = "Bra" }
+                        };
+                        changed = true;
+                    }
+                }
+
+                if (changed)
+                {
+                    Profile = Profile.WithBaseLoadout(baseLoadout);
+                    SetDirty();
+                }
+            }
+            // RW end
 
             UpdateGenderControls();
             Markings.SetSex(newSex);

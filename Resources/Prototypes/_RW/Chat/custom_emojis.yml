@@ -1,0 +1,19 @@
+- type: chatCustomEmoji
+  id: happy
+  rsiPath: /Textures/_RW/Interface/Chat/custom_emoji.rsi
+  state: happy
+
+- type: chatCustomEmoji
+  id: loveyou
+  rsiPath: /Textures/_RW/Interface/Chat/custom_emoji.rsi
+  state: loveyou
+
+- type: chatCustomEmoji
+  id: ok
+  rsiPath: /Textures/_RW/Interface/Chat/custom_emoji.rsi
+  state: ok
+
+- type: chatCustomEmoji
+  id: stareyard
+  rsiPath: /Textures/_RW/Interface/Chat/custom_emoji.rsi
+  state: stareyard

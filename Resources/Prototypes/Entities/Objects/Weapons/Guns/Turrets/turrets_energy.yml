@@ -160,6 +160,12 @@
   id: WeaponEnergyTurretSecurity
   suffix: Security
   components:
+  # RW start
+  - type: NpcFactionMember
+    factions:
+    - AllHostile
+    - RWSecurityTurret
+  # RW end
   - type: AccessReader
     access: [["StationAi"], ["Security"]]
   - type: TurretTargetSettings

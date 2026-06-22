@@ -57,6 +57,26 @@ public partial class ReplacementObfuscation : ObfuscationMethod
     }
 }
 
+// RW start
+/// <summary>
+///     Replaces the entire message with a random localized phrase.
+/// </summary>
+public sealed partial class LocalizedReplacementObfuscation : ObfuscationMethod
+{
+    [DataField(required: true)]
+    public List<string> Replacement = [];
+
+    internal override void Obfuscate(StringBuilder builder, string message, SharedLanguageSystem context)
+    {
+        if (Replacement.Count == 0)
+            return;
+
+        var idx = context.PseudoRandomNumber(message.GetHashCode(), 0, Replacement.Count - 1);
+        builder.Append(Loc.GetString(Replacement[idx]));
+    }
+}
+// RW end
+
 /// <summary>
 ///     Obfuscates the provided message by replacing each word with a random number of syllables in the range (min, max),
 ///     preserving the original punctuation to a resonable extent.

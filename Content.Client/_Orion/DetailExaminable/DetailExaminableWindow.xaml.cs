@@ -128,9 +128,7 @@ public sealed partial class DetailExaminableWindow : FancyWindow
         var showTraits = config.GetCVar(CCVars.FlavorTraitsEnabled);
         var showOoc = config.GetCVar(CCVars.FlavorOocEnabled);
         var showGyr = config.GetCVar(CCVars.FlavorGyrEnabled);
-        var showNsfw = config.GetCVar(CCVars.FlavorNsfwEnabled) &&
-                       config.GetCVar(CCVars.NsfwContentEnabled) &&
-                       !isClothed;
+        var showNsfw = config.GetCVar(CCVars.NsfwContentEnabled) && !isClothed; // RW
         var showLinks = config.GetCVar(CCVars.FlavorLinksEnabled);
 
         PreviewTabs.SetTabVisible(0, showOoc);

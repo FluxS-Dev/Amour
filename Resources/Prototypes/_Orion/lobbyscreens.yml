@@ -1,5 +1,6 @@
-- type: lobbyBackground
-  id: orion-station
-  background: /Textures/_Orion/LobbyScreens/orion-station.webp
-  name: Ti-Julie on peaceful patrol
-  artist: Zicwi
+# - type: lobbyBackground
+#   id: orion-station
+#   background: /Textures/_Orion/LobbyScreens/orion-station.webp
+#   name: Ti-Julie on peaceful patrol
+#   artist: Zicwi
+

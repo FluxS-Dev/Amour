@@ -24,7 +24,7 @@ public sealed class AdminLogLabel : RichTextLabel
         var impactText = $"[color={impactColor}]█[/color]";
 
         var formatted = new FormattedMessage();
-        formatted.AddMarkupOrThrow($"{impactText} [bold]{log.Date:HH:mm:ss}[/bold]: ");
+        formatted.AddMarkupOrThrow($"{impactText} [bold]{log.Date:HH:mm:ss}[/bold]: "); // RW: Use AddMarkupPermissive instead of AddMarkupOrThrow for admin log messages; я рот шатал того пидораса что решил будто OrThrow и log.Messag это охуенная затея.
         formatted.AddMarkupPermissive(log.Message);
         // Orion-End
 

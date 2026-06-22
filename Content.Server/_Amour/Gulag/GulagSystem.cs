@@ -21,6 +21,7 @@ using Content.Server.Station.Systems;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared._Amour.CCVar;
 using Content.Shared.Cargo.Prototypes;
+using Content.Shared.Follower;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -124,6 +125,9 @@ public sealed class GulagSystem : EntitySystem
         SubscribeLocalEvent<GulagBoundComponent, GetAntagSelectionBlockerEvent>(OnAntagSelectionBlocker);
         SubscribeLocalEvent<GulagOreProcessorComponent, MaterialEntityInsertedEvent>(OnOreInserted);
         SubscribeLocalEvent<GulagFillContainerComponent, MapInitEvent>(OnGulagContainerSpawned);
+
+        SubscribeLocalEvent<ActorComponent, AttemptFollowEvent>(OnAttemptFollow);
+        SubscribeLocalEvent<ActorComponent, GulagChatMessageAttemptEvent>(OnChatMessageAttempt);
     }
 
     public override void Update(float frameTime)
@@ -801,6 +805,24 @@ public sealed class GulagSystem : EntitySystem
     private string GetPrisonerName(ServerBanDef ban)
     {
         return Loc.GetString("gulag-prisoner-name", ("banId", ban.Id ?? 0));
+    }
+
+    private void OnAttemptFollow(EntityUid uid, ActorComponent component, AttemptFollowEvent args)
+    {
+        if (_playerManager.TryGetSessionByEntity(uid, out var session) &&
+            IsUserGulagged(session.UserId))
+        {
+            args.Cancel();
+        }
+    }
+
+    private void OnChatMessageAttempt(EntityUid uid, ActorComponent component, GulagChatMessageAttemptEvent args)
+    {
+        if (_playerManager.TryGetSessionByEntity(uid, out var session) &&
+            IsUserGulagged(session.UserId))
+        {
+            args.Cancel();
+        }
     }
 
     private sealed record PendingSentenceReduction(NetUserId Worker, double Points);

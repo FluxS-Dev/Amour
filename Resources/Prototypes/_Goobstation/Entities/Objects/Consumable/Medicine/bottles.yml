@@ -364,7 +364,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-tranexamicacid
+    currentLabel: reagent-name-tranexamic-acid  # Reserve edit: fixed wrong label string
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -484,7 +484,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-heartbreakertoxin
+    currentLabel: reagent-name-heartbreaker-toxin  # Reserve edit: fixed wrong label string
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -544,7 +544,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-mindbreakertoxin
+    currentLabel: reagent-name-mindbreaker-toxin  # Reserve edit: fixed wrong label string
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -559,7 +559,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-spacedrugs
+    currentLabel: reagent-name-space-drugs  # Reserve edit: fixed wrong label string
   - type: SolutionContainerManager
     solutions:
       drink:
@@ -844,7 +844,7 @@
   parent: BaseChemistryBottleFilled
   components:
   - type: Label
-    currentLabel: reagent-name-potassiumiodide
+    currentLabel: reagent-name-potassium-iodide  # Reserve edit: fixed wrong label string
   - type: SolutionContainerManager
     solutions:
       drink:

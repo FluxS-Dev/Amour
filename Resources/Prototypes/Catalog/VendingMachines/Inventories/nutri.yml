@@ -20,7 +20,19 @@
 # SPDX-FileCopyrightText: 2024 drakewill-CRL <46307022+drakewill-CRL@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 Джексон Миссиссиппи <tripwiregamer@gmail.com>
 # SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Khundo <141230574+korguzenok@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Kirill <kirill@example.com>
+# SPDX-FileCopyrightText: 2025 ReserveBot <211949879+ReserveBot@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
+# SPDX-FileCopyrightText: 2025 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Smith <182301147+AgentSmithRadio@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 Svarshik <96281939+lexaSvarshik@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 TheBlueYowie <the.blue.yowie@hotmail.com>
+# SPDX-FileCopyrightText: 2025 Tim <timfalken@hotmail.com>
+# SPDX-FileCopyrightText: 2025 echotry <xippl1@mail.ru>
+# SPDX-FileCopyrightText: 2025 nazrin <tikufaev@outlook.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -33,6 +45,7 @@
     HydroponicsToolScythe: 4
     HydroponicsToolHatchet: 4
     Dropper: 4
+
     PlantBag: 3
     PlantBGoneSpray: 20
     WeedSpray: 20
@@ -43,13 +56,14 @@
     Bucket: 3
     BoxMouthSwab: 1
     BoxAgrichem: 1
-    #TO DO:
-    #plant analyzer
   contrabandInventory:
     ChemistryBottleUnstableMutagen: 1
     Chainsaw: 1 #Goob
     Joint: 1
     ChemistryBottleLeft4Zed: 1
+  emaggedInventory:
+    DrinkDoctorMomCan: 1  # Reserve: Orchid's Barmania - Vendichaos
+
   # Orion-Start
   prices:
     Dropper: 25

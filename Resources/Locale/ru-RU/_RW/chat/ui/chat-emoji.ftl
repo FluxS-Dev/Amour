@@ -1,0 +1,12 @@
+hud-chatbox-emoji-button-tooltip = Выбор эмодзи
+hud-chatbox-emoji-preview = { $emoji } :{ $alias }:
+hud-chatbox-emoji-preview-empty = Выберите эмодзи
+hud-chatbox-emoji-category-custom = Пользовательские
+hud-chatbox-emoji-category-smileys = Эмоции и жесты
+hud-chatbox-emoji-category-nature = Природа
+hud-chatbox-emoji-category-food = Еда и напитки
+hud-chatbox-emoji-category-activities = Активности
+hud-chatbox-emoji-category-travel = Транспорт
+hud-chatbox-emoji-category-objects = Предметы
+hud-chatbox-emoji-category-symbols = Символы
+hud-chatbox-emoji-category-flags = Флаги

@@ -235,12 +235,18 @@ public sealed class MagicMirrorSystem : SharedMagicMirrorSystem
         if (component.Target == message.Actor)
             doafterTime /= 3;
 
+        // RW start
         var doAfter = new MagicMirrorChangeColorDoAfterEvent
         {
             Category = message.Category,
             Slot = message.Slot,
             Colors = message.Colors,
+            UseGradient = message.UseGradient,
+            GradientPosition = message.GradientPosition,
+            GradientBlur = message.GradientBlur,
+            SecondaryColors = message.SecondaryColors,
         };
+        // RW end
 
         _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, message.Actor, doafterTime, doAfter, uid, target: target, used: uid)
         {
@@ -283,6 +289,9 @@ public sealed class MagicMirrorSystem : SharedMagicMirrorSystem
         }
 
         _humanoid.SetMarkingColor(component.Target.Value, category, args.Slot, args.Colors);
+        // RW start
+        _humanoid.SetMarkingGradient(component.Target.Value, category, args.Slot, args.UseGradient, args.GradientPosition, args.GradientBlur, args.SecondaryColors);
+        // RW end
 
         // using this makes the UI feel like total ass
         // que

@@ -18,7 +18,6 @@ public static class SafeMarkupTags
         typeof(HeadingTag),
         typeof(ItalicTag),
         typeof(MonoTag),
-        typeof(TextureTag), // Amour - Stickers
     };
 
     /// <summary>

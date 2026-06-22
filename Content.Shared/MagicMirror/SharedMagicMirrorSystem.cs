@@ -132,16 +132,37 @@ public sealed class MagicMirrorSelectMessage : BoundUserInterfaceMessage
 [Serializable, NetSerializable]
 public sealed class MagicMirrorChangeColorMessage : BoundUserInterfaceMessage
 {
-    public MagicMirrorChangeColorMessage(MagicMirrorCategory category, List<Color> colors, int slot)
+    public MagicMirrorChangeColorMessage(
+        MagicMirrorCategory category,
+        List<Color> colors,
+        int slot,
+        // RW start
+        bool useGradient,
+        float gradientPosition,
+        float gradientBlur,
+        List<Color>? secondaryColors)
+        // RW end
     {
         Category = category;
         Colors = colors;
         Slot = slot;
+        // RW start
+        UseGradient = useGradient;
+        GradientPosition = gradientPosition;
+        GradientBlur = gradientBlur;
+        SecondaryColors = secondaryColors;
+        // RW end
     }
 
     public MagicMirrorCategory Category { get; }
     public List<Color> Colors { get; }
     public int Slot { get; }
+    // RW start
+    public bool UseGradient { get; }
+    public float GradientPosition { get; }
+    public float GradientBlur { get; }
+    public List<Color>? SecondaryColors { get; }
+    // RW end
 }
 
 [Serializable, NetSerializable]
@@ -236,4 +257,10 @@ public sealed partial class MagicMirrorChangeColorDoAfterEvent : DoAfterEvent
     public MagicMirrorCategory Category;
     public int Slot;
     public List<Color> Colors = new List<Color>();
+    // RW start
+    public bool UseGradient;
+    public float GradientPosition;
+    public float GradientBlur;
+    public List<Color>? SecondaryColors;
+    // RW end
 }

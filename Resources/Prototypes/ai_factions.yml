@@ -104,6 +104,10 @@
   - Dragon
   - Blob # Goobstation - Blob
   - Lavafauna # Goob - Lavaland
+  # RW start
+  friendly:
+  - RWSecurityTurret
+  # RW end
 
 - type: npcFaction
   id: SimpleHostile

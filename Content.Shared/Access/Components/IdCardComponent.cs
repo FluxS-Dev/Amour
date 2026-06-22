@@ -149,6 +149,8 @@ public sealed partial class IdCardComponent : Component
     [AutoNetworkedField]
     public string? BankAccountId;
     // Orion-End
+    [DataField]
+    public TimeSpan NextWithdrawTime; // RW
 
     /// <summary>
     /// Determines if accesses from this card should be logged by <see cref="AccessReaderComponent"/>

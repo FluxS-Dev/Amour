@@ -54,3 +54,5 @@ chat-language-Pig-name = Свиной
 chat-language-Sheep-name = Овечий
 chat-language-Xeno-name = Ксенский
 chat-language-DroneTalk-name = Дроновый
+
+chat-language-Zombie-name = Зомби

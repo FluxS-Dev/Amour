@@ -114,7 +114,10 @@ public sealed partial class ActionFleshmendEvent : InstantActionEvent
 }
 public sealed partial class ActionLastResortEvent : InstantActionEvent { }
 public sealed partial class ActionLesserFormEvent : InstantActionEvent { }
-public sealed partial class ActionHivemindAccessEvent : InstantActionEvent { }
+// RW start
+// Hivemind Access was turned into a base ability
+// public sealed partial class ActionHivemindAccessEvent : InstantActionEvent { }
+// RW end
 public sealed partial class ActionContortBodyEvent : InstantActionEvent { }
 
 #endregion

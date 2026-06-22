@@ -49,7 +49,19 @@ public sealed class MagicMirrorBoundUserInterface : BoundUserInterface
 
     private void ChangeColor(MagicMirrorCategory category, Marking marking, int slot)
     {
-        SendMessage(new MagicMirrorChangeColorMessage(category, new(marking.MarkingColors), slot));
+        // RW start
+        var secondaryColors = marking.SecondaryMarkingColors != null
+            ? new List<Color>(marking.SecondaryMarkingColors)
+            : null;
+        SendMessage(new MagicMirrorChangeColorMessage(
+            category,
+            new(marking.MarkingColors),
+            slot,
+            marking.UseGradient,
+            marking.GradientPosition,
+            marking.GradientBlur,
+            secondaryColors));
+        // RW end
     }
 
     private void RemoveSlot(MagicMirrorCategory category, int slot)

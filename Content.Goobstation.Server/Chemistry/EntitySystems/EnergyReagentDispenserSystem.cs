@@ -56,6 +56,13 @@ using Content.Server.Power.EntitySystems;
 using Content.Shared._Orion.Construction.Events;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Power.Components;
+using Content.Server.Chemistry.Components;
+using Content.Shared.Popups;
+using Content.Server.Tools;
+using Content.Server.Chemistry.EntitySystems;
+using Content.Shared.Interaction;
+using Content.Shared.Tools.Systems;
+using Content.Goobstation.Maths.FixedPoint;
 
 namespace Content.Goobstation.Server.Chemistry.EntitySystems
 {
@@ -72,6 +79,12 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
         [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly BatterySystem _battery = default!;
+        // RW start
+        [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+        [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+        [Dependency] private readonly ToolSystem _toolSystem = default!;
+        [Dependency] private readonly ChemicalLinkSystem _chemicalLinkSystem = default!;
+        // RW end
 
         public override void Initialize()
         {
@@ -89,6 +102,10 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
             SubscribeLocalEvent<EnergyReagentDispenserComponent, PowerChangedEvent>(OnPowerChanged);
 
             SubscribeLocalEvent<EnergyReagentDispenserComponent, MapInitEvent>(OnMapInit, before: [typeof(ItemSlotsSystem)]);
+
+            // RW start
+            SubscribeLocalEvent<EnergyReagentDispenserComponent, InteractUsingEvent>(OnInteractUsing);
+            // RW end
 
             // Orion-Start
             SubscribeLocalEvent<EnergyReagentDispenserComponent, RefreshPartsEvent>(OnPartsRefresh);
@@ -191,15 +208,56 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
 
         private void OnDispenseReagentMessage(Entity<EnergyReagentDispenserComponent> reagentDispenser, ref EnergyReagentDispenserDispenseReagentMessage message)
         {
+            if (!TryComp<BatteryComponent>(reagentDispenser, out var battery))
+                return;
+
+            var amount = (int) reagentDispenser.Comp.DispenseAmount;
+
+            // RW start
+            if (TryComp<ChemicalLinkComponent>(reagentDispenser.Owner, out var link) && link.LinkedDevice is { } linkedMaster && Exists(linkedMaster))
+            {
+                if (_transformSystem.InRange(reagentDispenser.Owner, linkedMaster, 1.5f))
+                {
+                    if (_solutionContainerSystem.TryGetSolution(linkedMaster, SharedChemMaster.BufferSolutionName, out var dstSoln, out var dstSolution))
+                    {
+                        var actualAmount = FixedPoint2.Min(amount, dstSolution.AvailableVolume);
+                        if (actualAmount > 0)
+                        {
+                            var powerForActual = GetPowerCostForReagent(message.ReagentId, actualAmount.Float(), reagentDispenser.Comp);
+                            if (battery.CurrentCharge >= powerForActual)
+                            {
+                                var linkedSol = new Solution(message.ReagentId, actualAmount);
+                                _solutionContainerSystem.AddSolution(dstSoln.Value, linkedSol);
+                                _battery.SetCharge(reagentDispenser.Owner, battery.CurrentCharge - powerForActual);
+                            }
+                            else
+                            {
+                                _audioSystem.PlayPvs(reagentDispenser.Comp.PowerSound, reagentDispenser, AudioParams.Default.WithVolume(-2f));
+                                return;
+                            }
+                        }
+                        else if (dstSolution.AvailableVolume <= 0)
+                        {
+                            _popupSystem.PopupEntity(Loc.GetString("chemical-linker-buffer-full"), reagentDispenser.Owner, message.Actor);
+                        }
+                    }
+                    UpdateUiState(reagentDispenser);
+                    ClickSound(reagentDispenser);
+                    return;
+                }
+                else
+                {
+                    _popupSystem.PopupEntity(Loc.GetString("chemical-linker-dispenser-too-far"), reagentDispenser.Owner, message.Actor);
+                    return;
+                }
+            }
+            // RW end
+
             var outputContainer = _itemSlotsSystem.GetItemOrNull(reagentDispenser, SharedEnergyReagentDispenser.OutputSlotName);
             if (outputContainer is not { Valid: true }
                 || !_solutionContainerSystem.TryGetFitsInDispenser(outputContainer.Value, out var solution, out _))
                 return;
 
-            if (!TryComp<BatteryComponent>(reagentDispenser, out var battery))
-                return;
-
-            var amount = (int) reagentDispenser.Comp.DispenseAmount;
             var powerRequired = GetPowerCostForReagent(message.ReagentId, amount, reagentDispenser.Comp);
 
             if (battery.CurrentCharge < powerRequired)
@@ -225,7 +283,7 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
                 || !_solutionContainerSystem.TryGetFitsInDispenser(outputContainer, out var solution, out var soln))
                 return;
 
-            var refundedPower = soln.Sum(reagent => GetPowerCostForReagent(reagent.Reagent.Prototype, (int) reagent.Quantity, reagentDispenser.Comp)) // Orion-Edit
+            var refundedPower = soln.Sum(reagent => GetPowerCostForReagent(reagent.Reagent.Prototype, reagent.Quantity.Float(), reagentDispenser.Comp)) // Orion-Edit // RW
                                 * reagentDispenser.Comp.RefundEnergyEfficiency; // Orion
             if (refundedPower > 0)
                 _battery.AddCharge(reagentDispenser, refundedPower);
@@ -238,12 +296,14 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
         private void ClickSound(Entity<EnergyReagentDispenserComponent> reagentDispenser) =>
             _audioSystem.PlayPvs(reagentDispenser.Comp.ClickSound, reagentDispenser, AudioParams.Default.WithVolume(-2f));
 
-        private static float GetPowerCostForReagent(string reagentId, int amount, EnergyReagentDispenserComponent comp)
+        // RW start
+        private static float GetPowerCostForReagent(string reagentId, float amount, EnergyReagentDispenserComponent comp)
         {
             return comp.Reagents.TryGetValue(reagentId, out var cost)
                 ? cost * amount * comp.FinalEnergyCostMultiplier // Orion-Edit
                 : float.MaxValue;
         }
+        // RW end
 
         private void OnMapInit(Entity<EnergyReagentDispenserComponent> entity, ref MapInitEvent args)
         {
@@ -259,6 +319,20 @@ namespace Content.Goobstation.Server.Chemistry.EntitySystems
             entity.Comp.FinalRechargeRate = apcBattery.BatteryRechargeRate;
             // Orion-End
         }
+
+        // RW start
+        private void OnInteractUsing(EntityUid uid, EnergyReagentDispenserComponent component, InteractUsingEvent args)
+        {
+            if (args.Handled)
+                return;
+
+            if (!_toolSystem.HasQuality(args.Used, SharedToolSystem.PulseQuality))
+                return;
+
+            args.Handled = true;
+            _chemicalLinkSystem.HandleLinking(args.Used, uid, args.User, isDispenser: true);
+        }
+        // RW end
 
         // Orion-Start
         private void OnPartsRefresh(EntityUid uid, EnergyReagentDispenserComponent component, RefreshPartsEvent args)

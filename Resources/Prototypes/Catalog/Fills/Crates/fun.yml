@@ -407,6 +407,7 @@
         amount: 6
       - id: PaperCNCSheet
         amount: 6
+      - id: BoxPlaysetEvacPod # RW edit
 
 - type: entity
   id: CrateFunSadTromboneImplants

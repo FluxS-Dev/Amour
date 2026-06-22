@@ -511,6 +511,14 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     // Goob edit start
     private void ApplyExperimentalLaws(Entity<SiliconLawUpdaterComponent> ent, Entity<ExperimentalLawProviderComponent, SiliconLawProviderComponent> experiment)
     {
+        // RW add - Requires an active station AI player when the experiment completes.
+        if (!HasActiveStationAiPlayer(ent.Comp))
+        {
+            var noActiveAiMessage = Loc.GetString("experimental-law-provider-no-active-ai");
+            _radio.SendRadioMessage(ent, noActiveAiMessage, AnnouncementChannel, ent, escapeMarkup: false);
+            return;
+        }
+
         var laws = GetRandomLaws(experiment.Comp1.RandomLawsets);
         var query = EntityManager.CompRegistryQueryEnumerator(ent.Comp.Components);
 
@@ -558,10 +566,38 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
                 SetLaws(lawset, update, provider.LawRewardSound);
 
             RemCompDeferred(uid, provider);
+            // RW add - Requires an active station AI player when the experiment completes.
+            if (!HasActiveStationAiPlayer(updater))
+            {
+                var failMessage = Loc.GetString("experimental-law-provider-no-active-ai");
+                _radio.SendRadioMessage(uid, failMessage, AnnouncementChannel, uid, escapeMarkup: false);
+                continue;
+            }
+
             _research.ModifyServerPoints(researchClient.Server.Value, provider.RewardPoints);
             var message = Loc.GetString("experimental-law-provider-success", ("amount", provider.RewardPoints));
             _radio.SendRadioMessage(uid, message, AnnouncementChannel, uid, escapeMarkup: false);
         }
+    }
+
+    // RW add - Requires an active station AI player when the experiment completes.
+    private bool HasActiveStationAiPlayer(SiliconLawUpdaterComponent updater)
+    {
+        var query = EntityManager.CompRegistryQueryEnumerator(updater.Components);
+        while (query.MoveNext(out var update))
+        {
+            if (!TryComp<StationAiHeldComponent>(update, out var stationAiHeld))
+                continue;
+
+            if (HasComp<ActorComponent>(update))
+                return true;
+
+            if (stationAiHeld.CurrentConnectedEntity is { } connectedEntity &&
+                HasComp<ActorComponent>(connectedEntity))
+                return true;
+        }
+
+        return false;
     }
 
     /// <summary>

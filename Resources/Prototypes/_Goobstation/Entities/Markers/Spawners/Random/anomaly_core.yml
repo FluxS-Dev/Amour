@@ -43,8 +43,8 @@
     - id: AnomalyCoreFlora
     - id: AnomalyCoreShadow
     - id: AnomalyCoreTech
-    - id: AnomalyCoreSanta
-      weight: 0.4 #same % value as AnomalySpawner
+#    - id: AnomalyCoreSanta # RW: disable spawn
+#      weight: 0.4 #same % value as AnomalySpawner
 
 - type: entityTable
   id: RandomAnomalyCoreInertTable
@@ -61,5 +61,5 @@
     - id: AnomalyCoreFloraInert
     - id: AnomalyCoreShadowInert
     - id: AnomalyCoreTechInert
-    - id: AnomalyCoreSantaInert
-      weight: 0.4 #same % value as AnomalySpawner
+#    - id: AnomalyCoreSantaInert # RW: disable spawn
+#      weight: 0.4 #same % value as AnomalySpawner

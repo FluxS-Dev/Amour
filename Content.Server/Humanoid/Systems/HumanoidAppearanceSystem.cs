@@ -133,4 +133,37 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
 
         Dirty(uid, humanoid);
     }
+
+    // RW start
+    /// <summary>
+    ///     Sets the marking gradient parameters of the humanoid in a category at an index in the category's list.
+    /// </summary>
+    public void SetMarkingGradient(EntityUid uid, MarkingCategories category, int index,
+        bool useGradient, float gradientPosition, float gradientBlur, List<Color>? secondaryColors,
+        HumanoidAppearanceComponent? humanoid = null)
+    {
+        if (index < 0
+            || !Resolve(uid, ref humanoid)
+            || !humanoid.MarkingSet.TryGetCategory(category, out var markings)
+            || index >= markings.Count)
+        {
+            return;
+        }
+
+        var marking = markings[index];
+        marking.UseGradient = useGradient;
+        marking.GradientPosition = Marking.ClampGradientPosition(gradientPosition);
+        marking.GradientBlur = Marking.ClampGradientBlur(gradientBlur);
+
+        if (secondaryColors != null)
+        {
+            for (var i = 0; i < secondaryColors.Count; i++)
+            {
+                marking.SetGradientColor(i, secondaryColors[i]);
+            }
+        }
+
+        Dirty(uid, humanoid);
+    }
+    // RW end
 }

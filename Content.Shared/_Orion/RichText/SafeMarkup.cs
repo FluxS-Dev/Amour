@@ -15,7 +15,6 @@ public static class SafeMarkup
         "head",
         "italic",
         "mono",
-        "tex", // Amour - Stickers
     };
 
     private static readonly string[] NewsArticleMarkupTags = BasicMarkupTags;

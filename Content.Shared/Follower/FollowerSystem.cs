@@ -215,6 +215,13 @@ public sealed class FollowerSystem : EntitySystem
         if (follower == entity || TerminatingOrDeleted(entity))
             return;
 
+        // RW start
+        var attemptEv = new AttemptFollowEvent(entity);
+        RaiseLocalEvent(follower, attemptEv, false);
+        if (attemptEv.Cancelled)
+            return;
+        // RW end
+
         // No recursion for you
         var targetXform = Transform(entity);
         while (targetXform.ParentUid.IsValid())
@@ -420,3 +427,17 @@ public sealed class EntityStoppedFollowingEvent : FollowEvent
     {
     }
 }
+
+// RW start
+/// <summary>
+///     Raised on an entity before it starts following another entity.
+/// </summary>
+public sealed class AttemptFollowEvent : CancellableEntityEventArgs
+{
+    public EntityUid Target;
+    public AttemptFollowEvent(EntityUid target)
+    {
+        Target = target;
+    }
+}
+// RW end

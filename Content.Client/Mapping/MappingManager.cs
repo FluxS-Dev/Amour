@@ -70,15 +70,25 @@
 // SPDX-FileCopyrightText: 2024 to4no_fix <156101927+chavonadelal@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 voidnull000 <18663194+voidnull000@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 ReserveBot <211949879+ReserveBot@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
+// SPDX-FileCopyrightText: 2025 Svarshik <96281939+lexaSvarshik@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 nazrin <tikufaev@outlook.com>
+// SPDX-FileCopyrightText: 2025 poemota <142114334+poeMota@users.noreply.github.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Content.Shared.Decals;
 using Content.Shared.Mapping;
+using Content.Shared._RW.Mapping;
+using Content.Shared.Maps;
 using Robust.Client.UserInterface;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.Mapping;
 
@@ -86,15 +96,25 @@ public sealed class MappingManager : IPostInjectInit
 {
     [Dependency] private readonly IFileDialogManager _file = default!;
     [Dependency] private readonly IClientNetManager _net = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!; // RW edit: added favorite prototype lookups for mapping editor
 
     private Stream? _saveStream;
     private MappingMapDataMessage? _mapData;
+    // RW START - mapping editor favorite prototype cache
+    private List<IPrototype>? _favoritePrototypes;
+
+    public event Action<List<IPrototype>>? OnFavoritePrototypesLoaded;
+    // RW END
 
     public void PostInject()
     {
         _net.RegisterNetMessage<MappingSaveMapMessage>();
         _net.RegisterNetMessage<MappingSaveMapErrorMessage>(OnSaveError);
         _net.RegisterNetMessage<MappingMapDataMessage>(OnMapData);
+        // RW START - mapping editor favorite network messages
+        _net.RegisterNetMessage<MappingFavoritesDataMessage>(OnFavoritesData);
+        _net.RegisterNetMessage<MappingFavoritesSaveMessage>();
+        // RW END
     }
 
     private void OnSaveError(MappingSaveMapErrorMessage message)
@@ -117,6 +137,25 @@ public sealed class MappingManager : IPostInjectInit
         _saveStream = null;
         _mapData = null;
     }
+
+    // RW START - mapping editor favorite prototype hydration
+    private void OnFavoritesData(MappingFavoritesDataMessage message)
+    {
+        _favoritePrototypes = new List<IPrototype>();
+
+        foreach (var prototype in message.PrototypeIDs)
+        {
+            if (_prototypeManager.TryIndex<EntityPrototype>(prototype, out var entity))
+                _favoritePrototypes.Add(entity);
+            else if (_prototypeManager.TryIndex<ContentTileDefinition>(prototype, out var tile))
+                _favoritePrototypes.Add(tile);
+            else if (_prototypeManager.TryIndex<DecalPrototype>(prototype, out var decal))
+                _favoritePrototypes.Add(decal);
+        }
+
+        OnFavoritePrototypesLoaded?.Invoke(_favoritePrototypes);
+    }
+    // RW END
 
     public async Task SaveMap()
     {
@@ -141,4 +180,23 @@ public sealed class MappingManager : IPostInjectInit
 
         _saveStream = stream;
     }
+    // RW START - mapping editor favorite save/load requests
+    public void SaveFavorites(List<MappingPrototype> prototypes)
+    {
+        var msg = new MappingFavoritesSaveMessage()
+        {
+            PrototypeIDs = prototypes
+                .FindAll(p => p.Prototype != null)
+                .Select(p => p.Prototype!.ID)
+                .ToList(),
+        };
+        _net.ClientSendMessage(msg);
+    }
+
+    public void LoadFavorites()
+    {
+        var request = new MappingFavoritesLoadMessage();
+        _net.ClientSendMessage(request);
+    }
+    // RW END
 }

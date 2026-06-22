@@ -4,8 +4,10 @@ using Content.Server.EUI;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Roles;
+using Content.Shared.Bed.Cryostorage;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
+using Content.Shared.Medical.Cryogenics;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -287,6 +289,11 @@ public sealed class SsdAmnesiacGhostRoleSystem : EntitySystem
 
         if (!Exists(body) || Deleted(body) || Terminating(body))
             return false;
+
+        // RW start
+        if (HasComp<InsideCryoPodComponent>(body) || HasComp<CryostorageContainedComponent>(body))
+            return false;
+        // RW end
 
         if (HasComp<GhostComponent>(body) || !HasComp<SSDIndicatorComponent>(body))
             return false;

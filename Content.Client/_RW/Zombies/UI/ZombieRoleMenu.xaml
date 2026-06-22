@@ -1,0 +1,21 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'zombie-role-menu-title'}"
+                      MinSize="650 410"
+                      SetSize="650 410">
+    <BoxContainer Orientation="Vertical" Margin="8">
+        <RichTextLabel Text="{Loc 'zombie-role-menu-summary'}" Margin="0 0 0 10" />
+
+        <Label Text="{Loc 'zombie-role-menu-communication-title'}" StyleClasses="LabelHeading" Margin="0 0 0 4" />
+        <RichTextLabel Text="{Loc 'zombie-role-menu-communication-1'}" Margin="0 0 0 4" />
+        <RichTextLabel Text="{Loc 'zombie-role-menu-communication-2'}" Margin="0 0 0 10" />
+
+        <Label Text="{Loc 'zombie-role-menu-conditions-title'}" StyleClasses="LabelHeading" Margin="0 0 0 4" />
+        <RichTextLabel Text="{Loc 'zombie-role-menu-conditions-1'}" Margin="0 0 0 4" />
+        <RichTextLabel Text="{Loc 'zombie-role-menu-conditions-2'}" Margin="0 0 0 12" />
+
+        <BoxContainer Orientation="Horizontal" Align="Center">
+            <Button Name="ConfirmButton" Text="{Loc 'zombie-role-menu-confirm'}" MinWidth="120" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

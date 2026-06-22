@@ -250,6 +250,8 @@ public sealed partial class ChatUIController : UIController
         SubscribeNetworkEvent<DamageForceSayEvent>(OnDamageForceSay);
         _config.OnValueChanged(CCVars.ChatEnableColorName, (value) => { _chatNameColorsEnabled = value; });
         _chatNameColorsEnabled = _config.GetCVar(CCVars.ChatEnableColorName);
+        _config.OnValueChanged(CCVars.ChatEmojiAllowedChannels, OnEmojiAllowedChannelsChanged, true); // RW
+        _config.OnValueChanged(CCVars.NsfwContentEnabled, _ => UpdateChannelPermissions()); // RW
 
         _speechBubbleRoot = new LayoutContainer();
 
@@ -612,7 +614,8 @@ public sealed partial class ChatUIController : UIController
                 CanSendChannels |= ChatSelectChannel.Whisper;
                 CanSendChannels |= ChatSelectChannel.Radio;
                 CanSendChannels |= ChatSelectChannel.Emotes;
-                CanSendChannels |= ChatSelectChannel.QuietEmotes; // Amour - Quiet emote
+                if (_config.GetCVar(CCVars.NsfwContentEnabled)) // RW
+                    CanSendChannels |= ChatSelectChannel.QuietEmotes; // Amour - Quiet emote
             }
         }
 
@@ -804,6 +807,8 @@ public sealed partial class ChatUIController : UIController
                 break;
         }
         // </Goobstation>
+
+        UpdateEmojiAvailability(box); // RW
     }
 
     // Goobstation - Starlight collective mind port
@@ -1050,6 +1055,7 @@ public sealed partial class ChatUIController : UIController
     public void RegisterChat(ChatBox chat)
     {
         _chats.Add(chat);
+        UpdateSelectedChannel(chat); // RW
     }
 
     public void UnregisterChat(ChatBox chat)

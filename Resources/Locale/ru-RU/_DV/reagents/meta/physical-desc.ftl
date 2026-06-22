@@ -1,3 +1,3 @@
-reagent-physical-desc-maddening = сводящий с ума
-reagent-physical-desc-dark = тёмный
-reagent-physical-desc-menacing = угрожающий
+reagent-physical-desc-maddening = сводящее с ума
+reagent-physical-desc-dark = тёмное
+reagent-physical-desc-menacing = зловещее

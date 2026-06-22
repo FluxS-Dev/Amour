@@ -42,7 +42,7 @@
       - id: BrokenBottle
       # Orion-Start
       - id: FoodPacketInteQCookiesTrash
-      - id: FoodPacketOrioCookiesTrash
+      # RW edit: FoodPacketOrioCookiesTrash removed.
       # Orion-End
     - !type:GroupSelector
       weight: 5
