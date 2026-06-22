@@ -1,8 +1,8 @@
 <controls:EmojiPickerPopup
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RW.UserInterface.Systems.Chat.Controls"
-    MinSize="580 440">
-    <PanelContainer Name="EmojiPopupPanel" StyleClasses="BorderedWindowPanel" MinSize="580 440">
+    MinSize="600 440">
+    <PanelContainer Name="EmojiPopupPanel" StyleClasses="BorderedWindowPanel" MinSize="600 440">
         <BoxContainer
             Orientation="Horizontal"
             SeparationOverride="8"

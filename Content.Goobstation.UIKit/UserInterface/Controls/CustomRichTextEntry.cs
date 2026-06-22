@@ -377,7 +377,7 @@ internal struct CustomRichTextEntry
                         Angle.Zero);
             }
 
-            var advanceX = control.SetWidth;
+            var advanceX = float.IsNaN(control.SetWidth) ? control.DesiredPixelSize.X : control.SetWidth * uiScale; // RW
             controlYAdvance = Math.Max(0f, (control.DesiredPixelSize.Y - GetLineHeight(font, uiScale, lineHeightScale)) * invertedScale);
             baseLine += new Vector2(advanceX, 0);
         }
