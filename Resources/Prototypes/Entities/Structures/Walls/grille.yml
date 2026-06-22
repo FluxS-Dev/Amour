@@ -108,7 +108,7 @@
     - type: CanBuildWindowOnTop
     - type: Sprite
       drawdepth: Walls
-      sprite: Structures/Walls/grille.rsi
+      sprite: _Amour/Structures/Walls/grille.rsi
       layers:
         - state: grille
         - state: electrified
@@ -117,7 +117,7 @@
           shader: unshaded
           visible: false
     - type: Icon
-      sprite: Structures/Walls/grille.rsi
+      sprite: _Amour/Structures/Walls/grille.rsi
       state: grille
     - type: Construction
       graph: Grille
