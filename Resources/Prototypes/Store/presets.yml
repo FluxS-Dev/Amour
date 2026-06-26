@@ -40,6 +40,7 @@
     - UplinkJob
     - UplinkPointless
     - UplinkSales # WD EDIT
+    - UplinkShortages # RW
     currencyWhitelist:
     - Telecrystal
     balance:
@@ -51,6 +52,17 @@
       minItems: 4
       maxItems: 8
       salesCategory: UplinkSales
+      # RW start
+      playersPerDiscountStock: 10
+      shortagesEnabled: true
+      shortageMinMultiplier: 1.1
+      shortageMaxMultiplier: 1.25
+      shortageMinItems: 4
+      shortageMaxItems: 8
+      shortageMinStock: 1
+      shortageMaxStock: 5
+      shortageCategory: UplinkShortages
+      # RW end
 
 - type: entity
   id: StorePresetSpellbook

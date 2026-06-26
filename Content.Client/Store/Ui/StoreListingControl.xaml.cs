@@ -56,6 +56,11 @@ public sealed partial class StoreListingControl : Control
 
         UpdateBuyButtonText();
         StoreItemBuyButton.Disabled = !CanBuy();
+        // RW start
+        DiscountSubText.Text = _data.DiscountValue > 0 || _data.MarkupValue > 0
+            ? Loc.GetString("store-market-limited-stock")
+            : string.Empty;
+        // RW end
 
         StoreItemTexture.Texture = texture;
     }

@@ -176,15 +176,20 @@ public sealed partial class StoreSystem
     /// </summary>
     private void OnBuyRequest(EntityUid uid, StoreComponent component, StoreBuyListingMessage msg)
     {
-        var listing = component.Listings.FirstOrDefault(x => x.Equals(msg.Listing));
+        // RW start
+        _storeDiscount.ApplyMarket(component.Listings, component);
+        var listing = component.Listings.FirstOrDefault(x => x.ID == msg.Listing.ID);
 
-        if (listing == null) //make sure this listing actually exists
+        if (listing == null || !listing.Equals(msg.Listing)) //make sure this listing actually exists and is current
         {
             Log.Debug("listing does not exist");
+            UpdateUserInterface(msg.Actor, uid, component);
             return;
         }
+        // RW end
 
         var buyer = msg.Actor;
+        var consumesMarketStock = listing.DiscountValue > 0 || listing.MarkupValue > 0; // RW
 
         //verify that we can actually buy this listing and it wasn't added
         if (!ListingHasCategory(listing, component.Categories))
@@ -362,13 +367,12 @@ public sealed partial class StoreSystem
         listing.PurchaseAmount++; //track how many times something has been purchased
         _audio.PlayGlobal(component.BuySuccessSound, msg.Actor); //cha-ching! // Goob edit
 
-        //WD EDIT START
-        if (listing.SaleLimit != 0 && listing.DiscountValue > 0 && listing.PurchaseAmount >= listing.SaleLimit)
+        // RW start
+        if (consumesMarketStock && !_storeDiscount.TryConsumeStock(listing))
         {
-            listing.DiscountValue = 0;
-            listing.Cost = listing.OldCost;
+            Log.Error($"Failed to consume shared uplink market stock for listing {listing.ID}.");
         }
-        //WD EDIT END
+        // RW end
 
         UpdateUserInterface(buyer, uid, component);
         UpdateRefundUserInterface(uid, component); // Goobstation

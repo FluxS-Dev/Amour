@@ -579,28 +579,33 @@ public abstract partial class InventorySystem
         if (!force && !_containerSystem.CanRemove(removedItem.Value, slotContainer))
             return false;
 
+        // RW start
         if (checkDoafter &&
             Resolve(removedItem.Value, ref clothing, false) &&
-            (clothing.Slots & slotDefinition.SlotFlags) != 0 &&
-            clothing.UnequipDelay > TimeSpan.Zero)
+            (clothing.Slots & slotDefinition.SlotFlags) != 0)
         {
-            var args = new DoAfterArgs(
-                EntityManager,
-                actor,
-                clothing.UnequipDelay,
-                new ClothingUnequipDoAfterEvent(slot),
-                removedItem.Value,
-                target,
-                removedItem.Value)
+            var unequipDelay = GetUnequipDelay(actor, target, slotDefinition.SlotFlags, clothing.UnequipDelay);
+            if (unequipDelay > TimeSpan.Zero)
             {
-                BreakOnMove = true,
-                NeedHand = true,
-            };
+                var args = new DoAfterArgs(
+                    EntityManager,
+                    actor,
+                    unequipDelay,
+                    new ClothingUnequipDoAfterEvent(slot),
+                    removedItem.Value,
+                    target,
+                    removedItem.Value)
+                {
+                    BreakOnMove = true,
+                    NeedHand = true,
+                };
 
-            _doAfter.TryStartDoAfter(args);
-            return false;
+                _doAfter.TryStartDoAfter(args);
+                return false;
+            }
         }
 
+        // RW end
         if (!_containerSystem.Remove(removedItem.Value, slotContainer, force: force, reparent: reparent))
             return false;
 

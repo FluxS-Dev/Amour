@@ -268,7 +268,7 @@
   suffix: Grenadier bundle, filled
   components:         # How many nades do you want?
   - type: StorageFill # Yes.
-    contents:         # If seriously this is like 100 TC worth of explosives.
+    contents:         # If seriously this is like 20 TC worth of explosives. # RW 100 > 20
     - id: CleanerGrenade
     - id: MetalFoamGrenade
     - id: GrenadeFlashBang

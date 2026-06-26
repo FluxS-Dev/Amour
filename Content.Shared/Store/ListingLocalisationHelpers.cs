@@ -10,9 +10,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Dataset;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 
 namespace Content.Shared.Store;
 
@@ -51,18 +49,18 @@ public static class ListingLocalisationHelpers
         else if (listingData.ProductEntity != null)
             desc = prototypeManager.Index(listingData.ProductEntity.Value).Description;
 
-        // goob edit
-        var _protoMan = IoCManager.Resolve<IPrototypeManager>();
-        var _rand = IoCManager.Resolve<IRobustRandom>();
-
-        var discountFluff = _rand.Pick(_protoMan.Index<DatasetPrototype>("UplinkDiscountFluff").Values);
-        var discountString = $"{Loc.GetString("store-sales-amount", ("amount", listingData.DiscountValue))} {discountFluff}";
-
+        // RW start
         if (listingData.DiscountValue > 0)
-            desc += "\n" + discountString;
-        else if (listingData.OldCost.Count > 0)
-            desc += "\n" + Loc.GetString("store-sales-over");
-        // goob edit end
+        {
+            desc += "\n" + Loc.GetString("store-sales-description",
+                ("amount", listingData.DiscountValue));
+        }
+        else if (listingData.MarkupValue > 0)
+        {
+            desc += "\n" + Loc.GetString("store-shortages-description",
+                ("amount", listingData.MarkupValue));
+        }
+        // RW end
 
         return desc;
     }

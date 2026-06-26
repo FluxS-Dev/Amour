@@ -7,3 +7,4 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 store-category-uplink-sales = Скидки!
+store-category-uplink-shortages = Дефицит

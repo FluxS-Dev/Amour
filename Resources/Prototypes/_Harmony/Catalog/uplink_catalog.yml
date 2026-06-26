@@ -6,6 +6,6 @@
   icon: { sprite: /Textures/_Harmony/Objects/Weapons/Guns/Shotguns/hushpup.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateFilledHushpup
   cost:
-    Telecrystal: 30
+    Telecrystal: 6 # RW 30 > 6
   categories:
   - UplinkWeaponry

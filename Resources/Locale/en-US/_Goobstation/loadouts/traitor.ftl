@@ -11,4 +11,5 @@ loadout-traitor-uplink-pen-desc = Your uplink will be hidden in a pen. Spin to y
 
 # Implant Uplink Option
 loadout-traitor-uplink-implant-name = Subdermal Implant
-loadout-traitor-uplink-implant-desc = Your uplink will be implanted under your skin. Costs 10 TC. Activate it from your actions menu.
+# RW 10 > 2
+loadout-traitor-uplink-implant-desc = Your uplink will be implanted under your skin. Costs 2 TC. Activate it from your actions menu.

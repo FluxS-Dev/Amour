@@ -38,7 +38,7 @@
   parent: [BaseItem, BaseSyndicateContraband]
   id: Telecrystal
   # Goobstation - Telecrystal rework
-  suffix: 100 TC
+  suffix: 20 TC # RW 100 > 20
   description: It seems to be pulsing with suspiciously enticing energies.
   components:
   - type: Sprite
@@ -48,7 +48,7 @@
     sprite: Objects/Specific/Syndicate/telecrystal.rsi
     size: Tiny
   - type: Stack
-    count: 100
+    count: 20 # RW 100 > 20
     stackType: Telecrystal
   # Orion-Start
     baseLayer: base
@@ -58,7 +58,7 @@
     - telecrystal_3
     layerFunction: Threshold
   - type: StackLayerThreshold
-    thresholds: [10, 20, 30]
+    thresholds: [2, 4, 6] # RW 10/20/30 > 2/4/6
   # Orion-End
   - type: StaticPrice
     price: 0
@@ -85,18 +85,18 @@
 - type: entity
   parent: Telecrystal
   id: Telecrystal5
-  suffix: 5 TC
+  suffix: 1 TC # RW 5 > 1
   components:
   - type: Stack
-    count: 5
+    count: 1 # RW 5 > 1
 
 - type: entity
   parent: Telecrystal
   id: Telecrystal10
-  suffix: 10 TC
+  suffix: 2 TC # RW 10 > 2
   components:
   - type: Stack
-    count: 10
+    count: 2 # RW 10 > 2
 
 # Uplinks
 - type: entity
@@ -127,20 +127,20 @@
 - type: entity
   parent: BaseUplinkRadio
   id: BaseUplinkRadio50TC
-  suffix: 50 TC
+  suffix: 10 TC # RW 50 > 10
   components:
   - type: Store
     balance:
-      Telecrystal: 50
+      Telecrystal: 10 # RW 50 > 10
 
 - type: entity
   parent: BaseUplinkRadio
   id: BaseUplinkRadio50TCNukeOps
-  suffix: 50 TC, NukeOps reinforcement
+  suffix: 10 TC, NukeOps reinforcement # RW 50 > 10
   components:
   - type: Store
     balance:
-      Telecrystal: 50
+      Telecrystal: 10 # RW 50 > 10
   - type: Tag
     tags:
     - NukeOpsUplink
@@ -150,41 +150,41 @@
   parent: BaseUplinkRadio
   # Goobstation - Telecrystal rework
   id: BaseUplinkRadio100TC
-  suffix: 100 TC
+  suffix: 20 TC # RW 100 > 20
   components:
   - type: Store
     balance:
-      Telecrystal: 100
+      Telecrystal: 20 # RW 100 > 20
 
 - type: entity
   parent: BaseUplinkRadio
   # Goobstation - Telecrystal rework
   id: BaseUplinkRadio125TC
-  suffix: 125 TC
+  suffix: 25 TC # RW 125 > 25
   components:
   - type: Store
     balance:
-      Telecrystal: 125
+      Telecrystal: 25 # RW 125 > 25
 
 - type: entity
   parent: BaseUplinkRadio
   # Goobstation - Telecrystal rework
   id: BaseUplinkRadio200TC
-  suffix: 200 TC
+  suffix: 40 TC # RW 200 > 40
   components:
   - type: Store
     balance:
-      Telecrystal: 200
+      Telecrystal: 40 # RW 200 > 40
 
 - type: entity
   parent: BaseUplinkRadio
   # Goobstation - Telecrystal rework
   id: BaseUplinkRadio350TC
-  suffix: 350 TC, Commander #(LoneOps suffix Removed) Commander is goob only
+  suffix: 70 TC, Commander #(LoneOps suffix Removed) Commander is goob only # RW 350 > 70
   components:
   - type: Store
     balance:
-      Telecrystal: 350
+      Telecrystal: 70 # RW 350 > 70
   - type: Tag
     tags:
     - NukeOpsUplink
@@ -198,7 +198,7 @@
   - type: Store
     balance:
       # Goobstation - Telecrystal rework
-      Telecrystal: 999999
+      Telecrystal: 200000 # RW 999999 > 200000
 
 - type: entity
   parent: [BaseItem, StorePresetContractor, BaseSyndicateContraband]

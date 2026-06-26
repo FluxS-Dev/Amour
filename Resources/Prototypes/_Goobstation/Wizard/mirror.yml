@@ -44,6 +44,7 @@
     - Shadowkin
     - Chitinid
     - Feroxi
+    - Demon # RW
   - type: ActivatableUI
     key: enum.WizardMirrorUiKey.Key
     singleUser: true

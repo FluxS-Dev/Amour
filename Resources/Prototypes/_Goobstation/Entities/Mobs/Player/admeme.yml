@@ -38,6 +38,7 @@
   - Dwarf
   - Feroxi
   - Chitinid
+  - Demon # RW
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false

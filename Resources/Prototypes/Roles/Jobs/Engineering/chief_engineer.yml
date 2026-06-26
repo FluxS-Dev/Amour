@@ -148,7 +148,7 @@
   icon: "JobIconChiefEngineer"
   supervisors: job-supervisors-captain
   canBeAntag: false
-  antagAdvantage: 75 # Goobstation
+  antagAdvantage: 15 # Goobstation # RW 75 > 15
 #  guides: # goobstation | Orion-Edit: Removed because dont have this SOP
 #  - Engineering
 #  - ChiefEngineerSOP

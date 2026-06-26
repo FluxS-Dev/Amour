@@ -578,11 +578,13 @@
   - type: ShowHealthIcons
     damageContainers:
     - Biological
-  - type: Advertise
-    pack: MedibotAds
-  - type: Vocalizer
-  - type: DatasetVocalizer
-    dataset: MedibotAds
+# RW start
+#  - type: Advertise
+#    pack: MedibotAds
+#  - type: Vocalizer
+#  - type: DatasetVocalizer
+#    dataset: MedibotAds
+# RW end
   - type: Inventory
     templateId: medibot
   - type: DoAfter

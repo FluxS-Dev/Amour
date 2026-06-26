@@ -98,7 +98,7 @@ public sealed partial class NukeopsRuleComponent : Component
     ///     This amount of TC will be given to each nukie
     /// </summary>
     [DataField]
-    public int WarTcAmountPerNukie = 100; // Goobstation
+    public int WarTcAmountPerNukie = 20; // Goobstation // RW 100 > 20
 
     // Goobstation start
     /// <summary>
@@ -113,14 +113,14 @@ public sealed partial class NukeopsRuleComponent : Component
     /// Total bonus is divided by number of operatives.
     /// </summary>
     [DataField]
-    public int WarTcPerPlayer = 10; // Goobstation
+    public int WarTcPerPlayer = 2; // Goobstation // RW 10 > 2
 
     /// <summary>
     /// Compensation telecrystals granted per missing nuclear operative.
     /// Total bonus is divided by number of operatives.
     /// </summary>
     [DataField]
-    public int WarTcPerNukieMissing = 100;
+    public int WarTcPerNukieMissing = 20; // RW 100 > 20
     // Goobstation end
 
     /// <summary>

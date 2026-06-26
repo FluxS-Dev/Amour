@@ -7,7 +7,7 @@
   #discountDownTo:
  #  Telecrystal: 2
   cost:
-    Telecrystal: 10 # Orion-Edit: 4 > 10
+    Telecrystal: 2 # Orion-Edit: 4 > 10 # RW 10 > 2
   categories:
     - UplinkDeception
   #Goobstation

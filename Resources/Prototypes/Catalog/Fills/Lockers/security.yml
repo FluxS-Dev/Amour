@@ -183,8 +183,8 @@
       children:
       - id: ClothingBeltSecurityFilled
         weight: 0.8 # Orion-Edit: 0.5 > 0.8
-      - id: ClothingBeltCorporateJudoFilled
-        weight: 0.2 # Orion-Edit: 0.5 > 0.2
+      # - id: ClothingBeltCorporateJudoFilled # RW: disable judo
+      #   weight: 0.2 # Orion-Edit: 0.5 > 0.2
     # Goobstation - Martial Arts - end
 
 - type: entity

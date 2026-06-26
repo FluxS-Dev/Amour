@@ -24,7 +24,7 @@
 
 using System.Linq;
 using Content.Goobstation.Maths.FixedPoint;
-using Content.Server._White.StoreDiscount;
+using Content.Server._RW.StoreDiscount;
 using Content.Server.Store.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
@@ -66,6 +66,7 @@ public sealed partial class StoreSystem : EntitySystem
         SubscribeLocalEvent<StoreComponent, OpenUplinkImplantEvent>(OnImplantActivate);
 
         SubscribeLocalEvent<StoreComponent, PolymorphedEvent>(OnPolymorphed); // goob edit
+        SubscribeLocalEvent<UplinkMarketChangedEvent>(OnUplinkMarketChanged); // RW
 
         InitializeUi();
         InitializeCommand();
@@ -80,6 +81,21 @@ public sealed partial class StoreSystem : EntitySystem
 
         _polymorph.CopyPolymorphComponent<StoreComponent>(ent, args.NewEntity);
     }
+
+    // RW start
+    private void OnUplinkMarketChanged(UplinkMarketChangedEvent args)
+    {
+        var query = EntityQueryEnumerator<StoreComponent>();
+        while (query.MoveNext(out var uid, out var store))
+        {
+            if (!store.Sales.Enabled)
+                continue;
+
+            _storeDiscount.ApplyMarket(store.Listings, store);
+            UpdateUserInterface(null, uid, store);
+        }
+    }
+    // RW end
 
     private void OnMapInit(EntityUid uid, StoreComponent component, MapInitEvent args)
     {

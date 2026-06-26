@@ -10,3 +10,8 @@
   id: UplinkSales
   name: store-category-uplink-sales
   priority: 10
+
+- type: storeCategory
+  id: UplinkShortages
+  name: store-category-uplink-shortages
+  priority: 11

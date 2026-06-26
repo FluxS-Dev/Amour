@@ -7,6 +7,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// RW start - replaced by Content.Server._RW.StoreDiscount.StoreDiscountSystem
+/*
 using System.Linq;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Store;
@@ -53,3 +55,5 @@ public sealed class StoreDiscountSystem : EntitySystem
         return _random.NextFloat() * (maxMultiplier - minMultiplier) + minMultiplier;
     }
 }
+*/
+// RW end

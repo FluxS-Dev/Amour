@@ -1396,7 +1396,7 @@
   loadouts:
   - SecurityBelt
   - SecurityWebbing
-  - SecurityJudoBelt # Goobstation - Martial Arts
+  # - SecurityJudoBelt # Goobstation - Martial Arts # RW: disable judo
 
 - type: loadoutGroup
   id: SecurityOuterClothing

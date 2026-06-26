@@ -154,6 +154,8 @@ public partial class ListingData : IEquatable<ListingData>, ICloneable
 
     public int DiscountValue;
 
+    public int MarkupValue; // RW
+
     public Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> OldCost = new();
 
     // Goobstation
@@ -263,6 +265,7 @@ public partial class ListingData : IEquatable<ListingData>, ICloneable
             SaleLimit = SaleLimit,
             SaleBlacklist = SaleBlacklist,
             DiscountValue = DiscountValue,
+            MarkupValue = MarkupValue, // RW
             OldCost = OldCost,
             SaleCost = SaleCost,
             Components = Components,

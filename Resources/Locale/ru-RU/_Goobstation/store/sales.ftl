@@ -8,3 +8,6 @@
 
 store-sales-amount = Скидка { $amount }%!
 store-sales-over = Распродажа закончилась!
+store-sales-description = Скидка { $amount }%!
+store-shortages-description = Наценка из-за дефицита: { $amount }%.
+store-market-limited-stock = Количество ограничено

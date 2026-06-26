@@ -28,7 +28,7 @@ public sealed partial class StoreSystem
     public void RefreshAllListings(StoreComponent component)
     {
         component.Listings = GetAllListings();
-        _storeDiscount.ApplyDiscounts(component.Listings, component); // WD edit
+        _storeDiscount.ApplyMarket(component.Listings, component); // RW edit
     }
 
     /// <summary>

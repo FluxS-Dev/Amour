@@ -8,3 +8,6 @@
 
 store-sales-amount = {$amount}% off!
 store-sales-over = The sale is over!
+store-sales-description = {$amount}% off!
+store-shortages-description = Shortage markup: {$amount}%.
+store-market-limited-stock = Limited stock

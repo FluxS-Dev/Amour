@@ -13,84 +13,84 @@
 - type: entity
   parent: Telecrystal
   id: Telecrystal15
-  suffix: 15 TC
+  suffix: 3 TC # RW 15 > 3
   components:
   - type: Stack
-    count: 15
+    count: 3 # RW 15 > 3
 
 - type: entity
   parent: Telecrystal
   id: Telecrystal20
-  suffix: 20 TC
+  suffix: 4 TC # RW 20 > 4
   components:
   - type: Stack
-    count: 20
+    count: 4 # RW 20 > 4
 
 - type: entity
   parent: Telecrystal
   id: Telecrystal25
-  suffix: 25 TC
+  suffix: 5 TC # RW 25 > 5
   components:
   - type: Stack
-    count: 25
+    count: 5 # RW 25 > 5
 
 - type: entity
   parent: Telecrystal
   id: Telecrystal30
-  suffix: 30 TC
+  suffix: 6 TC # RW 30 > 6
   components:
   - type: Stack
-    count: 30
+    count: 6 # RW 30 > 6
 
 - type: entity
   parent: Telecrystal
   id: Telecrystal35
-  suffix: 35 TC
+  suffix: 7 TC # RW 35 > 7
   components:
   - type: Stack
-    count: 35
+    count: 7 # RW 35 > 7
 
 - type: entity
   parent: Telecrystal
   id: Telecrystal40
-  suffix: 40 TC
+  suffix: 8 TC # RW 40 > 8
   components:
   - type: Stack
-    count: 40
+    count: 8 # RW 40 > 8
 
 - type: entity
   parent: Telecrystal
   id: Telecrystal50
-  suffix: 50 TC
+  suffix: 10 TC # RW 50 > 10
   components:
   - type: Stack
-    count: 50
+    count: 10 # RW 50 > 10
 
 - type: entity
   parent: Telecrystal
   id: Telecrystal250
-  suffix: 250 TC
+  suffix: 50 TC # RW 250 > 50
   components:
   - type: Stack
-    count: 250
+    count: 50 # RW 250 > 50
 
 - type: entity
   parent: Telecrystal
   id: Telecrystal500
-  suffix: 500 TC
+  suffix: 100 TC # RW 500 > 100
   components:
   - type: Stack
-    count: 500
+    count: 100 # RW 500 > 100
 
 #this uplink MUST be used for nukeops, as it has the tag for filtering the listing.
 - type: entity
   parent: BaseUplinkRadio
   id: BaseUplinkRadio225TC
-  suffix: 225 TC, NukeOps
+  suffix: 45 TC, NukeOps # RW 225 > 45
   components:
   - type: Store
     balance:
-      Telecrystal: 225
+      Telecrystal: 45 # RW 225 > 45
   - type: Tag
     tags:
     - NukeOpsUplink
@@ -98,11 +98,11 @@
 - type: entity
   parent: BaseUplinkRadio
   id: BaseUplinkRadio225TCMedic
-  suffix: 225 TC, NukeOps medic
+  suffix: 45 TC, NukeOps medic # RW 225 > 45
   components:
   - type: Store
     balance:
-      Telecrystal: 225
+      Telecrystal: 45 # RW 225 > 45
   - type: Tag
     tags:
     - NukeOpsUplink
