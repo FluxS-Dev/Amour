@@ -25,6 +25,18 @@
   name: heart
   description: "I feel bad for the heartless bastard who lost this."
   components:
+  # RW start
+  - type: Heart
+  - type: Appearance
+  - type: Organ
+    slotId: heart
+    intCap: 15
+    integrity: 15
+    integrityThresholds:
+      Normal: 15
+      Damaged: 6
+      Destroyed: 0
+  # RW end
   - type: Sprite
     sprite: _Lavaland/Objects/Specific/Lavaland/loot.rsi
     state: cursed_heart

@@ -35,3 +35,13 @@ public sealed partial class StatusIconComponent : Component
 /// <param name="StatusIcons"></param>
 [ByRefEvent]
 public record struct GetStatusIconsEvent(EntityUid Uid, List<StatusIconData> StatusIcons); // Goob edit
+
+// RW start
+[ByRefEvent]
+public record struct CanDisplayStatusIconsEvent(EntityUid? User = null)
+{
+    public EntityUid? User = User;
+
+    public bool Cancelled = false;
+}
+// RW end

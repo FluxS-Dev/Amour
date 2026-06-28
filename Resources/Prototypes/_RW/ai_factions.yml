@@ -2,3 +2,12 @@
   id: RWSecurityTurret
   friendly:
   - PetsNT
+
+- type: npcFaction
+  id: GeometerOfBlood
+  hostile:
+  - NanoTrasen
+  - SimpleHostile
+  - Xeno
+  - PetsNT
+  - Zombie

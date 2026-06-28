@@ -13,6 +13,7 @@
 
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Content.Shared.Whitelist;
 
 namespace Content.Shared.Ensnaring.Components;
 /// <summary>
@@ -84,6 +85,11 @@ public sealed partial class EnsnaringComponent : Component
     /// </summary>
     [DataField]
     public bool DestroyOnRemove;
+
+    // RW start
+    [DataField]
+    public EntityWhitelist? IgnoredTargets;
+    // RW end
 }
 
 /// <summary>

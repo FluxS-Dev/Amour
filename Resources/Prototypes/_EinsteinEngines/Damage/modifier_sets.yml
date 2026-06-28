@@ -19,7 +19,8 @@
     Piercing: 0.8
     Heat: 1.7
     Shock: 2
-  # Goobstation
+    Poison: 0 # RW
+    Cold: 0.2 # RW
     Radiation: 0.4
     Ion: 0.8
   ignoreArmorPierceFlags: All

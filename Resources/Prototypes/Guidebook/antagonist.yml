@@ -55,6 +55,7 @@
   - Slasher # Goob content
   - CorticalBorer # Amour edit
   - Morph # Amour edit
+  - BloodCult # RW
 
 - type: guideEntry
   id: Traitors
@@ -90,6 +91,13 @@
   id: Thieves
   name: guide-entry-thieves
   text: "/ServerInfo/Guidebook/Antagonist/Thieves.xml"
+
+  # RW start
+- type: guideEntry
+  id: BloodCult
+  name: guide-entry-blood-cult
+  text: "/ServerInfo/Guidebook/Antagonist/BloodCult.xml"
+  # RW end
 
   # Amour edit start
 

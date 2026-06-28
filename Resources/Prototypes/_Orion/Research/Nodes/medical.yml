@@ -18,6 +18,7 @@
   - ScanningReagentHaloperidol
   - ScanningReagentCryostylane
   recipeUnlocks:
+  - LifeTrigger # RW
   - LargeBeaker
   - Beaker
   - Bloodpack

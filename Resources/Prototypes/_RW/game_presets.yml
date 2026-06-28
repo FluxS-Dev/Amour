@@ -1,0 +1,13 @@
+﻿- type: gamePreset
+  id: BloodCult
+  alias:
+  - bloodcult
+  name: blood-cult-title
+  showInVote: true
+  minPlayers: 20
+  description: blood-cult-description
+  rules:
+  - BloodCult
+  - SubGamemodesRule
+  - BasicStationEventScheduler
+  - BasicRoundstartVariation

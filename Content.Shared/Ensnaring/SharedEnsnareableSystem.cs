@@ -21,6 +21,7 @@
 using Content.Goobstation.Common.DoAfter;
 using Content.Shared._Goobstation.Wizard.Mutate;
 using Content.Shared.Alert;
+using Content.Shared.Whitelist;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
@@ -58,6 +59,7 @@ public abstract class SharedEnsnareableSystem : EntitySystem
     [Dependency] private   readonly SharedHandsSystem _hands = default!;
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private   readonly EntityWhitelistSystem _entityWhitelist = default!; // RW
 
     public override void Initialize()
     {
@@ -300,6 +302,11 @@ public abstract class SharedEnsnareableSystem : EntitySystem
         //Don't do anything if they don't have the ensnareable component.
         if (!TryComp<EnsnareableComponent>(target, out var ensnareable))
             return false;
+
+        // RW start
+        if (component.IgnoredTargets is not null && _entityWhitelist.IsValid(component.IgnoredTargets, target))
+            return false;
+        // RW end
 
         var numEnsnares = ensnareable.Container.ContainedEntities.Count;
 

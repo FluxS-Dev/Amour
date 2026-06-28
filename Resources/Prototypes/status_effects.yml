@@ -73,6 +73,9 @@
   id: StaminaModifier
 
 - type: statusEffect
+  id: PhaseShifted # RW
+
+- type: statusEffect
   id: Flashed
 
 - type: statusEffect

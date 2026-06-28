@@ -63,6 +63,7 @@
   - EnergyCautery
   - AdvancedBoneGel
   - OmnimedTool
+  - LifeTrigger # RW: add life trigger
 
 - type: latheRecipePack
   id: MedicalCybernetics

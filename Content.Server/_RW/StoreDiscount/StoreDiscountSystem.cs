@@ -93,12 +93,14 @@ public sealed class StoreDiscountSystem : EntitySystem
         _random.Shuffle(candidates);
         GenerateDiscounts(candidates, sales, playerCount);
 
+        /* Включить когда будет добавлен список
         if (!sales.ShortagesEnabled)
             return;
 
         candidates.RemoveAll(listing => _market.ContainsKey(listing.ID));
         _random.Shuffle(candidates);
         GenerateShortages(candidates, sales);
+        */
     }
 
     private void GenerateDiscounts(

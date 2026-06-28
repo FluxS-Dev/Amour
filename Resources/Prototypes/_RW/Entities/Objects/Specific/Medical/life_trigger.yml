@@ -1,0 +1,61 @@
+- type: entity
+  parent: BaseItem
+  id: LifeTrigger
+  name: life trigger
+  description: A surgical implant that attaches to the heart and sends a signal when a specific health state is reached.
+  components:
+  - type: Sprite
+    sprite: _RW/Objects/Specific/Medical/life_trigger.rsi
+    state: icon
+  - type: LifeTrigger
+  - type: DeviceLinkSource
+    ports:
+    - LifeTriggered
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 30
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Glass: 25
+      Silver: 10
+
+- type: entity
+  parent: SurgeryStepBase
+  id: SurgeryStepAttachLifeTrigger
+  name: Attach life trigger
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: LifeTrigger
+    duration: 5
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/manipulation.rsi
+    state: insertion
+  - type: SurgeryStepAttachLifeTrigger
+
+- type: entity
+  parent: BasePartSurgery
+  id: SurgeryAttachLifeTrigger
+  name: Attach Life Trigger to Heart
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - SurgeryStepAttachLifeTrigger
+  - type: SurgeryPartCondition
+    parts: [ Chest ]
+  - type: SurgeryOrganCondition
+    organ:
+    - type: Heart
+
+- type: latheRecipe
+  id: LifeTrigger
+  result: LifeTrigger
+  completetime: 2
+  materials:
+    Steel: 50
+    Glass: 25
+    Silver: 10

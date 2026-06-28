@@ -2,9 +2,9 @@ namespace Content.Shared.Inventory;
 
 public partial class InventorySystem
 {
-    private static readonly TimeSpan QuickSelfUnequipDelay = TimeSpan.FromSeconds(1);
-    private static readonly TimeSpan JumpsuitSelfUnequipDelay = TimeSpan.FromSeconds(5);
-    private static readonly TimeSpan OuterClothingSelfUnequipDelay = TimeSpan.FromSeconds(3);
+    private static readonly TimeSpan QuickSelfUnequipDelay = TimeSpan.FromSeconds(0.5);
+    private static readonly TimeSpan JumpsuitSelfUnequipDelay = TimeSpan.FromSeconds(2.5);
+    private static readonly TimeSpan OuterClothingSelfUnequipDelay = TimeSpan.FromSeconds(1.5);
 
     private static TimeSpan GetUnequipDelay(
         EntityUid actor,

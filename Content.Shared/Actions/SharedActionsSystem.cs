@@ -207,6 +207,11 @@ public abstract class SharedActionsSystem : EntitySystem
 
     private void OnActionShutdown(Entity<ActionComponent> ent, ref ComponentShutdown args)
     {
+        // RW start
+        if (TerminatingOrDeleted(ent.Owner))
+            return;
+        // RW end
+
         if (ent.Comp.AttachedEntity is {} user && !TerminatingOrDeleted(user))
             RemoveAction(user, (ent, ent));
     }
@@ -1014,7 +1019,7 @@ public abstract class SharedActionsSystem : EntitySystem
         DirtyField(ent, ent.Comp, nameof(ActionComponent.AttachedEntity));
         ActionRemoved((performer, performer.Comp), ent);
 
-        if (ent.Comp.Temporary)
+        if (ent.Comp.Temporary && !TerminatingOrDeleted(ent)) // RW
             QueueDel(ent);
     }
 

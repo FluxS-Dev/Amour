@@ -1,0 +1,4 @@
+- type: sourcePort
+  id: LifeTriggered
+  name: signal-port-name-life-triggered
+  description: signal-port-description-life-triggered

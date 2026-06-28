@@ -8,6 +8,7 @@
   id: OrganSlaughterHeart
   name: demonic heart
   components:
+  - type: Appearance # RW
   - type: Sprite
     sprite: _Goobstation/SlaughterDemon/heart.rsi
     state: demon_heart

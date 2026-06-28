@@ -110,6 +110,7 @@
   name: cybernetic heart
   description: A precision-tuned heart that slows down medicine absorption while hastening the absorption of poisons and narcotics resulting in weakened effects.
   components:
+  - type: Appearance # RW
   - type: Sprite
     state: heart-on
   - type: Heart

@@ -56,11 +56,11 @@ public sealed class GulagSystem : EntitySystem
 {
     private static readonly ResPath GulagMapPath = new("/Maps/_Amour/Gulag/gulag.yml");
     private static readonly ProtoId<BiomeTemplatePrototype> GulagBiome = "GulagBiome";
-    private static readonly EntProtoId GulagCrate = "CrateGulag";
+    // private static readonly EntProtoId GulagCrate = "CrateGulag";
     private static readonly ProtoId<StartingGearPrototype> GulagRegulatingCollarGear = "GulagRegulatingCollarGear";
     private static readonly ProtoId<StartingGearPrototype> GulagGoodBoyCollarGear = "GulagGoodBoyCollarGear";
     private static readonly ProtoId<StartingGearPrototype> GulagPrisonerGear = "GulagPrisonerGear";
-    private static readonly ProtoId<CargoAccountPrototype> CargoAccount = "Cargo";
+    // private static readonly ProtoId<CargoAccountPrototype> CargoAccount = "Cargo";
     private const string NeckSlot = "neck";
 
     [Dependency] private readonly AdminSystem _admin = default!;
@@ -94,17 +94,17 @@ public sealed class GulagSystem : EntitySystem
     private readonly Dictionary<ICommonSession, List<ServerBanDef>> _cachedTemporaryBans = [];
     private readonly Dictionary<int, HashSet<ICommonSession>> _cachedBanSessions = [];
     private readonly Dictionary<int, PendingSentenceReduction> _pendingSentenceReductions = [];
-    private readonly Dictionary<ProtoId<MaterialPrototype>, int> _gulagMaterialStorage = [];
+    // private readonly Dictionary<ProtoId<MaterialPrototype>, int> _gulagMaterialStorage = [];
     private readonly List<EntityCoordinates> _spawnCoordinates = [];
 
     private readonly TimeSpan _safeguardUpdateRate = TimeSpan.FromSeconds(10);
-    private readonly TimeSpan _shuttleFillUpdateRate = TimeSpan.FromMinutes(10);
+    // private readonly TimeSpan _shuttleFillUpdateRate = TimeSpan.FromMinutes(10);
 
     private double _pointsToTimeRatio;
     private MapId? _activeMap;
     private EntityUid? _mapEntity;
     private TimeSpan _nextSafeguardUpdate;
-    private TimeSpan _nextShuttleFillUpdate;
+    // private TimeSpan _nextShuttleFillUpdate;
 
     public override void Initialize()
     {
@@ -124,7 +124,7 @@ public sealed class GulagSystem : EntitySystem
 
         SubscribeLocalEvent<GulagBoundComponent, GetAntagSelectionBlockerEvent>(OnAntagSelectionBlocker);
         SubscribeLocalEvent<GulagOreProcessorComponent, MaterialEntityInsertedEvent>(OnOreInserted);
-        SubscribeLocalEvent<GulagFillContainerComponent, MapInitEvent>(OnGulagContainerSpawned);
+        // SubscribeLocalEvent<GulagFillContainerComponent, MapInitEvent>(OnGulagContainerSpawned);
 
         SubscribeLocalEvent<ActorComponent, AttemptFollowEvent>(OnAttemptFollow);
         SubscribeLocalEvent<ActorComponent, GulagChatMessageAttemptEvent>(OnChatMessageAttempt);
@@ -139,9 +139,10 @@ public sealed class GulagSystem : EntitySystem
             Safeguard();
             _nextSafeguardUpdate = _timing.CurTime + _safeguardUpdateRate;
         }
-
+        /*
         if (_timing.CurTime >= _nextShuttleFillUpdate && TryFillCargoShuttle())
             _nextShuttleFillUpdate = _timing.CurTime + _shuttleFillUpdateRate;
+        */
     }
 
     /// <summary>
@@ -389,7 +390,7 @@ public sealed class GulagSystem : EntitySystem
             var protoId = new ProtoId<MaterialPrototype>(materialId);
 
             points += material.Price * volume;
-            _gulagMaterialStorage[protoId] = volume + _gulagMaterialStorage.GetValueOrDefault(protoId);
+            // _gulagMaterialStorage[protoId] = volume + _gulagMaterialStorage.GetValueOrDefault(protoId);
             _materialStorage.TrySetMaterialAmount(ent.Owner, materialId, 0, storage);
         }
 
@@ -426,6 +427,7 @@ public sealed class GulagSystem : EntitySystem
             PopupType.Medium);
     }
 
+    /*
     private void OnGulagContainerSpawned(Entity<GulagFillContainerComponent> ent, ref MapInitEvent args)
     {
         var coordinates = Transform(ent).Coordinates;
@@ -441,6 +443,7 @@ public sealed class GulagSystem : EntitySystem
 
         _gulagMaterialStorage.Clear();
     }
+    */
 
     private void OnRoundStarting(RoundStartingEvent ev)
     {
@@ -478,7 +481,7 @@ public sealed class GulagSystem : EntitySystem
         _mapEntity = null;
         _spawnCoordinates.Clear();
         _nextSafeguardUpdate = TimeSpan.Zero;
-        _nextShuttleFillUpdate = TimeSpan.Zero;
+        // _nextShuttleFillUpdate = TimeSpan.Zero;
     }
 
     private async void ApplyPendingSentenceReductions()
@@ -538,6 +541,7 @@ public sealed class GulagSystem : EntitySystem
         }
     }
 
+    /*
     private bool TryFillCargoShuttle()
     {
         if (_gulagMaterialStorage.Count == 0 ||
@@ -562,6 +566,7 @@ public sealed class GulagSystem : EntitySystem
             CargoAccount,
             (station, stationData));
     }
+    */
 
     private EntityUid? GetMainStation()
     {

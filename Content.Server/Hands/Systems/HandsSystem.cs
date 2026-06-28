@@ -379,6 +379,14 @@ namespace Content.Server.Hands.Systems
 
             // Let other systems change the thrown entity (useful for virtual items)
             // or the throw strength.
+            // RW start
+            var itemEv = new BeforeGettingThrownEvent(throwEnt.Value, direction, throwSpeed, player);
+            RaiseLocalEvent(throwEnt.Value, ref itemEv);
+
+            if (itemEv.Cancelled)
+                return true;
+            // RW end
+
             // Goobstation start - added thrower's velocity for inertia
             var holderVelocity = _physics.GetMapLinearVelocity(player);
             var modifier = MathF.Max(0f, Vector2.Dot(direction.Normalized(), holderVelocity));

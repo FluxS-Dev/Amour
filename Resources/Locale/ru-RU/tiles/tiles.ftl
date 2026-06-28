@@ -1,4 +1,5 @@
 tiles-space = космос
+tiles-cult-floor = пол культа
 tiles-plating = покрытие
 tiles-lattice = решётка
 tiles-lattice-train = решётка поезда

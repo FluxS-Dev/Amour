@@ -25,7 +25,11 @@
   id: OrganSpaceAnimalHeart
   name: space animal heart
   components:
+  # RW start
+  - type: Heart
+  - type: Appearance
   - type: Organ
+    slotId: heart
     intCap: 21
     integrity: 21
     integrityThresholds:
@@ -34,15 +38,27 @@
       Destroyed: 0  
     onAdd:
     - type: PressureImmunity
+  # RW end
 
 - type: entity
   parent: [ OrganAnimalHeart, BaseMajorContraband ]
   id: OrganGoliathHeart
   name: goliath heart
   components:
+  # RW start
+  - type: Heart
+  - type: Appearance
   - type: Organ
+    slotId: heart
+    intCap: 14
+    integrity: 14
+    integrityThresholds:
+      Normal: 14
+      Damaged: 6
+      Destroyed: 0
     onAdd:
     - type: GoliathTentacle
+  # RW end
   - type: Sprite
     sprite: _Shitmed/Mobs/Species/Space/Goliath/organs.rsi
     state: heart-on

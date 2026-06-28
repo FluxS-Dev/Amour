@@ -1,0 +1,407 @@
+﻿- type: entity
+  parent: BaseAction
+  id: ActionBloodCultSelectSpells
+  name: Prepare blood spells
+  description: Opens the menu to prepare blood spells.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: blood_spells
+  - type: InstantAction
+    event: !type:BloodCultSelectSpellsEvent {}
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodCultRemoveSpells
+  name: Remove blood spells
+  description: Opens the menu to remove prepared blood spells.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: gone
+  - type: InstantAction
+    event: !type:BloodCultRemoveSpellsEvent {}
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodCultStun
+  name: Stun
+  description: Empowers your hand to stun and mute a victim on contact.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    temporary: true
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: stun
+  - type: TargetAction
+    checkCanAccess: false
+    range: 3
+    interactOnMiss: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - Body
+    event: !type:BloodCultStunEvent
+      speech: "Fuu ma'jin!"
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodCultTeleport
+  name: Teleport
+  description: Empowers your hand to teleport yourself or another cultist to a teleport rune on contact.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    temporary: true
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: teleport
+  - type: TargetAction
+    checkCanAccess: false
+    range: 3
+    interactOnMiss: false
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - BloodCultist
+    event: !type:BloodCultTeleportEvent
+      speech: "Sas'so c'arta forbici"
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodCultEmp
+  name: Electromagnetic Pulse
+  description: Emits a large electromagnetic pulse.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    temporary: true
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: create_emp
+  - type: InstantAction
+    event: !type:BloodCultEmpEvent
+      speech: "Ta'gh fara'qha fel d'amar det!"
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodCultShadowShackles
+  name: Shadow Shackles
+  description: Empowers your hand to handcuff a victim on contact, and mute them if successful.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    temporary: true
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: shackles
+  - type: TargetAction
+    checkCanAccess: false
+    range: 3
+    interactOnMiss: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - Body
+    event: !type:BloodCultShacklesEvent
+      speech: "In'totum Lig'abis!"
+  - type: LimitedCharges
+    maxCharges: 4
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodCultTwistedConstruction
+  name: Twisted Construction
+  description: Empowers your hand to corrupt certain metallic objects.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    temporary: true
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: transmute
+  - type: TargetAction
+    checkCanAccess: false
+    range: 3
+    interactOnMiss: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      tags:
+      - TwistedConstructionTarget
+    event: !type:BloodCultTwistedConstructionEvent
+      speech: "Ethra p'ni dedol!"
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodCultSummonCombatEquipment
+  name: Summon Combat Equipment
+  description: Allows you to summon combat cult gear, including cult armor, a cult bola and a cult sword.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    temporary: true
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: summon_combat_equipment
+  - type: InstantAction
+    event: !type:SummonEquipmentEvent
+      speech: "Wur d'dai leev'mai k'sagan!"
+      prototypes:
+        outerClothing: ClothingOuterCultArmor
+        hand1: EldritchLongsword
+        hand2: CultBola
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodCultSummonRitualDagger
+  name: Summon Ritual Dagger
+  description: Allows you to summon a ritual dagger, in case you've lost the dagger that was given to you.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    temporary: true
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: summon_dagger
+  - type: InstantAction
+    event: !type:SummonEquipmentEvent
+      speech: "Wur d'dai leev'mai k'sagan!"
+      prototypes:
+        hand: RitualDagger
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodCultBloodRites
+  name: Blood Rites
+  description: Empowers your hand to absorb blood to be used for advanced rites, or heal a cultist on contact. Use the spell in-hand to cast advanced rites
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    useDelay: 3
+    temporary: true
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: blood_rites
+  - type: InstantAction
+    event: !type:SummonEquipmentEvent
+      speech: "Fel'th Dol Ab'orod!"
+      prototypes:
+        hand1: BloodRitesAura
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionSummonCultFloor
+  name: Summon Cult Floor
+  description: This spell constructs a cult floor.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 10
+    itemIconStyle: BigAction
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: create_cult_floor
+  - type: TargetAction
+    checkCanAccess: false
+    range: 5
+  - type: WorldTargetAction
+    event: !type:PlaceTileEntityEvent
+      tileId: CultFloor
+      audio: !type:SoundPathSpecifier
+        path: /Audio/_RW/BloodCult/curse.ogg
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionLesserConstruction
+  name: Lesser Construction
+  description: This spell constructs a cult wall.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 20
+    itemIconStyle: BigAction
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: lesser_construct
+  - type: TargetAction
+    checkCanAccess: false
+    range: 5
+  - type: WorldTargetAction
+    event: !type:PlaceTileEntityEvent
+      entity: WallCult
+      audio: !type:SoundPathSpecifier
+        path: /Audio/_RW/BloodCult/curse.ogg
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionSummonCultDoor
+  name: Summon Cult Door
+  description: This spell constructs a cult door.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: lesser_construct
+  - type: TargetAction
+    checkCanAccess: false
+    range: 5
+  - type: WorldTargetAction
+    event: !type:PlaceTileEntityEvent
+      entity: CultDoor
+      audio: !type:SoundPathSpecifier
+        path: /Audio/_RW/BloodCult/curse.ogg
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionSummonSoulStone
+  name: Summon Soulshard
+  description: This spell reaches into Nar'Sie's realm, summoning one of the legendary fragments across time and space.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: create_soul_stone
+  - type: TargetAction
+    checkCanAccess: false
+    range: 5
+  - type: WorldTargetAction
+    event: !type:PlaceTileEntityEvent
+      entity: SoulShardGhost
+      audio: !type:SoundPathSpecifier
+        path: /Audio/_RW/BloodCult/curse.ogg
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionSummonSoulStoneHoly
+  name: Summon Holy Soulshard
+  description: This spell reaches into Nar'Sie's realm, summoning one of the legendary fragments across time and space.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: create_soul_stone
+  - type: TargetAction
+    checkCanAccess: false
+    range: 5
+  - type: WorldTargetAction
+    event: !type:PlaceTileEntityEvent
+      entity: SoulShardHolyGhost
+      audio: !type:SoundPathSpecifier
+        path: /Audio/_RW/BloodCult/curse.ogg
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionForceWallCult
+  name: Shield
+  description: This spell creates a temporary forcefield to shield yourself and allies from incoming fire.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 40
+    itemIconStyle: BigAction
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: summon_force_wall
+  - type: InstantAction
+    event: !type:InstantSpawnSpellEvent
+      prototype: WallForceCult
+      posData: !type:TargetInFront
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionPhaseShift
+  name: Phase Shift
+  description: This spell allows you to pass through walls.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: phase_shift
+  - type: InstantAction
+    event: !type:PhaseShiftEvent
+  - type: BaseCultSpell
+
+- type: entity
+  parent: BaseAction
+  id: ActionGauntletEcho
+  name: Gauntlet Echo
+  description: Channels energy into your gauntlet - firing its essence forward in a slow moving, yet devastating, attack
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 30
+    raiseOnUser: true
+    itemIconStyle: BigAction
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_RW/BloodCult/resonator_blast.ogg
+    icon:
+      sprite: _RW/BloodCult/actions.rsi
+      state: gauntlet_echo
+  - type: TargetAction
+    checkCanAccess: false
+    range: 15
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileGauntlet
+      speed: 5
+  - type: BaseCultSpell

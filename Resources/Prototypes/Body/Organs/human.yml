@@ -377,6 +377,7 @@
       Damaged: 9
       Destroyed: 0
     slotId: heart # Shitmed Change
+  - type: Appearance # RW
   - type: Sprite
     state: heart-on
   # The heart 'metabolizes' medicines and poisons that aren't filtered out by other organs.

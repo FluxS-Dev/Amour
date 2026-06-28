@@ -513,7 +513,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (door.State is DoorState.Welded or DoorState.Closed)
             return false;
 
-        var ev = new BeforeDoorClosedEvent(door.PerformCollisionCheck, partial);
+        var ev = new BeforeDoorClosedEvent(door.PerformCollisionCheck, partial) { User = user }; // RW
         RaiseLocalEvent(uid, ev);
         if (ev.Cancelled)
             return false;

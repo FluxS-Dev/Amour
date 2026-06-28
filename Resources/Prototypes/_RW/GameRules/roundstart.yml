@@ -1,0 +1,30 @@
+- type: entity
+  id: BloodCult
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: GameRule
+    minPlayers: 30
+  - type: BloodCultRule
+  - type: AntagSelection
+    definitions:
+    - prefRoles: [ BloodCultist ]
+      max: 4
+      min: 2
+      playerRatio: 15
+      briefing:
+        text: blood-cult-role-greeting
+        color: Red
+        sound: "/Audio/_RW/BloodCult/blood_cult_greeting.ogg"
+      startingGear: BloodCultistGear
+      components:
+      - type: BloodCultist
+      - type: BloodCultSpellsHolder
+      - type: UserInterface
+        interfaces:
+          enum.RadialSelectorUiKey.Key:
+            type: AttachedRadialSelectorMenuBUI
+          enum.ListViewSelectorUiKey.Key:
+            type: ListViewSelectorBUI
+      mindRoles:
+      - MindRoleBloodCultist
