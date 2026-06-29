@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 using Content.Server.Anomaly.Effects;
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 
 namespace Content.Server.Anomaly.Components;
@@ -12,6 +13,14 @@ namespace Content.Server.Anomaly.Components;
 [RegisterComponent, Access(typeof(BluespaceAnomalySystem))]
 public sealed partial class BluespaceAnomalyComponent : Component
 {
+    // RW start
+    /// <summary>
+    /// The damage dealt to entities when they enter a portal created by/on the anomaly
+    /// </summary>
+    [DataField]
+    public DamageSpecifier TeleportDamage = new();
+    // RW end
+
     /// <summary>
     /// The maximum radius that the shuffle effect will extend for
     /// scales with stability

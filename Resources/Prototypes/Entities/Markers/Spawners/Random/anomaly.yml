@@ -41,7 +41,7 @@
     - id: RandomRockAnomalySpawner
     - id: AnomalyLiquid
     - id: AnomalyFlora
-    - id: AnomalyShadow
+#    - id: AnomalyShadow # RW: disable spawn
     - id: AnomalyTech
 #    - id: AnomalySanta # RW: disable spawn
 #      weight: .4 #  Make more common in december
@@ -90,7 +90,7 @@
     children:
     - id: AnomalyTrapPyroclastic
     - id: AnomalyTrapElectricity
-    - id: AnomalyTrapShadow
+#    - id: AnomalyTrapShadow # RW: disable spawn
     - id: AnomalyTrapIce
     - id: AnomalyTrapFlora
     - id: AnomalyTrapBluespace

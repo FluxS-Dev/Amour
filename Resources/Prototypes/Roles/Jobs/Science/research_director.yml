@@ -148,7 +148,7 @@
   icon: "JobIconResearchDirector"
   supervisors: job-supervisors-captain
   canBeAntag: false
-  antagAdvantage: 15 # Goobstation # RW 75 > 15
+  antagAdvantage: 75 # Goobstation
 #  guides: # goobstation | Orion-Edit: Removed because dont have this SOP
 #  - Science
 #  - Command

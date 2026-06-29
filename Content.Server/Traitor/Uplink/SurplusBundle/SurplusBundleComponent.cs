@@ -17,5 +17,5 @@ public sealed partial class SurplusBundleComponent : Component
     ///     Total price of all content inside bundle.
     /// </summary>
     [DataField]
-    public int TotalPrice = 4; // RW 20 > 4
+    public int TotalPrice = 20;
 }

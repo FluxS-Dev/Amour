@@ -21,9 +21,11 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Physics;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Physics;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Dynamics;
@@ -254,10 +256,20 @@ public abstract class SharedPortalSystem : EntitySystem
         {
             var randVector = _random.NextVector2(component.MaxRandomRadius);
             newCoords = coords.Offset(randVector);
-            if (!_lookup.AnyEntitiesIntersecting(_transform.ToMapCoordinates(newCoords), LookupFlags.Static))
+            // RW start
+            var mapCoords = _transform.ToMapCoordinates(newCoords);
+            var safe = true;
+            foreach (var (_, fix) in _lookup.GetEntitiesInRange<FixturesComponent>(mapCoords, 0.35f, LookupFlags.Static))
             {
-                break;
+                if (fix.Fixtures.Any(x => x.Value.Hard && (x.Value.CollisionLayer & (int) CollisionGroup.Impassable) != 0))
+                {
+                    safe = false;
+                    break;
+                }
             }
+            if (safe)
+                break;
+            // RW end
         }
 
         TeleportEntity(portal, subject, newCoords);

@@ -5,7 +5,7 @@
   icon: { sprite: /Textures/_Orion/Objects/Misc/books.rsi, state: syndicate }
   productEntity: ManualCodespeak
   cost:
-    Telecrystal: 1 # RW 2 > 1
+    Telecrystal: 2
   categories:
   - UplinkDeception
 
@@ -15,7 +15,7 @@
   description: uplink-energy-dome-desc
   productEntity: EnergyDomeGeneratorPersonalSyndie
   cost:
-    Telecrystal: 6 # RW 30 > 6
+    Telecrystal: 30
   categories:
     - UplinkWearables
   conditions:
@@ -30,7 +30,7 @@
   description: uplink-holo-cigar-desc
   productEntity: HoloCigar
   cost:
-    Telecrystal: 14 # RW 70 > 14
+    Telecrystal: 70
   categories:
   - UplinkWearables
   conditions:
@@ -47,7 +47,7 @@
   icon: { sprite: /Textures/Structures/Specific/anomaly.rsi, state: anom4 }
   productEntity: ScramImplanter
   cost:
-    Telecrystal: 8 # RW 40 > 8
+    Telecrystal: 40
   categories:
     - UplinkImplants
   conditions:
@@ -63,7 +63,7 @@
   icon: { sprite: /Textures/_Orion/Mobs/Aliens/cortical_borer_egg.rsi, state: icon }
   productEntity: CorticalBorerEgg
   cost:
-    Telecrystal: 2 # RW 8 > 2
+    Telecrystal: 8
   categories:
   - UplinkAllies
   conditions:
@@ -80,7 +80,7 @@
   icon: { sprite: /Textures/_Orion/Mobs/Aliens/cortical_borer_egg.rsi, state: icon }
   productEntity: CorticalBorerEgg
   cost:
-    Telecrystal: 4 # RW 20 > 4
+    Telecrystal: 20
   categories:
   - UplinkAllies
   conditions:
@@ -95,7 +95,7 @@
   description: uplink-combat-medipen-desc
   productEntity: CombatMedipen
   cost:
-    Telecrystal: 4 # RW 19 > 4
+    Telecrystal: 19
   categories:
   - UplinkChemicals
   conditions: # Orion: Too expensive for Nukies
@@ -111,7 +111,7 @@
   description: uplink-advanced-combat-medipen-desc
   productEntity: AdvancedCombatMedipen
   cost:
-    Telecrystal: 8 # Amour edit - 54 > 40 # RW 40 > 8
+    Telecrystal: 40 # Amour edit - 54 > 40
   categories:
   - UplinkChemicals
   conditions: # Orion: Too expensive for Nukies
@@ -128,7 +128,7 @@
   icon: { sprite: _Orion/Objects/Weapons/Guns/Shotguns/zauer/big.rsi, state: icon }
   productEntity: WeaponShotgunZauer
   cost:
-    Telecrystal: 16 # RW 80 > 16
+    Telecrystal: 80
   categories:
   - UplinkWeaponry
 
@@ -139,7 +139,7 @@
   icon: { sprite: _Orion/Objects/Weapons/Guns/LMGs/rpd/big.rsi, state: icon }
   productEntity: WeaponLightMachineGunRPD
   cost:
-    Telecrystal: 23 # RW 115 > 23
+    Telecrystal: 115
   categories:
   - UplinkWeaponry
 
@@ -150,7 +150,7 @@
   icon: { sprite: _Orion/Objects/Weapons/Guns/Ammunition/Magazines/Heavy/rpd.rsi, state: base }
   productEntity: MagazineLightMachineGunRPD
   cost:
-    Telecrystal: 5 # RW 22 > 5
+    Telecrystal: 22
   categories:
   - UplinkAmmo
 
@@ -161,7 +161,7 @@
   productEntity: ReinforcementRadioSyndicateCyborgSaboteur
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-borg-saboteur }
   cost:
-    Telecrystal: 44 # RW 220 > 44
+    Telecrystal: 220
   categories:
     - UplinkAllies
   conditions:
@@ -179,7 +179,7 @@
   description: uplink-stamp-chameleon-desc
   productEntity: RubberStampChameleon
   cost:
-    Telecrystal: 4 # RW 20 > 4
+    Telecrystal: 20
   categories:
   - UplinkDeception
 
@@ -189,7 +189,7 @@
   description: protocol-crab17-phone-desc
   productEntity: SuspiciousPhone
   cost:
-    Telecrystal: 7 # TODO: 7 # RW 35 > 7
+    Telecrystal: 35 # TODO: 7
   categories:
   - UplinkDisruption
   conditions:

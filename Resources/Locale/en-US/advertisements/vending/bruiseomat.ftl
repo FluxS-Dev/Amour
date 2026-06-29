@@ -40,8 +40,7 @@ thankyou-bruiseomat-18 = Remember your pinpointer!
 thankyou-bruiseomat-19 = See you soon! Or maybe never again, that one's more likely!
 thankyou-bruiseomat-20 = Rescue another one of me! I need a friend!
 thankyou-bruiseomat-21 = You're going to sober up before the mission, right?
-# RW 5 > 1
-thankyou-bruiseomat-22 = 1 telecrystal says you won't make it to the shuttle before you fall over.
+thankyou-bruiseomat-22 = 5 telecrystal says you won't make it to the shuttle before you fall over.
 thankyou-bruiseomat-23 = The soda fountain's over there, lightweight.
 thankyou-bruiseomat-24 = Did you spend your TC on cat ears?
 thankyou-bruiseomat-25 = Really? That's what you wanted to drink?

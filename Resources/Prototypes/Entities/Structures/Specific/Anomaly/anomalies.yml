@@ -415,6 +415,9 @@
     color: "#00ccff"
     castShadows: false
   - type: BluespaceAnomaly
+    teleportDamage:
+      types:
+        Cellular: 5
   - type: Portal
   - type: Fixtures
     fixtures:

@@ -1,0 +1,21 @@
+- type: entity
+  abstract: true
+  id: ItemSkinCaseBase
+  parent: BaseItem
+  components:
+    - type: Sprite
+      sprite: _RW/Fluff/skin.rsi
+      state: icon
+
+- type: entity
+  parent: ItemSkinCaseBase
+  id: StunbatonSkinCase
+  name: чехол для дубинки
+  suffix: TEST
+  description: Красивый чехол для телескопической дубинки.
+  components:
+    - type: ItemSkinCase
+      targetPrototype: Stunbaton
+      spriteRsi: _Amour/Fluff/Boosty/contactor_batton.rsi
+      inhandRsi: _Amour/Fluff/Boosty/contactor_batton.rsi
+      uses: 3

@@ -21,6 +21,7 @@ using Content.Server.Radio.Components;
 using Content.Shared._Orion.Radio;
 using Content.Shared.Chat;
 using Content.Shared.Examine;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Radio;
@@ -102,7 +103,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         if (!HasComp<HeadsetComponent>(leftEar) || !HasComp<HeadsetComponent>(rightEar))
             return;
 
-        var entityName = MetaData(uid).EntityName;
+        var entityName = Identity.Name(uid, EntityManager, args.Examiner); // RW
         args.PushMarkup(Loc.GetString("examine-headset-double-wearing", ("entityName", entityName)));
     }
     // Orion-End

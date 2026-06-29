@@ -1,4 +1,4 @@
-﻿# SPDX-FileCopyrightText: 2025 BloodfiendishOperator <141253729+Diggy0@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 BloodfiendishOperator <141253729+Diggy0@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 # SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
 #
@@ -17,9 +17,12 @@
   markingLimits: MobShadowkinMarkingLimits
   dollPrototype: MobShadowkinDummy
   skinColoration: Hues
-  naming: First
-  maleFirstNames: NamesShadowkin
-  femaleFirstNames: NamesShadowkin
+  # RW start
+  naming: FirstLast
+  maleFirstNames: NamesShadowkinFirst
+  femaleFirstNames: NamesShadowkinFirst
+  lastNames: NamesShadowkinLast
+  # RW end
   minAge: 18
   maxAge: 250
   youngAge: 80

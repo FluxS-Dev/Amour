@@ -41,7 +41,7 @@
     - id: AnomalyCoreRock
     - id: AnomalyCoreLiquid
     - id: AnomalyCoreFlora
-    - id: AnomalyCoreShadow
+#    - id: AnomalyCoreShadow # RW: disable spawn
     - id: AnomalyCoreTech
 #    - id: AnomalyCoreSanta # RW: disable spawn
 #      weight: 0.4 #same % value as AnomalySpawner
@@ -59,7 +59,7 @@
     - id: AnomalyCoreRockInert
     - id: AnomalyCoreLiquidInert
     - id: AnomalyCoreFloraInert
-    - id: AnomalyCoreShadowInert
+#    - id: AnomalyCoreShadowInert # RW: disable spawn
     - id: AnomalyCoreTechInert
 #    - id: AnomalyCoreSantaInert # RW: disable spawn
 #      weight: 0.4 #same % value as AnomalySpawner

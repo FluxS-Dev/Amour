@@ -44,7 +44,7 @@
     key: enum.StoreUiKey.Key
   - type: Store
     balance:
-      Telecrystal: 20 # RW 100 > 20
+      Telecrystal: 100
   - type: Tag
     tags:
       - ContravendUplink

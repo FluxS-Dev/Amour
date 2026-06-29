@@ -8,11 +8,11 @@
   parent: BaseUplinkRadio
   # Goobstation - Telecrystal rework
   id: LoneOpsUplink350TC
-  suffix: 70 TC, LoneOps # RW 350 > 70
+  suffix: 350 TC, LoneOps
   components:
   - type: Store
     balance:
-      Telecrystal: 70 # RW 350 > 70
+      Telecrystal: 350
   - type: Tag
     tags:
     - NukeOpsUplink

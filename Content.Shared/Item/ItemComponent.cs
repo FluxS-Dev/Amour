@@ -33,7 +33,9 @@ public sealed partial class ItemComponent : Component
     [Access(typeof(SharedItemSystem), typeof(SharedPseudoItemSystem))]
     public ProtoId<ItemSizePrototype> Size = "Small";
 
-    [Access(typeof(SharedItemSystem))]
+    // RW start
+    [Access(typeof(SharedItemSystem), typeof(_RW.Skin.SharedItemSkinSystem))]
+    // RW end
     [DataField]
     public Dictionary<HandLocation, List<PrototypeLayerData>> InhandVisuals = new();
 
@@ -45,7 +47,9 @@ public sealed partial class ItemComponent : Component
     /// <summary>
     ///     Rsi of the sprite shown on the player when this item is in their hands. Used to generate a default entry for <see cref="InhandVisuals"/>
     /// </summary>
-    [Access(typeof(SharedItemSystem))]
+    // RW start
+    [Access(typeof(SharedItemSystem), typeof(_RW.Skin.SharedItemSkinSystem))]
+    // RW end
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("sprite")]
     public string? RsiPath;

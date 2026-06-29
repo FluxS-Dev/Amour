@@ -20,8 +20,12 @@ using Content.Shared.Anomaly.Components;
 using Content.Shared.Database;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Teleportation.Components;
+using Content.Shared.Physics;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Collections;
+using Robust.Shared.Map;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 
 namespace Content.Server.Anomaly.Effects;
@@ -61,10 +65,17 @@ public sealed class BluespaceAnomalySystem : EntitySystem
         }
 
         _random.Shuffle(coords);
+        // RW start
+        var mapId = xform.MapID;
+        // RW end
         for (var i = 0; i < allEnts.Count; i++)
         {
-            _adminLogger.Add(LogType.Teleport, $"{ToPrettyString(allEnts[i])} has been shuffled to {coords[i]} by the {ToPrettyString(uid)} at {xform.Coordinates}");
-            _xform.SetWorldPosition(allEnts[i], coords[i]);
+            // RW start
+            var targetCoords = new MapCoordinates(coords[i], mapId);
+            var safePos = GetSafePosition(targetCoords);
+            _adminLogger.Add(LogType.Teleport, $"{ToPrettyString(allEnts[i])} has been shuffled to {safePos} by the {ToPrettyString(uid)} at {xform.Coordinates}");
+            _xform.SetWorldPosition(allEnts[i], safePos);
+            // RW end
         }
     }
 
@@ -76,6 +87,9 @@ public sealed class BluespaceAnomalySystem : EntitySystem
         var gridBounds = new Box2(mapPos - new Vector2(radius, radius), mapPos + new Vector2(radius, radius));
         var mobs = new HashSet<Entity<MobStateComponent>>();
         _lookup.GetEntitiesInRange(xform.Coordinates, component.MaxShuffleRadius, mobs, flags: LookupFlags.Uncontained);
+        // RW start
+        var mapId = xform.MapID;
+        // RW end
         foreach (var comp in mobs.Where(x => !HasComp<BlockTeleportComponent>(x))) // Goob edit
         {
             var ent = comp.Owner;
@@ -83,10 +97,13 @@ public sealed class BluespaceAnomalySystem : EntitySystem
             var randomY = _random.NextFloat(gridBounds.Bottom, gridBounds.Top);
 
             var pos = new Vector2(randomX, randomY);
+            // RW start
+            var safePos = GetSafePosition(new MapCoordinates(pos, mapId), 10f);
 
-            _adminLogger.Add(LogType.Teleport, $"{ToPrettyString(ent)} has been teleported to {pos} by the supercritical {ToPrettyString(uid)} at {mapPos}");
+            _adminLogger.Add(LogType.Teleport, $"{ToPrettyString(ent)} has been teleported to {safePos} by the supercritical {ToPrettyString(uid)} at {mapPos}");
 
-            _xform.SetWorldPosition(ent, pos);
+            _xform.SetWorldPosition(ent, safePos);
+            // RW end
             _audio.PlayPvs(component.TeleportSound, ent);
         }
     }
@@ -97,4 +114,33 @@ public sealed class BluespaceAnomalySystem : EntitySystem
             return;
         portal.MaxRandomRadius = (component.MaxPortalRadius - component.MinPortalRadius) * args.Severity + component.MinPortalRadius;
     }
+
+    // RW start
+    private bool IsPositionSafe(MapCoordinates coords)
+    {
+        foreach (var (_, fix) in _lookup.GetEntitiesInRange<FixturesComponent>(coords, 0.35f, LookupFlags.Static))
+        {
+            if (fix.Fixtures.Any(x => x.Value.Hard && (x.Value.CollisionLayer & (int) CollisionGroup.Impassable) != 0))
+                return false;
+        }
+
+        return true;
+    }
+
+    private Vector2 GetSafePosition(MapCoordinates coords, float searchRadius = 3f)
+    {
+        if (IsPositionSafe(coords))
+            return coords.Position;
+
+        for (var attempt = 0; attempt < 20; attempt++)
+        {
+            var offset = _random.NextVector2(searchRadius);
+            var newCoords = new MapCoordinates(coords.Position + offset, coords.MapId);
+            if (IsPositionSafe(newCoords))
+                return newCoords.Position;
+        }
+
+        return coords.Position;
+    }
+    // RW end
 }

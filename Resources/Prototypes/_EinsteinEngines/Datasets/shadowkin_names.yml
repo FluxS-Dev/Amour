@@ -5,7 +5,13 @@
 # Or something symbolic.
 
 - type: localizedDataset
-  id: NamesShadowkin
+  id: NamesShadowkinFirst
   values:
-    prefix: names-shadowkin-dataset-
-    count: 81
+    prefix: names-shadowkin-first-dataset-
+    count: 20
+
+- type: localizedDataset
+  id: NamesShadowkinLast
+  values:
+    prefix: names-shadowkin-last-dataset-
+    count: 20

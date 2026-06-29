@@ -5,7 +5,7 @@
   icon: { sprite: _Omu/Objects/Weapons/Guns/Battery/dislippler.rsi, state: base }
   productEntity: WeaponDislippler
   cost:
-    Telecrystal: 4 # RW 20 > 4
+    Telecrystal: 20
   categories:
   - UplinkWeaponry
   conditions:
