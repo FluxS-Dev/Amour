@@ -245,7 +245,8 @@
   - type: RandomHumanoidAppearance
   - type: RandomMetadata
     nameSegments:
-    - NamesShadowkin
+    - NamesShadowkinFirst
+    - NamesShadowkinLast
     nameFormat: random-metadata-name-format-default
 
 - type: entity

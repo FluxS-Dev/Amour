@@ -1,4 +1,4 @@
-﻿chat-trigger-cancel-button = Отмена
+chat-trigger-cancel-button = Отмена
 chat-trigger-send-anyway-button = Всё равно отправить
 
 chat-trigger-grammarnazi-title = Grammarnazi
@@ -18,6 +18,8 @@ brainrot-trigger-desc-generic =
 brainrot-trigger-desc-brainrot21 = Лучше используй что-то вроде... Трансвестит или мужеложец.
 
 brainrot-trigger-desc-brainrot14 = Во-первых, это уебищно звучит. Во-вторых, Синдром Сенсорной Депривации / S.S.D - неожиданное заболевание, твой персонаж не может знать что у него сейчас отомрет мозг. Лучше скажи что ты уходишь поспать.
+
+brainrot-trigger-desc-soviet = Ты кажется перепутал эпоху постсовка и далекое будущее всего человечества.
 
 grammarnazi-trigger-desc-grammar1 = Шаттл пишется с двумя Т
 

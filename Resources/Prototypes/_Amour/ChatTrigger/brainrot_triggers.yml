@@ -420,12 +420,12 @@
 - type: brainrotBotTrigger
   id: Brainrot84
   trigger: "[полиция; полицейский; полицейской; полицейские; полицейского; полиции; полицейскими]"
-  description: Ты кажется перепутал эпоху постсовка и далекое будущее всего человечества.
+  description: brainrot-trigger-desc-soviet
 
 - type: brainrotBotTrigger
   id: Brainrot85
   trigger: "[милиция; милиции; милиционер; милиционеры; милиционера; милиционером]"
-  description: Ты кажется перепутал эпоху постсовка и далекое будущее всего человечества.
+  description: brainrot-trigger-desc-soviet
 
 - type: brainrotBotTrigger
   id: Brainrot86
