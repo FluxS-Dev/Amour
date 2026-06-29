@@ -8,10 +8,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityTable.EntitySelectors;
+using Content.Server._RW.GameFlowControl;
 
 namespace Content.Server.StationEvents.Components;
 
-[RegisterComponent, Access(typeof(RampingStationEventSchedulerSystem))]
+[RegisterComponent, Access(typeof(RampingStationEventSchedulerSystem), typeof(GameFlowControlSystem))] // RW
 public sealed partial class RampingStationEventSchedulerComponent : Component
 {
     /// <summary>

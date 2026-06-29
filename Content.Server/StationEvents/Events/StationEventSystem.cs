@@ -28,6 +28,8 @@ using Content.Server.Station.Systems;
 using Content.Server.StationEvents.Components;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
+using Content.Shared._RW.GameFlowControl;
+using Content.Server._RW.GameFlowControl;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -58,6 +60,18 @@ public abstract class StationEventSystem<T> : GameRuleSystem<T> where T : ICompo
     protected override void Added(EntityUid uid, T component, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {
         base.Added(uid, component, gameRule, args);
+
+        // RW start
+        var gameFlowControl = EntityManager.System<GameFlowControlSystem>();
+        if (gameFlowControl.IsOccupied() && !HasComp<GameFlowControlApprovedComponent>(uid))
+        {
+            var pending = EnsureComp<PendingApprovalRuleComponent>(uid);
+            pending.Timeout = Timing.CurTime + TimeSpan.FromSeconds(30);
+            pending.IsStationEvent = true;
+            gameFlowControl.AddPendingRule(uid, MetaData(uid).EntityPrototype?.ID ?? "");
+            return;
+        }
+        // RW end
 
         if (!TryComp<StationEventComponent>(uid, out var stationEvent))
             return;
@@ -126,6 +140,11 @@ public abstract class StationEventSystem<T> : GameRuleSystem<T> where T : ICompo
         {
             if (!GameTicker.IsGameRuleAdded(uid, ruleData))
                 continue;
+
+            // RW start
+            if (HasComp<PendingApprovalRuleComponent>(uid))
+                continue;
+            // RW end
 
             if (!GameTicker.IsGameRuleActive(uid, ruleData) && !HasComp<DelayedStartRuleComponent>(uid))
             {

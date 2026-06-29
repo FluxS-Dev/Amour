@@ -28,6 +28,9 @@ using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Prototypes;
+using Content.Shared._RW.GameFlowControl;
+using Content.Server._RW.GameFlowControl;
+using Content.Server.StationEvents.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
@@ -92,6 +95,43 @@ public sealed partial class GameTicker
     public EntityUid AddGameRule(string ruleId)
     {
         var ruleEntity = Spawn(ruleId, MapCoordinates.Nullspace);
+        // RW start
+        var meta = MetaData(ruleEntity);
+        if (string.IsNullOrWhiteSpace(meta.EntityName))
+        {
+            _metaData.SetEntityName(ruleEntity, ruleId, meta);
+        }
+        // RW end
+
+        var currentTime = RunLevel == GameRunLevel.PreRoundLobby ? TimeSpan.Zero : RoundDuration();
+        if (!HasComp<RoundstartStationVariationRuleComponent>(ruleEntity) && !HasComp<StationVariationPassRuleComponent>(ruleEntity))
+        {
+            _allPreviousGameRules.Add((currentTime, ruleId + " (Pending)"));
+        }
+
+        // RW start
+        var gameFlowControl = EntityManager.System<GameFlowControlSystem>();
+        if (gameFlowControl.IsOccupied() && !HasComp<GameFlowControlApprovedComponent>(ruleEntity))
+        {
+            if (!HasComp<PendingApprovalRuleComponent>(ruleEntity))
+            {
+                var pending = EnsureComp<PendingApprovalRuleComponent>(ruleEntity);
+                pending.Timeout = _gameTiming.CurTime + TimeSpan.FromSeconds(30);
+                pending.IsStationEvent = HasComp<StationEventComponent>(ruleEntity);
+                gameFlowControl.AddPendingRule(ruleEntity, ruleId);
+            }
+            return ruleEntity;
+        }
+        // RW end
+
+        // If it starts immediately (not intercepted), replace the (Pending) entry in history
+        var pendingRuleIndex = _allPreviousGameRules.FindIndex(rule => rule.Item2 == ruleId + " (Pending)");
+        if (pendingRuleIndex != -1)
+        {
+            _allPreviousGameRules.RemoveAt(pendingRuleIndex);
+            _allPreviousGameRules.Add((currentTime, ruleId));
+        }
+
         _sawmill.Info($"Added game rule {ToPrettyString(ruleEntity)}");
         _adminLogger.Add(LogType.EventStarted, $"Added game rule {ToPrettyString(ruleEntity)}");
         var str = Loc.GetString("station-event-system-run-event", ("eventName", ToPrettyString(ruleEntity)));
@@ -107,12 +147,6 @@ public sealed partial class GameTicker
 
         var ev = new GameRuleAddedEvent(ruleEntity, ruleId);
         RaiseLocalEvent(ruleEntity, ref ev, true);
-
-        var currentTime = RunLevel == GameRunLevel.PreRoundLobby ? TimeSpan.Zero : RoundDuration();
-        if (!HasComp<RoundstartStationVariationRuleComponent>(ruleEntity) && !HasComp<StationVariationPassRuleComponent>(ruleEntity))
-        {
-            _allPreviousGameRules.Add((currentTime, ruleId + " (Pending)"));
-        }
 
         return ruleEntity;
     }
@@ -151,6 +185,21 @@ public sealed partial class GameTicker
 
         if (MetaData(ruleEntity).EntityPrototype?.ID is not { } id) // you really fucked up
             return false;
+
+        // RW start
+        var gameFlowControl = EntityManager.System<GameFlowControlSystem>();
+        if (gameFlowControl.IsOccupied() && !HasComp<GameFlowControlApprovedComponent>(ruleEntity))
+        {
+            if (!HasComp<PendingApprovalRuleComponent>(ruleEntity))
+            {
+                var pending = EnsureComp<PendingApprovalRuleComponent>(ruleEntity);
+                pending.Timeout = _gameTiming.CurTime + TimeSpan.FromSeconds(30);
+                pending.IsStationEvent = HasComp<StationEventComponent>(ruleEntity);
+                gameFlowControl.AddPendingRule(ruleEntity, id);
+            }
+            return true;
+        }
+        // RW end
 
         // If we already have it, then we just skip the delay as it has already happened.
         if (!RemComp<DelayedStartRuleComponent>(ruleEntity) && ruleData.Delay != null)
@@ -220,6 +269,17 @@ public sealed partial class GameTicker
         RaiseLocalEvent(ruleEntity, ref ev, true);
         return true;
     }
+
+    // RW start
+    public void RemovePendingGameRule(string ruleId)
+    {
+        var pendingRuleIndex = _allPreviousGameRules.FindIndex(rule => rule.Item2 == ruleId + " (Pending)");
+        if (pendingRuleIndex >= 0)
+        {
+            _allPreviousGameRules.RemoveAt(pendingRuleIndex);
+        }
+    }
+    // RW end
 
     /// <summary>
     ///     Returns true if a game rule with the given component has been added.

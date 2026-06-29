@@ -9,10 +9,11 @@
 
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityTable.EntitySelectors;
+using Content.Server._RW.GameFlowControl;
 
 namespace Content.Server.StationEvents.Components;
 
-[RegisterComponent, Access(typeof(BasicStationEventSchedulerSystem))]
+[RegisterComponent, Access(typeof(BasicStationEventSchedulerSystem), typeof(GameFlowControlSystem))] // RW
 public sealed partial class BasicStationEventSchedulerComponent : Component
 {
     /// <summary>
