@@ -44,7 +44,7 @@ override_adminname_in_client_ahelp = "10KE"
 advertise = 1
 advertise_interval = 30
 use_dynamic_hostname = true
-hub_urls = "https://hub.spacestation14.com/,https://hub.singularity14.co.uk/"
+hub_urls = "https://hub.spacestation14.com/"
 
 [infolinks]
 discord = "https://discord.gg/goobstation"
