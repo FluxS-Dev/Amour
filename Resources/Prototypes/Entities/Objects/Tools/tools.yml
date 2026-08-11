@@ -505,8 +505,8 @@
     materialComposition:
       Steel: 300
       Plastic: 100
-  - type: StaticPrice
-    price: 100
+  - type: StaticPrice #Amour - Cargo rebalance
+    price: 250
   - type: MeleeWeapon
     wideAnimationRotation: -90
     attackRate: 1.5

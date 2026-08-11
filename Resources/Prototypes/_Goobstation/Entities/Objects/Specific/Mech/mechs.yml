@@ -95,7 +95,7 @@
   - type: Damageable
     damageModifierSet: MediumArmorNT
   - type: StaticPrice
-    price: 1000
+    price: 8000
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -153,7 +153,7 @@
   - type: CanMoveInAir
   - type: MovementAlwaysTouching
   - type: StaticPrice
-    price: 1500
+    price: 8000
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -225,7 +225,7 @@
     baseWalkSpeed: 2
     baseSprintSpeed: 2.6 #Goobedit # Orion-Edit: 2 > 2.6
   - type: StaticPrice
-    price: 3000
+    price: 10000
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -290,7 +290,7 @@
     fuelCost: 30
     doAfterDelay: 15
   - type: StaticPrice
-    price: 5000
+    price: 15000
   - type: Tag
     tags:
     - DoorBumpOpener

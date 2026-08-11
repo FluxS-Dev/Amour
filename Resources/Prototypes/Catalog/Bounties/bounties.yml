@@ -31,7 +31,7 @@
 
 - type: cargoBounty
   id: BountyBaseballBat
-  reward: 4000
+  reward: 5000
   description: bounty-description-baseball-bat
   idPrefix: CC
   entries:
@@ -413,7 +413,7 @@
   description: bounty-description-syringe
   entries:
   - name: bounty-item-syringe
-    amount: 10
+    amount: 5
     whitelist:
       tags:
       - Syringe
@@ -488,7 +488,7 @@
 
 - type: cargoBounty
   id: BountyOrgans
-  reward: 2000
+  reward: 5000
   description: bounty-description-organs
   idPrefix: UNTH
   entries:
@@ -555,12 +555,12 @@
 
 - type: cargoBounty
   id: BountyFood
-  reward: 4000
+  reward: 20000
   description: bounty-description-food
   idPrefix: UNTH
   entries:
   - name: bounty-item-food
-    amount: 30
+    amount: 15
     whitelist:
       tags:
       - Meat

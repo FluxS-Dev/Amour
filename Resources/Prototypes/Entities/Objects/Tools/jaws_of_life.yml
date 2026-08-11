@@ -125,6 +125,8 @@
   - type: SurgeryTool # Shitmed
     startSound: /Audio/Items/change_jaws.ogg
     endSound: /Audio/Items/change_jaws.ogg
+  - type: StaticPrice #Amour - Cargo rebalance
+    price: 550
 
 - type: entity # Goobstation - Recycler Update
   parent: JawsOfLifeBase
