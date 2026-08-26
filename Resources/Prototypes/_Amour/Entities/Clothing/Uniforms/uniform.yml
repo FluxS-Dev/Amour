@@ -37,3 +37,14 @@
       sprite: _Amour/Clothing/Uniforms/sexymime.rsi
     - type: Clothing
       sprite: _Amour/Clothing/Uniforms/sexymime.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: viltrumitesuit
+  name: viltrumitesuit
+  components:
+    - type: Sprite
+      sprite: _Amour/Clothing/Uniforms/viltrumitesuit.rsi
+    - type: Clothing
+      sprite: _Amour/Clothing/Uniforms/viltrumitesuit.rsi
+
